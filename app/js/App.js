@@ -18,7 +18,7 @@ var App = React.createClass({
       newPageTitle += ' \u2014 ';
     }
 
-    newPageTitle += 'App Name';
+    newPageTitle += 'PunditTracker';
 
     document.title = newPageTitle;
   },
