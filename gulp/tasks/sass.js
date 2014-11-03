@@ -1,8 +1,10 @@
 'use strict';
 
 var gulp         = require('gulp');
+var gulpif       = require('gulp-if');
 var sass         = require('gulp-sass');
 var handleErrors = require('../util/handle-errors');
+var browserSync  = require('browser-sync');
 var config       = require('../config');
 
 gulp.task('sass', function() {
@@ -18,6 +20,7 @@ gulp.task('sass', function() {
       }
     }))
     .on('error', handleErrors)
-    .pipe(gulp.dest(config.styles.dest));
+    .pipe(gulp.dest(config.styles.dest))
+    .pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));
 
 });
