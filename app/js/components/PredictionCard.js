@@ -19,4 +19,4 @@ var PredictionCard = React.createClass({
 
 });
 
-module.exports = PredictionCard;
+module.exports = React.createFactory(PredictionCard);

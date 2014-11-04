@@ -17,4 +17,4 @@ var Footer = React.createClass({
 
 });
 
-module.exports = Footer;
+module.exports = React.createFactory(Footer);

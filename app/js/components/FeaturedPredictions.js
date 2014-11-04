@@ -15,4 +15,4 @@ var FeaturedPredictions = React.createClass({
 
 });
 
-module.exports = FeaturedPredictions;
+module.exports = React.createFactory(FeaturedPredictions);

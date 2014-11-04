@@ -15,4 +15,4 @@ var FeaturedBlogPosts = React.createClass({
 
 });
 
-module.exports = FeaturedBlogPosts;
+module.exports = React.createFactory(FeaturedBlogPosts);

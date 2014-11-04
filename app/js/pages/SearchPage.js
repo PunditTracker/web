@@ -25,4 +25,4 @@ var SearchPage = React.createClass({
 
 });
 
-module.exports = SearchPage;
+module.exports = React.createFactory(SearchPage);
