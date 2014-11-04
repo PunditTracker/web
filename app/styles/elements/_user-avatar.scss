@@ -1,0 +1,10 @@
+div.user-avatar {
+
+  width: 50px;
+  height: 50px;
+
+  @include border-radius(100%);
+
+  background: #eeeeee;
+
+}

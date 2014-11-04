@@ -3,7 +3,9 @@
  */
 'use strict';
 
-var React = require('react/addons');
+var React          = require('react/addons');
+
+var PredictionCard = require('../components/PredictionCard');
 
 var HomePage = React.createClass({
 
@@ -18,7 +20,9 @@ var HomePage = React.createClass({
   render: function() {
     return (
       <section className="home-page">
-        Home
+
+        <PredictionCard />
+
       </section>
     );
   }

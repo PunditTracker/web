@@ -1,6 +1,7 @@
 footer {
   @extend .island;
   height: 50px;
+  margin-top: $full-space;
 
   background: $white;
 }

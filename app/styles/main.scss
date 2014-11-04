@@ -1,7 +1,10 @@
 @import 'vars';
+@import 'mixins';
 @import 'typography';
 @import 'layout';
 @import 'base';
 
 @import 'elements/header';
 @import 'elements/footer';
+@import 'elements/user-avatar';
+@import 'elements/prediction-card';

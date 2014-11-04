@@ -10,6 +10,10 @@ var Footer = require('./components/Footer');
 
 var App = React.createClass({
 
+  componentDidUpdate: function() {
+    console.log('update app');
+  },
+
   updatePageTitle: function(title) {
     var newPageTitle = '';
 

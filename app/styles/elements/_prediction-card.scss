@@ -1,0 +1,98 @@
+div.prediction-card {
+
+  width: 350px;
+
+  background: $white;
+  @include box-shadow(0px 1px 1.5px rgba(0, 0, 0, 0.1));
+
+  .title-container {
+    position: relative;
+    padding: $half-space;
+
+    color: $white;
+    @include background-cover();
+    background-image: url(http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg);
+
+    .category {
+      z-index: 2;
+      position: absolute;
+      top: $half-space;
+      right: 0;
+      padding: 3px 5px;
+
+      background: green;
+      font-style: italic;
+    }
+
+    .title {
+      z-index: 2;
+      position: relative;
+      margin: 0;
+      padding-top: 30px; /* to clear category tag */
+    }
+
+    .filter {
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      background: rgba($black, 0.3);
+    }
+  }
+
+  .info-container {
+    display: table;
+    width: 100%;
+    height: 80px;
+
+    & > * {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    & > *:first-child,
+    & > *:last-child {
+      padding: 0 $half-space;
+    }
+
+    .avatar-container {
+      width: 90px; /* 50px user-avatar + $half-space*2 padding */
+      text-align: center;
+    }
+
+    .user-container {
+      h4.user-name {
+        margin-bottom: $half-space/2;
+      }
+
+      h5.user-organization {
+        margin: 0;
+      }
+    }
+
+    .score-container {
+      width: 80px; /* same height as .info-container to ensure that it's square */
+      text-align: center;
+
+      background-color: green;
+      color: $white;
+      text-transform: uppercase;
+
+      h6.descriptor {
+        display: block;
+        margin: 0 0 $half-space/2;
+
+        font-weight: normal;
+      }
+
+      h2.score {
+        margin: 0;
+      }
+
+    }
+  }
+
+}
