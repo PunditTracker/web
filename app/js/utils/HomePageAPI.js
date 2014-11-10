@@ -18,7 +18,41 @@ var HomePageAPI = {
     //   }
     // });
 
-    deferred.resolve([1, 2, 3]);
+    deferred.resolve([
+      {
+        id: 1,
+        category: 'Finance',
+        title: 'Dow Jones will fall below 6000 by March 2012',
+        imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
+        user: {
+          name: 'John Doe',
+          organization: 'ESPN'
+        },
+        score: 'C'
+      },
+      {
+        id: 2,
+        category: 'Finance',
+        title: 'Dow Jones will fall below 6000 by March 2012',
+        imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
+        user: {
+          name: 'John Doe',
+          organization: 'ESPN'
+        },
+        score: 'C'
+      },
+      {
+        id: 3,
+        category: 'Finance',
+        title: 'Dow Jones will fall below 6000 by March 2012',
+        imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
+        user: {
+          name: 'John Doe',
+          organization: 'ESPN'
+        },
+        score: 'C'
+      }
+    ]);
 
     return deferred.promise;
   },

@@ -14,24 +14,14 @@ var PredictionCard = React.createClass({
   },
 
   getDefaultProps: function() {
-    // TODO: don't hardcode this
     return {
-      prediction: {
-        category: 'Finance',
-        title: 'Dow Jones will fall below 6000 by March 2012',
-        image_url: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
-        user: {
-          name: 'John Doe',
-          organization: 'ESPN'
-        },
-        score: 'C'
-      }
+      prediction: {}
     };
   },
 
   render: function() {
     var titleStyles = {
-      'backgroundImage': 'url(' + this.props.prediction.image_url + ')'
+      'backgroundImage': 'url(' + this.props.prediction.imageUrl + ')'
     };
     var categoryClass = 'category' + ' ' + this.props.prediction.category.toLowerCase();
 

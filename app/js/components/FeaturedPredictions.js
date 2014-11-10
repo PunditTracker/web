@@ -38,7 +38,7 @@ var FeaturedPredictions = React.createClass({
   renderFeaturedPredictions: function() {
     return _.map(this.state.featuredPredictions, function(prediction, index) {
       return (
-        <PredictionCard key={index} />
+        <PredictionCard prediction={prediction} key={index} />
       );
     });
   },
