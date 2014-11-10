@@ -34,7 +34,7 @@ var PredictionCard = React.createClass({
           <h2 className="title">{this.props.prediction.title}</h2>
           <div className="filter" />
           <div className="shadow" />
-          <Link to="Home" />
+          <Link to="Prediction" params={{ id: this.props.prediction.id }} />
         </div>
 
         <div className="info-container">
@@ -42,7 +42,11 @@ var PredictionCard = React.createClass({
             <UserAvatar user={this.props.prediction.user} />
           </div>
           <div className="user-container">
-            <a className="user-name">{this.props.prediction.user.name}</a>
+            <Link to="Profile"
+                  params={{ id: this.props.prediction.user.id }}
+                  className="user-name">
+              {this.props.prediction.user.name}
+            </Link>
             <a className="user-organization">{this.props.prediction.user.organization}</a>
           </div>
           <div className="score-container">

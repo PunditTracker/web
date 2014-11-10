@@ -82,6 +82,10 @@ div.prediction-card {
       bottom: 0;
       left: 0;
     }
+
+    &:hover .title {
+      text-decoration: underline;
+    }
   }
 
   .info-container {

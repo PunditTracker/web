@@ -25,6 +25,7 @@ var HomePageAPI = {
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
+          id: 1,
           name: 'John Doe',
           organization: 'ESPN'
         },
@@ -36,6 +37,7 @@ var HomePageAPI = {
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
+          id: 1,
           name: 'John Doe',
           organization: 'ESPN'
         },
@@ -47,6 +49,7 @@ var HomePageAPI = {
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
+          id: 1,
           name: 'John Doe',
           organization: 'ESPN'
         },
@@ -70,11 +73,13 @@ var HomePageAPI = {
 
     deferred.resolve([
       {
+        id: 1,
         name: 'John Doe',
         organization: 'ESPN',
         score: 'C'
       },
       {
+        id: 1,
         name: 'John Doe',
         organization: 'ESPN',
         score: 'C'

@@ -6,6 +6,7 @@
 var React              = require('react/addons');
 var Reflux             = require('reflux');
 var _                  = require('underscore');
+var Link               = require('react-router').Link;
 
 var HomePageActions    = require('../actions/HomePageActions');
 var FeaturedUsersStore = require('../stores/FeaturedUsersStore');
@@ -43,7 +44,7 @@ var FeaturedUsers = React.createClass({
             <UserAvatar user={user} />
           </div>
           <div className="user-container">
-            <a className="user-name">{user.name}</a>
+            <Link to="Profile" params={{ id: user.id }} className="user-name">{user.name}</Link>
             <a className="user-organization">{user.organization}</a>
           </div>
           <div className="score-container">
