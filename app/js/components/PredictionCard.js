@@ -4,6 +4,7 @@
 'use strict';
 
 var React      = require('react/addons');
+var Link       = require('react-router').Link;
 
 var UserAvatar = require('./UserAvatar');
 
@@ -33,6 +34,7 @@ var PredictionCard = React.createClass({
           <h2 className="title">{this.props.prediction.title}</h2>
           <div className="filter" />
           <div className="shadow" />
+          <Link to="Home" />
         </div>
 
         <div className="info-container">
@@ -40,8 +42,8 @@ var PredictionCard = React.createClass({
             <UserAvatar user={this.props.prediction.user} />
           </div>
           <div className="user-container">
-            <h4 className="user-name">{this.props.prediction.user.name}</h4>
-            <h5 className="user-organization">{this.props.prediction.user.organization}</h5>
+            <a className="user-name">{this.props.prediction.user.name}</a>
+            <a className="user-organization">{this.props.prediction.user.organization}</a>
           </div>
           <div className="score-container">
             <h6 className="descriptor">Score</h6>

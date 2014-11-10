@@ -1,10 +1,19 @@
 div.user-avatar {
 
+  position: relative;
   width: 40px;
   height: 40px;
 
   @include border-radius(100%);
 
   background: #eeeeee;
+
+  a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 
 }

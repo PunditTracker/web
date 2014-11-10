@@ -36,14 +36,20 @@ section.featured-users {
       }
 
       .user-container {
-        h4.user-name {
+        a.user-name {
+          @extend .delta;
+
+          display: block;
           margin-bottom: $half-space/2;
 
           color: $grey-text;
           font-weight: 400;
         }
 
-        h5.user-organization {
+        a.user-organization {
+          @extend .epsilon;
+
+          display: block;
           margin: 0;
 
           color: $dark-grey-text;

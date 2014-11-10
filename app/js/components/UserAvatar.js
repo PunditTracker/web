@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react/addons');
+var Link  = require('react-router').Link;
 
 var UserAvatar = React.createClass({
 
@@ -13,7 +14,9 @@ var UserAvatar = React.createClass({
 
   render: function() {
     return (
-      <div className="user-avatar" />
+      <div className="user-avatar">
+        <Link to="Home" />
+      </div>
     );
   }
 

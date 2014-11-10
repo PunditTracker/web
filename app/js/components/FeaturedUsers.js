@@ -43,8 +43,8 @@ var FeaturedUsers = React.createClass({
             <UserAvatar user={user} />
           </div>
           <div className="user-container">
-            <h4 className="user-name">{user.name}</h4>
-            <h5 className="user-organization">{user.organization}</h5>
+            <a className="user-name">{user.name}</a>
+            <a className="user-organization">{user.organization}</a>
           </div>
           <div className="score-container">
             <h2 className="score">{user.score}</h2>

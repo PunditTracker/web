@@ -73,6 +73,15 @@ div.prediction-card {
       background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
     }
+
+    a {
+      z-index: 3;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
   }
 
   .info-container {
@@ -96,14 +105,20 @@ div.prediction-card {
     }
 
     .user-container {
-      h4.user-name {
+      a.user-name {
+        @extend .delta;
+
+        display: block;
         margin-bottom: $half-space/2;
 
         color: $grey-text;
         font-weight: 400;
       }
 
-      h5.user-organization {
+      a.user-organization {
+        @extend .epsilon;
+
+        display: block;
         margin: 0;
 
         color: $dark-grey-text;
