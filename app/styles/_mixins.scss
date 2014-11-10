@@ -1,3 +1,21 @@
+@mixin border-box {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+%clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 @mixin border-radius($top, $right: $top, $bottom: $top, $left: $top) {
   -webkit-border-radius: $top $right $bottom $left;
   -moz-border-radius:    $top $right $bottom $left;
@@ -32,7 +50,7 @@
   background-size:         $size;
 }
 
-@mixin background-cover() {
+@mixin background-cover {
   @include background-size(cover);
   background-position: center center;
   background-repeat: no-repeat;

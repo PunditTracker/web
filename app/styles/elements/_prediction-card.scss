@@ -1,16 +1,27 @@
 div.prediction-card {
 
-  width: 350px;
+  float: left;
+  width: calc(50% - #{$half-space/2});
+  margin-bottom: $half-space;
 
   background: $white;
-  @include box-shadow(0px 1px 1.5px rgba(0, 0, 0, 0.1));
+  @include box-shadow(0px 1px 1.5px rgba(0, 0, 0, 0.3));
+
+  &:nth-child(odd) {
+    margin-right: $half-space/2;
+  }
+
+  &:nth-child(even) {
+    margin-left: $half-space/2;
+  }
 
   .title-container {
     position: relative;
     padding: $half-space;
 
     color: $white;
-    @include background-cover();
+    @include background-cover;
+    // TODO: don't hardcode background-image
     background-image: url(http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg);
 
     .category {
@@ -20,8 +31,13 @@ div.prediction-card {
       right: 0;
       padding: 3px 5px;
 
-      background: green;
       font-style: italic;
+
+      &.finance { background: $finance; }
+      &.politics { background: $politics; }
+      &.sports { background: $sports; }
+      &.entertainment { background: $entertainment; }
+      &.tech { background: $tech; }
     }
 
     .title {
@@ -39,7 +55,23 @@ div.prediction-card {
       bottom: 0;
       left: 0;
 
-      background: rgba($black, 0.3);
+      background: rgba($black, 0.4);
+    }
+
+    .shadow {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 5px;
+
+      background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
+      background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+      background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+      background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+      background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
     }
   }
 
@@ -66,10 +98,15 @@ div.prediction-card {
     .user-container {
       h4.user-name {
         margin-bottom: $half-space/2;
+
+        color: $grey-text;
+        font-weight: 400;
       }
 
       h5.user-organization {
         margin: 0;
+
+        color: $dark-grey-text;
       }
     }
 
@@ -83,7 +120,7 @@ div.prediction-card {
 
       h6.descriptor {
         display: block;
-        margin: 0 0 $half-space/2;
+        margin: 0;
 
         font-weight: normal;
       }

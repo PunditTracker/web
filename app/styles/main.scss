@@ -1,10 +1,13 @@
 @import 'vars';
 @import 'mixins';
 @import 'typography';
-@import 'layout';
+@import 'spacing';
+@import 'grid';
 @import 'base';
 
 @import 'elements/header';
 @import 'elements/footer';
 @import 'elements/user-avatar';
 @import 'elements/prediction-card';
+@import 'elements/featured-users';
+@import 'elements/recent-blog-posts';

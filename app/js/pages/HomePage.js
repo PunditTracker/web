@@ -3,9 +3,11 @@
  */
 'use strict';
 
-var React          = require('react/addons');
+var React               = require('react/addons');
 
-var PredictionCard = require('../components/PredictionCard');
+var FeaturedPredictions = require('../components/FeaturedPredictions');
+var FeaturedUsers       = require('../components/FeaturedUsers');
+var RecentBlogPosts     = require('../components/RecentBlogPosts');
 
 var HomePage = React.createClass({
 
@@ -21,7 +23,25 @@ var HomePage = React.createClass({
     return (
       <section className="home-page">
 
-        <PredictionCard />
+        <div className="hero">
+          <div className="wrapper">
+          </div>
+        </div>
+
+        <div className="wrapper">
+          <h2 className="dark-grey">Featured Predictions</h2>
+          <div className="col-8">
+            <div className="wrapper">
+              <FeaturedPredictions />
+            </div>
+          </div>
+          <div className="col-4">
+            <div className="wrapper">
+              <FeaturedUsers />
+              <RecentBlogPosts />
+            </div>
+          </div>
+        </div>
 
       </section>
     );

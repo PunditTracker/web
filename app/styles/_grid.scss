@@ -1,0 +1,38 @@
+$grid-max-width: 1140px;
+$grid-columns: 12;
+
+*, *:before, *:after {
+  @include border-box;
+}
+
+img {
+  width: auto;
+  max-width: 100%;
+  height: auto !important;
+}
+
+.wrapper, .row {
+  width: 100%;
+  max-width: $grid-max-width;
+  margin: 0 auto;
+  *zoom: 1;
+
+  @extend %clearfix;
+}
+
+[class*='col-'] {
+  float: left;
+  width: 100%;
+  min-height: 1px;
+  padding: 0 $half-space $half-space 0;
+
+  &:last-of-type {
+    padding-right: 0;
+  }
+}
+
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+    width: 100% / $grid-columns * $i;
+  }
+}

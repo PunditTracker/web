@@ -31,16 +31,18 @@ var PredictionCard = React.createClass({
 
   render: function() {
     var titleStyles = {
-      'background-image': 'url(' + this.props.prediction.image_url + ')'
+      'backgroundImage': 'url(' + this.props.prediction.image_url + ')'
     };
+    var categoryClass = 'category' + ' ' + this.props.prediction.category.toLowerCase();
 
     return (
       <div className="prediction-card">
 
         <div className="title-container" style={titleStyles}>
-          <div className="category">{this.props.prediction.category}</div>
+          <div className={categoryClass}>{this.props.prediction.category}</div>
           <h2 className="title">{this.props.prediction.title}</h2>
           <div className="filter" />
+          <div className="shadow" />
         </div>
 
         <div className="info-container">
