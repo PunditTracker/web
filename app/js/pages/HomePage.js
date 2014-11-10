@@ -29,7 +29,7 @@ var HomePage = React.createClass({
         </div>
 
         <div className="wrapper">
-          <h2 className="dark-grey">Featured Predictions</h2>
+          <h2 className="dark-grey nudge-half--top">Featured Predictions</h2>
           <div className="col-8">
             <div className="wrapper">
               <FeaturedPredictions />
