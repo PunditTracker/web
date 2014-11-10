@@ -10,7 +10,13 @@ var Header = React.createClass({
   render: function() {
     return (
       <header>
-        Header
+
+        <div className="wrapper">
+          Header
+        </div>
+
+        <div className="shadow" />
+
       </header>
     );
   }
