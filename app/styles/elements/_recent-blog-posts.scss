@@ -1,9 +1,7 @@
 section.recent-blog-posts {
 
   @extend .islet;
-
-  background: $white;
-  @include box-shadow(0px 1px 1.5px rgba(0, 0, 0, 0.3));
+  @extend %card;
 
   .title {
     text-transform: uppercase;

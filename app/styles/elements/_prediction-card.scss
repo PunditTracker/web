@@ -4,8 +4,7 @@ div.prediction-card {
   width: calc(50% - #{$half-space/2});
   margin-bottom: $half-space;
 
-  background: $white;
-  @include box-shadow(0px 1px 1.5px rgba(0, 0, 0, 0.3));
+  @extend %card;
 
   &:nth-child(odd) {
     margin-right: $half-space/2;
@@ -21,6 +20,7 @@ div.prediction-card {
 
     color: $white;
     @include background-cover;
+    @include border-radius(5px, 5px, 0, 0);
     // TODO: don't hardcode background-image
     background-image: url(http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg);
 
@@ -133,6 +133,7 @@ div.prediction-card {
       width: 80px; /* same height as .info-container to ensure that it's square */
       text-align: center;
 
+      @include border-radius(0, 0, 5px, 0);
       background-color: green;
       color: $white;
       text-transform: uppercase;

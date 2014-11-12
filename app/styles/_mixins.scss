@@ -4,18 +4,6 @@
   box-sizing: border-box;
 }
 
-%clearfix {
-  *zoom: 1;
-  &:before,
-  &:after {
-    content: " ";
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
-}
-
 @mixin border-radius($top, $right: $top, $bottom: $top, $left: $top) {
   -webkit-border-radius: $top $right $bottom $left;
   -moz-border-radius:    $top $right $bottom $left;
@@ -109,4 +97,22 @@
   @keyframes $animation-name {
     @content;
   }
+}
+
+%clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+%card {
+  background: $white;
+  @include box-shadow(0px 1px 1.5px rgba(0, 0, 0, 0.3));
+  @include border-radius(5px);
 }
