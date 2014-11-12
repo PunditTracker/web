@@ -3,9 +3,137 @@ header {
   position: relative;
   display: table;
   width: 100%;
-  height: 100px;
 
   background: $dark-background-grey;
+
+  div.top-container {
+    display: table;
+    width: 100%;
+    height: 100px;
+
+    & > * {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .logo-container {
+      width: 60px;
+
+       .logo {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        background: $white;
+        @include border-radius(100%);
+
+        a {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding: $half-space $full-space 0;
+      list-style: none;
+
+      li {
+        position: relative;
+        display: inline-block;
+        font-size: 18px;
+
+        &:not(:last-child) {
+          margin-right: $half-space;
+        }
+
+        a {
+          display: inline-block;
+          height: 80px;
+          line-height: 50px;
+          padding: $half-space/2;
+
+          color: $white;
+        }
+      }
+    }
+
+    .main-nav {
+      li {
+        a {
+          .color-strip {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 8px;
+            height: 5px;
+          }
+
+          &:hover {
+            text-decoration: none;
+          }
+
+          &.finance {
+            &:hover { background-color: $finance; }
+
+            .color-strip { background-color: $finance; }
+          }
+          &.politics {
+            &:hover { background-color: $politics; }
+
+            .color-strip { background-color: $politics; }
+          }
+          &.sports {
+            &:hover { background-color: $sports; }
+
+            .color-strip { background-color: $sports; }
+          }
+          &.entertainment {
+            &:hover { background-color: $entertainment; }
+
+            .color-strip { background-color: $entertainment; }
+          }
+          &.tech {
+            &:hover { background-color: $tech; }
+
+            .color-strip { background-color: $tech; }
+          }
+          &.blog:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .user-options {
+      padding-right: 0;
+
+      text-align: right;
+    }
+  }
+
+  div.hero {
+
+  }
+
+  .filter {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.3;
+  }
+
+  &.finance > .filter { background-color: $finance; }
+  &.politics > .filter { background-color: $politics; }
+  &.sports > .filter { background-color: $sports; }
+  &.entertainment > .filter { background-color: $entertainment; }
+  &.tech > .filter { background-color: $tech; }
 
   .shadow {
     position: absolute;
