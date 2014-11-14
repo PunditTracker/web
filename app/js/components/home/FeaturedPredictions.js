@@ -7,9 +7,9 @@ var React                    = require('react/addons');
 var Reflux                   = require('reflux');
 var _                        = require('underscore');
 
-var HomePageActions          = require('../actions/HomePageActions');
-var FeaturedPredictionsStore = require('../stores/FeaturedPredictionsStore');
-var PredictionCard           = require('./PredictionCard');
+var HomePageActions          = require('../../actions/HomePageActions');
+var FeaturedPredictionsStore = require('../../stores/FeaturedPredictionsStore');
+var PredictionCard           = require('../PredictionCard');
 
 var FeaturedPredictions = React.createClass({
 

@@ -1,5 +1,124 @@
-section.hero {
+div.hero {
 
+  position: relative;
+  display: table;
+  width: 100%;
+  min-height: 300px;
+  padding-bottom: $half-space;
+  vertical-align: middle;
 
+  &.finance { color: lighten($finance, 15); }
+  &.politics { color: lighten($politics, 15); }
+  &.sports { color: lighten($sports, 15); }
+  &.entertainment { color: lighten($entertainment, 15); }
+  &.tech { color: lighten($tech, 15); }
+
+  h6 {
+    margin: $full-space 0 $half-space;
+    position: relative;
+    z-index: 2; /* place above filter */
+
+    text-transform: uppercase;
+  }
+
+  ul.subnav {
+    margin: $half-space 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      position: relative;
+      z-index: 2; /* place above filter */
+      display: inline-block;
+
+      a {
+        padding: $half-space/2;
+
+        font-size: 20px;
+        text-transform: uppercase;
+        color: $white;
+
+        &.active, &:hover, &:active {
+          background-color: $white;
+          text-decoration: none;
+        }
+      }
+    }
+
+    &.finance li a.active, &.finance li a:hover, &.finance li a:active { color: $finance; }
+    &.politics li a.active, &.politics li a:hover, &.politics li a:active { color: $politics; }
+    &.sports li a.active, &.sports li a:hover, &.sports li a:active { color: $sports; }
+    &.entertainment li a.active, &.entertainment li a:hover, &.entertainment li a:active { color: $entertainment; }
+    &.tech li a.active, &.tech li a:hover, &.tech li a:active { color: $tech; }
+  }
+
+  div.latest-predictions-container {
+    position: relative;
+    z-index: 2;
+
+    .prediction {
+      @extend %card;
+      position: relative;
+      height: 175px;
+      padding: $half-space;
+
+      cursor: pointer;
+
+      h5.title {
+        z-index: 2; /* place above gradient */
+        position: absolute;
+        bottom: 0;
+        margin-left: 0;
+
+        color: $white;
+      }
+
+      .gradient {
+        z-index: 1;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 75px;
+
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+        background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+        background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+      }
+
+      a {
+        z-index: 3;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      &:hover h5.title {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .filter {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.3;
+
+    &.finance { background-color: $finance; }
+    &.politics { background-color: $politics; }
+    &.sports { background-color: $sports; }
+    &.entertainment { background-color: $entertainment; }
+    &.tech { background-color: $tech; }
+  }
 
 }

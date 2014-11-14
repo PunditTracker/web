@@ -3,16 +3,15 @@
  */
 'use strict';
 
-var React  = require('react/addons');
+var React         = require('react/addons');
+var ActiveState = require('react-router').ActiveState;
 
-var Header = require('./components/Header');
+var Header = require('./components/header/Header');
 var Footer = require('./components/Footer');
 
 var App = React.createClass({
 
-  componentDidUpdate: function() {
-    console.log('update app');
-  },
+  mixins: [ActiveState],
 
   updatePageTitle: function(title) {
     var newPageTitle = '';
@@ -31,7 +30,7 @@ var App = React.createClass({
     return (
       <div>
 
-        <Header />
+        <Header isHome={this.isActive('Home')} />
 
         <this.props.activeRouteHandler updatePageTitle={this.updatePageTitle} />
 

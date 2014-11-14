@@ -5,9 +5,9 @@
 
 var React               = require('react/addons');
 
-var FeaturedPredictions = require('../components/FeaturedPredictions');
-var FeaturedUsers       = require('../components/FeaturedUsers');
-var RecentBlogPosts     = require('../components/RecentBlogPosts');
+var FeaturedPredictions = require('../components/home/FeaturedPredictions');
+var FeaturedUsers       = require('../components/home/FeaturedUsers');
+var RecentBlogPosts     = require('../components/home/RecentBlogPosts');
 
 var HomePage = React.createClass({
 
@@ -22,11 +22,6 @@ var HomePage = React.createClass({
   render: function() {
     return (
       <section className="home-page">
-
-        <div className="hero">
-          <div className="wrapper">
-          </div>
-        </div>
 
         <div className="wrapper">
           <h2 className="dark-grey nudge-half--top">Featured Predictions</h2>

@@ -8,8 +8,8 @@ var Reflux               = require('reflux');
 var _                    = require('underscore');
 var moment               = require('moment');
 
-var HomePageActions      = require('../actions/HomePageActions');
-var RecentBlogPostsStore = require('../stores/RecentBlogPostsStore');
+var HomePageActions      = require('../../actions/HomePageActions');
+var RecentBlogPostsStore = require('../../stores/RecentBlogPostsStore');
 
 var RecentBlogPosts = React.createClass({
 

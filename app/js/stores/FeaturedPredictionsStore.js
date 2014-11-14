@@ -13,7 +13,7 @@ var FeaturedPredictionsStore = Reflux.createStore({
 
   loadPredictions: function(cb) {
     HomePageAPI.getFeaturedPredictions().then(function(predictions) {
-      console.log('got predictions:', predictions);
+      console.log('got featured predictions:', predictions);
       this.predictions = predictions;
       this.trigger(predictions);
       cb();

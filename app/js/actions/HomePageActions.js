@@ -4,6 +4,7 @@ var Reflux = require('reflux');
 
 var HomePageActions = Reflux.createActions([
 
+  'loadLatestPredictions',
   'loadFeaturedPredictions',
   'loadFeaturedUsers',
   'loadRecentBlogPosts'

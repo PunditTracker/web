@@ -8,9 +8,9 @@ var Reflux             = require('reflux');
 var _                  = require('underscore');
 var Link               = React.createFactory(require('react-router').Link);
 
-var HomePageActions    = require('../actions/HomePageActions');
-var FeaturedUsersStore = require('../stores/FeaturedUsersStore');
-var UserAvatar         = require('./UserAvatar');
+var HomePageActions    = require('../../actions/HomePageActions');
+var FeaturedUsersStore = require('../../stores/FeaturedUsersStore');
+var UserAvatar         = require('../UserAvatar');
 
 var FeaturedUsers = React.createClass({
 

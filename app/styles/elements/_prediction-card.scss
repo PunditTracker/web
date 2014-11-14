@@ -21,8 +21,6 @@ div.prediction-card {
     color: $white;
     @include background-cover;
     @include border-radius(5px, 5px, 0, 0);
-    // TODO: don't hardcode background-image
-    background-image: url(http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg);
 
     .category {
       z-index: 2;
