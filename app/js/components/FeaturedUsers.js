@@ -6,7 +6,7 @@
 var React              = require('react/addons');
 var Reflux             = require('reflux');
 var _                  = require('underscore');
-var Link               = require('react-router').Link;
+var Link               = React.createFactory(require('react-router').Link);
 
 var HomePageActions    = require('../actions/HomePageActions');
 var FeaturedUsersStore = require('../stores/FeaturedUsersStore');
