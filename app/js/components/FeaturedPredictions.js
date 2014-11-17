@@ -7,13 +7,23 @@ var React                    = require('react/addons');
 var Reflux                   = require('reflux');
 var _                        = require('underscore');
 
-var HomePageActions          = require('../../actions/HomePageActions');
-var FeaturedPredictionsStore = require('../../stores/FeaturedPredictionsStore');
-var PredictionCard           = require('../PredictionCard');
+var HomePageActions          = require('../actions/HomePageActions');
+var FeaturedPredictionsStore = require('../stores/FeaturedPredictionsStore');
+var PredictionCard           = require('./PredictionCard');
 
 var FeaturedPredictions = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
+
+  propTypes: {
+    subcategory: React.PropTypes.string
+  },
+
+  getDefaultProps: function() {
+    return {
+      subcategory: null
+    };
+  },
 
   getInitialState: function() {
     return {
@@ -31,7 +41,7 @@ var FeaturedPredictions = React.createClass({
   },
 
   componentWillMount: function() {
-    HomePageActions.loadFeaturedPredictions(this._onFeaturedPredictionsChange);
+    HomePageActions.loadFeaturedPredictions(this.props.subcategory, this._onFeaturedPredictionsChange);
     this.listenTo(FeaturedPredictionsStore, this._onFeaturedPredictionsChange);
   },
 

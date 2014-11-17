@@ -8,13 +8,23 @@ var Reflux             = require('reflux');
 var _                  = require('underscore');
 var Link               = React.createFactory(require('react-router').Link);
 
-var HomePageActions    = require('../../actions/HomePageActions');
-var FeaturedUsersStore = require('../../stores/FeaturedUsersStore');
-var UserAvatar         = require('../UserAvatar');
+var HomePageActions    = require('../actions/HomePageActions');
+var FeaturedUsersStore = require('../stores/FeaturedUsersStore');
+var UserAvatar         = require('./UserAvatar');
 
 var FeaturedUsers = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
+
+  propTypes: {
+    subcategory: React.PropTypes.string
+  },
+
+  getDefaultProps: function() {
+    return {
+      subcategory: null
+    };
+  },
 
   getInitialState: function() {
     return {
@@ -32,7 +42,7 @@ var FeaturedUsers = React.createClass({
   },
 
   componentWillMount: function() {
-    HomePageActions.loadFeaturedUsers(this._onFeaturedUsersChange);
+    HomePageActions.loadFeaturedUsers(this.props.subcategory, this._onFeaturedUsersChange);
     this.listenTo(FeaturedUsersStore, this._onFeaturedUsersChange);
   },
 

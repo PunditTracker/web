@@ -11,8 +11,17 @@ var FeaturedPredictionsStore = Reflux.createStore({
     this.listenTo(HomePageActions.loadFeaturedPredictions, this.loadPredictions);
   },
 
-  loadPredictions: function(cb) {
-    HomePageAPI.getFeaturedPredictions().then(function(predictions) {
+  loadPredictions: function(subcategory, cb) {
+    if ( typeof subcategory === 'function' ) {
+      cb = subcategory;
+      subcategory = null;
+    } else {
+      cb = cb || function() {};
+    }
+
+    console.log('get featured predictions for:', subcategory);
+
+    HomePageAPI.getFeaturedPredictions(subcategory).then(function(predictions) {
       console.log('got featured predictions:', predictions);
       this.predictions = predictions;
       this.trigger(predictions);

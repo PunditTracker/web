@@ -11,8 +11,17 @@ var FeaturedUsersStore = Reflux.createStore({
     this.listenTo(HomePageActions.loadFeaturedUsers, this.loadUsers);
   },
 
-  loadUsers: function(cb) {
-    HomePageAPI.getFeaturedUsers().then(function(users) {
+  loadUsers: function(subcategory, cb) {
+    if ( typeof subcategory === 'function' ) {
+      cb = subcategory;
+      subcategory = null;
+    } else {
+      cb = cb || function() {};
+    }
+
+    console.log('get featured users for:', subcategory);
+
+    HomePageAPI.getFeaturedUsers(subcategory).then(function(users) {
       console.log('got users:', users);
       this.users = users;
       this.trigger(users);
