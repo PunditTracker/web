@@ -15,4 +15,4 @@ var Hero = React.createClass({
 
 });
 
-module.exports = Hero;
+module.exports = React.createFactory(Hero);

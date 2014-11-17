@@ -12,13 +12,14 @@ var HomePageActions        = require('../../actions/HomePageActions');
 var LatestPredictionsStore = require('../../stores/LatestPredictionsStore');
 var ListLink               = require('../ListLink');
 
-var SportsHero = React.createClass({
+var CategoryHero = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
 
   propTypes: {
     category: React.PropTypes.string.isRequired,
-    subcategories: React.PropTypes.array.isRequired
+    subcategories: React.PropTypes.array.isRequired,
+    isHome: React.PropTypes.bool
   },
 
   getInitialState: function() {
@@ -38,7 +39,7 @@ var SportsHero = React.createClass({
   },
 
   componentWillUpdate: function(nextProps) {
-    if ( nextProps.category !== this.props.category ) {
+    if ( nextProps.category !== this.props.category && this.props.isHome ) {
       this.updateLatestPredictions(nextProps.subcategories[0]);
     }
   },
@@ -64,7 +65,7 @@ var SportsHero = React.createClass({
       classString = (this.state.subcategory === subcategory) ? 'active': '';
 
       return (
-        <ListLink to="SubCategory"
+        <ListLink to="Subcategory"
                   params={{ category: this.props.category, subcategory: subcategory }}
                   className={classString}
                   onMouseOver={this.updateLatestPredictions.bind(null, subcategory)}
@@ -87,12 +88,12 @@ var SportsHero = React.createClass({
         <div className="col-3" key={index}>
           <div className="prediction" style={predictionStyles}>
             <h5 className="title">{prediction.title}</h5>
-            <Link to="Prediction" params={{ id: prediction.id }} />
+            <Link to="Prediction" params={{ category: this.props.category, id: prediction.id }} />
             <div className="gradient" />
           </div>
         </div>
       );
-    });
+    }.bind(this));
   },
 
   render: function() {
@@ -122,4 +123,4 @@ var SportsHero = React.createClass({
 
 });
 
-module.exports = SportsHero;
+module.exports = React.createFactory(CategoryHero);

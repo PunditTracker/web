@@ -69,4 +69,4 @@ var Navigation = React.createClass({
 
 });
 
-module.exports = Navigation;
+module.exports = React.createFactory(Navigation);

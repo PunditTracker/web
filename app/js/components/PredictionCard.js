@@ -34,7 +34,7 @@ var PredictionCard = React.createClass({
           <h2 className="title">{this.props.prediction.title}</h2>
           <div className="filter" />
           <div className="shadow" />
-          <Link to="Prediction" params={{ id: this.props.prediction.id }} />
+          <Link to="Prediction" params={{ category: this.props.prediction.category, id: this.props.prediction.id }} />
         </div>
 
         <div className="info-container">
