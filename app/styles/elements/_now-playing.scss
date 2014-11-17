@@ -1,0 +1,63 @@
+section.now-playing {
+
+  .event-info {
+    height: (380px*2 + $half-space);
+
+    @extend %card;
+
+    .location-banner {
+      position: relative;
+      height: 125px;
+
+      @include background-cover();
+      @include border-radius(5px, 5px, 0, 0);
+
+      .location-name {
+        position: absolute;
+        left: $full-space;
+        bottom: $half-space;
+        padding: $half-space/3;
+
+        background: $black;
+        color: $white;
+      }
+    }
+
+    .info-container {
+      height: ((380px*2 + $half-space) - 125px);
+      padding: $full-space;
+    }
+  }
+
+  .team-container {
+    position: relative;
+    height: 380px; // the width of a col-4 grid item at full screen size
+
+    @extend %card;
+    @include background-cover();
+
+    &:not(:last-child) {
+      margin-bottom: $half-space;
+    }
+
+    .filter {
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      opacity: 0.3;
+
+      &.red {
+        background: $red;
+      }
+
+      &.blue {
+        background: $blue;
+      }
+    }
+  }
+
+}

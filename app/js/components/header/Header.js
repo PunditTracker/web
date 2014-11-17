@@ -13,12 +13,13 @@ var CategoryHero = require('./CategoryHero');
 var Header = React.createClass({
 
   propTypes: {
+    category: React.PropTypes.string,
     isHome: React.PropTypes.bool
   },
 
   getInitialState: function() {
     return {
-      category: 'sports'
+      category: this.props.category
     };
   },
 
@@ -40,7 +41,7 @@ var Header = React.createClass({
     var subcategories;
     var element;
 
-    if ( !this.state.category || !this.props.isHome ) {
+    if ( !this.state.category ) {
       element = (
         <Hero />
       );
@@ -66,7 +67,7 @@ var Header = React.createClass({
       }
 
       element = (
-        <CategoryHero category={this.state.category} subcategories={subcategories} />
+        <CategoryHero category={this.state.category} subcategories={subcategories} isHome={this.props.isHome} />
       );
     }
 

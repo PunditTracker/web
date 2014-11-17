@@ -2,9 +2,12 @@
 $white: #ffffff;
 $black: #000000;
 
+$blue: #2e8dd6;
+$red: #e54236;
+
 $finance: #039b67; // green
-$politics: #e54236; // red
-$sports: #2e8dd6; // blue
+$politics: $red;
+$sports: $blue;
 $entertainment: #f4bb15; // yellow
 $tech: #d79003; // orange
 

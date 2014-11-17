@@ -13,6 +13,12 @@ var App = React.createClass({
 
   mixins: [ActiveState],
 
+  getInitialState: function() {
+    return {
+      category: null
+    };
+  },
+
   updatePageTitle: function(title) {
     var newPageTitle = '';
 
@@ -26,13 +32,17 @@ var App = React.createClass({
     document.title = newPageTitle;
   },
 
+  setCategory: function(category) {
+    this.setState({ category: category });
+  },
+
   render: function() {
     return (
       <div>
 
-        <Header isHome={this.isActive('Home')} />
+        <Header isHome={this.isActive('Home')} category={this.state.category} />
 
-        <this.props.activeRouteHandler updatePageTitle={this.updatePageTitle} />
+        <this.props.activeRouteHandler updatePageTitle={this.updatePageTitle} setCategory={this.setCategory} />
 
         <Footer />
 

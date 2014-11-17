@@ -26,7 +26,7 @@ var HomePageAPI = {
     deferred.resolve([
       {
         id: 1,
-        category: 'Finance',
+        category: 'finance',
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
@@ -38,7 +38,7 @@ var HomePageAPI = {
       },
       {
         id: 2,
-        category: 'Finance',
+        category: 'finance',
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
@@ -50,7 +50,7 @@ var HomePageAPI = {
       },
       {
         id: 3,
-        category: 'Finance',
+        category: 'finance',
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
@@ -62,7 +62,7 @@ var HomePageAPI = {
       },
       {
         id: 4,
-        category: 'Finance',
+        category: 'finance',
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
@@ -77,10 +77,15 @@ var HomePageAPI = {
     return deferred.promise;
   },
 
-  getFeaturedPredictions: function() {
+  getFeaturedPredictions: function(subcategory) {
     var deferred = when.defer();
+    var getUrl = APIUtils.root + 'predictions/featured';
 
-    // request.get(APIUtils.root + 'predictions/featured').end(function(res) {
+    if ( subcategory ) {
+      getUrl += ('/' + subcategory);
+    }
+
+    // request.get(getUrl).end(function(res) {
     //   if ( !res.ok ) {
     //     deferred.reject(res.text);
     //   } else {
@@ -91,7 +96,7 @@ var HomePageAPI = {
     deferred.resolve([
       {
         id: 1,
-        category: 'Finance',
+        category: 'finance',
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
@@ -103,7 +108,7 @@ var HomePageAPI = {
       },
       {
         id: 2,
-        category: 'Finance',
+        category: 'finance',
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
@@ -115,7 +120,7 @@ var HomePageAPI = {
       },
       {
         id: 3,
-        category: 'Finance',
+        category: 'finance',
         title: 'Dow Jones will fall below 6000 by March 2012',
         imageUrl: 'http://www.shedexpedition.com/wp-content/uploads/2013/04/Wall-Street-NYSE.jpg',
         user: {
@@ -130,10 +135,15 @@ var HomePageAPI = {
     return deferred.promise;
   },
 
-  getFeaturedUsers: function() {
+  getFeaturedUsers: function(subcategory) {
     var deferred = when.defer();
+    var getUrl = APIUtils.root + 'users/featured';
 
-    // request.get(APIUtils.root + 'users/featured').end(function(res) {
+    if ( subcategory ) {
+      getUrl += ('/' + subcategory);
+    }
+
+    // request.get(getUrl).end(function(res) {
     //   if ( !res.ok ) {
     //     deferred.reject(res.text);
     //   } else {

@@ -30,6 +30,7 @@ div.prediction-card {
       padding: 3px 5px;
 
       font-style: italic;
+      text-transform: capitalize;
 
       &.finance { background: $finance; }
       &.politics { background: $politics; }
