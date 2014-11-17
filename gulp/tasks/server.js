@@ -15,6 +15,12 @@ gulp.task('server', function() {
   server.use(morgan('dev'));
   server.use(express.static(config.buildDir));
 
+  // serve all asset files from necessary directories
+  server.use('*/js', express.static(config.buildDir + 'js'));
+  server.use('*/images', express.static(config.buildDir + 'images'));
+  server.use('*/css', express.static(config.buildDir + 'css'));
+  server.use('*/fonts', express.static(config.buildDir + 'fonts'));
+
   // Serve index.html for all routes to leave routing up to Angular
   server.all('/*', function(req, res) {
       res.sendFile('index.html', { root: 'build' });
