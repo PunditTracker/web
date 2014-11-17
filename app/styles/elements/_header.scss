@@ -24,7 +24,7 @@ header {
 
     .logo-container,
     .login-container {
-      width: 10%;
+      width: calc((100% - #{$grid-max-width})/2);
     }
 
     .logo-container {
@@ -34,6 +34,7 @@ header {
         position: relative;
         width: 60px;
         height: 60px;
+        margin: 0 auto;
 
         background: $white;
         @include border-radius(100%);
