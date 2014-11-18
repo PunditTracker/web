@@ -13,7 +13,7 @@ var PredictionPage = React.createClass({
     };
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.props.updatePageTitle(this.state.prediction.title);
   },
 

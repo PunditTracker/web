@@ -8,6 +8,7 @@ var React = require('react/addons');
 var CategoryPage = React.createClass({
 
   propTypes: {
+    updatePageTitle: React.PropTypes.func.isRequired,
     setCategory: React.PropTypes.func.isRequired
   },
 
@@ -24,7 +25,7 @@ var CategoryPage = React.createClass({
 
   render: function() {
     return (
-      <this.props.activeRouteHandler updatePageTitle={this.updatePageTitle} setCategory={this.setCategory} />
+      <this.props.activeRouteHandler updatePageTitle={this.props.updatePageTitle} setCategory={this.setCategory} />
     );
   }
 
