@@ -11,7 +11,6 @@ var browserify   = require('browserify');
 var reactify     = require('reactify');
 var uglify       = require('gulp-uglify');
 var handleErrors = require('../util/handle-errors');
-var browserSync  = require('browser-sync');
 var config       = require('../config');
 
 // Based on: http://blog.avisi.nl/2014/04/25/how-to-keep-a-fast-build-with-browserify-and-reactjs/
@@ -42,8 +41,7 @@ function buildScript(file, watch) {
     .pipe(streamify(rename({
       basename: 'main'
     })))
-    .pipe(gulp.dest(config.scripts.dest))
-    .pipe(browserSync.reload({ stream: true, once: true }));
+    .pipe(gulp.dest(config.scripts.dest));
   }
 
   return rebundle();
