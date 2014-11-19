@@ -1,3 +1,18 @@
+.full-width { width: 100%; }
+.full-height { height: 100%; }
+.inherit-height { height: inherit; }
+
+.table { display: table; }
+.tr { display: table-row; }
+.td {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+
 .nudge { margin: $full-space; }
 .nudge-half { margin: $half-space; }
 .nudge--top { margin-top: $full-space; }

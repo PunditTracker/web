@@ -38,9 +38,9 @@
   background-size:         $size;
 }
 
-@mixin background-cover {
+@mixin background-cover($yPos: top) {
   @include background-size(cover);
-  background-position: center center;
+  background-position: center $yPos;
   background-repeat: no-repeat;
 }
 
@@ -109,10 +109,4 @@
   &:after {
     clear: both;
   }
-}
-
-%card {
-  background: $white;
-  @include box-shadow(0px 1px 1.5px rgba(0, 0, 0, 0.3));
-  @include border-radius(5px);
 }

@@ -1,12 +1,13 @@
 @import 'vars';
 @import 'mixins';
 @import 'typography';
-@import 'spacing';
+@import 'layout';
 @import 'grid';
 @import 'base';
+@import 'vendor/font-awesome/font-awesome';
 
-@import 'elements/header';
-@import 'elements/hero';
+@import 'elements/card';
+@import 'elements/header-hero';
 @import 'elements/footer';
 @import 'elements/user-avatar';
 @import 'elements/prediction-card';

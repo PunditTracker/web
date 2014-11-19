@@ -12,14 +12,14 @@ var HomePageActions        = require('../../actions/HomePageActions');
 var LatestPredictionsStore = require('../../stores/LatestPredictionsStore');
 var ListLink               = require('../ListLink');
 
-var CategoryHero = React.createClass({
+var HomeCategoryHero = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
 
   propTypes: {
+    setCategory: React.PropTypes.func.isRequired,
     category: React.PropTypes.string.isRequired,
-    subcategories: React.PropTypes.array.isRequired,
-    isHome: React.PropTypes.bool
+    subcategories: React.PropTypes.array.isRequired
   },
 
   getInitialState: function() {
@@ -39,7 +39,7 @@ var CategoryHero = React.createClass({
   },
 
   componentWillUpdate: function(nextProps) {
-    if ( nextProps.category !== this.props.category && this.props.isHome ) {
+    if ( nextProps.category !== this.props.category ) {
       this.updateLatestPredictions(nextProps.subcategories[0]);
     }
   },
@@ -99,23 +99,20 @@ var CategoryHero = React.createClass({
   render: function() {
     var heroClasses = 'hero ' + this.props.category;
     var subnavClasses = 'subnav ' + this.props.category;
-    var filterClasses = 'filter ' + this.props.category;
 
     return (
-      <div className={heroClasses}>
+      <div className={heroClasses} onMouseLeave={this.props.setCategory.bind(null, null)}>
 
-      <div className="wrapper">
-        <ul className={subnavClasses}>
-          {this.renderSubnavItems()}
-        </ul>
-        <h6>Latest Predictions</h6>
-      </div>
+        <div className="wrapper">
+          <ul className={subnavClasses}>
+            {this.renderSubnavItems()}
+          </ul>
+          <h6>Latest Predictions</h6>
+        </div>
 
-      <div className="wrapper latest-predictions-container">
-        {this.renderLatestPredictions()}
-      </div>
-
-      <div className={filterClasses} />
+        <div className="wrapper latest-predictions-container">
+          {this.renderLatestPredictions()}
+        </div>
 
       </div>
     );
@@ -123,4 +120,4 @@ var CategoryHero = React.createClass({
 
 });
 
-module.exports = React.createFactory(CategoryHero);
+module.exports = React.createFactory(HomeCategoryHero);

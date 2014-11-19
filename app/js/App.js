@@ -6,7 +6,6 @@
 var React         = require('react/addons');
 var ActiveState = require('react-router').ActiveState;
 
-var Header = require('./components/header/Header');
 var Footer = require('./components/Footer');
 
 var App = React.createClass({
@@ -40,9 +39,9 @@ var App = React.createClass({
     return (
       <div>
 
-        <Header isHome={this.isActive('Home')} category={this.state.category} />
-
-        <this.props.activeRouteHandler updatePageTitle={this.updatePageTitle} setCategory={this.setCategory} />
+        <this.props.activeRouteHandler updatePageTitle={this.updatePageTitle}
+                                       setCategory={this.setCategory}
+                                       category={this.state.category} />
 
         <Footer />
 

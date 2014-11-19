@@ -3,12 +3,16 @@
  */
 'use strict';
 
-var React        = require('react/addons');
-var Link         = React.createFactory(require('react-router').Link);
+var React                = require('react/addons');
+var Reflux               = require('reflux');
+var Link                 = React.createFactory(require('react-router').Link);
 
-var Navigation   = require('./Navigation');
-var Hero         = require('./Hero');
-var CategoryHero = require('./CategoryHero');
+var HomePageActions      = require('../../actions/HomePageActions');
+var HeroPredictionStore  = require('../../stores/HeroPredictionStore');
+var Navigation           = require('./Navigation');
+var Hero                 = require('./Hero');
+var HomeCategoryHero     = require('./HomeCategoryHero');
+var SubpageCategoryHero  = require('./SubpageCategoryHero');
 
 var Header = React.createClass({
 
@@ -17,10 +21,30 @@ var Header = React.createClass({
     isHome: React.PropTypes.bool
   },
 
+  mixins: [Reflux.ListenerMixin],
+
   getInitialState: function() {
     return {
-      category: this.props.category
+      prediction: {
+        id: 0,
+        category: ''
+      }
     };
+  },
+
+  _onHeroPredictionChange: function(heroPrediction) {
+    if ( heroPrediction ) {
+      console.log('hero prediction change:', heroPrediction);
+      this.setState({
+        prediction: heroPrediction,
+        backgroundImage: heroPrediction.imageUrl
+      });
+    }
+  },
+
+  componentWillMount: function() {
+    HomePageActions.loadHeroPrediction(this._onHeroPredictionChange);
+    this.listenTo(HeroPredictionStore, this._onHeroPredictionChange);
   },
 
   renderUserOptions: function() {
@@ -41,12 +65,12 @@ var Header = React.createClass({
     var subcategories;
     var element;
 
-    if ( !this.state.category ) {
+    if ( !this.props.category && this.props.isHome ) {
       element = (
-        <Hero />
+        <Hero prediction={this.state.prediction} />
       );
     } else {
-      switch ( this.state.category ) {
+      switch ( this.props.category ) {
         case 'finance':
           subcategories = ['barron\'s roundtable'];
           break;
@@ -66,37 +90,56 @@ var Header = React.createClass({
           subcategories = [];
       }
 
-      element = (
-        <CategoryHero category={this.state.category} subcategories={subcategories} isHome={this.props.isHome} />
-      );
+      if ( this.props.category && this.props.isHome ) {
+        element = (
+          <HomeCategoryHero category={this.props.category}
+                            subcategories={subcategories}
+                            setCategory={this.props.setCategory} />
+        );
+      } else if ( this.props.category && !this.props.isHome ) {
+        element = (
+          <SubpageCategoryHero category={this.props.category}
+                               subcategories={subcategories} />
+        );
+      }
     }
 
     return element;
   },
 
   render: function() {
-    var filterClasses = 'filter ' + this.state.category;
+    var topContainerClasses = 'top-container ' + (this.props.category && this.props.isHome ? 'gray' : null);
+    var filterClasses = 'filter ' + this.props.category;
+    var imageStyle = {
+      'backgroundImage': this.state.backgroundImage ? 'url(' + this.state.backgroundImage + ')' : null
+    };
 
     return (
-      <header onMouseLeave={this.updateCategory.bind(null, 'sports')}>
+      <div className="header-hero-container">
 
-        <div className="top-container">
-          <div className="logo-container">
-            <div className="logo">
-              <Link to="Home" />
+        <header>
+
+          <div className={topContainerClasses}>
+            <div className="logo-container">
+              <div className="logo">
+                <Link to="Home" />
+              </div>
             </div>
+            <Navigation isHome={this.props.isHome} currentCategory={this.props.category} setCategory={this.props.setCategory} />
+            {this.renderUserOptions()}
           </div>
-          <Navigation currentCategory={this.state.category} updateCategory={this.updateCategory} />
-          {this.renderUserOptions()}
-        </div>
+
+        </header>
 
         {this.renderHero()}
 
         <div className={filterClasses} />
 
+        <div className="background-image" style={imageStyle} />
+
         <div className="shadow" />
 
-      </header>
+      </div>
     );
   }
 

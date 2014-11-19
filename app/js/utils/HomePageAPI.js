@@ -7,6 +7,27 @@ var APIUtils = require('./APIUtils');
 
 var HomePageAPI = {
 
+  getHeroPrediction: function() {
+    var deferred = when.defer();
+
+    // request.get(APIUtils.root + 'predictions/hero').end(function(res) {
+    //   if ( !res.ok ) {
+    //     deferred.reject(res.text);
+    //   } else {
+    //     deferred.resolve(APIUtils.normalizeResponse(res));
+    //   }
+    // });
+
+    deferred.resolve({
+      id: 1,
+      category: 'sports',
+      title: 'Who will win the World Series?',
+      imageUrl: 'http://mtv.mtvnimages.com/uri/mgid:uma:image:mtv.com:9677767'
+    });
+
+    return deferred.promise;
+  },
+
   getLatestPredictions: function(subcategory) {
     var deferred = when.defer();
     var getUrl = APIUtils.root + 'predictions/latest';

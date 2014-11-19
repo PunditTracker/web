@@ -1,16 +1,22 @@
-header {
+%header {
 
   position: relative;
   width: 100%;
 
   div.top-container {
+    z-index: 2;
+    position: relative;
     display: table;
     table-layout: fixed;
     width: 100%;
     height: 100px;
     margin: 0 auto;
 
-    background: $dark-background-grey;
+    background: transparent;
+
+    &.gray {
+      background: $dark-background-grey;
+    }
 
     & > * {
       display: table-cell;
@@ -127,6 +133,18 @@ header {
           ul { display: block; }
         }
       }
+
+      &.subpage {
+        li a {
+          .color-strip { background: transparent; }
+
+          &.active, &:hover {
+            background: transparent;
+
+            .color-strip { background-color: $white; }
+          }
+        }
+      }
     }
 
     .login-container {
@@ -134,24 +152,6 @@ header {
 
       text-align: right;
     }
-  }
-
-  .shadow {
-    position: absolute;
-    right: 0;
-    bottom: -5px;
-    left: 0;
-    height: 5px;
-
-    opacity: 0.2;
-
-    background: -moz-linear-gradient(bottom,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
-    background: -webkit-linear-gradient(bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-    background: -o-linear-gradient(bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-    background: -ms-linear-gradient(bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-    background: linear-gradient(to top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
   }
 
 }

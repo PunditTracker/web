@@ -1,11 +1,13 @@
-div.hero {
+%hero {
 
   position: relative;
   display: table;
   width: 100%;
-  min-height: 300px;
-  padding-bottom: $half-space;
+  height: 300px;
   vertical-align: middle;
+
+  @include background-cover();
+  color: $white;
 
   &.finance { color: lighten($finance, 15); }
   &.politics { color: lighten($politics, 15); }
@@ -13,12 +15,27 @@ div.hero {
   &.entertainment { color: lighten($entertainment, 15); }
   &.tech { color: lighten($tech, 15); }
 
+  & * {
+    position: relative;
+    z-index: 2;
+  }
+
   h6 {
     margin: $full-space 0 $half-space;
     position: relative;
     z-index: 2; /* place above filter */
 
     text-transform: uppercase;
+  }
+
+  .cta {
+    font-weight: normal;
+
+    a {
+      margin-left: $half-space;
+      color: $white;
+      font-weight: bold;
+    }
   }
 
   ul.subnav {
@@ -55,6 +72,7 @@ div.hero {
   div.latest-predictions-container {
     position: relative;
     z-index: 2;
+    margin-bottom: $half-space;
 
     .prediction {
       @extend %card;
@@ -103,22 +121,6 @@ div.hero {
         text-decoration: underline;
       }
     }
-  }
-
-  .filter {
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0.3;
-
-    &.finance { background-color: $finance; }
-    &.politics { background-color: $politics; }
-    &.sports { background-color: $sports; }
-    &.entertainment { background-color: $entertainment; }
-    &.tech { background-color: $tech; }
   }
 
 }

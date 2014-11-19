@@ -5,18 +5,16 @@
 
 var React = require('react/addons');
 
+var Header = require('../components/header/Header');
+
 var CategoryPage = React.createClass({
 
   propTypes: {
-    updatePageTitle: React.PropTypes.func.isRequired,
-    setCategory: React.PropTypes.func.isRequired
+    updatePageTitle: React.PropTypes.func.isRequired
   },
 
-  componentWillReceiveProps: function(nextProps) {
-    if ( nextProps.category && nextProps.category !== this.props.category) {
-      this.props.updatePageTitle(this.props.params.category);
-      this.props.setCategory(this.props.params.category);
-    }
+  componentDidMount: function() {
+    this.props.updatePageTitle(this.props.params.category);
   },
 
   componentWillUnmount: function() {
@@ -25,7 +23,13 @@ var CategoryPage = React.createClass({
 
   render: function() {
     return (
-      <this.props.activeRouteHandler updatePageTitle={this.props.updatePageTitle} setCategory={this.setCategory} />
+      <div>
+
+        <Header isHome={false} setCategory={this.props.setCategory} category={this.props.params.category} subcategory={this.props.params.category} />
+
+        <this.props.activeRouteHandler updatePageTitle={this.props.updatePageTitle} setCategory={this.setCategory} />
+
+      </div>
     );
   }
 
