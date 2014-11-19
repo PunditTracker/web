@@ -40,7 +40,9 @@ var HomePageAPI = {
           losses: 2,
           score: {
             q1: 7,
-            q3: 3,
+            q2: 3,
+            q3: null,
+            q4: null,
             total: 10
           }
         },
@@ -53,11 +55,13 @@ var HomePageAPI = {
           losses: 2,
           score: {
             q1: 7,
-            q3: 3,
+            q2: 3,
+            q3: null,
+            q4: null,
             total: 10
           },
         },
-        highlights: [],
+        highlights: [1, 2, 3, 4],
         relatedPredictions: [
           {
             id: 1,
