@@ -75,7 +75,6 @@
     margin-bottom: $half-space;
 
     .prediction {
-      @extend %card;
       position: relative;
       height: 175px;
       padding: $half-space;

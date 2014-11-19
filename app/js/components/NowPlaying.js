@@ -49,10 +49,28 @@ var NowPlaying = React.createClass({
           </div>
         </div>
         <div className="col-4">
-          <div className="team-container" style={teamOneStyle}>
+          <div className="team-container islet" style={teamOneStyle}>
+            <div className="table full-width">
+              <div className="td">
+                <h6 className="flush--bottom">{this.props.event.teamOne.location}</h6>
+                <h3>{this.props.event.teamOne.name}</h3>
+              </div>
+              <div className="td text-right">
+                <h2>({this.props.event.teamOne.wins}-{this.props.event.teamOne.losses})</h2>
+              </div>
+            </div>
             <div className="filter red" />
           </div>
-          <div className="team-container" style={teamTwoStyle}>
+          <div className="team-container islet" style={teamTwoStyle}>
+            <div className="table full-width">
+              <div className="td">
+                <h6 className="flush--bottom">{this.props.event.teamTwo.location}</h6>
+                <h3>{this.props.event.teamTwo.name}</h3>
+              </div>
+              <div className="td text-right">
+                <h2>({this.props.event.teamTwo.wins}-{this.props.event.teamTwo.losses})</h2>
+              </div>
+            </div>
             <div className="filter blue" />
           </div>
         </div>

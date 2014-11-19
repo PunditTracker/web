@@ -9,7 +9,7 @@ section.now-playing {
       position: relative;
       height: 125px;
 
-      @include background-cover();
+      @include background-cover(bottom);
       @include border-radius(5px, 5px, 0, 0);
 
       .location-name {
@@ -33,11 +33,17 @@ section.now-playing {
     position: relative;
     height: 380px; // the width of a col-4 grid item at full screen size
 
+    color: $white;
     @extend %card;
     @include background-cover();
 
     &:not(:last-child) {
       margin-bottom: $half-space;
+    }
+
+    & * {
+      position: relative;
+      z-index: 2;
     }
 
     .filter {
