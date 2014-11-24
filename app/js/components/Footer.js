@@ -11,7 +11,9 @@ var Footer = React.createClass({
     return (
       <footer>
 
-        Footer
+        <div className="wrapper">
+          Footer
+        </div>
 
         <div className="shadow" />
 

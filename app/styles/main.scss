@@ -2,15 +2,16 @@
 @import 'mixins';
 @import 'typography';
 @import 'layout';
-@import 'grid';
-@import 'base';
+@import 'vendor/elf/elf';
 @import 'vendor/font-awesome/font-awesome';
+@import 'base';
 
 @import 'elements/card';
 @import 'elements/header-hero';
 @import 'elements/footer';
 @import 'elements/user-avatar';
 @import 'elements/prediction-card';
+@import 'elements/featured-predictions';
 @import 'elements/featured-users';
 @import 'elements/recent-blog-posts';
 @import 'elements/now-playing';

@@ -12,7 +12,9 @@ div.header-hero-container {
   .hero {
     @extend %hero;
 
-    .prediction { @extend %card; }
+    .prediction {
+      @extend %card;
+    }
   }
 
   .background-image {

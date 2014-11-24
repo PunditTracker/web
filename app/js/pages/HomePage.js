@@ -32,10 +32,10 @@ var HomePage = React.createClass({
         </div>
 
         <div className="wrapper">
-          <div className="col-8">
+          <div className="content-container">
               <FeaturedPredictions />
           </div>
-          <div className="col-4">
+          <div className="sidebar-container">
               <FeaturedUsers />
               <RecentBlogPosts />
           </div>

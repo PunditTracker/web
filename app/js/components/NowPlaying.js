@@ -130,26 +130,24 @@ var NowPlaying = React.createClass({
 
     return (
       <section className="now-playing wrapper">
-        <div className="col-8">
-          <div className="event-info">
-            <div className="location-banner" style={locationStyle}>
-              <div className="location-name">{this.props.event.location.name}</div>
-              <div className="shadow" />
-            </div>
-            <div className="info-container islet">
-              {this.renderGameScores()}
-              <h6 className="caps light-grey nudge-half--ends">Highlights</h6>
-              <ul className="highlights row">
-                {this.renderHighlights()}
-              </ul>
-              <h6 className="caps light-grey nudge-quarter--bottom">Related Predictions</h6>
-              <ul className="related-predictions">
-                {this.renderRelatedPredictions()}
-              </ul>
-            </div>
+        <div className="content-container event-info">
+          <div className="location-banner" style={locationStyle}>
+            <div className="location-name">{this.props.event.location.name}</div>
+            <div className="shadow" />
+          </div>
+          <div className="info-container islet">
+            {this.renderGameScores()}
+            <h6 className="caps light-grey nudge-half--ends">Highlights</h6>
+            <ul className="highlights row">
+              {this.renderHighlights()}
+            </ul>
+            <h6 className="caps light-grey nudge-quarter--bottom">Related Predictions</h6>
+            <ul className="related-predictions">
+              {this.renderRelatedPredictions()}
+            </ul>
           </div>
         </div>
-        <div className="col-4">
+        <div className="sidebar-container">
           <div className="team-container islet" style={teamOneStyle}>
             <div className="table full-width">
               <div className="td">

@@ -1,18 +1,6 @@
 div.prediction-card {
 
-  float: left;
-  width: calc(50% - #{$half-space/2});
-  margin-bottom: $half-space;
-
   @extend %card;
-
-  &:nth-child(odd) {
-    margin-right: $half-space/2;
-  }
-
-  &:nth-child(even) {
-    margin-left: $half-space/2;
-  }
 
   .title-container {
     position: relative;

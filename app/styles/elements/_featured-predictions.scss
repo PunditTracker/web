@@ -1,0 +1,9 @@
+section.featured-predictions {
+
+  .prediction-card {
+    @include column(1/2, $half-space);
+    @include cycle(2);
+    margin-bottom: $half-space;
+  }
+
+}

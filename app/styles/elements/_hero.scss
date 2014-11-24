@@ -75,6 +75,8 @@
     margin-bottom: $half-space;
 
     .prediction {
+      @include column(1/4, $half-space);
+      @include cycle(4);
       position: relative;
       height: 175px;
       padding: $half-space;

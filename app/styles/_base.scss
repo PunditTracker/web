@@ -4,3 +4,23 @@ body {
 
   background-color: $body-background-grey;
 }
+
+*, *:before, *:after {
+  @include border-box;
+}
+
+.wrapper, .row {
+  width: 100%;
+  max-width: $grid-max-width;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.content-container {
+  @include column(2/3, $half-space);
+
+}
+
+.sidebar-container {
+  @include column(1/3, $half-space);
+}

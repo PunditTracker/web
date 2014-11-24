@@ -85,12 +85,10 @@ var HomeCategoryHero = React.createClass({
       };
 
       return (
-        <div className="col-3" key={index}>
-          <div className="prediction" style={predictionStyles}>
-            <h5 className="title">{prediction.title}</h5>
-            <Link to="Prediction" params={{ category: this.props.category, id: prediction.id }} />
-            <div className="gradient" />
-          </div>
+        <div className="prediction" style={predictionStyles} key={index}>
+          <h5 className="title">{prediction.title}</h5>
+          <Link to="Prediction" params={{ category: this.props.category, id: prediction.id }} />
+          <div className="gradient" />
         </div>
       );
     }.bind(this));

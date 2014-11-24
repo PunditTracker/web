@@ -43,14 +43,14 @@ var SubcategoryPage = React.createClass({
         <NowPlaying event={this.state.subcategory.currentEvent} />
 
         <div className="wrapper">
-          <h2 className="dark-grey">Featured Predictions</h2>
+          <h2 className="dark-grey nudge-half--top">Featured Predictions</h2>
         </div>
 
         <div className="wrapper">
-          <div className="col-8">
+          <div className="content-container">
             <FeaturedPredictions subcategory={this.props.params.subcategory.toString()} />
           </div>
-          <div className="col-4">
+          <div className="sidebar-container">
             <FeaturedUsers subcategory={this.props.params.subcategory.toString()} />
           </div>
         </div>
