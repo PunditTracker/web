@@ -23,6 +23,7 @@ var HomePageAPI = {
       title: 'NFL',
       featuredPrediction: {
         id: 1,
+        category: 'sports',
         title: 'Which team will make it to the Super Bowl?'
       },
       currentEvent: {
