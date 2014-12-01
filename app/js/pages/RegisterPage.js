@@ -56,8 +56,10 @@ var RegisterPage = React.createClass({
     evt.preventDefault();
 
     AuthAPI.register(user).then(function() {
+      console.log('successfully registerd user, transitioning to login page');
       this.transitionTo('Login');
     }.bind(this)).catch(function(err) {
+      console.log('error registering:', err);
       this.setState({ error: err });
     }.bind(this));
   },
