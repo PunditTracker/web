@@ -79,7 +79,7 @@ var RegisterPage = React.createClass({
           <br />
           <div className="error">{this.state.error}</div>
           <br />
-          <input type="submit" value="Login" disabled={this.state.submitDisabled ? 'true' : ''} />
+          <input type="submit" value="Register" disabled={this.state.submitDisabled ? 'true' : ''} />
         </form>
 
       </section>
