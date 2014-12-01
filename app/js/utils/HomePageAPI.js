@@ -10,7 +10,7 @@ var HomePageAPI = {
   getHeroPrediction: function() {
     var deferred = when.defer();
 
-    // request.get(APIUtils.root + 'predictions/hero').end(function(res) {
+    // request.get(APIUtils.root + 'prediction/featured?limit=1').end(function(res) {
     //   if ( !res.ok ) {
     //     deferred.reject(res.text);
     //   } else {
@@ -30,7 +30,7 @@ var HomePageAPI = {
 
   getLatestPredictions: function(subcategory) {
     var deferred = when.defer();
-    var getUrl = APIUtils.root + 'predictions/latest';
+    var getUrl = APIUtils.root + 'prediction/latest';
 
     if ( subcategory ) {
       getUrl += ('/' + subcategory);
@@ -100,7 +100,7 @@ var HomePageAPI = {
 
   getFeaturedPredictions: function(subcategory) {
     var deferred = when.defer();
-    var getUrl = APIUtils.root + 'predictions/featured';
+    var getUrl = APIUtils.root + 'prediction/featured';
 
     if ( subcategory ) {
       getUrl += ('/' + subcategory);

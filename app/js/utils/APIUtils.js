@@ -5,7 +5,7 @@ var camelizeKeys = humps.camelizeKeys;
 
 var APIUtils = {
 
-  root: '/api/',
+  root: 'http://54.148.40.249:8080/v1/',
 
   normalizeResponse: function(response) {
     return camelizeKeys(response.body);
