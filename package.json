@@ -38,7 +38,8 @@
     "body-parser": "^1.9.2",
     "method-override": "^2.3.0",
     "compression": "^1.2.0",
-    "gulp-imagemin": "^2.0.0"
+    "gulp-imagemin": "^2.0.0",
+    "jquery": "^2.1.1"
   },
   "devDependencies": {
     "supervisor": "^0.6.0"
