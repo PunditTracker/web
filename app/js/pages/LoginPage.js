@@ -39,7 +39,7 @@ var LoginPage = React.createClass({
 
   componentDidMount: function() {
     if ( CurrentUserStore.user ) {
-      this.transitionTo('Explore');
+      this.transitionTo('Home');
     } else {
       this.listenTo(CurrentUserStore, this._onUserChange);
     }
@@ -76,7 +76,7 @@ var LoginPage = React.createClass({
         if ( err ) {
           this.setState({ error: err });
         } else {
-          this.transitionTo('Explore');
+          this.transitionTo('Home');
         }
       }.bind(this));
     }.bind(this));
