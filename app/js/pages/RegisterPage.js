@@ -8,7 +8,8 @@ var _          = require('underscore');
 var $          = require('jquery');
 var Navigation = require('react-router').Navigation;
 
-var AuthAPI    = require('../utils/AuthAPI');
+var DocumentTitle = require('../components/DocumentTitle');
+var AuthAPI       = require('../utils/AuthAPI');
 
 var RegisterPage = React.createClass({
 
@@ -67,6 +68,8 @@ var RegisterPage = React.createClass({
   render: function() {
     return (
       <section className="register-page">
+
+        <DocumentTitle title="Register" />
 
         <form id="register-form" className="island" onSubmit={this.handleSubmit}>
           <input type="text" id="username" valueLink={this.linkState('username')} placeholder="Username" required />

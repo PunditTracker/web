@@ -3,22 +3,20 @@
  */
 'use strict';
 
-var React = require('react/addons');
+var React         = require('react/addons');
+
+var DocumentTitle = require('../components/DocumentTitle');
 
 var SearchPage = React.createClass({
-
-  propTypes: {
-    updatePageTitle: React.PropTypes.func
-  },
-
-  componentDidMount: function() {
-    this.props.updatePageTitle('Search');
-  },
 
   render: function() {
     return (
       <section className="search-page">
+
+        <DocumentTitle title="Search" />
+
         Search
+
       </section>
     );
   }

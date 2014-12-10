@@ -9,6 +9,7 @@ var _                = require('underscore');
 var $                = require('jquery');
 var Navigation       = require('react-router').Navigation;
 
+var DocumentTitle    = require('../components/DocumentTitle');
 var UserActions      = require('../actions/UserActions');
 var CurrentUserStore = require('../stores/CurrentUserStore');
 
@@ -90,6 +91,8 @@ var LoginPage = React.createClass({
   render: function() {
     return (
       <section className="login-page">
+
+        <DocumentTitle title="Login" />
 
         <form id="login-form" className="island" onSubmit={this.handleSubmit}>
           <input type="text" id="username" valueLink={this.linkState('username')} placeholder="Username" required />

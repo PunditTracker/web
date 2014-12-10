@@ -3,19 +3,12 @@
  */
 'use strict';
 
-var React = require('react/addons');
+var React         = require('react/addons');
 
-var Header = require('../components/header/Header');
+var DocumentTitle = require('../components/DocumentTitle');
+var Header        = require('../components/header/Header');
 
 var CategoryPage = React.createClass({
-
-  propTypes: {
-    updatePageTitle: React.PropTypes.func.isRequired
-  },
-
-  componentDidMount: function() {
-    this.props.updatePageTitle(this.props.params.category);
-  },
 
   componentWillUnmount: function() {
     this.props.setCategory(null);
@@ -25,9 +18,11 @@ var CategoryPage = React.createClass({
     return (
       <div>
 
+        <DocumentTitle title={this.props.params.category} />
+
         <Header isHome={false} setCategory={this.props.setCategory} category={this.props.params.category} subcategory={this.props.params.category} />
 
-        <this.props.activeRouteHandler updatePageTitle={this.props.updatePageTitle} setCategory={this.setCategory} />
+        <this.props.activeRouteHandler setCategory={this.setCategory} />
 
       </div>
     );

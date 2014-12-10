@@ -5,6 +5,7 @@
 
 var React               = require('react/addons');
 
+var DocumentTitle       = require('../components/DocumentTitle');
 var Header              = require('../components/header/Header');
 var FeaturedPredictions = require('../components/FeaturedPredictions');
 var FeaturedUsers       = require('../components/FeaturedUsers');
@@ -12,18 +13,15 @@ var RecentBlogPosts     = require('../components/home/RecentBlogPosts');
 
 var HomePage = React.createClass({
 
-  propTypes: {
-    updatePageTitle: React.PropTypes.func
-  },
-
   componentDidMount: function() {
     this.props.setCategory(null);
-    this.props.updatePageTitle('Home');
   },
 
   render: function() {
     return (
       <section className="home-page">
+
+        <DocumentTitle title="Home" />
 
         <Header isHome={true} setCategory={this.props.setCategory} category={this.props.category} />
 

@@ -3,7 +3,9 @@
  */
 'use strict';
 
-var React = require('react/addons');
+var React         = require('react/addons');
+
+var DocumentTitle = require('../../components/DocumentTitle');
 
 var PredictionPage = React.createClass({
 
@@ -13,14 +15,14 @@ var PredictionPage = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    this.props.updatePageTitle(this.state.prediction.title);
-  },
-
   render: function() {
     return (
       <div>
+
+        <DocumentTitle title={this.state.prediction.title} />
+
         Prediction page
+
       </div>
     );
   }
