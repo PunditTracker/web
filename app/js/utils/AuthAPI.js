@@ -43,10 +43,38 @@ var AuthAPI = {
     return deferred.promise;
   },
 
+  facebookRegister: function(user) {
+    var deferred = when.defer();
+
+    request.post(APIUtils.root + 'auth/registerfb', user).end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(JSON.parse(res.text));
+      } else {
+        deferred.resolve(APIUtils.normalizeResponse(res));
+      }
+    });
+
+    return deferred.promise;
+  },
+
   login: function(user) {
     var deferred = when.defer();
 
-    request.post(APIUtils.root + 'auth/login', user).end(function(res) {
+    request.post(APIUtils.root + 'auth/loginfb', user).end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(JSON.parse(res.text));
+      } else {
+        deferred.resolve(APIUtils.normalizeResponse(res));
+      }
+    });
+
+    return deferred.promise;
+  },
+
+  facebookLogin: function(user) {
+    var deferred = when.defer();
+
+    request.post(APIUtils.root + 'auth/loginfb', user).end(function(res) {
       if ( !res.ok ) {
         deferred.reject(JSON.parse(res.text));
       } else {

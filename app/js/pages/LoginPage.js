@@ -1,6 +1,7 @@
 /**
  * @jsx React.DOM
  */
+ /* global FB */
 'use strict';
 
 var React            = require('react/addons');
@@ -21,7 +22,9 @@ var LoginPage = React.createClass({
     return {
       username: '',
       password: '',
+      facebookId: null,
       submitDisabled: true,
+      isFacebookLogin: false,
       error: null
     };
   },
@@ -55,6 +58,30 @@ var LoginPage = React.createClass({
     }
   },
 
+  checkFbState: function() {
+    FB.getLoginStatus(function(response) {
+      if ( response.status === 'connected' ) {
+        console.log('logged in via Facebook!!');
+        this.getUserInfoFb();
+      } else if ( response.status === 'not_authorized' ) {
+        this.setState({ error: 'You must authorize PunditTracker via Facebook to log in using that method.' });
+      } else {
+        this.setState({ error: 'You must be logged in to Facebook to log in using that method.' });
+      }
+    }.bind(this));
+  },
+
+  getUserInfoFb: function() {
+    FB.api('/me', { fields: 'id' }, function(response) {
+      this.setState({ facebookId: response.id }, this.handleSubmit);
+    }.bind(this));
+  },
+
+  fbLogin: function() {
+    this.setState({ isFacebookLogin: true });
+    FB.login(this.checkFbState, { scope: 'public_profile,email' });
+  },
+
   checkForm: function() {
     var $form = $('#login-form');
     var formIsValid = !$form.checkValidity || $form.checkValidity();
@@ -69,14 +96,18 @@ var LoginPage = React.createClass({
   handleSubmit: function(evt) {
     var user = {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      facebookId: this.state.facebookId
     };
+    var loginFunction = this.state.isFacebookLogin ? UserActions.facebookLogin : UserActions.login;
 
-    evt.stopPropagation();
-    evt.preventDefault();
+    if ( evt ) {
+      evt.stopPropagation();
+      evt.preventDefault();
+    }
 
     this.setState({ error: null }, function() {
-      UserActions.login(user, function(err) {
+      loginFunction(user, function(err) {
         if ( err ) {
           console.log('error logging in:', err);
           this.setState({ error: err });
@@ -99,10 +130,14 @@ var LoginPage = React.createClass({
           <br />
           <input type="password" id="password" valueLink={this.linkState('password')} placeholder="Password" required />
           <br />
-          <div className="error">{this.state.error}</div>
+          <div className="error-container">{this.state.error}</div>
           <br />
           <input type="submit" value="Login" disabled={this.state.submitDisabled ? 'true' : ''} />
         </form>
+
+        <div className="fb-login-container">
+          <a onClick={this.fbLogin}>Login with Facebook</a>
+        </div>
 
       </section>
     );
