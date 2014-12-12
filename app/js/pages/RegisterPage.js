@@ -87,7 +87,7 @@ var RegisterPage = React.createClass({
       username: this.state.username,
       email: this.state.email,
       firstName: this.state.firstName,
-      lastName: this.state.LastName,
+      lastName: this.state.lastName,
       avatarURL: this.state.avatarUrl,
       facebookId: this.state.facebookId,
       password: this.state.password
