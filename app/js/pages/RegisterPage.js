@@ -5,8 +5,6 @@
 'use strict';
 
 var React      = require('react/addons');
-var _          = require('underscore');
-var $          = require('jquery');
 var Navigation = require('react-router').Navigation;
 
 var DocumentTitle = require('../components/DocumentTitle');
@@ -24,16 +22,9 @@ var RegisterPage = React.createClass({
       lastName: '',
       avatarUrl: '',
       password: '',
-      submitDisabled: true,
       error: null,
       isFacebookRegister: false
     };
-  },
-
-  componentDidUpdate: function(prevProps, prevState) {
-    if ( !_.isEqual(this.state, prevState) ) {
-      this.checkForm();
-    }
   },
 
   checkFbState: function() {
@@ -69,17 +60,6 @@ var RegisterPage = React.createClass({
   fbLogin: function() {
     this.setState({ isFacebookRegister: true });
     FB.login(this.checkFbState, { scope: 'public_profile,email' });
-  },
-
-  checkForm: function() {
-    var $form = $('#register-form');
-    var formIsValid = !$form.checkValidity || $form.checkValidity();
-
-    if ( formIsValid ) {
-      this.setState({ submitDisabled: false });
-    } else {
-      this.setState({ submitDisabled: true });
-    }
   },
 
   handleSubmit: function(evt) {
@@ -139,7 +119,7 @@ var RegisterPage = React.createClass({
           <br />
           <div className="error-container">{this.state.error}</div>
           <br />
-          <input type="submit" value="Register" disabled={this.state.submitDisabled ? 'true' : ''} />
+          <input type="submit" value="Register" />
         </form>
 
         <div className="fb-register-container">

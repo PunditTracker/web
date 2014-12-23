@@ -7,7 +7,6 @@
 var React            = require('react/addons');
 var Reflux           = require('reflux');
 var _                = require('underscore');
-var $                = require('jquery');
 var Navigation       = require('react-router').Navigation;
 
 var DocumentTitle    = require('../components/DocumentTitle');
@@ -23,7 +22,6 @@ var LoginPage = React.createClass({
       username: '',
       password: '',
       facebookId: null,
-      submitDisabled: true,
       isFacebookLogin: false,
       error: null
     };
@@ -52,12 +50,6 @@ var LoginPage = React.createClass({
     }
   },
 
-  componentDidUpdate: function(prevProps, prevState) {
-    if ( !_.isEqual(this.state, prevState) ) {
-      this.checkForm();
-    }
-  },
-
   checkFbState: function() {
     FB.getLoginStatus(function(response) {
       if ( response.status === 'connected' ) {
@@ -80,17 +72,6 @@ var LoginPage = React.createClass({
   fbLogin: function() {
     this.setState({ isFacebookLogin: true });
     FB.login(this.checkFbState, { scope: 'public_profile,email' });
-  },
-
-  checkForm: function() {
-    var $form = $('#login-form');
-    var formIsValid = !$form.checkValidity || $form.checkValidity();
-
-    if ( formIsValid ) {
-      this.setState({ submitDisabled: false });
-    } else {
-      this.setState({ submitDisabled: true });
-    }
   },
 
   handleSubmit: function(evt) {
@@ -132,7 +113,7 @@ var LoginPage = React.createClass({
           <br />
           <div className="error-container">{this.state.error}</div>
           <br />
-          <input type="submit" value="Login" disabled={this.state.submitDisabled ? 'true' : ''} />
+          <input type="submit" value="Login" />
         </form>
 
         <div className="fb-login-container">
