@@ -5,7 +5,7 @@
 
 var React                    = require('react/addons');
 var Reflux                   = require('reflux');
-var _                        = require('underscore');
+var _                        = require('lodash');
 
 var HomePageActions          = require('../actions/HomePageActions');
 var FeaturedPredictionsStore = require('../stores/FeaturedPredictionsStore');
