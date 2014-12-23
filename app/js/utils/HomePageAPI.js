@@ -12,7 +12,7 @@ var HomePageAPI = {
 
     // request.get(APIUtils.root + 'prediction/featured?limit=1').end(function(res) {
     //   if ( !res.ok ) {
-    //     deferred.reject(res.text);
+    //     deferred.reject(APIUtils.normalizeResponse(res));
     //   } else {
     //     deferred.resolve(APIUtils.normalizeResponse(res));
     //   }
@@ -38,7 +38,7 @@ var HomePageAPI = {
 
     // request.get(getUrl).end(function(res) {
     //   if ( !res.ok ) {
-    //     deferred.reject(res.text);
+    //     deferred.reject(APIUtils.normalizeResponse(res));
     //   } else {
     //     deferred.resolve(APIUtils.normalizeResponse(res));
     //   }
@@ -108,7 +108,7 @@ var HomePageAPI = {
 
     // request.get(getUrl).end(function(res) {
     //   if ( !res.ok ) {
-    //     deferred.reject(res.text);
+    //     deferred.reject(APIUtils.normalizeResponse(res));
     //   } else {
     //     deferred.resolve(APIUtils.normalizeResponse(res));
     //   }
@@ -166,7 +166,7 @@ var HomePageAPI = {
 
     // request.get(getUrl).end(function(res) {
     //   if ( !res.ok ) {
-    //     deferred.reject(res.text);
+    //     deferred.reject(APIUtils.normalizeResponse(res));
     //   } else {
     //     deferred.resolve(APIUtils.normalizeResponse(res));
     //   }
@@ -195,7 +195,7 @@ var HomePageAPI = {
 
     // request.get(APIUtils.root + 'blog').end(function(res) {
     //   if ( !res.ok ) {
-    //     deferred.reject(res.text);
+    //     deferred.reject(APIUtils.normalizeResponse(res));
     //   } else {
     //     deferred.resolve(APIUtils.normalizeResponse(res));
     //   }

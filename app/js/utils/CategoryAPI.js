@@ -12,7 +12,7 @@ var HomePageAPI = {
 
     // request.get(APIUtils.root + 'subcategory/' + subcategory).end(function(res) {
     //   if ( !res.ok ) {
-    //     deferred.reject(res.text);
+    //     deferred.reject(APIUtils.normalizeResponse(res));
     //   } else {
     //     deferred.resolve(APIUtils.normalizeResponse(res));
     //   }

@@ -12,7 +12,7 @@ var AuthAPI = {
 
     // request.get(APIUtils.root + 'auth/check').end(function(res) {
     //   if ( !res.ok ) {
-    //     deferred.reject(JSON.parse(res.text));
+    //     deferred.reject(JSON.parse(res));
     //   } else {
     //     deferred.resolve(APIUtils.normalizeResponse(res));
     //   }
@@ -34,7 +34,7 @@ var AuthAPI = {
 
     request.put(APIUtils.root + 'auth/register', user).end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(JSON.parse(res.text));
+        deferred.reject(APIUtils.normalizeResponse(res));
       } else {
         deferred.resolve(APIUtils.normalizeResponse(res));
       }
@@ -48,7 +48,7 @@ var AuthAPI = {
 
     request.post(APIUtils.root + 'auth/registerfb', user).end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(JSON.parse(res.text));
+        deferred.reject(APIUtils.normalizeResponse(res));
       } else {
         deferred.resolve(APIUtils.normalizeResponse(res));
       }
@@ -62,7 +62,7 @@ var AuthAPI = {
 
     request.post(APIUtils.root + 'auth/loginfb', user).end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(JSON.parse(res.text));
+        deferred.reject(APIUtils.normalizeResponse(res));
       } else {
         deferred.resolve(APIUtils.normalizeResponse(res));
       }
@@ -76,7 +76,7 @@ var AuthAPI = {
 
     request.post(APIUtils.root + 'auth/loginfb', user).end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(JSON.parse(res.text));
+        deferred.reject(APIUtils.normalizeResponse(res));
       } else {
         deferred.resolve(APIUtils.normalizeResponse(res));
       }
@@ -90,7 +90,7 @@ var AuthAPI = {
 
     request.post(APIUtils.root + 'auth/logout').end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(JSON.parse(res.text));
+        deferred.reject(APIUtils.normalizeResponse(res));
       } else {
         deferred.resolve(APIUtils.normalizeResponse(res));
       }

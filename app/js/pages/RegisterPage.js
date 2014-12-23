@@ -102,7 +102,7 @@ var RegisterPage = React.createClass({
       this.transitionTo('Login');
     }.bind(this)).catch(function(err) {
       console.log('error registering:', err);
-      this.setState({ error: err });
+      this.setState({ error: err.message });
     }.bind(this));
   },
 

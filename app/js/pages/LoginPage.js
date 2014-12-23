@@ -32,7 +32,7 @@ var LoginPage = React.createClass({
   _onUserChange: function(err, user) {
     if ( err ) {
       console.log('error setting current user:', err);
-      this.setState({ error: err });
+      this.setState({ error: err.message });
     } else if ( !_.isEmpty(user) ) {
       console.log('current user set:', user, 'transitioning to home page');
       this.transitionTo('Home');
