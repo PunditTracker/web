@@ -1,155 +1,78 @@
-%header {
+header {
 
-  position: relative;
+  height: $header-height;
+  background-color: $white;
+  position: fixed;
   width: 100%;
+  z-index: 500;
 
-  div.top-container {
-    z-index: 2;
-    position: relative;
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-    height: 100px;
+  @include custom-box-shadow(0 0 0 1rem $black);
+
+  nav {
+    max-width: $content-width;
     margin: 0 auto;
+    width: 95%;
+    padding: 0 0.75rem;
+    @include border-box;
 
-    background: transparent;
+    .logo {
+      @extend .h5;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
+      display: inline-block;
 
-    &.gray {
-      background: $dark-background-grey;
-    }
+      span {
+        text-align: justify;
+        width: 4rem;
+        line-height: 0.75rem;
+        display: block;
 
-    & > * {
-      display: table-cell;
-      vertical-align: middle;
-    }
+        &:first-child {
+          font-size: 1.125rem;
+          line-height: 1.25rem;
+        }
 
-    a {
-      font-size: 18px;
-      color: $white;
-    }
-
-    .logo-container,
-    .login-container {
-      width: calc((100% - #{$grid-max-width})/2);
-    }
-
-    .logo-container {
-      padding: 0 $half-space;
-
-       .logo {
-        position: relative;
-        width: 60px;
-        height: 60px;
-
-        background: $white;
-        @include border-radius(100%);
-
-        a {
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
+        &:last-child {
+          font-size: 0.95rem;
+          margin-top: -0.75rem;
         }
       }
     }
 
-    ul {
-      margin: 0;
-      padding: $half-space 0 0 0;
-      list-style: none;
+    .categories {
+      display: inline-block;
+      vertical-align: top;
 
       li {
-        z-index: 2; /* place above filter */
-        position: relative;
         display: inline-block;
-
-        &:not(:last-child) {
-          margin-right: $half-space;
-        }
-
-        a {
-          display: inline-block;
-          height: 80px;
-          line-height: 50px;
-          padding: $half-space/2;
-        }
+        font-size: 0.8rem;
+        padding: 0 1rem;
       }
     }
 
-    .main-nav {
-      width: $grid-max-width;
-
-      li {
-        a {
-          .color-strip {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 8px;
-            height: 5px;
-          }
-
-          &:hover {
-            text-decoration: none;
-          }
-
-          &.finance {
-            &.active, &:hover { background-color: $finance; }
-
-            .color-strip { background-color: $finance; }
-          }
-          &.politics {
-            &.active, &:hover { background-color: $politics; }
-
-            .color-strip { background-color: $politics; }
-          }
-          &.sports {
-            &.active, &:hover { background-color: $sports; }
-
-            .color-strip { background-color: $sports; }
-          }
-          &.entertainment {
-            &.active, &:hover { background-color: $entertainment; }
-
-            .color-strip { background-color: $entertainment; }
-          }
-          &.tech {
-            &.active, &:hover { background-color: $tech; }
-
-            .color-strip { background-color: $tech; }
-          }
-          &.blog:hover {
-            text-decoration: underline;
-          }
-        }
-
-        ul {
-          display: none;
-        }
-
-        &:hover {
-          ul { display: block; }
-        }
-      }
-
-      &.subpage {
-        li a {
-          .color-strip { background: transparent; }
-
-          &.active, &:hover {
-            background: transparent;
-
-            .color-strip { background-color: $white; }
-          }
-        }
-      }
+    .sign-up, .search, {
+      float: right;
+      font-size: 0.8rem;
+      margin-top: 1rem;
     }
 
-    .login-container {
-      padding-right: $half-space;
+    .search {
+      position: relative;
+      margin-right: 1rem;
 
-      text-align: right;
+      i {
+        position: absolute;
+        left: 1rem;
+        top: 0.5rem;
+        line-height: 1.2rem;
+        vertical-align: middle;
+        @include transition(0.2s);
+      }
+
+      .stretch:focus i {
+          color: rgba(0,0,0,0) !important;
+        }
     }
   }
 

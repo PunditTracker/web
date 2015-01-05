@@ -2,24 +2,49 @@
 $white: #ffffff;
 $black: #000000;
 
-$blue: #2e8dd6;
+$blue: #2a81c4;
+$green: #039b67;
+$yellow: #f4bb15;
+$yellow-green: #FF5900;
 $red: #e54236;
+$orange: #d79003;
+$facebook-blue: #3b5998;
 
-$finance: #039b67; // green
-$politics: $red;
-$sports: $blue;
-$entertainment: #f4bb15; // yellow
-$tech: #d79003; // orange
-
-$body-background-grey: #e6e6e6;
-$dark-background-grey: #4a4a4a;
-
-$light-grey-text: #a39f9e;
-$grey-text: #616161;
-$dark-grey-text: #595959;
-$link-color: #2a81c4;
+$ultra-light-grey: #f5f5f5;
+$very-light-grey: #e5e5e5;
+$light-grey: #999;
+$grey: #666;
+$dark-grey: #111;
 
 // spacing
 $grid-max-width: 1140px;
 $full-space: 40px;
 $half-space: 20px;
+
+// sizing
+$content-width: 65rem;
+$header-height: 4rem;
+$blog-post-height: 6rem;
+$extension: 10rem;
+$card-grid-padding: 1.5rem;
+$hero-height: 30rem;
+$prediction-height: 15rem;
+$prediction-padding: 0.75rem;
+$pundit-vertical-padding: 1rem;
+$pundit-height: 4rem;
+$voting-height: 2rem;
+$hero-image-width: 100rem;
+$tall-2-height: (2 * $prediction-height + $card-grid-padding);
+$tall-3-2-height: ((3 * $prediction-height + $card-grid-padding) / 2);
+
+// media queries
+$phone-max: 640px;
+$tablet-portrait-min: 641px;
+$tablet-portrait-max: 768px;
+$tablet-landscape-min: 769px;
+$tablet-landscape-max: 1024px;
+$desktop-min: 1025px;
+$desktop-max: 1440px;
+$xl-desktop-min: 1441px;
+$xl-desktop-max: 1920px;
+$xxl-desktop-min: 1921px;

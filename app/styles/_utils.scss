@@ -1,0 +1,216 @@
+@mixin border-box {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@mixin border-radius($top, $right: $top, $bottom: $top, $left: $top) {
+  -webkit-border-radius: $top $right $bottom $left;
+  -moz-border-radius:    $top $right $bottom $left;
+  -ms-border-radius:     $top $right $bottom $left;
+  border-radius:         $top $right $bottom $left;
+}
+
+@mixin custom-box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow:    $shadow;
+  box-shadow:         $shadow;
+}
+
+@mixin box-shadow {
+  @include custom-box-shadow(0 3px 10px rgba(0, 0, 0, 0.16));
+}
+
+@mixin large-box-shadow {
+  @include custom-box-shadow(0 10px 30px rgba(0, 0, 0, 0.19));
+}
+
+@mixin custom-text-shadow($shadow...) {
+  text-shadow: $shadow;
+}
+
+@mixin text-shadow {
+  @include custom-text-shadow(2px 2px 3px $black);
+}
+
+@mixin transition-with-delay($speed, $delay) {
+  -webkit-transition: $speed $delay ease all;
+     -moz-transition: $speed $delay ease all;
+       -o-transition: $speed $delay ease all;
+          transition: $speed $delay ease all;
+}
+
+@mixin transition($speed) {
+  @include transition-with-delay($speed, 0);
+}
+
+@mixin transform-transition($transition-time, $method) {
+  -webkit-transition: -webkit-transform $transition-time $method;
+  -moz-transition:    -moz-transform $transition-time $method;
+  -o-transition:      -o-transform $transition-time $method;
+  transition:         transform $transition-time $method;
+}
+
+@mixin background-size($size) {
+  -webkit-background-size: $size;
+  -moz-background-size:    $size;
+  -o-background-size:      $size;
+  background-size:         $size;
+}
+
+@mixin background-cover($yPos: top) {
+  @include background-size(cover);
+  background-position: center $yPos;
+  background-repeat: no-repeat;
+}
+
+@mixin translate-x($distance){
+  -webkit-transform: translateX($distance);
+  -moz-transform:    translateX($distance);
+  -o-transform:      translateX($distance);
+  -ms-transform:     translateX($distance);
+  transform:         translateX($distance);
+}
+
+@mixin translate-y($distance) {
+  -webkit-transform: translateY($distance);
+  -moz-transform:    translateY($distance);
+  -o-transform:      translateY($distance);
+  -ms-transform:     translateY($distance);
+  transform:         translateY($distance);
+}
+
+@mixin translate-z($distance) {
+  -webkit-transform: translateZ($distance);
+  -moz-transform:    translateZ($distance);
+  -o-transform:      translateZ($distance);
+  -ms-transform:     translateZ($distance);
+  transform:         translateZ($distance);
+}
+
+@mixin translate3d($x, $y, $z) {
+  -webkit-transform: translate3d($x,$y,$z);
+  -moz-transform:    translate3d($x,$y,$z);
+  -o-transform:      translate3d($x,$y,$z);
+  -ms-transform:     translate3d($x,$y,$z);
+  transform:         translate3d($x,$y,$z);
+}
+
+@mixin scale($proportion) {
+  -webkit-transform: scale($proportion);
+  -moz-transform:    scale($proportion);
+  -o-transform:      scale($proportion);
+  -ms-transform:     scale($proportion);
+  transform:         scale($proportion);
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }
+  @-o-keyframes $animation-name {
+    @content;
+  }
+  @keyframes $animation-name {
+    @content;
+  }
+}
+
+$p1: 0%;
+$p2: 15%;
+$p3: 35%;
+$p4: 45%;
+$p5: 60%;
+$p6: 100%;
+$o1: 0.01;
+$o2: 0.1;
+$o3: 0.4;
+$o4: 0.6;
+$o5: 1;
+$o6: 1;
+@mixin radial($r, $g, $b, $x, $y) {
+  background: rgba(255,255,255,1);
+  background: -moz-radial-gradient($x $y, circle cover,
+    rgba($r,$g,$b,$o1) $p1,
+    rgba($r,$g,$b,$o2) $p2,
+    rgba($r,$g,$b,$o3) $p3,
+    rgba($r,$g,$b,$o4) $p4,
+    rgba($r,$g,$b,$o5) $p5,
+    rgba($r,$g,$b,$o6) $p6);
+  background: -webkit-gradient(radial, $x $y, 0px, $x $y, 100%,
+    color-stop($p1,  rgba($r,$g,$b,$o1)),
+    color-stop($p2, rgba($r,$g,$b,$o2)),
+    color-stop($p3, rgba($r,$g,$b,$o3)),
+    color-stop($p4, rgba($r,$g,$b,$o4)),
+    color-stop($p5, rgba($r,$g,$b,$o5)),
+    color-stop($p6,rgba($r,$g,$b,$o6)));
+  background: -webkit-radial-gradient($x $y, circle cover,
+    rgba($r,$g,$b,$o1) $p1,
+    rgba($r,$g,$b,$o2) $p2,
+    rgba($r,$g,$b,$o3) $p3,
+    rgba($r,$g,$b,$o4) $p4,
+    rgba($r,$g,$b,$o5) $p5,
+    rgba($r,$g,$b,$o6) $p6);
+  background: -o-radial-gradient($x $y, circle cover,
+    rgba($r,$g,$b,$o1) $p1,
+    rgba($r,$g,$b,$o2) $p2,
+    rgba($r,$g,$b,$o3) $p3,
+    rgba($r,$g,$b,$o4) $p4,
+    rgba($r,$g,$b,$o5) $p5,
+    rgba($r,$g,$b,$o6) $p6);
+  background: -ms-radial-gradient($x $y, circle cover,
+    rgba($r,$g,$b,$o1) $p1,
+    rgba($r,$g,$b,$o2) $p2,
+    rgba($r,$g,$b,$o3) $p3,
+    rgba($r,$g,$b,$o4) $p4,
+    rgba($r,$g,$b,$o5) $p5,
+    rgba($r,$g,$b,$o6) $p6);
+  background: radial-gradient(circle at $x $y,
+    rgba($r,$g,$b,$o1) $p1,
+    rgba($r,$g,$b,$o2) $p2,
+    rgba($r,$g,$b,$o3) $p3,
+    rgba($r,$g,$b,$o4) $p4,
+    rgba($r,$g,$b,$o5) $p5,
+    rgba($r,$g,$b,$o6) $p6);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#3b5897', GradientType=1 );
+}
+
+@mixin two-way-scrim($x) {
+  @include _scrim(rgba($x, $x, $x,1), 0%,
+                  rgba($x, $x, $x,0.25), 20%,
+                  rgba($x, $x, $x,0.01), 50%,
+                  rgba($x, $x, $x,0.25), 70%,
+                  rgba($x, $x, $x,1), 100%);
+}
+
+@mixin scrim($x) {
+  @include _scrim(rgba($x, $x, $x,0), 0%,
+                  rgba($x, $x, $x,0.25), 55%,
+                  rgba($x, $x, $x,0.25), 55%,
+                  rgba($x, $x, $x,1), 100%,
+                  rgba($x, $x, $x,1), 100%);
+}
+
+@mixin _scrim ($v1_c, $v1_p, $v2_c, $v2_p, $v3_c, $v3_p, $v4_c, $v4_p, $v5_c, $v5_p) {
+  background: -moz-linear-gradient(top, $v1_c $v1_p, $v2_c $v2_p, $v3_c $v3_p, $v4_c $v4_p, $v5_c $v5_p);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop($v1_p, $v1_c), color-stop($v2_p, $v2_c), color-stop($v3_p, $v3_c), color-stop($v4_p $v4_c), color-stop($v5_p $v5_c));
+  background: -webkit-linear-gradient(top, $v1_c $v1_p, $v2_c $v2_p, $v3_c $v3_p, $v4_c $v4_p, $v5_c $v5_p);
+  background: -o-linear-gradient(top, $v1_c $v1_p, $v2_c $v2_p, $v3_c $v3_p, $v4_c $v4_p, $v5_c $v5_p);
+  background: -ms-linear-gradient(top, $v1_c $v1_p, $v2_c $v2_p, $v3_c $v3_p, $v4_c $v4_p, $v5_c $v5_p);
+  background: linear-gradient(to bottom, $v1_c $v1_p, $v2_c $v2_p, $v3_c $v3_p, $v4_c $v4_p, $v5_c $v5_p);
+}
+
+%clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}

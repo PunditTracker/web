@@ -3,57 +3,55 @@
  */
 'use strict';
 
-var React      = require('react/addons');
-var Link       = React.createFactory(require('react-router').Link);
+var React = require('react/addons');
 
-var UserAvatar = require('./UserAvatar');
+var User  = require('./User');
 
 var PredictionCard = React.createClass({
 
   propTypes: {
-    prediction: React.PropTypes.object.isRequired
+    prediction: React.PropTypes.object.isRequired,
+    className: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
-      prediction: {}
+      prediction: {},
+      className: ''
     };
   },
 
   render: function() {
-    var titleStyles = {
-      'backgroundImage': 'url(' + this.props.prediction.imageUrl + ')'
-    };
-    var categoryClass = 'category' + ' ' + this.props.prediction.category.toLowerCase();
+    var classes = 'prediction-card ' + this.props.className;
 
     return (
-      <div className="prediction-card">
+      <div className={classes}>
 
-        <div className="title-container" style={titleStyles}>
-          <div className={categoryClass}>{this.props.prediction.category}</div>
-          <h2 className="title">{this.props.prediction.title}</h2>
-          <div className="filter" />
-          <div className="shadow" />
-          <Link to="Prediction" params={{ category: this.props.prediction.category, id: this.props.prediction.id }} />
+        <div className="background"><div className="scrim" /></div>
+
+        <h4 className="text">{this.props.prediction.text}</h4>
+
+        <div className="voting">
+          <div className="prompt">
+            <p><i className="fa fa-bar-chart"></i></p>
+          </div>
+          <ul className="options">
+            <li><a href="#">
+              <span className="option">No Way</span>
+            </a></li>
+            <li><a href="#">
+              <span className="option">Unlikely</span>
+            </a></li>
+            <li><a href="#">
+              <span className="option">Likely</span>
+            </a></li>
+            <li><a href="#">
+              <span className="option">Definitely</span>
+            </a></li>
+          </ul>
         </div>
 
-        <div className="info-container">
-          <div className="avatar-container">
-            <UserAvatar user={this.props.prediction.user} />
-          </div>
-          <div className="user-container">
-            <Link to="Profile"
-                  params={{ id: this.props.prediction.user.id }}
-                  className="user-name">
-              {this.props.prediction.user.name}
-            </Link>
-            <a className="user-organization">{this.props.prediction.user.organization}</a>
-          </div>
-          <div className="score-container">
-            <h6 className="descriptor">Score</h6>
-            <h2 className="score">{this.props.prediction.score}</h2>
-          </div>
-        </div>
+        <User user={this.props.prediction.user} />
 
       </div>
     );

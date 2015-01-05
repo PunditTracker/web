@@ -6,25 +6,14 @@
 var React              = require('react/addons');
 var Reflux             = require('reflux');
 var _                  = require('lodash');
-var Link               = React.createFactory(require('react-router').Link);
 
 var HomePageActions    = require('../actions/HomePageActions');
 var FeaturedUsersStore = require('../stores/FeaturedUsersStore');
-var UserAvatar         = require('./UserAvatar');
+var User               = require('./User');
 
 var FeaturedUsers = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
-
-  propTypes: {
-    subcategory: React.PropTypes.string
-  },
-
-  getDefaultProps: function() {
-    return {
-      subcategory: null
-    };
-  },
 
   getInitialState: function() {
     return {
@@ -35,47 +24,36 @@ var FeaturedUsers = React.createClass({
   _onFeaturedUsersChange: function(users) {
     if ( users ) {
       console.log('users change:', users);
-      this.setState({
-        featuredUsers: users
-      });
+      this.setState({ featuredUsers: users });
     }
   },
 
   componentWillMount: function() {
-    HomePageActions.loadFeaturedUsers(this.props.subcategory, this._onFeaturedUsersChange);
+    HomePageActions.loadFeaturedUsers(this._onFeaturedUsersChange);
     this.listenTo(FeaturedUsersStore, this._onFeaturedUsersChange);
   },
 
   renderUsers: function() {
     return _.map(this.state.featuredUsers, function(user, index) {
       return (
-        <li key={index}>
-          <div className="avatar-container">
-            <UserAvatar user={user} />
-          </div>
-          <div className="user-container">
-            <Link to="Profile" params={{ id: user.id }} className="user-name">{user.name}</Link>
-            <a className="user-organization">{user.organization}</a>
-          </div>
-          <div className="score-container">
-            <h2 className="score">{user.score}</h2>
-          </div>
-        </li>
+        <User user={user} tag="li" key={index} />
       );
     });
   },
 
   render: function() {
     return (
-      <section className="featured-users">
+      <div className="list-card featured-users">
 
-        <h5 className="title">Featured Users</h5>
+        <div className="title-wrapper">
+            <h2 className="title">Featured Users</h2>
+        </div>
 
         <ul>
           {this.renderUsers()}
         </ul>
 
-      </section>
+      </div>
     );
   }
 

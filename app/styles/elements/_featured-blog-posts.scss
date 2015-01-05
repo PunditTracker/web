@@ -1,0 +1,29 @@
+.featured-blog-posts {
+
+  & > .title-wrapper {
+      height: ($tall-3-2-height - 3*$blog-post-height) !important;
+  }
+
+  .blog-post {
+    @include border-box;
+    height: $blog-post-height;
+    width: 100%;
+    padding: $prediction-padding;
+    background-color: $white;
+
+    &:hover {
+      background-color: $ultra-light-grey;
+    }
+    &:not(:last-child) {
+      border-bottom: 1px solid $ultra-light-grey;
+    }
+    h4 {
+      margin: 0;
+      line-height: 1.5rem;
+    }
+    h6 {
+      margin-top: 0.25rem;
+    }
+  }
+
+}

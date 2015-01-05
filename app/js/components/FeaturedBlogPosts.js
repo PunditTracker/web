@@ -8,16 +8,16 @@ var Reflux               = require('reflux');
 var _                    = require('lodash');
 var moment               = require('moment');
 
-var HomePageActions      = require('../../actions/HomePageActions');
-var RecentBlogPostsStore = require('../../stores/RecentBlogPostsStore');
+var HomePageActions      = require('../actions/HomePageActions');
+var RecentBlogPostsStore = require('../stores/RecentBlogPostsStore');
 
-var RecentBlogPosts = React.createClass({
+var FeaturedBlogPosts = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
 
   getInitialState: function() {
     return {
-      recentBlogPosts: []
+      featuredBlogPosts: []
     };
   },
 
@@ -25,7 +25,7 @@ var RecentBlogPosts = React.createClass({
     if ( posts ) {
       console.log('posts change:', posts);
       this.setState({
-        recentBlogPosts: posts
+        featuredBlogPosts: posts
       });
     }
   },
@@ -36,16 +36,13 @@ var RecentBlogPosts = React.createClass({
   },
 
   renderBlogPosts: function() {
-    return _.map(this.state.recentBlogPosts, function(post, index) {
+    return _.map(this.state.featuredBlogPosts, function(post, index) {
       return (
-        <li key={index}>
-          <div>
-            <span className="category">{post.category}</span>
-            <span className="time">{moment(post.timestamp).fromNow()}</span>
-          </div>
-          <div>
-            <a href={post.url} target="_blank">{post.title}</a>
-          </div>
+        <li className="blog-post" key={index}>
+          <a href={post.url}>
+            <h4>{post.title}</h4>
+            <h6>{moment(post.timestamp).fromNow()} | {post.category}</h6>
+          </a>
         </li>
       );
     });
@@ -53,18 +50,20 @@ var RecentBlogPosts = React.createClass({
 
   render: function() {
     return (
-      <section className="recent-blog-posts">
+      <div className="list-card featured-blog-posts">
 
-        <h5 className="title">Recent Blog Posts</h5>
+        <div className="title-wrapper">
+            <h2 className="title">From our Blog</h2>
+        </div>
 
         <ul>
           {this.renderBlogPosts()}
         </ul>
 
-      </section>
+      </div>
     );
   }
 
 });
 
-module.exports = React.createFactory(RecentBlogPosts);
+module.exports = React.createFactory(FeaturedBlogPosts);

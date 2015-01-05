@@ -1,0 +1,37 @@
+.card-grid {
+
+  max-width: $content-width;
+  margin: 0 auto;
+  margin-bottom: $card-grid-padding;
+
+  & > div {
+    padding: 0 ($card-grid-padding / 2);
+    @include border-box;
+
+    &:first-child {
+      // margin-left: (- $card-grid-padding);
+    }
+  }
+
+  .card-grid  {
+    z-index: 200;
+    width: 100%;
+
+    &:last-child {
+        margin: 0;
+    }
+
+    & > div {
+      padding: 0;
+      margin: 0;
+
+      &:not(:last-child) {
+        padding-right: ($card-grid-padding / 2);
+      }
+      &:not(:first-child) {
+        padding-left: ($card-grid-padding / 2);
+      }
+    }
+  }
+
+}

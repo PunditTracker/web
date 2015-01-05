@@ -1,0 +1,51 @@
+.prediction-card.featured {
+
+  position: absolute;
+  bottom: 2rem;
+  width: 50%;
+
+  background-color: rgba(0,0,0,0.2);
+  color: $white;
+  @include text-shadow;
+
+  .text {
+    position: absolute;
+    bottom: ($pundit-height + $voting-height + 1rem);
+    left: 1rem;
+    right: 1rem;
+
+    @extend .h1;
+  }
+
+  .pundit {
+    bottom: 0;
+    background-color: rgba(0,0,0,0) !important;
+
+    .text-wrapper {
+      left: 4rem;
+      height: 5rem;
+      color: $white;
+      @include text-shadow;
+    }
+    .name, .source {
+      @include text-shadow;
+    }
+  }
+
+  .voting {
+    .prompt {
+      color: white;
+      @include text-shadow;
+    }
+    .options, .options li {
+      border: 0 !important;
+    }
+    .option {
+      @include text-shadow;
+    }
+    .options li:hover .option {
+      text-shadow: none;
+    }
+  }
+
+}

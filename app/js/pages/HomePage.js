@@ -3,19 +3,20 @@
  */
 'use strict';
 
-var React               = require('react/addons');
+var React             = require('react/addons');
 
-var DocumentTitle       = require('../components/DocumentTitle');
-var Header              = require('../components/header/Header');
-var FeaturedPredictions = require('../components/FeaturedPredictions');
-var FeaturedUsers       = require('../components/FeaturedUsers');
-var RecentBlogPosts     = require('../components/home/RecentBlogPosts');
+var DocumentTitle     = require('../components/DocumentTitle');
+var Hero              = require('../components/Hero');
+var PredictionCard    = require('../components/PredictionCard');
+var FeaturedBlogPosts = require('../components/FeaturedBlogPosts');
+var FeaturedUsers     = require('../components/FeaturedUsers');
+var PredictionSet     = require('../components/PredictionSet');
+var FacebookCard      = require('../components/FacebookCard');
+var CategoryLink      = require('../components/CategoryLink');
+var FaceoffCard       = require('../components/FaceoffCard');
+var Footer            = require('../components/Footer');
 
 var HomePage = React.createClass({
-
-  componentDidMount: function() {
-    this.props.setCategory(null);
-  },
 
   render: function() {
     return (
@@ -23,20 +24,138 @@ var HomePage = React.createClass({
 
         <DocumentTitle title="Home" />
 
-        <Header isHome={true} setCategory={this.props.setCategory} category={this.props.category} />
+        <Hero className="fixed" featuredPrediction={{}} />
 
-        <div className="wrapper">
-          <h2 className="dark-grey nudge-half--top">Featured Predictions</h2>
-        </div>
+        <div className="content">
+          <div className="pure-g card-grid">
+            <div className="pure-u-1-3"><PredictionCard prediction={{}} /></div>
+            <div className="pure-u-1-3"><PredictionCard prediction={{}} /></div>
+            <div className="pure-u-1-3"><PredictionCard prediction={{}} /></div>
+          </div>
 
-        <div className="wrapper">
-          <div className="content-container">
-              <FeaturedPredictions />
+          <div className="pure-g card-grid">
+            <div className="pure-u-2-3">
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1-2"><PredictionCard className="tall-2" prediction={{}} /></div>
+                  <div className="pure-u-1-2">
+                    <div className="pure-g card-grid">
+                      <div className="pure-u-1-1"><PredictionCard prediction={{}} /></div>
+                    </div>
+                    <div className="pure-g card-grid">
+                      <div className="pure-u-1-1"><PredictionCard prediction={{}} /></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1-2"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1-2"><PredictionCard prediction={{}} /></div>
+                </div>
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1"><PredictionCard className="wide-2" prediction={{}} /></div>
+                </div>
+            </div>
+
+            <div className="pure-u-1-3">
+              <div className="pure-g card-grid">
+                <div className="pure-u-1-1"><FeaturedBlogPosts /></div>
+              </div>
+              <div className="pure-g card-grid">
+                <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+              </div>
+              <div className="pure-g card-grid">
+                <div className="pure-u-1-1"><FeaturedUsers /></div>
+              </div>
+            </div>
+
+            <div className="pure-g card-grid">
+              <div className="pure-u-1 faceoff-outer">
+                <PredictionSet predictions={[]} />
+              </div>
+            </div>
+
+            <div className="pure-g card-grid">
+              <div className="pure-u-1-3">
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1"><PredictionCard className="tall-3-2" prediction={{}} /></div>
+                </div>
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1"><FacebookCard /></div>
+                </div>
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1"><PredictionCard className="tall-3-2" prediction={{}} /></div>
+                </div>
+              </div>
+              <div className="pure-u-2-3">
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1-2"><CategoryLink category="finance" /></div>
+                  <div className="pure-u-1-2"><PredictionCard prediction={{}} /></div>
+                </div>
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1-2">
+                    <div className="pure-g card-grid">
+                      <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                    </div>
+                    <div className="pure-g card-grid">
+                      <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                    </div>
+                  </div>
+                  <div className="pure-u-1-2"><PredictionCard className="tall-2" prediction={{}} /></div>
+                </div>
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1"><PredictionCard className="wide-2" prediction={{}} /></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="pure-g card-grid">
+              <div className="pure-u-1 faceoff-outer">
+                <FaceoffCard />
+              </div>
+            </div>
+
+            <div className="pure-g card-grid">
+              <div className="pure-u-1-3">
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1"><FeaturedUsers /></div>
+                </div>
+                <div className="pure-g card-grid">
+                    <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                </div>
+                <div className="pure-g card-grid">
+                    <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                </div>
+                <div className="pure-g card-grid">
+                    <div className="pure-u-1"><PredictionCard className="tall-3-2" prediction={{}} /></div>
+                </div>
+              </div>
+              <div className="pure-u-2-3">
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1-2"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1-2"><PredictionCard prediction={{}} /></div>
+                </div>
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1"><PredictionCard className="wide-2" prediction={{}} /></div>
+                </div>
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1-2">
+                    <div className="pure-g card-grid">
+                      <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                    </div>
+                    <div className="pure-g card-grid">
+                      <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                    </div>
+                  </div>
+                  <div className="pure-u-1-2"><PredictionCard className="tall-2" prediction={{}} /></div>
+                </div>
+                <div className="pure-g card-grid">
+                  <div className="pure-u-1-2"><CategoryLink category="sports" /></div>
+                  <div className="pure-u-1-2"><PredictionCard prediction={{}} /></div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="sidebar-container">
-              <FeaturedUsers />
-              <RecentBlogPosts />
-          </div>
+
+          <Footer />
         </div>
 
       </section>

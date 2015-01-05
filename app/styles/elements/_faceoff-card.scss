@@ -1,0 +1,77 @@
+@import 'full-width-card';
+
+.faceoff-card {
+
+  @extend .full-width-card;
+  color: $white;
+
+  .background {
+    background-image: url(../../img/football.jpg);
+  }
+
+  .prediction-card {
+    position: relative;
+    padding: 3rem;
+
+    background-color: rgba(0,0,0,0);
+    @include text-shadow;
+
+    & > .pundit {
+      position: relative;
+      top: 0;
+      border: 0;
+      background-color: rgba(0,0,0,0);
+      .text-wrapper {
+          left: 0;
+          color: $white;
+      }
+      .photo {
+          height: 6rem;
+          width: 6rem;
+          border-radius: 6rem;
+      }
+      .name {
+          font-size: 2rem;
+          line-height: 2.5rem;
+      }
+      .source {
+          font-size: 1.5rem;
+      }
+    }
+
+    & > .text {
+      margin-top: 2.5rem;
+    }
+
+    &.left {
+      .pundit {
+        .photo {
+          position: absolute;
+          left: -7rem;
+          top: -1rem;
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    &.right {
+      .text {
+        text-align: right;
+      }
+      .pundit {
+        .photo {
+          position: absolute;
+          top: -1rem;
+          right: -7rem;
+        }
+        .text-wrapper {
+          float: right;
+          left: auto;
+          width: 100%;
+          text-align: right;
+        }
+      }
+    }
+  }
+
+}

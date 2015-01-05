@@ -1,0 +1,35 @@
+%full-width-card {
+
+  position: relative;
+  margin: 0 (-1 * $extension - 0.75rem);
+  padding: 0 ($extension + 0.75rem);
+  @include large-box-shadow;
+
+  .question {
+    color: $white;
+    position: relative;
+    height: 4rem;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    padding: 5rem 0 0;
+    z-index: 500;
+    @extend .h2;
+    @include text-shadow;
+  }
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    @include background-cover();
+
+    .scrim {
+      background-color: rgba(0,0,0, 0.15);
+    }
+  }
+
+}

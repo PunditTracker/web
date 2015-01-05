@@ -23,6 +23,7 @@ var LoginPage = React.createClass({
       password: '',
       facebookId: null,
       isFacebookLogin: false,
+      loading: false,
       error: null
     };
   },
@@ -87,16 +88,16 @@ var LoginPage = React.createClass({
       evt.preventDefault();
     }
 
-    this.setState({ error: null }, function() {
-      loginFunction(user, function(err) {
-        if ( err ) {
-          console.log('error logging in:', err);
-          this.setState({ error: err });
-        } else {
-          console.log('successfully logged in, transitioning to home page');
-          this.transitionTo('Home');
-        }
-      }.bind(this));
+    this.setState({ loading: true });
+
+    loginFunction(user, function(err) {
+      if ( err ) {
+        console.log('error logging in:', err);
+        this.setState({ error: err.message, loading: false });
+      } else {
+        console.log('successfully logged in, transitioning to home page');
+        this.transitionTo('Home');
+      }
     }.bind(this));
   },
 

@@ -12,7 +12,7 @@ var AuthAPI = {
 
     // request.get(APIUtils.root + 'auth/check').end(function(res) {
     //   if ( !res.ok ) {
-    //     deferred.reject(JSON.parse(res));
+    //     deferred.reject(APIUtils.normalizeResponse(res));
     //   } else {
     //     deferred.resolve(APIUtils.normalizeResponse(res));
     //   }
@@ -60,10 +60,15 @@ var AuthAPI = {
   login: function(user) {
     var deferred = when.defer();
 
-    request.post(APIUtils.root + 'auth/loginfb', user).end(function(res) {
+    console.log('about to log in');
+
+    request.post(APIUtils.root + 'auth/login', user).end(function(res) {
+      console.log('res:', res);
       if ( !res.ok ) {
+        console.log('will reject');
         deferred.reject(APIUtils.normalizeResponse(res));
       } else {
+        console.log('will resolve');
         deferred.resolve(APIUtils.normalizeResponse(res));
       }
     });

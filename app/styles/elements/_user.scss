@@ -1,0 +1,91 @@
+.user {
+
+  position: relative;
+  height: $pundit-height;
+  background-color: $ultra-light-grey;
+  width: 100%;
+  color: $black;
+  z-index: 700;
+  @include border-box;
+
+  .grade {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: $pundit-height;
+    width: $pundit-height;
+    color: $white;
+    text-align: center;
+    overflow: hidden;
+    @include transition(0.2s);
+
+    .average {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      line-height: 1rem;
+      left: 0;
+      bottom: -1rem;
+      @include transition(0.2s);
+    }
+
+    .letter {
+      top: 0rem;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      @include transition(0.2s);
+      font-size: 1.5rem;
+      line-height: $pundit-height;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      .letter {
+        top: -0.5rem;
+      }
+      .average {
+        bottom: 0;
+      }
+    }
+  }
+
+  .photo {
+    background-image: url(../../img/profile.jpeg);
+    background-position: center center;
+    background-size: cover;
+    height: $pundit-height;
+    width: $pundit-height;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .text-wrapper {
+    @include border-box;
+    position: absolute;
+    padding: $pundit-vertical-padding;
+    top: 0;
+    left: ($pundit-height - 2 * $pundit-vertical-padding +  2 * $prediction-padding);
+    right: $pundit-height;
+    height: $pundit-height;
+    color: $dark-grey;
+    .name {
+      margin:0;
+      font-weight: $regular;
+    }
+    .source {
+      margin: 0.25rem 0 0;
+    }
+  }
+
+  &:hover {
+    .grade {
+      top: 0;
+    }
+  }
+
+}

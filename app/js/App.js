@@ -5,28 +5,17 @@
 
 var React  = require('react/addons');
 
-var Footer = require('./components/Footer');
+var Header = require('./components/Header');
 
 var App = React.createClass({
-
-  getInitialState: function() {
-    return {
-      category: null
-    };
-  },
-
-  setCategory: function(category) {
-    this.setState({ category: category });
-  },
 
   render: function() {
     return (
       <div>
 
-        <this.props.activeRouteHandler setCategory={this.setCategory}
-                                       category={this.state.category} />
+        <Header />
 
-        <Footer />
+        <this.props.activeRouteHandler />
 
       </div>
     );

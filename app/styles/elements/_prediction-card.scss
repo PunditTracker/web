@@ -1,141 +1,222 @@
-div.prediction-card {
+.prediction-card {
 
-  @extend %card;
+  @include border-box;
+  z-index: 200;
+  position: relative;
+  height: $prediction-height;
+  padding: $prediction-padding;
 
-  .title-container {
-    position: relative;
-    padding: $half-space;
+  background-color: $white;
+  @include background-cover();
+  @include box-shadow;
 
-    color: $white;
-    @include background-cover;
-    @include border-radius(5px, 5px, 0, 0);
+  .text {
+    margin: 0;
+  }
 
-    .category {
-      z-index: 2;
+  .background {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include background-cover();
+  }
+
+  .pundit {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  .scrim {
+    @include scrim(50);
+  }
+
+  .voting {
+    z-index: 500;
+    height: $voting-height;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: $pundit-height;
+    width: 100%;
+    @include transition(0.2s);
+
+    .prompt {
+      text-transform: uppercase;
       position: absolute;
-      top: $half-space;
-      right: 0;
-      padding: 3px 5px;
-
-      font-style: italic;
-      text-transform: capitalize;
-
-      &.finance { background: $finance; }
-      &.politics { background: $politics; }
-      &.sports { background: $sports; }
-      &.entertainment { background: $entertainment; }
-      &.tech { background: $tech; }
+      display: none;
+      top: -1rem;
+      font-size: 0.8rem;
+      line-height: $pundit-height;
+      height: $pundit-height;
+      vertical-align: middle;
+      text-align: center;
+      width: 100%;
+      color: $dark-grey;
     }
 
-    .title {
-      z-index: 2;
-      position: relative;
+    .options {
+      margin-top: 1px;
+      border-top: 1px solid $ultra-light-grey;
+      height: $voting-height;
+      line-height: $voting-height;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: $voting-height;
+      list-style: none;
+      padding: 0;
       margin: 0;
-      padding-top: 30px; /* to clear category tag */
-    }
+      z-index: 3000;
+      @include transition(0.2s);
+      @include border-box;
+      font-size: 0;
 
-    .filter {
-      z-index: 1;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-
-      background: rgba($black, 0.4);
-    }
-
-    .shadow {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 5px;
-
-      background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
-      background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-      background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-      background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-      background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
-    }
-
-    a {
-      z-index: 3;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-    }
-
-    &:hover .title {
-      text-decoration: underline;
+      li {
+        @include border-box;
+        display: inline-block;
+        width: 25%;
+        height: $voting-height;
+        text-align: center;
+        &:hover {
+          color: $dark-grey;
+          background-color: $ultra-light-grey;
+        }
+        &:not(:last-child) {
+          border-right: 1px solid $ultra-light-grey;
+        }
+        .option {
+          @extend .h6;
+          line-height: 2rem;
+          vertical-align: top;
+        }
+      }
     }
   }
 
-  .info-container {
-    display: table;
-    width: 100%;
-    height: 80px;
-
-    & > * {
-      display: table-cell;
-      vertical-align: middle;
+  &:hover {
+    .voting .options {
+      top: 0;
     }
+  }
 
-    & > *:first-child,
-    & > *:last-child {
-      padding: 0 $half-space;
+  /**************
+   * Variations *
+   **************/
+  &.wide-2 {
+    .text {
+      @extend .h3;
     }
+  }
 
-    .avatar-container {
-      width: 90px; /* 50px user-avatar + $half-space*2 padding */
-      text-align: center;
+  &.tall-3-2 {
+    height: $tall-3-2-height;
+    .text {
+      @extend .h3;
     }
+  }
 
-    .user-container {
-      a.user-name {
-        @extend .delta;
-
-        display: block;
-        margin-bottom: $half-space/2;
-
-        color: $grey-text;
-        font-weight: 400;
-      }
-
-      a.user-organization {
-        @extend .epsilon;
-
-        display: block;
-        margin: 0;
-
-        color: $dark-grey-text;
-      }
-    }
-
-    .score-container {
-      width: 80px; /* same height as .info-container to ensure that it's square */
-      text-align: center;
-
-      @include border-radius(0, 0, 5px, 0);
-      background-color: green;
+  &.tall-2 {
+    color: $white;
+    height: $tall-2-height;
+    .prompt {
       color: $white;
-      text-transform: uppercase;
+    }
+    .background {
+      background-image: url(../../img/vertical.jpg);
+      display: block;
+    }
 
-      h6.descriptor {
-        display: block;
-        margin: 0;
+    .pundit {
+      background-color: rgba(0,0,0,0) !important;
+      color: $white;
+    }
+    .text-wrapper {
+      color: $white;
+    }
+    .text {
+      z-index: 300;
+      position: absolute;
+      right: $prediction-padding;
+      bottom: ($pundit-height + $prediction-padding + $voting-height);
+      left: $prediction-padding;
 
-        font-weight: normal;
+      @extend .h2;
+      @include text-shadow;
+    }
+    .options, .options li {
+      border: 0 !important;
+    }
+    .option {
+      @include text-shadow;
+    }
+    .options li:hover .option {
+      text-shadow: none;
+    }
+  }
+
+  &.featured {
+    background-color: rgba(0,0,0,0.2);
+    color: $white;
+    @include text-shadow;
+    position: absolute;
+    bottom: 2rem;
+    width: 50%;
+
+    .text {
+      @extend .h1;
+
+      position: absolute;
+      bottom: ($pundit-height + $voting-height + 1rem);
+      left: 1rem;
+      right: 1rem;
+    }
+
+    .pundit {
+      background-color: rgba(0,0,0,0) !important;
+      bottom: 0;
+      .text-wrapper {
+          height: 5rem;
+          color: $white;
+          left: 4rem;
+          @include text-shadow;
       }
-
-      h2.score {
-        margin: 0;
+      .name, .source {
+          @include text-shadow;
       }
+    }
+    .voting {
+      .prompt {
+        color: white;
+        @include text-shadow;
+      }
+      .options, .options li {
+        border: 0 !important;
+      }
+      .option {
+        @include text-shadow;
+      }
+      .options li:hover .option {
+        text-shadow: none;
+      }
+    }
+  }
 
+  &.no-box {
+    height: $tall-2-height;
+    padding-bottom: 1rem;
+
+    border: 1rem solid white;
+    background-color: rgba(0,0,0,0.2) !important;
+
+    .background {
+        display: none;
+    }
+    .text {
+        width: 50%;
     }
   }
 
