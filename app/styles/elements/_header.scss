@@ -6,7 +6,7 @@ header {
   width: 100%;
   z-index: 500;
 
-  @include custom-box-shadow(0 0 0 1rem $black);
+  @include custom-box-shadow(0 0 1rem rgba($black, 0.5));
 
   nav {
     max-width: $content-width;

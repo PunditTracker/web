@@ -3,12 +3,12 @@
   height: $prediction-height;
   @include box-shadow;
   position: relative;
-  @include radial(59,89,152,50%, $prediction-height - $pundit-height);
+  @include radial(59,89,152,50%, $prediction-height - $user-height);
 
   .title-wrapper {
     @include border-box;
     padding: $prediction-padding;
-    height: ($tall-3-2-height - 4 * $pundit-height);
+    height: ($tall-3-2-height - 4 * $user-height);
     color: white;
     h3, h2 {
       margin: 0;
@@ -18,7 +18,7 @@
   & > .fb-wrapper {
     text-align: center;
     position: absolute;
-    top: ($tall-3-2-height - 4 * $pundit-height);
+    top: ($tall-3-2-height - 4 * $user-height);
     bottom: 0;
     width: 100%;
     left: 0;

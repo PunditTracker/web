@@ -15,7 +15,6 @@
   h2 {
     z-index: 1000;
     position: absolute;
-    right: 1rem;
     left: 1rem;
     margin: 0;
 
@@ -24,10 +23,8 @@
 
     & + a h2 {
       bottom: 1rem;
-      text-decoration: underline !important;
-    }
-    & + a i {
-      text-decoration: underline !important;
+      line-height: 0; // Keep border-bottom close to simulate text-underline
+      border-bottom: 2px solid $white;
     }
   }
 

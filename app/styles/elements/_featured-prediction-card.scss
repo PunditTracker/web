@@ -10,14 +10,14 @@
 
   .text {
     position: absolute;
-    bottom: ($pundit-height + $voting-height + 1rem);
+    bottom: ($user-height + $voting-height + 1rem);
     left: 1rem;
     right: 1rem;
 
     @extend .h1;
   }
 
-  .pundit {
+  .user {
     bottom: 0;
     background-color: rgba(0,0,0,0) !important;
 

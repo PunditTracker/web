@@ -12,7 +12,7 @@ var FeaturedBlogPosts = require('../components/FeaturedBlogPosts');
 var FeaturedUsers     = require('../components/FeaturedUsers');
 var PredictionSet     = require('../components/PredictionSet');
 var FacebookCard      = require('../components/FacebookCard');
-var CategoryLink      = require('../components/CategoryLink');
+var CategoryLinkCard  = require('../components/CategoryLinkCard');
 var FaceoffCard       = require('../components/FaceoffCard');
 var Footer            = require('../components/Footer');
 
@@ -68,7 +68,7 @@ var HomePage = React.createClass({
             </div>
 
             <div className="pure-g card-grid">
-              <div className="pure-u-1 faceoff-outer">
+              <div className="pure-u-1 full-width-outer">
                 <PredictionSet predictions={[]} />
               </div>
             </div>
@@ -87,7 +87,7 @@ var HomePage = React.createClass({
               </div>
               <div className="pure-u-2-3">
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1-2"><CategoryLink category="finance" /></div>
+                  <div className="pure-u-1-2"><CategoryLinkCard category="finance" /></div>
                   <div className="pure-u-1-2"><PredictionCard prediction={{}} /></div>
                 </div>
                 <div className="pure-g card-grid">
@@ -108,7 +108,7 @@ var HomePage = React.createClass({
             </div>
 
             <div className="pure-g card-grid">
-              <div className="pure-u-1 faceoff-outer">
+              <div className="pure-u-1 full-width-outer">
                 <FaceoffCard />
               </div>
             </div>
@@ -148,7 +148,7 @@ var HomePage = React.createClass({
                   <div className="pure-u-1-2"><PredictionCard className="tall-2" prediction={{}} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1-2"><CategoryLink category="sports" /></div>
+                  <div className="pure-u-1-2"><CategoryLinkCard category="sports" /></div>
                   <div className="pure-u-1-2"><PredictionCard prediction={{}} /></div>
                 </div>
               </div>

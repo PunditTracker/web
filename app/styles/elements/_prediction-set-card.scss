@@ -2,7 +2,7 @@
 
 .prediction-set-card {
 
-  @extend .full-width-card;
+  @extend %full-width-card;
 
   .background {
     background-image: url(../../img/hero.jpg);

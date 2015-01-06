@@ -3,7 +3,7 @@
   position: relative;
   margin: 0 (-1 * $extension - 0.75rem);
   padding: 0 ($extension + 0.75rem);
-  @include large-box-shadow;
+  @include box-shadow;
 
   .question {
     color: $white;

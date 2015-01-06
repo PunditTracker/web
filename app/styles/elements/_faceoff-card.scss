@@ -2,7 +2,7 @@
 
 .faceoff-card {
 
-  @extend .full-width-card;
+  @extend %full-width-card;
   color: $white;
 
   .background {
@@ -15,8 +15,9 @@
 
     background-color: rgba(0,0,0,0);
     @include text-shadow;
+    @include custom-box-shadow(none);
 
-    & > .pundit {
+    & > .user {
       position: relative;
       top: 0;
       border: 0;
@@ -44,7 +45,7 @@
     }
 
     &.left {
-      .pundit {
+      .user {
         .photo {
           position: absolute;
           left: -7rem;
@@ -58,7 +59,7 @@
       .text {
         text-align: right;
       }
-      .pundit {
+      .user {
         .photo {
           position: absolute;
           top: -1rem;

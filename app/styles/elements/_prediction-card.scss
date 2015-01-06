@@ -24,7 +24,7 @@
     @include background-cover();
   }
 
-  .pundit {
+  .user {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -40,7 +40,7 @@
     overflow: hidden;
     position: absolute;
     right: 0;
-    bottom: $pundit-height;
+    bottom: $user-height;
     width: 100%;
     @include transition(0.2s);
 
@@ -50,8 +50,8 @@
       display: none;
       top: -1rem;
       font-size: 0.8rem;
-      line-height: $pundit-height;
-      height: $pundit-height;
+      line-height: $user-height;
+      height: $user-height;
       vertical-align: middle;
       text-align: center;
       width: 100%;
@@ -59,18 +59,20 @@
     }
 
     .options {
-      margin-top: 1px;
-      border-top: 1px solid $ultra-light-grey;
-      height: $voting-height;
-      line-height: $voting-height;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: $voting-height;
-      list-style: none;
-      padding: 0;
-      margin: 0;
       z-index: 3000;
+      position: absolute;
+      top: $voting-height;
+      right: 0;
+      left: 0;
+      height: $voting-height;
+      margin: 0;
+      padding: 0;
+      margin-top: 1px;
+
+      border-top: 1px solid $ultra-light-grey;
+      line-height: $voting-height;
+      list-style: none;
+
       @include transition(0.2s);
       @include border-box;
       font-size: 0;
@@ -89,7 +91,7 @@
           border-right: 1px solid $ultra-light-grey;
         }
         .option {
-          @extend .h6;
+          font-size: 0.8rem; // same as h6, .h6
           line-height: 2rem;
           vertical-align: top;
         }
@@ -130,7 +132,7 @@
       display: block;
     }
 
-    .pundit {
+    .user {
       background-color: rgba(0,0,0,0) !important;
       color: $white;
     }
@@ -141,7 +143,7 @@
       z-index: 300;
       position: absolute;
       right: $prediction-padding;
-      bottom: ($pundit-height + $prediction-padding + $voting-height);
+      bottom: ($user-height + $prediction-padding + $voting-height);
       left: $prediction-padding;
 
       @extend .h2;
@@ -170,12 +172,12 @@
       @extend .h1;
 
       position: absolute;
-      bottom: ($pundit-height + $voting-height + 1rem);
+      bottom: ($user-height + $voting-height + 1rem);
       left: 1rem;
       right: 1rem;
     }
 
-    .pundit {
+    .user {
       background-color: rgba(0,0,0,0) !important;
       bottom: 0;
       .text-wrapper {

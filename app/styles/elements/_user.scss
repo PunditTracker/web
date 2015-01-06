@@ -1,7 +1,7 @@
 .user {
 
   position: relative;
-  height: $pundit-height;
+  height: $user-height;
   background-color: $ultra-light-grey;
   width: 100%;
   color: $black;
@@ -13,8 +13,8 @@
     position: absolute;
     right: 0;
     top: 0;
-    height: $pundit-height;
-    width: $pundit-height;
+    height: $user-height;
+    width: $user-height;
     color: $white;
     text-align: center;
     overflow: hidden;
@@ -39,7 +39,7 @@
       width: 100%;
       @include transition(0.2s);
       font-size: 1.5rem;
-      line-height: $pundit-height;
+      line-height: $user-height;
       vertical-align: middle;
     }
 
@@ -57,8 +57,8 @@
     background-image: url(../../img/profile.jpeg);
     background-position: center center;
     background-size: cover;
-    height: $pundit-height;
-    width: $pundit-height;
+    height: $user-height;
+    width: $user-height;
     display: inline-block;
     position: relative;
     overflow: hidden;
@@ -67,11 +67,11 @@
   .text-wrapper {
     @include border-box;
     position: absolute;
-    padding: $pundit-vertical-padding;
+    padding: $user-vertical-padding;
     top: 0;
-    left: ($pundit-height - 2 * $pundit-vertical-padding +  2 * $prediction-padding);
-    right: $pundit-height;
-    height: $pundit-height;
+    left: ($user-height - 2 * $user-vertical-padding +  2 * $prediction-padding);
+    right: $user-height;
+    height: $user-height;
     color: $dark-grey;
     .name {
       margin:0;

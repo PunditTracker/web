@@ -6,7 +6,7 @@
 var React = require('react/addons');
 var Link  = React.createFactory(require('react-router').Link);
 
-var CategoryLink = React.createClass({
+var CategoryLinkCard = React.createClass({
 
   propTypes: {
     category: React.PropTypes.string.isRequired
@@ -20,7 +20,7 @@ var CategoryLink = React.createClass({
 
   render: function() {
     return (
-      <div className="category-link">
+      <div className="category-link-card">
         <div className="scrim"></div>
         <h2>The best {this.props.category.toLowerCase()} predictions.</h2>
         <Link to="Category" params={{ category: this.props.category.toLowerCase() }}>
@@ -32,4 +32,4 @@ var CategoryLink = React.createClass({
 
 });
 
-module.exports = React.createFactory(CategoryLink);
+module.exports = React.createFactory(CategoryLinkCard);
