@@ -6,7 +6,6 @@
   width: 100%;
   color: $black;
   z-index: 700;
-  @include border-box;
 
   .grade {
     display: block;
@@ -65,7 +64,6 @@
   }
 
   .text-wrapper {
-    @include border-box;
     position: absolute;
     padding: $user-vertical-padding;
     top: 0;

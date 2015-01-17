@@ -6,7 +6,6 @@
 
   & > div {
     padding: 0 ($card-grid-padding / 2);
-    @include border-box;
 
     &:first-child {
       // margin-left: (- $card-grid-padding);

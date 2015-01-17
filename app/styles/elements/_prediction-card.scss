@@ -1,6 +1,5 @@
 .prediction-card {
 
-  @include border-box;
   z-index: 200;
   position: relative;
   height: $prediction-height;
@@ -108,11 +107,9 @@
       list-style: none;
 
       @include transition(0.2s);
-      @include border-box;
       font-size: 0;
 
       li {
-        @include border-box;
         display: inline-block;
         width: 25%;
         height: $voting-height;

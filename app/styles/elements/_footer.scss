@@ -5,7 +5,6 @@ footer {
 
   background-color: $blue;
   color: $white;
-  @include border-box;
 
   & > .card-grid {
     max-width: 95%;

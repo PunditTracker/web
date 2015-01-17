@@ -6,7 +6,6 @@
   @include radial(59,89,152,50%, $prediction-height - $user-height);
 
   .title-wrapper {
-    @include border-box;
     padding: $prediction-padding;
     height: ($tall-3-2-height - 4 * $user-height);
     color: white;
@@ -24,7 +23,6 @@
     left: 0;
     z-index: 500;
     display: block;
-    @include border-box;
     & > .inner {
       position: absolute;
       height: 8rem;

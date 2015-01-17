@@ -10,7 +10,6 @@
     height: ($tall-3-2-height - 4 * $user-height);
     padding: 1rem;
 
-    @include border-box;
     @include background-cover();
     background-image: url(../../img/hero.jpg);
 
