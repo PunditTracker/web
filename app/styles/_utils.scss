@@ -203,6 +203,19 @@ $o6: 1;
   background: linear-gradient(to bottom, $v1_c $v1_p, $v2_c $v2_p, $v3_c $v3_p, $v4_c $v4_p, $v5_c $v5_p);
 }
 
+@mixin button($bg, $fg, $hov, $border: 0) {
+  display: inline-block;
+  width: auto;
+  padding: 0.5rem 1rem;
+  border: $border;
+  background-color: $bg;
+  color: $fg;
+
+  &:hover {
+      color: $hov;
+  }
+}
+
 %clearfix {
   *zoom: 1;
   &:before,

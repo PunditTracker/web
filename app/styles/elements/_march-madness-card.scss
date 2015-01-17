@@ -1,0 +1,58 @@
+.march-madness-card {
+
+  position: relative;
+  padding: 2rem;
+  @include box-shadow;
+  overflow: hidden;
+  height: $tall-2-height;
+
+  .header {
+    color: $white;
+    position: relative;
+    margin: 0;
+    z-index: 500;
+    @include text-shadow;
+    @extend .h1;
+  }
+
+  .background {
+    width: 100%;
+    background-position: center top;
+    background-size: cover;
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    background-image: url(../../img/basket.jpg);
+
+    .scrim {
+      background-color: rgba(0,0,0, 0.3);
+    }
+  }
+
+  .pick {
+    z-index: 500;
+    position: absolute;
+    height: 5rem;
+    right: 2rem;
+    bottom: 3.5rem;
+    text-align: center;
+
+    .button {
+      @include button(rgba(0,0,0,0), $white, $black, $border: 2px solid $white);
+      @include text-shadow;
+      &:hover {
+        background-color: $white;
+        text-shadow: none;
+      }
+    }
+  }
+  .mm-logo {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    width: 3rem;
+    z-index: 500;
+  }
+
+}
