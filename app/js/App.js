@@ -3,19 +3,52 @@
  */
 'use strict';
 
-var React  = require('react/addons');
+var React            = require('react/addons');
+var Reflux           = require('reflux');
+var _                = require('lodash');
+var RouteHandler     = React.createFactory(require('react-router').RouteHandler);
 
-var Header = require('./components/Header');
+var UserActions      = require('./actions/UserActions');
+var CurrentUserStore = require('./stores/CurrentUserStore');
+var Header           = require('./components/Header');
 
 var App = React.createClass({
+
+  mixins: [Reflux.ListenerMixin],
+
+  getInitialState: function() {
+    return {
+      currentUser: {}
+    };
+  },
+
+  _onUserChange: function(err, user) {
+    if ( err ) {
+      this.setState({ error: err.message });
+    } else {
+      this.setState({ currentUser: user });
+    }
+  },
+
+  componentDidMount: function() {
+    if ( !_.isEmpty(CurrentUserStore.user) ) {
+      this._onUserChange(CurrentUserStore.user);
+    } else {
+      UserActions.check(this._onUserChange);
+    }
+
+    this.listenTo(CurrentUserStore, this._onUserChange);
+  },
 
   render: function() {
     return (
       <div>
 
-        <Header />
+        <Header currentUser={this.state.currentUser} />
 
-        <this.props.activeRouteHandler />
+        <RouteHandler params={this.props.params}
+                      query={this.props.query}
+                      currentUser={this.state.currentUser} />
 
       </div>
     );
