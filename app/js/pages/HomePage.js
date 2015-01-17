@@ -20,7 +20,7 @@ var HomePage = React.createClass({
 
   render: function() {
     return (
-      <section className="home-page">
+      <section className="page home">
 
         <DocumentTitle title="Home" />
 

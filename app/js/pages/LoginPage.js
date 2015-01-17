@@ -103,7 +103,7 @@ var LoginPage = React.createClass({
 
   render: function() {
     return (
-      <section className="login-page">
+      <section className="content no-hero login">
 
         <DocumentTitle title="Login" />
 

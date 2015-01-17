@@ -9,7 +9,7 @@ var ProfilePage = React.createClass({
 
   render: function() {
     return (
-      <section className="profile-page">
+      <section className="content no-hero profile">
 
         profile page
 

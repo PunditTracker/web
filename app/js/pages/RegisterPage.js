@@ -100,7 +100,7 @@ var RegisterPage = React.createClass({
 
   render: function() {
     return (
-      <section className="register-page">
+      <section className="content no-hero register">
 
         <DocumentTitle title="Register" />
 

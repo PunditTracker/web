@@ -11,7 +11,7 @@ var CategoryPage = React.createClass({
 
   render: function() {
     return (
-      <section className="category-page">
+      <section className="content no-hero category">
 
         <DocumentTitle title={this.props.params.category} />
 
