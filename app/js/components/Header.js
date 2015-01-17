@@ -4,11 +4,38 @@
 'use strict';
 
 var React    = require('react/addons');
+var _        = require('lodash');
 var Link     = React.createFactory(require('react-router').Link);
 
 var ListLink = require('./ListLink');
 
 var Header = React.createClass({
+
+  propTypes: {
+    currentUser: React.PropTypes.object.isRequired
+  },
+
+  getDefaultProps: function() {
+    return {
+      currentUser: {}
+    };
+  },
+
+  renderButton: function() {
+    var element = null;
+
+    if ( _.isEmpty(this.props.currentUser) ) {
+      element = (
+        <a className="sign-up button">Sign Up / Log in</a>
+      );
+    } else {
+      element = (
+        <Link to="Predict" className="sign-up button">Predict!</Link>
+      );
+    }
+
+    return element;
+  },
 
   render: function() {
     return (
@@ -30,7 +57,7 @@ var Header = React.createClass({
                 <ListLink to="Category" params={{ category: 'media' }}>Media</ListLink>
                 <ListLink to="/blog">Blog</ListLink>
               </ul>
-              <a className="sign-up button" href="#">Sign Up / Log in</a>
+              {this.renderButton()}
               <div className="search">
                 <input id="search" className="stretch" type="text" placeholder="Type to search..." />
                 <i className="search-icon fa fa-search"></i>

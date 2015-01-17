@@ -210,9 +210,10 @@ $o6: 1;
   border: $border;
   background-color: $bg;
   color: $fg;
+  cursor: pointer;
 
   &:hover {
-      color: $hov;
+    color: $hov;
   }
 }
 

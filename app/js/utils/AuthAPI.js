@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 var when     = require('when');
 var request  = require('superagent');
@@ -18,13 +18,14 @@ var AuthAPI = {
     //   }
     // });
 
-    // deferred.resolve({
-    //   id: 1,
-    //   name: 'Jake Marsh',
-    //   imageUrl: 'https://scontent-b-lga.xx.fbcdn.net/hphotos-xpf1/t31.0-8/1796992_10151957242618173_179336983_o.jpg'
-    // });
+    deferred.resolve({
+      id: 1,
+      name: 'Jake Marsh',
+      affiliation: 'ESPN',
+      avatarURL: 'https://scontent-b-lga.xx.fbcdn.net/hphotos-xpf1/t31.0-8/1796992_10151957242618173_179336983_o.jpg'
+    });
 
-    deferred.resolve(null);
+    //deferred.resolve(null);
 
     return deferred.promise;
   },

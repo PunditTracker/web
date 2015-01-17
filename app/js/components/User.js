@@ -15,16 +15,16 @@ var User = React.createClass({
 
   getDefaultProps: function() {
     return {
-      user: {
-        id: 1
-      },
+      user: {},
       tag: 'div'
     };
   },
 
   render: function() {
     var factory = React.createFactory(this.props.tag);
-    var photoStyles = {};
+    var photoStyles = {
+      'background-image': this.props.user.avatarURL ? 'url(' + this.props.user.avatarURL + ')' : null
+    };
     var gradeClasses = 'grade ' + this.props.color; // TODO: figure out how to actually get the color from user's grade
 
     return factory({ className: 'user' },
@@ -33,11 +33,11 @@ var User = React.createClass({
         <div className="photo" style={photoStyles} />
 
         <div className="text-wrapper">
-            <Link to="Profile" params={{ id: this.props.user.id }}>
+            <Link to="Profile" params={{ id: this.props.user.id || 1 }}>
                 <h5 className="name">{this.props.user.name}</h5>
             </Link>
             <a href="#/source/{{source}}">
-                <h6 className="source">{this.props.user.source}</h6>
+                <h6 className="affiliation">{this.props.user.affiliation}</h6>
             </a>
         </div>
 

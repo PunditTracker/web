@@ -1,0 +1,186 @@
+.prediction-form {
+
+  margin-bottom: 1.5rem;
+  color: $black;
+
+  input:not(.token-input) {
+    height: 2.5rem;
+    margin-bottom: 1rem;
+    border: 0;
+
+    &[type="text"] {
+      width: 100%;
+    }
+  }
+
+  .tokenfield.form-control {
+    margin-bottom: 1rem;
+  }
+
+  h4 {
+    margin: 0 0 1rem;
+  }
+
+  label {
+    display: block;
+    padding-left: 1rem;
+    margin-bottom: 0;
+  }
+
+  .spacer {
+    background-color: $blue;
+    width: 10rem;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    height: 1rem;
+  }
+
+  .editor {
+    position: absolute;
+    left: 11rem;
+    top: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    width: 5rem;
+  }
+
+  .clause-wrapper {
+    @include transition(0.2s);
+    overflow: hidden;
+    display: inline;
+    width: 0 !important;
+    min-width: 50%;
+
+    &.hidden {
+      min-width: 0;
+    }
+
+    input {
+      margin: 0;
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .joiners {
+    position: relative;
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    font-size: 0;
+
+    span {
+      z-index: 20;
+      position: absolute;
+      left: 50%;
+      padding: 0.25rem;
+      line-height: 2rem;
+      @extend .h6;
+    }
+
+    li {
+      display: inline-block;
+      width: 16.666666%;
+      font-size: 1rem;
+      vertical-align: top;
+
+      &:not(:last-child) {
+        padding-right: 0.25rem;
+      }
+
+      button {
+        width: 100%;
+        height: 2.5rem;
+        text-align: center;
+      }
+      input {
+        position: relative;
+        z-index: 50;
+      }
+    }
+
+    .button {
+      padding: 0 1rem;
+      position: relative;
+      height: 2.5rem !important;
+      background-color: white;
+      color: gray;
+      border-color: $very-light-grey;
+
+      &.on {
+        color: $white;
+        background-color: $blue;
+        border-color: $blue;
+      }
+    }
+  }
+
+  .button {
+    height: 2.5rem;
+    border:0;
+  }
+
+  .active-tags {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+
+    li {
+      font-size: 0.8rem; // Same as .h6, @extend wasn't working
+      line-height: 1rem; // Same as .h6, @extend wasn't working
+      display: inline-block;
+      background-color: $blue;
+      color: $white;
+      padding: 0.25rem 0.5rem;
+      margin-bottom: 1rem;
+      &:hover { cursor: pointer; }
+
+      &:not(:last-child) {
+        margin-right: 0.25rem;
+      }
+      i {
+        padding-left: 0.25rem;
+      }
+    }
+  }
+
+  .is-opt {
+    font-size: 0.8rem; // Same as .h6, @extend wasn't working
+    line-height: 1rem; // Same as .h6, @extend wasn't working
+    color: gray;
+  }
+
+  select {
+    margin-bottom: 1rem;
+    background-color: $white;
+  }
+
+  fieldset {
+    margin: 0;
+    border: 0;
+    padding:0;
+  }
+
+}
+
+.final-prediction {
+
+  margin-top: 3rem;
+
+  .placeholder {
+    color: gray;
+  }
+
+  .joiner {
+    font-weight: $bold;
+  }
+
+  span.hidden {
+    display: none;
+  }
+
+}

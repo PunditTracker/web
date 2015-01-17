@@ -12,6 +12,7 @@ var HomePage            = require('./pages/HomePage');
 var LoginPage           = require('./pages/LoginPage');
 var RegisterPage        = require('./pages/RegisterPage');
 var SearchPage          = require('./pages/SearchPage');
+var PredictPage         = require('./pages/PredictPage');
 var CategoryPage        = require('./pages/CategoryPage');
 var ProfilePage         = require('./pages/ProfilePage');
 var NotFoundPage        = require('./pages/NotFoundPage');
@@ -27,6 +28,8 @@ module.exports = (
     <Route name='Register' path='/register' handler={RegisterPage} />
 
     <Route name='Search' path='/search' handler={SearchPage} />
+
+    <Route name='Predict' path='/predict' handler={PredictPage} />
 
     <Route name='Category' path='/category/:category' handler={CategoryPage} />
 
