@@ -14,7 +14,6 @@ var PredictionSet     = require('../components/PredictionSet');
 var FacebookCard      = require('../components/FacebookCard');
 var CategoryLinkCard  = require('../components/CategoryLinkCard');
 var FaceoffCard       = require('../components/FaceoffCard');
-var Footer            = require('../components/Footer');
 var MarchMadnessCard  = require('../components/MarchMadnessCard');
 
 var HomePage = React.createClass({
@@ -159,7 +158,6 @@ var HomePage = React.createClass({
             </div>
           </div>
 
-          <Footer />
         </div>
 
       </section>

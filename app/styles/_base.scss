@@ -17,7 +17,7 @@ body {
 .content {
   @extend %clearfix;
   z-index: 80;
-  position: absolute;
+  position: relative;
   width: 100%;
   overflow-x: hidden;
 
