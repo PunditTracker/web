@@ -4,7 +4,7 @@
   z-index: 200;
   position: relative;
   height: $prediction-height;
-  padding: $prediction-padding;
+  padding: 0 $prediction-padding $prediction-padding;
 
   background-color: $white;
   @include background-cover();
@@ -32,6 +32,40 @@
 
   .scrim {
     @include scrim(50);
+  }
+
+  .tags {
+    @extend %clearfix;
+    margin: 0 (-1 * $prediction-padding) 0.5rem;
+    max-height: 1.5rem;
+    overflow: hidden;
+
+    .inner {
+      overflow: hidden;
+      max-height: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-top: -2rem;
+      @include transition(0.2s);
+      & > li {
+        float: right;
+        padding: 0 0.5rem;
+        font-size: 0.8rem;
+        line-height: 1.5rem;
+        border: 1px solid $ultra-light-grey;
+        margin-right: -1px;
+        margin-top: -1px;
+        position: relative;
+        z-index: 500;
+        &.category {
+          background-color: $blue;
+          color: $white;
+          border-color: $blue;
+          z-index: 550;
+        }
+      }
+    }
   }
 
   .voting {
@@ -102,6 +136,9 @@
   &:hover {
     .voting .options {
       top: 0;
+    }
+    .tags .inner {
+      margin-top: 0;
     }
   }
 

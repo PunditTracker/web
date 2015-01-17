@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react/addons');
+var _     = require('lodash');
 
 var User  = require('./User');
 
@@ -21,6 +22,20 @@ var PredictionCard = React.createClass({
     };
   },
 
+  renderTags: function() {
+    var element = null;
+
+    if ( !_.isEmpty(this.props.prediction.tags) ) {
+      element = _.map(this.props.prediction.tags, function(tag, index) {
+        return (
+          <li key={index}>{tag}</li>
+        );
+      });
+    }
+
+    return element;
+  },
+
   render: function() {
     var classes = 'prediction-card ' + this.props.className;
 
@@ -28,6 +43,13 @@ var PredictionCard = React.createClass({
       <div className={classes}>
 
         <div className="background"><div className="scrim" /></div>
+
+        <div className="tags">
+          <ul className="inner">
+            <li className="category">Sports</li>
+            {this.renderTags()}
+          </ul>
+        </div>
 
         <h4 className="text">{this.props.prediction.text}</h4>
 
