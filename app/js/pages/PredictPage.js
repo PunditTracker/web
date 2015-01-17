@@ -70,11 +70,8 @@ var PredictPage = React.createClass({
       prediction.tags = tags;
     }
 
-    if ( this.state.joiner ) {
+    if ( this.state.joiner && this.state.clause ) {
       prediction.joiner = this.state.joiner;
-    }
-
-    if ( this.state.clause ) {
       prediction.clause = this.state.clause;
     }
 
