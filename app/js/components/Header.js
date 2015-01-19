@@ -3,13 +3,16 @@
  */
 'use strict';
 
-var React    = require('react/addons');
-var _        = require('lodash');
-var Link     = React.createFactory(require('react-router').Link);
+var React      = require('react/addons');
+var _          = require('lodash');
+var Link       = React.createFactory(require('react-router').Link);
+var Navigation = require('react-router').Navigation;
 
-var ListLink = require('./ListLink');
+var ListLink   = require('./ListLink');
 
 var Header = React.createClass({
+
+  mixins: [React.addons.LinkedStateMixin, Navigation],
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired
@@ -19,6 +22,28 @@ var Header = React.createClass({
     return {
       currentUser: {}
     };
+  },
+
+  getInitialState: function() {
+    return {
+      query: ''
+    };
+  },
+
+  handleKeyPress: function(evt) {
+    var keyCode = evt.keyCode || evt.which;
+
+    if ( keyCode === '13' || keyCode === 13 ) {
+      this.doSearch();
+    }
+  },
+
+  doSearch: function() {
+    this.transitionTo('Search', {}, { q: this.state.query });
+
+    this.setState({ query: '' }, function() {
+      this.refs.searchInput.getDOMNode().blur();
+    }.bind(this));
   },
 
   renderButton: function() {
@@ -59,7 +84,13 @@ var Header = React.createClass({
               </ul>
               {this.renderButton()}
               <div className="search">
-                <input id="search" className="stretch" type="text" placeholder="Type to search..." />
+                <input ref="searchInput"
+                       id="search"
+                       className="stretch"
+                       type="text"
+                       placeholder="Type to search..."
+                       valueLink={this.linkState('query')}
+                       onKeyPress={this.handleKeyPress} />
                 <i className="search-icon fa fa-search"></i>
               </div>
             </div>
