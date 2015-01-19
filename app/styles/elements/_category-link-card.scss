@@ -10,7 +10,6 @@
   @include box-shadow;
   @include border-box;
   @include background-cover();
-  background-image: url(../../img/hero.jpg);
 
   h2 {
     z-index: 1000;

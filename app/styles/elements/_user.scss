@@ -53,9 +53,7 @@
   }
 
   .photo {
-    background-image: url(../../img/profile.jpeg);
-    background-position: center center;
-    background-size: cover;
+    @include background-cover(center);
     height: $user-height;
     width: $user-height;
     display: inline-block;

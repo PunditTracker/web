@@ -11,7 +11,6 @@
     padding: 1rem;
 
     @include background-cover();
-    background-image: url(../../img/hero.jpg);
 
     & > .title {
       position: absolute;

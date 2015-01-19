@@ -158,11 +158,12 @@
   &.tall-2 {
     color: $white;
     height: $tall-2-height;
+
     .prompt {
       color: $white;
     }
+
     .background {
-      background-image: url(../../img/vertical.jpg);
       display: block;
     }
 
@@ -170,9 +171,11 @@
       background-color: rgba(0,0,0,0) !important;
       color: $white;
     }
+
     .text-wrapper {
       color: $white;
     }
+
     .text {
       z-index: 300;
       position: absolute;
@@ -183,12 +186,15 @@
       @extend .h2;
       @include text-shadow;
     }
+
     .options, .options li {
       border: 0 !important;
     }
+
     .option {
       @include text-shadow;
     }
+
     .options li:hover .option {
       text-shadow: none;
     }

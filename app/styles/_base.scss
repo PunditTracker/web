@@ -1,6 +1,6 @@
 @import url('//cdn.jsdelivr.net/g/pure@0.5.0(base-min.css+grids-min.css+forms-min.css');
 
-bod,html {
+body, html {
   background-color: $very-light-grey;
   position: relative;
 }
@@ -57,6 +57,10 @@ body {
 .yellow-green { background-color: $yellow-green; }
 .green { background-color: $green; }
 .orange { background-color: $orange; }
+
+img {
+  max-width: 100%;
+}
 
 p, .p, label, table {
   margin: 0 0 1rem;

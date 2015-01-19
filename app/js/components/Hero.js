@@ -24,7 +24,7 @@ var Hero = React.createClass({
   render: function() {
     var classes = 'hero ' + this.props.className;
     var backgroundStyles = {
-      'background-image': ''
+      'backgroundImage': ''
     };
 
     return (

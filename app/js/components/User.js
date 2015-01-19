@@ -23,7 +23,7 @@ var User = React.createClass({
   render: function() {
     var factory = React.createFactory(this.props.tag);
     var photoStyles = {
-      'background-image': this.props.user.avatarURL ? 'url(' + this.props.user.avatarURL + ')' : null
+      'backgroundImage': this.props.user.avatarURL ? 'url(' + this.props.user.avatarURL + ')' : null
     };
     var gradeClasses = 'grade ' + this.props.color; // TODO: figure out how to actually get the color from user's grade
 
