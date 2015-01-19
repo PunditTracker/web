@@ -1,0 +1,58 @@
+.small-feature-card,
+.march-madness-card {
+
+  position: relative;
+  height: $small-hero-height;
+  padding: 2rem;
+  @include box-shadow;
+  overflow: hidden;
+
+  .header {
+    z-index: 500;
+    position: relative;
+    margin: 0;
+    color: $white;
+    @include text-shadow;
+  }
+
+  .background {
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    @include background-cover(top);
+
+    .scrim {
+      background-color: rgba(0,0,0, 0.4);
+    }
+  }
+
+  .pick,
+  .go {
+    z-index: 500;
+    position: absolute;
+    height: 5rem;
+    text-align: center;
+
+    .button {
+      @include button(rgba(0,0,0,0.2), $white, $black, $border: 2px solid $white);
+      @include text-shadow;
+      &:hover {
+        background-color: $white;
+        text-shadow: none;
+      }
+    }
+  }
+
+  .pick {
+    bottom: 3.5rem;
+    right: 2rem;
+  }
+
+  .go {
+    right: $extension;
+    bottom: 1rem;
+  }
+
+}

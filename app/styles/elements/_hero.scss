@@ -2,35 +2,46 @@
 
   z-index: 100;
   position: relative;
-  height: 80vh;
-  width: 100%;
+  height: $hero-height;
+  width: ($content-width + 2 * $extension);
+  max-width: 100%;
   margin: 0 auto;
-  padding-top: $header-height;
-  padding-bottom: 2rem;
+  padding: $header-height 0 2rem;
+  overflow: hidden;
+  @include content-box;
 
-  &.fixed {
+  .featured {
     height: $hero-height;
-    width: ($content-width + 2 * $extension);
-
-    &.done {
-      max-width: 100%;
-    }
-
-    .featured {
-      height: $hero-height;
-    }
   }
 
   & > .background {
-    @include large-box-shadow;
+    position: absolute;
     top: $header-height;
     bottom: 2rem;
-    position: absolute;
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: 100%;
     width: 100%;
     overflow-x: hidden;
+
+    @include large-box-shadow;
+    @include background-cover(center);
+
+    .scrim {
+      @include scrim(50);
+    }
+  }
+
+  & > .card-grid {
+    .large-with-small-feature {
+      margin-left: -$extension;
+      padding-left: $extension;
+    }
+    .small-feature-card {
+      margin-right: -$extension;
+      padding-right: $extension;
+    }
+  }
+
+  .right {
+      z-index: 200;
   }
 
 }

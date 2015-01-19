@@ -27,15 +27,16 @@ $header-height: 4rem;
 $blog-post-height: 6rem;
 $extension: 10rem;
 $card-grid-padding: 1.5rem;
-$hero-height: 30rem;
 $prediction-height: 16.5rem;
 $prediction-padding: 0.75rem;
 $user-vertical-padding: 1rem;
 $user-height: 4rem;
 $voting-height: 2rem;
-$hero-image-width: 100rem;
 $tall-2-height: (2 * $prediction-height + $card-grid-padding);
 $tall-3-2-height: ((3 * $prediction-height + $card-grid-padding) / 2);
+$hero-height: $tall-2-height; //30rem
+$hero-image-width: 100rem;
+$small-hero-height: (($hero-height - $card-grid-padding) / 2);
 
 // media queries
 $phone-max: 640px;

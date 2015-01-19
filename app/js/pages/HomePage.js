@@ -14,7 +14,6 @@ var PredictionSet     = require('../components/PredictionSet');
 var FacebookCard      = require('../components/FacebookCard');
 var CategoryLinkCard  = require('../components/CategoryLinkCard');
 var FaceoffCard       = require('../components/FaceoffCard');
-var MarchMadnessCard  = require('../components/MarchMadnessCard');
 
 var HomePage = React.createClass({
 
@@ -24,14 +23,16 @@ var HomePage = React.createClass({
 
         <DocumentTitle title="Home" />
 
-        <Hero className="fixed" featuredPrediction={{}} />
+        <Hero />
 
         <div className="content">
           <div className="pure-g card-grid">
+            <div className="pure-u-1-3"><PredictionCard prediction={{}} /></div>
+            <div className="pure-u-1-3"><PredictionCard prediction={{}} /></div>
+            <div className="pure-u-1-3"><PredictionCard prediction={{}} /></div>
+          </div>
+          <div className="pure-g card-grid">
             <div className="pure-u-2-3">
-              <div className="pure-g card-grid">
-                <div className="pure-u-1"><MarchMadnessCard /></div>
-              </div>
               <div className="pure-g card-grid">
                 <div className="pure-u-1-2"><PredictionCard className="tall-2" prediction={{}} /></div>
                 <div className="pure-u-1-2">
@@ -53,14 +54,8 @@ var HomePage = React.createClass({
             </div>
 
             <div className="pure-u-1-3">
-            <div className="pure-g card-grid">
-                <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
-              </div>
               <div className="pure-g card-grid">
                 <div className="pure-u-1-1"><FeaturedBlogPosts /></div>
-              </div>
-              <div className="pure-g card-grid">
-                <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
               </div>
               <div className="pure-g card-grid">
                 <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
