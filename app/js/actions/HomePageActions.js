@@ -8,7 +8,7 @@ var HomePageActions = Reflux.createActions([
   'loadFeaturedPredictions',
   'loadFeaturedUsers',
   'loadRecentBlogPosts',
-  'loadPredictionSet'
+  'loadPredictionSets'
 
 ]);
 

@@ -8,6 +8,7 @@ var Reflux                   = require('reflux');
 
 var HomePageActions          = require('../actions/HomePageActions');
 var FeaturedPredictionsStore = require('../stores/FeaturedPredictionsStore');
+var PredictionSetsStore      = require('../stores/PredictionSetsStore');
 var DocumentTitle            = require('../components/DocumentTitle');
 var Hero                     = require('../components/Hero');
 var PredictionCard           = require('../components/PredictionCard');
@@ -25,6 +26,7 @@ var HomePage = React.createClass({
   getInitialState: function() {
     return {
       featuredPredictions: [],
+      predictionSets: [],
       error: null
     };
   },
@@ -37,9 +39,19 @@ var HomePage = React.createClass({
     }
   },
 
+  _onPredictionSetChange: function(err, predictionSets) {
+    if ( err ) {
+      this.setState({ error: err });
+    } else {
+      this.setState({ predictionSets: predictionSets || [], error: null });
+    }
+  },
+
   componentDidMount: function() {
     HomePageActions.loadFeaturedPredictions(this._onFeaturedPredictionsChange);
+    HomePageActions.loadPredictionSets(this._onPredictionSetChange);
     this.listenTo(FeaturedPredictionsStore, this._onFeaturedPredictionsChange);
+    this.listenTo(PredictionSetsStore, this._onPredictionSetChange);
   },
 
   render: function() {
@@ -92,7 +104,7 @@ var HomePage = React.createClass({
 
             <div className="pure-g card-grid">
               <div className="pure-u-1 full-width-outer">
-                <PredictionSet category="sports" />
+                <PredictionSet set={this.state.predictionSets[0]} />
               </div>
             </div>
 
