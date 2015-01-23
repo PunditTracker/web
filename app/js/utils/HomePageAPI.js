@@ -153,6 +153,25 @@ var HomePageAPI = {
     ]);
 
     return deferred.promise;
+  },
+
+  getPredictionSet: function(category) {
+    var deferred = when.defer();
+    var getUrl = APIUtils.root + 'homepage/predictionSet';
+
+    // if ( category ) {
+    //   getUrl += ('/' + category);
+    // }
+
+    request.get(getUrl).end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(APIUtils.normalizeResponse(res));
+      } else {
+        deferred.resolve(APIUtils.normalizeResponse(res));
+      }
+    });
+
+    return deferred.promise;
   }
 
 };

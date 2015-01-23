@@ -92,7 +92,7 @@ var HomePage = React.createClass({
 
             <div className="pure-g card-grid">
               <div className="pure-u-1 full-width-outer">
-                <PredictionSet predictions={[]} />
+                <PredictionSet category="sports" />
               </div>
             </div>
 
