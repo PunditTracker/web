@@ -21,12 +21,12 @@ var FeaturedBlogPosts = React.createClass({
     };
   },
 
-  _onBlogPostsChange: function(posts) {
-    if ( posts ) {
+  _onBlogPostsChange: function(err, posts) {
+    if ( err ) {
+      this.setState({ error: err });
+    } else {
       console.log('posts change:', posts);
-      this.setState({
-        featuredBlogPosts: posts
-      });
+      this.setState({ featuredBlogPosts: posts, error: null });
     }
   },
 

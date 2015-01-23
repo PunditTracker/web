@@ -21,10 +21,12 @@ var FeaturedUsers = React.createClass({
     };
   },
 
-  _onFeaturedUsersChange: function(users) {
-    if ( users ) {
+  _onFeaturedUsersChange: function(err, users) {
+    if ( err ) {
+      this.setState({ error: err });
+    } else {
       console.log('users change:', users);
-      this.setState({ featuredUsers: users });
+      this.setState({ featuredUsers: users, error: null });
     }
   },
 

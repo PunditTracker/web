@@ -4,6 +4,7 @@ var Reflux = require('reflux');
 
 var CategoryActions = Reflux.createActions([
 
+  'loadHome',
   'search'
 
 ]);

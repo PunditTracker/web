@@ -19,12 +19,12 @@ var HeroPredictionStore = Reflux.createStore({
     HomePageAPI.getHeroPrediction().then(function(prediction) {
       console.log('got hero prediction:', prediction);
       this.prediction = prediction;
-      this.trigger(prediction);
-      cb();
-    }.bind(this)).catch(function(e) {
-      // TODO: deal with error
-      console.log('error loading hero prediction:', e);
-    });
+      cb(null, this.prediction);
+      this.trigger(null, this.prediction);
+    }.bind(this)).catch(function(err) {
+      cb(err);
+      this.trigger(err);
+    }.bind(this));
   }
 
 });

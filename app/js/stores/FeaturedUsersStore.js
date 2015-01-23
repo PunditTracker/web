@@ -24,12 +24,12 @@ var FeaturedUsersStore = Reflux.createStore({
     HomePageAPI.getFeaturedUsers(subcategory).then(function(users) {
       console.log('got users:', users);
       this.users = users;
-      this.trigger(users);
-      cb();
-    }.bind(this)).catch(function(e) {
-      // TODO: deal with error
-      console.log('error loading featured users:', e);
-    });
+      cb(null, this.users);
+      this.trigger(null, this.users);
+    }.bind(this)).catch(function(err) {
+      cb(err);
+      this.trigger(err);
+    }.bind(this));
   }
 
 });

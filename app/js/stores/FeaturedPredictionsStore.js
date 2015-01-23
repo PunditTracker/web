@@ -24,12 +24,12 @@ var FeaturedPredictionsStore = Reflux.createStore({
     HomePageAPI.getFeaturedPredictions(subcategory).then(function(predictions) {
       console.log('got featured predictions:', predictions);
       this.predictions = predictions;
-      this.trigger(predictions);
-      cb();
-    }.bind(this)).catch(function(e) {
-      // TODO: deal with error
-      console.log('error loading featured predictions:', e);
-    });
+      cb(null, this.predictions);
+      this.trigger(null, this.predictions);
+    }.bind(this)).catch(function(err) {
+      cb(err);
+      this.trigger(err);
+    }.bind(this));
   }
 
 });
