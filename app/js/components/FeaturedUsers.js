@@ -15,6 +15,10 @@ var FeaturedUsers = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
 
+  propTypes: {
+    category: React.PropTypes.string
+  },
+
   getInitialState: function() {
     return {
       featuredUsers: []
@@ -30,8 +34,12 @@ var FeaturedUsers = React.createClass({
     }
   },
 
-  componentWillMount: function() {
-    HomePageActions.loadFeaturedUsers(this._onFeaturedUsersChange);
+  componentDidMount: function() {
+    if ( this.props.category ) {
+      HomePageActions.loadFeaturedUsers(this.props.category, this._onFeaturedUsersChange);
+    } else {
+      HomePageActions.loadFeaturedUsers(this._onFeaturedUsersChange);
+    }
     this.listenTo(FeaturedUsersStore, this._onFeaturedUsersChange);
   },
 

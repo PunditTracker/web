@@ -30,7 +30,7 @@ var FeaturedBlogPosts = React.createClass({
     }
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     HomePageActions.loadRecentBlogPosts(this._onBlogPostsChange);
     this.listenTo(RecentBlogPostsStore, this._onBlogPostsChange);
   },

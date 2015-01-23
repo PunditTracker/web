@@ -10,31 +10,33 @@ var HomePageAPI = {
   getHeroPrediction: function() {
     var deferred = when.defer();
 
-    // request.get(APIUtils.root + 'prediction/featured?limit=1').end(function(res) {
-    //   if ( !res.ok ) {
-    //     deferred.reject(APIUtils.normalizeResponse(res));
-    //   } else {
-    //     deferred.resolve(APIUtils.normalizeResponse(res));
-    //   }
-    // });
-
-    deferred.resolve({
-      id: 1,
-      category: 'sports',
-      title: 'Who will win the World Series?',
-      imageUrl: 'http://mtv.mtvnimages.com/uri/mgid:uma:image:mtv.com:9677767'
+    request.get(APIUtils.root + 'homepage/hero').end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(APIUtils.normalizeResponse(res));
+      } else {
+        deferred.resolve(APIUtils.normalizeResponse(res));
+      }
     });
+
+    // deferred.resolve({
+    //   id: 1,
+    //   category: 'sports',
+    //   title: 'Who will win the World Series?',
+    //   imageUrl: 'http://mtv.mtvnimages.com/uri/mgid:uma:image:mtv.com:9677767'
+    // });
 
     return deferred.promise;
   },
 
-  getFeaturedPredictions: function(subcategory) {
+  getFeaturedPredictions: function(category) {
     var deferred = when.defer();
     var getUrl = APIUtils.root + 'prediction/featured';
 
-    if ( subcategory ) {
-      getUrl += ('/' + subcategory);
+    if ( category ) {
+      getUrl += ('/' + category);
     }
+
+    getUrl += '?limit=24'; // Need exactly 24 predictions for current home page orientation
 
     request.get(getUrl).end(function(res) {
       if ( !res.ok ) {
@@ -86,12 +88,12 @@ var HomePageAPI = {
     return deferred.promise;
   },
 
-  getFeaturedUsers: function(subcategory) {
+  getFeaturedUsers: function(category) {
     var deferred = when.defer();
     var getUrl = APIUtils.root + 'user/featured';
 
-    if ( subcategory ) {
-      getUrl += ('/' + subcategory);
+    if ( category ) {
+      getUrl += ('/' + category);
     }
 
     request.get(getUrl).end(function(res) {
