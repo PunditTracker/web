@@ -15,6 +15,7 @@ var SearchPage          = require('./pages/SearchPage');
 var PredictPage         = require('./pages/PredictPage');
 var CategoryPage        = require('./pages/CategoryPage');
 var ProfilePage         = require('./pages/ProfilePage');
+var PredictionPage      = require('./pages/PredictionPage');
 var NotFoundPage        = require('./pages/NotFoundPage');
 
 module.exports = (
@@ -33,7 +34,9 @@ module.exports = (
 
     <Route name='Category' path='/category/:category' handler={CategoryPage} />
 
-    <Route name='Profile' path='/user/:id' handler={ProfilePage} />
+    <Route name='Profile' path='/user/:identifier' handler={ProfilePage} />
+
+    <Route name='Prediction' path='/prediction/:identifier' handler={PredictionPage} />
 
     <NotFoundRoute handler={NotFoundPage} />
 
