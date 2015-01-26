@@ -34,12 +34,16 @@ var PredictionSet = React.createClass({
   },
 
   render: function() {
+    var setStyles = {
+      'background-image': this.props.set.imageUrl ? 'url(' + this.props.set.imageUrl + ')' : null
+    };
+
     return (
-      <div className="prediction-set-card">
+      <div className="prediction-set-card" style={setStyles}>
 
           <div className="background"><div className="scrim" /></div>
 
-          <h3 className="question">The latest {this.props.set.category} predictions</h3>
+          <h3 className="question">{this.props.set.title}</h3>
 
           <div className="pure-g card-grid">
             {this.renderPredictions()}

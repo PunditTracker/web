@@ -46,12 +46,12 @@ var PredictionCard = React.createClass({
 
         <div className="tags">
           <ul className="inner">
-            <li className="category">Sports</li>
+            <li className="category">{this.props.prediction.subcat ? this.props.prediction.subcat.name : ''}</li>
             {this.renderTags()}
           </ul>
         </div>
 
-        <h4 className="text">{this.props.prediction.text}</h4>
+        <h4 className="text">{this.props.prediction.title}</h4>
 
         <div className="voting">
           <div className="prompt">
@@ -73,7 +73,7 @@ var PredictionCard = React.createClass({
           </ul>
         </div>
 
-        <User user={this.props.prediction.user} />
+        <User user={this.props.prediction.creator} />
 
       </div>
     );
