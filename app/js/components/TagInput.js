@@ -11,12 +11,20 @@ var tokenfield = require('bootstrap-tokenfield')($);
 var TagInput = React.createClass({
 
   propTypes: {
+    addTag: React.PropTypes.func,
     placeholder: React.PropTypes.string,
     limit: React.PropTypes.number
   },
 
+  getDefaultProps: function() {
+    return {
+      addTag: function() {}
+    };
+  },
+
   componentDidMount: function() {
     var $input = $(this.getDOMNode());
+    var isCopy = false;
 
     $input.tokenfield({
       limit: this.props.limit || 3
@@ -24,12 +32,15 @@ var TagInput = React.createClass({
 
     // Prevent default tags
     $input.on('tokenfield:createtoken', function (evt) {
-      console.log('token created');
       _.each(this.getTokens(), function(token) {
         if ( token === evt.attrs.value ) {
           evt.preventDefault();
+          isCopy = true;
         }
       });
+      if ( !isCopy ) {
+        this.props.addTag(evt.attrs.value);
+      }
     }.bind(this));
   },
 

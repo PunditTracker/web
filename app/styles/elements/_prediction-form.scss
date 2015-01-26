@@ -173,6 +173,10 @@
   select {
     margin-bottom: 1rem;
     background-color: $white;
+
+    &:not(:last-of-type) {
+      margin-right: 0.1rem;
+    }
   }
 
   fieldset {

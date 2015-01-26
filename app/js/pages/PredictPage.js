@@ -38,6 +38,8 @@ var PredictPage = React.createClass({
       clause: null,
       joiner: null,
       category: null,
+      subcategory: null,
+      tags: [],
       doesExpire: false,
       deadline: null,
       submitDisabled: true,
@@ -65,6 +67,32 @@ var PredictPage = React.createClass({
     this.setState({ category: hasCategory ? evt.target.value : null });
   },
 
+  setSubcategory: function(evt) {
+    var hasSubcategory = evt.target.value.indexOf('...') === -1;
+    var tagsCopy = this.state.tags;
+
+    evt.preventDefault();
+
+    if ( hasSubcategory ) {
+      tagsCopy.push(evt.target.value);
+    }
+
+    this.setState({
+      subcategory: hasSubcategory ? evt.target.value : null,
+      tags: tagsCopy
+    });
+  },
+
+  addTag: function(tag) {
+    var tagsCopy = this.state.tags;
+
+    console.log('add tag:', tag);
+
+    tagsCopy.push(tag);
+
+    this.setState({ tags: tagsCopy });
+  },
+
   toggleDateInput: function(shouldShow) {
     this.setState({ doesExpire: shouldShow });
   },
@@ -78,14 +106,17 @@ var PredictPage = React.createClass({
   handleSubmit: function(evt) {
     var prediction = {
       title: this.state.prediction.trim().charAt(0).toUpperCase() + this.state.prediction.trim().slice(1), // capitalize first letter
-      subcat: this.state.category
+      category: this.state.category
     };
-    var tags = this.refs.tagInput.getTokens();
 
     evt.preventDefault();
 
-    if ( tags && tags.length ) {
-      prediction.tags = tags;
+    if ( this.state.subcategory ) {
+      prediction.subcat = this.state.subcategory;
+    }
+
+    if ( this.state.tags && this.state.tags.length ) {
+      prediction.tags = this.state.tags;
     }
 
     if ( this.state.deadline ) {
@@ -108,6 +139,25 @@ var PredictPage = React.createClass({
     }.bind(this)).catch(function(err) {
       this.setState({ error: err });
     }.bind(this));
+  },
+
+  renderSubcategoryDropdown: function() {
+    var element = null;
+    var options = _.map(['NFL', 'NBA', 'MLB', 'NHL'], function(subcategory, index) {
+      return (
+        <option key={index}>{subcategory}</option>
+      );
+    });
+
+    if ( this.state.category && this.state.category.toLowerCase() === 'sports' ) {
+      element = (
+        <select name="category" onChange={this.setSubcategory}>
+          {options}
+        </select>
+      );
+    }
+
+    return element;
   },
 
   renderTags: function() {
@@ -213,14 +263,16 @@ var PredictPage = React.createClass({
             <fieldset>
               <select name="category" onChange={this.setCategory}>
                 <option>Select a Category...</option>
-                <option>NFL</option>
-                <option>NBA</option>
-                <option>MLB</option>
-                <option>NHL</option>
+                <option>Finance</option>
+                <option>Politics</option>
+                <option>Sports</option>
+                <option>Tech</option>
+                <option>Media</option>
               </select>
+              {this.renderSubcategoryDropdown()}
               </fieldset>
               <fieldset>
-              <TagInput ref="tagInput" placeholder="Add tags (Optional)" />
+              <TagInput ref="tagInput" placeholder="Add tags (Optional)" addTag={this.addTag} />
             </fieldset>
             <fieldset>
               <input type="radio" ref="doesntExpire" name="doesnt-expire" checked={!this.state.doesExpire} onChange={this.toggleDateInput.bind(null, false)} />
