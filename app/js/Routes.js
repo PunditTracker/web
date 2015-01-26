@@ -32,7 +32,7 @@ module.exports = (
 
     <Route name='Predict' path='/predict' handler={PredictPage} />
 
-    <Route name='Category' path='/category/:category' handler={CategoryPage} />
+    <Route name='Category' path='/:category' handler={CategoryPage} />
 
     <Route name='Profile' path='/user/:identifier' handler={ProfilePage} />
 

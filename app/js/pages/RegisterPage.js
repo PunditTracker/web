@@ -41,8 +41,7 @@ var RegisterPage = React.createClass({
   },
 
   getUserInfoFb: function() {
-    // Seemingly can't bind FB api calls to 'this'
-    var component = this;
+    var component = this; // Seemingly can't bind FB api calls to 'this'
 
     FB.api('/me', { fields: 'email,first_name,last_name,id' }, function(response) {
       FB.api('/me/picture?width=180&height=180', function(imageResponse) {
