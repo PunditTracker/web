@@ -38,6 +38,8 @@ var PredictPage = React.createClass({
       clause: null,
       joiner: null,
       category: null,
+      doesExpire: false,
+      deadline: null,
       submitDisabled: true,
       error: null
     };
@@ -63,6 +65,16 @@ var PredictPage = React.createClass({
     this.setState({ category: hasCategory ? evt.target.value : null });
   },
 
+  toggleDateInput: function(shouldShow) {
+    this.setState({ doesExpire: shouldShow });
+  },
+
+  setDeadline: function(evt) {
+    evt.preventDefault();
+
+    this.setState({ deadline: evt.target.value || null });
+  },
+
   handleSubmit: function(evt) {
     var prediction = {
       title: this.state.prediction.trim().charAt(0).toUpperCase() + this.state.prediction.trim().slice(1), // capitalize first letter
@@ -74,6 +86,10 @@ var PredictPage = React.createClass({
 
     if ( tags && tags.length ) {
       prediction.tags = tags;
+    }
+
+    if ( this.state.deadline ) {
+      prediction.deadline = this.state.deadline;
     }
 
     if ( this.state.joiner && this.state.clause ) {
@@ -160,6 +176,10 @@ var PredictPage = React.createClass({
       'clause-wrapper': true,
       'hidden': !this.state.joiner
     });
+    var dateInputClasses = cx({
+      'date-input': true,
+      'hidden': !this.state.doesExpire
+    });
     var finalPredictionClasses = cx({
       'final-prediction': true,
       'placeholder': !this.state.prediction
@@ -203,11 +223,11 @@ var PredictPage = React.createClass({
               <TagInput ref="tagInput" placeholder="Add tags (Optional)" />
             </fieldset>
             <fieldset>
-              <input type="radio" name="date-exists" id="date-exists-1" value="1" />
-              <label htmlFor="date-exists-1">Doesn't expire</label>
-              <input type="radio" name="date-exists" id="date-exists-2" value="2" />
-              <label htmlFor="date-exists-2">Expires:</label>
-              <input name="date" type="date" />
+              <input type="radio" ref="doesntExpire" name="doesnt-expire" checked={!this.state.doesExpire} onChange={this.toggleDateInput.bind(null, false)} />
+              <label htmlFor="doesnt-expire">Doesn't expire</label>
+              <input type="radio" name="does-expire" id="date-exists-2" checked={this.state.doesExpire} onChange={this.toggleDateInput.bind(null, true)} />
+              <label htmlFor="does-expire">Expires</label>
+              <input name="date" type="date" className={dateInputClasses} onChange={this.setDeadline} />
             </fieldset>
             <input name="login" defaultValue="yes" hidden />
             {this.renderError()}

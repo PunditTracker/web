@@ -33,6 +33,13 @@
 
   input[type="date"] {
     width: 12rem;
+
+    @include transition(0.2s);
+
+    &.hidden {
+      width: 0;
+      padding: 0;
+    }
   }
 
   .spacer {
@@ -54,11 +61,12 @@
   }
 
   .clause-wrapper {
-    @include transition(0.2s);
-    overflow: hidden;
     display: inline;
     width: 0 !important;
     min-width: 50%;
+    overflow: hidden;
+
+    @include transition(0.2s);
 
     &.hidden {
       min-width: 0;
