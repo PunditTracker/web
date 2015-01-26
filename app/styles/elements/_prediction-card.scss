@@ -130,7 +130,7 @@
     }
   }
 
-  &:hover {
+  &:hover, &.hover {
     .voting .options {
       top: 0;
     }

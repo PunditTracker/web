@@ -94,6 +94,14 @@ var PredictPage = React.createClass({
     }.bind(this));
   },
 
+  renderTags: function() {
+    return _.map(this.state.tags, function(tag, index) {
+      return (
+        <li key={index}>{tag}</li>
+      );
+    });
+  },
+
   renderFinalJoiner: function() {
     var element = null;
     var finalJoinerText = this.state.joiner ? ' ' + this.state.joiner + ' ' : '';
@@ -159,7 +167,7 @@ var PredictPage = React.createClass({
 
     return (
       <div className="container card-grid">
-        <div className="left">
+        <div className="content-with-sidebar left">
           <form id="prediction-form" className="prediction-form" onSubmit={this.handleSubmit}>
             <h4>I predict that...</h4>
             <fieldset>
@@ -194,17 +202,30 @@ var PredictPage = React.createClass({
               <fieldset>
               <TagInput ref="tagInput" placeholder="Add tags (Optional)" />
             </fieldset>
+            <fieldset>
+              <input type="radio" name="date-exists" id="date-exists-1" value="1" />
+              <label htmlFor="date-exists-1">Doesn't expire</label>
+              <input type="radio" name="date-exists" id="date-exists-2" value="2" />
+              <label htmlFor="date-exists-2">Expires:</label>
+              <input name="date" type="date" />
+            </fieldset>
             <input name="login" defaultValue="yes" hidden />
             {this.renderError()}
             <input type="submit" className="button" defaultValue="Publish" disabled={this.state.submitDisabled ? 'true' : ''} />
           </form>
         </div>
 
-        <div className="sidebar">
+        <div className="sidebar right">
           <div className="pure-g card-grid">
             <div className="pure-u-1">
-              <div className="prediction-card final-prediction">
+              <div className="prediction-card final-prediction hover">
                 <div className="background"><div className="scrim" /></div>
+                <div className="tags">
+                  <ul className="inner">
+                    <li className="category">{this.state.category || 'Select a Category...'}</li>
+                    {this.renderTags()}
+                  </ul>
+                </div>
                 <h4 className="text">
                   <span className={finalPredictionClasses}>{this.state.prediction || this.constructor.placeholderOne}</span>
                   {this.renderFinalJoiner()}
