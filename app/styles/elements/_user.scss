@@ -7,6 +7,18 @@
   color: $black;
   z-index: 700;
 
+  & > div {
+    position: relative;
+
+    & > a {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
   .grade {
     display: block;
     position: absolute;
@@ -19,18 +31,6 @@
     overflow: hidden;
     @include transition(0.2s);
 
-    .average {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      line-height: 1rem;
-      left: 0;
-      bottom: -1rem;
-      @include transition(0.2s);
-    }
-
     .letter {
       top: 0rem;
       position: absolute;
@@ -40,15 +40,6 @@
       font-size: 1.5rem;
       line-height: $user-height;
       vertical-align: middle;
-    }
-
-    &:hover {
-      .letter {
-        top: -0.5rem;
-      }
-      .average {
-        bottom: 0;
-      }
     }
   }
 

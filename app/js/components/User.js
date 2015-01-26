@@ -71,18 +71,15 @@ var User = React.createClass({
         <div className="photo" style={photoStyles} />
 
         <div className="text-wrapper">
-            <Link to="Profile" params={{ identifier: this.props.user.id || 1 }}>
-                <h5 className="name">{this.props.user.firstName} {this.props.user.lastName}</h5>
-            </Link>
-            <a href="#/source/{{source}}">
-                <h6 className="affiliation">{this.props.user.affiliation}</h6>
-            </a>
+            <h5 className="name">{this.props.user.firstName} {this.props.user.lastName}</h5>
+            <h6 className="affiliation">{this.props.user.affiliation}</h6>
         </div>
 
         <div className={gradeClasses}>
             <span className="letter">{this.state.letterGrade}</span>
-            <span className="average">Average</span>
         </div>
+
+        <Link to="Profile" params={{ identifier: this.props.user.id || 1 }} />
 
       </div>
     );
