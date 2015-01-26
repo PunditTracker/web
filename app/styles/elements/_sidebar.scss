@@ -1,9 +1,18 @@
-.left {
-  width: 66.66666%;
-  float: left;
+.sidebar {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 33.33333%;
+  max-height: 100%;
+
+  &.left { left: 0; }
+  &.right { right: 0; }
 }
 
-.sidebar {
-  width: 33.33333%;
-  float: left;
+.content-with-sidebar {
+  width: 66.666666%;
+
+  &.right { float: right; }
+  &.left { float: left; }
 }
