@@ -35,7 +35,7 @@ var PredictionSet = React.createClass({
 
   render: function() {
     var setStyles = {
-      'background-image': this.props.set.imageUrl ? 'url(' + this.props.set.imageUrl + ')' : null
+      'backgroundImage': this.props.set.imageUrl ? 'url(' + this.props.set.imageUrl + ')' : null
     };
 
     return (

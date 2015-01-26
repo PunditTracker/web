@@ -1,0 +1,25 @@
+div.modal-backdrop {
+
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  text-align: center;
+  background: rgba(0, 0, 0, 0.45);
+
+  div.modal {
+    z-index: 4;
+    position: relative;
+    margin: 150px auto 0 auto;
+    padding: $prediction-padding;
+    width: 600px;
+
+    color: $dark-grey;
+    background-color: $white;
+    @include custom-box-shadow(0px 2px 55px rgba(0, 0, 0, 0.3));
+  }
+
+}

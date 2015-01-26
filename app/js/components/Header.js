@@ -3,16 +3,17 @@
  */
 'use strict';
 
-var React      = require('react/addons');
-var _          = require('lodash');
-var Link       = React.createFactory(require('react-router').Link);
-var Navigation = require('react-router').Navigation;
+var React           = require('react/addons');
+var _               = require('lodash');
+var Link            = React.createFactory(require('react-router').Link);
+var Navigation      = require('react-router').Navigation;
 
-var ListLink   = require('./ListLink');
+var LoginModalMixin = require('../mixins/LoginModalMixin');
+var ListLink        = require('./ListLink');
 
 var Header = React.createClass({
 
-  mixins: [React.addons.LinkedStateMixin, Navigation],
+  mixins: [React.addons.LinkedStateMixin, Navigation, LoginModalMixin],
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired
@@ -51,11 +52,11 @@ var Header = React.createClass({
 
     if ( _.isEmpty(this.props.currentUser) ) {
       element = (
-        <a className="sign-up button">Sign Up / Log in</a>
+        <a className="user-button button" onClick={this.toggleLoginModal}>Sign Up / Log in</a>
       );
     } else {
       element = (
-        <Link to="Predict" className="sign-up button">Predict!</Link>
+        <Link to="Predict" className="user-button button">Predict!</Link>
       );
     }
 

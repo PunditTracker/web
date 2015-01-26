@@ -10,22 +10,13 @@ var AuthAPI = {
   check: function() {
     var deferred = when.defer();
 
-    // request.get(APIUtils.root + 'auth/check').end(function(res) {
-    //   if ( !res.ok ) {
-    //     deferred.reject(APIUtils.normalizeResponse(res));
-    //   } else {
-    //     deferred.resolve(APIUtils.normalizeResponse(res));
-    //   }
-    // });
-
-    deferred.resolve({
-      id: 1,
-      name: 'Jake Marsh',
-      affiliation: 'ESPN',
-      avatarURL: 'https://scontent-b-lga.xx.fbcdn.net/hphotos-xpf1/t31.0-8/1796992_10151957242618173_179336983_o.jpg'
+    request.get(APIUtils.root + 'auth/check').end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(APIUtils.normalizeResponse(res));
+      } else {
+        deferred.resolve(APIUtils.normalizeResponse(res));
+      }
     });
-
-    //deferred.resolve(null);
 
     return deferred.promise;
   },
@@ -61,15 +52,10 @@ var AuthAPI = {
   login: function(user) {
     var deferred = when.defer();
 
-    console.log('about to log in');
-
     request.post(APIUtils.root + 'auth/login', user).end(function(res) {
-      console.log('res:', res);
       if ( !res.ok ) {
-        console.log('will reject');
         deferred.reject(APIUtils.normalizeResponse(res));
       } else {
-        console.log('will resolve');
         deferred.resolve(APIUtils.normalizeResponse(res));
       }
     });
