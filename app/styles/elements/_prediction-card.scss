@@ -114,9 +114,14 @@
         width: 25%;
         height: $voting-height;
         text-align: center;
+        cursor: pointer;
         &:hover {
           color: $dark-grey;
           background-color: $ultra-light-grey;
+        }
+        &.active {
+          background-color: $blue;
+          color: $white;
         }
         &:not(:last-child) {
           border-right: 1px solid $ultra-light-grey;

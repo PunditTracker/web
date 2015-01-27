@@ -20,6 +20,12 @@ var ProfilePage = React.createClass({
     currentUser: React.PropTypes.object
   },
 
+  getDefaultProps: function() {
+    return {
+      currentUser: {}
+    };
+  },
+
   getInitialState: function() {
     return {
       profile: {},
@@ -105,54 +111,54 @@ var ProfilePage = React.createClass({
             <div className="pure-g card-grid">
               <div className="pure-u-1-2">
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[0]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard className="tall-2" prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.profile.predictions[1]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[2]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[3]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard className="tall-3-2" prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[4]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[5]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[6]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard className="tall-3-2" prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[7]} /></div>
                 </div>
               </div>
               <div className="pure-u-1-2">
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard className="tall-3-2" prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[8]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[9]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[10]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard className="tall-3-2" prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[11]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[12]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard className="tall-2" prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.profile.predictions[13]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[14]} /></div>
                 </div>
                 <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard prediction={{}} /></div>
+                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[15]} /></div>
                 </div>
               </div>
             </div>

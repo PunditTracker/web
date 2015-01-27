@@ -33,6 +33,20 @@ var PredictionAPI = {
     });
 
     return deferred.promise;
+  },
+
+  doVote: function(prediction, vote) {
+    var deferred = when.defer();
+
+    request.post(APIUtils.root + 'prediction/vote/' + prediction.id, vote).end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(APIUtils.normalizeResponse(res));
+      } else {
+        deferred.resolve(APIUtils.normalizeResponse(res));
+      }
+    });
+
+    return deferred.promise;
   }
 
 };
