@@ -4,8 +4,19 @@
 'use strict';
 
 var React = require('react/addons');
+var _     = require('lodash');
 
 var UserGrade = React.createClass({
+
+  propTypes: {
+    user: React.PropTypes.object.isRequired
+  },
+
+  getDefaultProps: function() {
+    return {
+      user: {}
+    };
+  },
 
   getInitialState: function() {
     return {
@@ -14,13 +25,15 @@ var UserGrade = React.createClass({
     };
   },
 
-  componentWillMount: function() {
-    this.calculateGrade();
+  componentDidUpdate: function(prevProps) {
+    if ( !_.isEqual(prevProps.user, this.props.user) ) {
+      this.calculateGrade();
+    }
   },
 
   calculateGrade: function() {
-    var scoreClass;
-    var letterGrade;
+    var scoreClass = null;
+    var letterGrade = null;
 
     if ( this.props.user.score <= -7 ) {
       scoreClass = 'red';
