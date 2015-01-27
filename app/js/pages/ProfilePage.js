@@ -94,9 +94,7 @@ var ProfilePage = React.createClass({
                   <div className="pure-u-1-1 since">
                     <h6>Predicting Since</h6>
                     <h4>January 2011</h4>
-                    <div className="green">
-                      <h4>A+</h4>
-                    </div>
+                    <UserGrade user={this.state.profile} />
                   </div>
                 </div>
               </div>
