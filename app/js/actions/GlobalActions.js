@@ -7,6 +7,7 @@ var CategoryActions = Reflux.createActions([
   'loadHome',
   'search',
   'loadPrediction',
+  'loadCategory',
   'loadProfile'
 
 ]);

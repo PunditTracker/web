@@ -7,6 +7,20 @@ var APIUtils = require('./APIUtils');
 
 var HomePageAPI = {
 
+  getPredictions: function(category) {
+    var deferred = when.defer();
+
+    request.get(APIUtils.root + 'prediction/category/' + category).end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(APIUtils.normalizeResponse(res));
+      } else {
+        deferred.resolve(APIUtils.normalizeResponse(res));
+      }
+    });
+
+    return deferred.promise;
+  },
+
   getSubcategory: function(subcategory) {
     var deferred = when.defer();
 

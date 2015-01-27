@@ -81,7 +81,7 @@ var Header = React.createClass({
                 <ListLink to="Category" params={{ category: 'sports' }}>Sports</ListLink>
                 <ListLink to="Category" params={{ category: 'tech' }}>Tech</ListLink>
                 <ListLink to="Category" params={{ category: 'media' }}>Media</ListLink>
-                <ListLink to="/blog">Blog</ListLink>
+                <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
               </ul>
               {this.renderButton()}
               <div className="search">
