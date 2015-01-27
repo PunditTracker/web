@@ -120,7 +120,7 @@ var PredictPage = React.createClass({
     }
 
     if ( this.state.deadline ) {
-      prediction.deadline = this.state.deadline;
+      prediction.deadline = (new Date(this.state.deadline)).toISOString();
     }
 
     if ( this.state.joiner && this.state.clause ) {

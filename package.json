@@ -33,7 +33,7 @@
     "when": "^3.6.0",
     "superagent": "^0.20.0",
     "reflux": "^0.1.15",
-    "moment": "^2.8.3",
+    "moment": "^2.9.0",
     "body-parser": "^1.9.2",
     "method-override": "^2.3.0",
     "compression": "^1.2.0",
