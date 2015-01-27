@@ -28,31 +28,65 @@
     }
   }
 
-  .pick,
-  .go {
+  .pick, .go {
     z-index: 500;
     position: absolute;
-    height: 5rem;
-    text-align: center;
-
-    .button {
-      @include button(rgba(0,0,0,0.2), $white, $black, $border: 2px solid $white);
-      @include text-shadow;
-      &:hover {
-        background-color: $white;
-        text-shadow: none;
-      }
-    }
   }
 
   .pick {
-    bottom: 3.5rem;
+    bottom: 5.5rem;
     right: 2rem;
+    color: $white;
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    h4 {
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      .button {
+        position: absolute;
+        right: -30%;
+        width: 25%;
+        @include border-box;
+      }
+    }
+
+    input[type="text"] {
+      margin-bottom: 0.5rem;
+      background-color: rgba(0,0,0,0);
+      border: 0;
+      @include text-shadow;
+      border-bottom: 2px solid $white;
+      width: 100%;
+      color: $white;
+
+      &.with-text {
+        width: 70%;
+
+        & + .button {
+          right: 0;
+        }
+      }
+    }
   }
 
   .go {
     right: $extension;
     bottom: 1rem;
+  }
+
+  .button {
+    @include button(rgba(0,0,0,0.2), $white, $black, $border: 2px solid $white);
+    @include text-shadow;
+
+    &:hover, &:focus {
+      background-color: $white;
+      text-shadow: none;
+      color: $black;
+    }
   }
 
 }
