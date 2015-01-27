@@ -1,7 +1,7 @@
 var config = {};
 
 config.aws = {
-  bucket: 'assets.pundittracker.com',
+  bucket: 'assets.foretellr.com',
   key: 'AKIAJTL7QEGHS6OTMSMQ',
   secret: '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'
 };
