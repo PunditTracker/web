@@ -8,7 +8,7 @@ var UserAPI       = require('../utils/UserAPI');
 var ViewingProfileStore = Reflux.createStore({
 
   init: function() {
-    this.user = null;
+    this.profile = null;
 
     this.listenTo(GlobalActions.loadProfile, this.loadUser);
   },
@@ -18,10 +18,16 @@ var ViewingProfileStore = Reflux.createStore({
 
     console.log('get user:', identifier);
 
-    UserAPI.get(identifier).then(function(user) {
-      this.user = user;
-      cb(null, this.user);
-      this.trigger(null, this.user);
+    UserAPI.get(identifier).then(function(profile) {
+      this.profile = profile;
+      this.profile.predictions = [];
+      cb(null, this.profile);
+      this.trigger(null, this.profile);
+
+      UserAPI.getPredictions(this.profile.id).then(function(predictions) {
+        this.profile.predictions = predictions;
+        this.trigger(null, this.profile);
+      }.bind(this));
     }.bind(this)).catch(function(err) {
       cb(err);
       this.trigger(err);

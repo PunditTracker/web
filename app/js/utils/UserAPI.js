@@ -19,6 +19,20 @@ var UserAPI = {
     });
 
     return deferred.promise;
+  },
+
+  getPredictions: function(id) {
+    var deferred = when.defer();
+
+    request.get(APIUtils.root + 'prediction/user/' + id).end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(APIUtils.normalizeResponse(res));
+      } else {
+        deferred.resolve(APIUtils.normalizeResponse(res));
+      }
+    });
+
+    return deferred.promise;
   }
 
 };

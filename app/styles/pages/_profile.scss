@@ -53,14 +53,14 @@ section.profile {
       .since {
         padding-right: 5rem !important;
         position: relative;
-        .green {
-          width: 3.5rem;
+        .grade {
+          width: 4.5rem;
           padding: 0.5rem;
-          height: 3.5rem;
+          height: 4.5rem;
           position: absolute;
           right: 0;
           top: 0;
-          h4 {
+          .letter {
             color: $white;
             font-size: 1.5rem;
             font-family: $sans !important;

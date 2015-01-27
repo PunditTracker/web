@@ -5,11 +5,14 @@
 
 var React               = require('react/addons');
 var Reflux              = require('reflux');
+var moment              = require('moment');
 var Navigation          = require('react-router').Navigation;
 
 var GlobalActions       = require('../actions/GlobalActions');
 var ViewingProfileStore = require('../stores/ViewingProfileStore');
 var DocumentTitle       = require('../components/DocumentTitle');
+var FixedSidebar        = require('../components/FixedSidebar');
+var UserGrade           = require('../components/UserGrade');
 var PredictionCard      = require('../components/PredictionCard');
 
 var ProfilePage = React.createClass({
@@ -28,7 +31,9 @@ var ProfilePage = React.createClass({
 
   getInitialState: function() {
     return {
-      profile: {},
+      profile: {
+        predictions: []
+      },
       error: null
     };
   },
@@ -57,29 +62,29 @@ var ProfilePage = React.createClass({
         <DocumentTitle title={this.state.profile.firstName + ' ' + this.state.profile.lastName} />
 
         <div className="container card-grid">
-          <div className="sidebar left">
+          <FixedSidebar className="left">
             <div className="inner">
               <div className="user-info">
                 <img src={this.state.profile.avatarUrl} />
                 <div className="text dark">
-                  <h1 className="h3">Joseph Pundit</h1>
-                  <h5>ABC: This Week</h5>
+                  <h1 className="h3">{this.state.profile.firstName + ' ' + this.state.profile.lastName}</h1>
+                  <h5>{this.state.profile.affiliation}</h5>
                 </div>
                 <div className="text">
-                  <p>George Will is a syndicated columnist for The Washington Post and contributing analyst with ABC News.</p>
+                  <p>{this.state.profile.bio}</p>
                 </div>
                 <div className="pure-g stats">
                   <div className="pure-u-1-3">
                     <h6>Predictions</h6>
-                    <h4>15</h4>
+                    <h4>{this.state.profile.predictionGraded}</h4>
                   </div>
                   <div className="pure-u-1-3">
                     <h6>Correct</h6>
-                    <h4>10</h4>
+                    <h4>{this.state.profile.predictionCorrect}</h4>
                   </div>
                   <div className="pure-u-1-3">
                     <h6>Wrong</h6>
-                    <h4>5</h4>
+                    <h4>{this.state.profile.predictionGraded - this.state.predictionCorrect}</h4>
                   </div>
                 </div>
                 <div className="pure-g stats">
@@ -99,13 +104,13 @@ var ProfilePage = React.createClass({
                 <div className="pure-g stats">
                   <div className="pure-u-1-1 since">
                     <h6>Predicting Since</h6>
-                    <h4>January 2011</h4>
+                    <h4>{moment(this.state.profile.created).format('MMMM YYYY')}</h4>
                     <UserGrade user={this.state.profile} />
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </FixedSidebar>
 
           <div className="content-with-sidebar right">
             <div className="pure-g card-grid">
