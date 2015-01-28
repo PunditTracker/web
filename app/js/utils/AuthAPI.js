@@ -1,94 +1,31 @@
  'use strict';
 
-var when     = require('when');
-var request  = require('superagent');
-
 var APIUtils = require('./APIUtils');
 
 var AuthAPI = {
 
   check: function() {
-    var deferred = when.defer();
-
-    request.get(APIUtils.root + 'auth/check').end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+    return APIUtils.doGet('auth/check');
   },
 
   register: function(user) {
-    var deferred = when.defer();
-
-    request.put(APIUtils.root + 'auth/register', user).end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+    return APIUtils.doPut('auth/register', user);
   },
 
   facebookRegister: function(user) {
-    var deferred = when.defer();
-
-    request.post(APIUtils.root + 'auth/registerfb', user).end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+    return APIUtils.doPost('auth/registerfb', user);
   },
 
   login: function(user) {
-    var deferred = when.defer();
-
-    request.post(APIUtils.root + 'auth/login', user).end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+    return APIUtils.doPost('auth/login', user);
   },
 
   facebookLogin: function(user) {
-    var deferred = when.defer();
-
-    request.post(APIUtils.root + 'auth/loginfb', user).end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+    return APIUtils.doPost('auth/loginfb', user);
   },
 
   logout: function() {
-    var deferred = when.defer();
-
-    request.post(APIUtils.root + 'auth/logout').end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+    return APIUtils.doPost('auth/logout');
   }
 
 };

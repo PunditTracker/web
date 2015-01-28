@@ -8,22 +8,11 @@ var APIUtils = require('./APIUtils');
 var HomePageAPI = {
 
   getHeroPrediction: function() {
-    var deferred = when.defer();
-
-    request.get(APIUtils.root + 'homepage/hero').end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+    return APIUtils.doGet('homepage/hero');
   },
 
   getFeaturedPredictions: function(category) {
-    var deferred = when.defer();
-    var getUrl = APIUtils.root + 'prediction/featured';
+    var getUrl = 'prediction/featured';
 
     if ( category ) {
       getUrl += ('/' + category);
@@ -31,34 +20,17 @@ var HomePageAPI = {
 
     getUrl += '?limit=24'; // Need exactly 24 predictions for current home page orientation
 
-    request.get(getUrl).end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+    return APIUtils.get(getUrl);
   },
 
   getFeaturedUsers: function(category) {
-    var deferred = when.defer();
-    var getUrl = APIUtils.root + 'user/featured';
+    var getUrl = 'user/featured';
 
     if ( category ) {
       getUrl += ('/' + category);
     }
 
-    request.get(getUrl).end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+    return APIUtils.get(getUrl);
   },
 
   getRecentBlogPosts: function() {
@@ -96,23 +68,8 @@ var HomePageAPI = {
     return deferred.promise;
   },
 
-  getPredictionSet: function(category) {
-    var deferred = when.defer();
-    var getUrl = APIUtils.root + 'homepage/predictionSet';
-
-    // if ( category ) {
-    //   getUrl += ('/' + category);
-    // }
-
-    request.get(getUrl).end(function(res) {
-      if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
-      } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
-      }
-    });
-
-    return deferred.promise;
+  getPredictionSet: function() {
+    return APIUtils.get('homepage/predictionSet');
   }
 
 };
