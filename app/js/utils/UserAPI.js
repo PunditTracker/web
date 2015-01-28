@@ -5,11 +5,11 @@ var APIUtils = require('./APIUtils');
 var UserAPI = {
 
   get: function(identifier) {
-    return APIUtils.get('user/' + identifier);
+    return APIUtils.doGet('user/' + identifier);
   },
 
   getPredictions: function(id) {
-    return APIUtils.get('prediction/user/' + id);
+    return APIUtils.doGet('prediction/user/' + id);
   }
 
 };

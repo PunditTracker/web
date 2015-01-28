@@ -20,7 +20,7 @@ var HomePageAPI = {
 
     getUrl += '?limit=24'; // Need exactly 24 predictions for current home page orientation
 
-    return APIUtils.get(getUrl);
+    return APIUtils.doGet(getUrl);
   },
 
   getFeaturedUsers: function(category) {
@@ -30,7 +30,7 @@ var HomePageAPI = {
       getUrl += ('/' + category);
     }
 
-    return APIUtils.get(getUrl);
+    return APIUtils.doGet(getUrl);
   },
 
   getRecentBlogPosts: function() {
@@ -69,7 +69,7 @@ var HomePageAPI = {
   },
 
   getPredictionSet: function() {
-    return APIUtils.get('homepage/predictionSet');
+    return APIUtils.doGet('homepage/predictionSet');
   }
 
 };

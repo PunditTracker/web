@@ -5,15 +5,15 @@ var APIUtils = require('./APIUtils');
 var PredictionAPI = {
 
   get: function(identifier) {
-    return APIUtils.get('prediction/' + identifier);
+    return APIUtils.doGet('prediction/' + identifier);
   },
 
   postPrediction: function(prediction) {
-    return APIUtils.psot('prediction/add', prediction);
+    return APIUtils.doPost('prediction/add', prediction);
   },
 
   doVote: function(prediction, vote) {
-    return APIUtils.post('predictio/vote/' + prediction.id, vote);
+    return APIUtils.doPost('predictio/vote/' + prediction.id, vote);
   }
 
 };

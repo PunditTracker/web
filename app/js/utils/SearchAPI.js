@@ -5,7 +5,7 @@ var APIUtils = require('./APIUtils');
 var SearchAPI = {
 
   search: function(query) {
-    return APIUtils.get('prediction/search/' + query);
+    return APIUtils.doGet('prediction/search/' + query);
   }
 
 };
