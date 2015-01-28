@@ -1,28 +1,27 @@
 'use strict';
 
-var request      = require('superagent');
-var when         = require('when');
-var humps        = require('humps');
-var camelizeKeys = humps.camelizeKeys;
+var request           = require('superagent');
+var when              = require('when');
+var humps             = require('humps');
+var camelizeKeys      = humps.camelizeKeys;
+var normalizeResponse = function(response) {
+  return camelizeKeys(response.body);
+};
 
 var APIUtils = {
 
   root: 'http://54.148.170.236:8080/v1/',
 
-  normalizeResponse: function(response) {
-    return camelizeKeys(response.body);
-  },
-
   doGet: function(path) {
     var deferred = when.defer();
 
-    request.get(APIUtils.root + path)
+    request.get(this.root + path)
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res));
       } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res));
       }
     });
 
@@ -32,13 +31,13 @@ var APIUtils = {
   doPost: function(path, body) {
     var deferred = when.defer();
 
-    request.post(APIUtils.root + path, body)
+    request.post(this.root + path, body)
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res));
       } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res));
       }
     });
 
@@ -48,13 +47,13 @@ var APIUtils = {
   doPut: function(path, body) {
     var deferred = when.defer();
 
-    request.put(APIUtils.root + path, body)
+    request.put(this.root + path, body)
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res));
       } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res));
       }
     });
 
@@ -64,13 +63,13 @@ var APIUtils = {
   doDelete: function(path) {
     var deferred = when.defer();
 
-    request.del(APIUtils.root + path)
+    request.del(this.root + path)
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(APIUtils.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res));
       } else {
-        deferred.resolve(APIUtils.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res));
       }
     });
 

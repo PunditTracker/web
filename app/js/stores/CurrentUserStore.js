@@ -70,12 +70,13 @@ var CurrentTrackStore = Reflux.createStore({
 
     AuthAPI.logout(this.user).then(function() {
       this.user = null;
-      cb();
-      this.trigger(this.user);
+      cb(null, this.user);
+      this.trigger(null, this.user);
     }.bind(this)).catch(function(err) {
-      cb(err);
       console.log('error logging out:', err);
-    });
+      cb(err);
+      this.trigger(err);
+    }.bind(this));
   }
 
 });
