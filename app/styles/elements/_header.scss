@@ -50,10 +50,19 @@ header {
       }
     }
 
-    .user-button, .search {
+    .user-option, .search {
       float: right;
       font-size: 0.8rem;
       margin-top: 1rem;
+    }
+
+    .user-option {
+      cursor: pointer;
+
+      &.non-button {
+        margin-top: 1.5rem;
+        margin-left: 1rem;
+      }
     }
 
     .search {

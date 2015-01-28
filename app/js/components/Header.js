@@ -9,6 +9,7 @@ var Link            = React.createFactory(require('react-router').Link);
 var Navigation      = require('react-router').Navigation;
 
 var LoginModalMixin = require('../mixins/LoginModalMixin');
+var UserActions     = require('../actions/UserActions');
 var ListLink        = require('./ListLink');
 
 var Header = React.createClass({
@@ -52,11 +53,27 @@ var Header = React.createClass({
 
     if ( _.isEmpty(this.props.currentUser) ) {
       element = (
-        <a className="user-button button" onClick={this.toggleLoginModal}>Sign Up / Log in</a>
+        <Link to="Register" className="user-option button">Sign Up</Link>
       );
     } else {
       element = (
-        <Link to="Predict" className="user-button button">Predict!</Link>
+        <Link to="Predict" className="user-option button">Predict!</Link>
+      );
+    }
+
+    return element;
+  },
+
+  renderLink: function() {
+    var element = null;
+
+    if ( _.isEmpty(this.props.currentUser) ) {
+      element = (
+        <a className="user-option non-button" onClick={this.toggleLoginModal}>Log in</a>
+      );
+    } else {
+      element = (
+        <a className="user-option non-button" onClick={UserActions.logout}>Log out</a>
       );
     }
 
@@ -83,6 +100,7 @@ var Header = React.createClass({
                 <ListLink to="Category" params={{ category: 'media' }}>Media</ListLink>
                 <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
               </ul>
+              {this.renderLink()}
               {this.renderButton()}
               <div className="search">
                 <input ref="searchInput"
