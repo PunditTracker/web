@@ -22,12 +22,12 @@ var LoginModalMixin = {
       showLoginModal: false,
       loading: false,
       username: '',
-      password: ''
+      password: '',
+      facebookId: null
     };
   },
 
   toggleLoginModal: function() {
-    console.log('toggle login modal');
     this.setState({ showLoginModal: !this.state.showLoginModal });
   },
 

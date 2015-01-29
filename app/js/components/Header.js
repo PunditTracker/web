@@ -73,7 +73,7 @@ var Header = React.createClass({
       );
     } else {
       element = (
-        <a className="user-option non-button" onClick={UserActions.logout}>Log out</a>
+        <a className="user-option non-button" onClick={UserActions.logout.bind(null, null)}>Log out</a>
       );
     }
 
