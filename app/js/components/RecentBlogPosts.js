@@ -41,7 +41,7 @@ var RecentBlogPosts = React.createClass({
     return _.map(this.state.recentBlogPosts, function(post, index) {
       return (
         <li className="blog-post" key={index}>
-          <a href={post.url}>
+          <a href={post.link} target="_blank">
             <h4>{post.title}</h4>
             <h6>{moment(post.pubDate, 'EEE, dd MMM yyyy HH:mm:ss zzz').format('MMMM DD, YYYY')} | {post.category}</h6>
           </a>
