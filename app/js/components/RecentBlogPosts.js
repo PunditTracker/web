@@ -11,13 +11,15 @@ var moment               = require('moment');
 var HomePageActions      = require('../actions/HomePageActions');
 var RecentBlogPostsStore = require('../stores/RecentBlogPostsStore');
 
-var FeaturedBlogPosts = React.createClass({
+window.moment = moment;
+
+var RecentBlogPosts = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
 
   getInitialState: function() {
     return {
-      featuredBlogPosts: []
+      recentBlogPosts: []
     };
   },
 
@@ -26,7 +28,7 @@ var FeaturedBlogPosts = React.createClass({
       this.setState({ error: err });
     } else {
       console.log('posts change:', posts);
-      this.setState({ featuredBlogPosts: posts, error: null });
+      this.setState({ recentBlogPosts: posts ? posts.slice(0, 3) : [], error: null });
     }
   },
 
@@ -36,12 +38,12 @@ var FeaturedBlogPosts = React.createClass({
   },
 
   renderBlogPosts: function() {
-    return _.map(this.state.featuredBlogPosts, function(post, index) {
+    return _.map(this.state.recentBlogPosts, function(post, index) {
       return (
         <li className="blog-post" key={index}>
           <a href={post.url}>
             <h4>{post.title}</h4>
-            <h6>{moment(post.timestamp).fromNow()} | {post.category}</h6>
+            <h6>{moment(post.pubDate, 'EEE, dd MMM yyyy HH:mm:ss zzz').format('MMMM DD, YYYY')} | {post.category}</h6>
           </a>
         </li>
       );
@@ -66,4 +68,4 @@ var FeaturedBlogPosts = React.createClass({
 
 });
 
-module.exports = React.createFactory(FeaturedBlogPosts);
+module.exports = React.createFactory(RecentBlogPosts);

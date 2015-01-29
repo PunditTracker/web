@@ -2,6 +2,7 @@
 
 var when     = require('when');
 var request  = require('superagent');
+var xml2js   = require('xml2js');
 
 var APIUtils = require('./APIUtils');
 
@@ -35,35 +36,23 @@ var HomePageAPI = {
 
   getRecentBlogPosts: function() {
     var deferred = when.defer();
+    var parser = new xml2js.Parser();
 
-    // request.get(APIUtils.root + 'blog').end(function(res) {
-    //   if ( !res.ok ) {
-    //     deferred.reject(APIUtils.normalizeResponse(res));
-    //   } else {
-    //     deferred.resolve(APIUtils.normalizeResponse(res));
-    //   }
-    // });
-
-    deferred.resolve([
-      {
-        category: 'Sports',
-        timestamp: new Date(),
-        title: 'Which experts predicted a Royals vs. Giants World Series?',
-        url: 'http://www.google.com'
-      },
-      {
-        category: 'Sports',
-        timestamp: new Date(),
-        title: 'Which experts predicted a Royals vs. Giants World Series?',
-        url: 'http://www.google.com'
-      },
-      {
-        category: 'Sports',
-        timestamp: new Date(),
-        title: 'Which experts predicted a Royals vs. Giants World Series?',
-        url: 'http://www.google.com'
+    request.get('http://blog.pundittracker.com/feed').end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(APIUtils.normalizeResponse(res));
+      } else {
+        parser.parseString(res.text, function(err, data) {
+          if ( err ) {
+            deferred.reject(err);
+          } else {
+            console.log(data.rss.channel[0].item);
+            console.log(deferred);
+            deferred.resolve(data.rss.channel[0].item);
+          }
+        });
       }
-    ]);
+    });
 
     return deferred.promise;
   },
