@@ -20,7 +20,6 @@ var CurrentTrackStore = Reflux.createStore({
     cb = cb || function() {};
 
     AuthAPI.check().then(function(user) {
-      console.log('checked:', user);
       this.user = user;
       cb(null, this.user);
       this.trigger(null, this.user);
@@ -37,7 +36,6 @@ var CurrentTrackStore = Reflux.createStore({
     console.log('login user');
 
     AuthAPI.login(user).then(function(loggedInUser) {
-      console.log('logged in user:', loggedInUser);
       this.user = loggedInUser;
       cb(null, this.user);
       this.trigger(null, this.user);
@@ -60,7 +58,7 @@ var CurrentTrackStore = Reflux.createStore({
     }.bind(this)).catch(function(err) {
       cb(err);
       this.trigger(err);
-    });
+    }.bind(this));
   },
 
   logoutUser: function(cb) {

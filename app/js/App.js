@@ -27,13 +27,13 @@ var App = React.createClass({
     if ( err ) {
       this.setState({ error: err.message });
     } else {
-      this.setState({ currentUser: user });
+      this.setState({ currentUser: user || {} });
     }
   },
 
   componentDidMount: function() {
     if ( !_.isEmpty(CurrentUserStore.user) ) {
-      this._onUserChange(CurrentUserStore.user);
+      this._onUserChange(null, CurrentUserStore.user);
     } else {
       UserActions.check(this._onUserChange);
     }

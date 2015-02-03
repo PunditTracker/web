@@ -42,6 +42,8 @@ var ProfilePage = React.createClass({
     if ( err ) {
       this.setState({ error: err });
     } else {
+      profile = profile || {};
+      profile.predictions = [];
       this.setState({ profile: profile, error: null });
     }
   },

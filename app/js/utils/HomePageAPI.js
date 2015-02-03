@@ -46,8 +46,6 @@ var HomePageAPI = {
           if ( err ) {
             deferred.reject(err);
           } else {
-            console.log(data.rss.channel[0].item);
-            console.log(deferred);
             deferred.resolve(data.rss.channel[0].item);
           }
         });
