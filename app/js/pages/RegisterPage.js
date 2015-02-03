@@ -4,11 +4,13 @@
  /* global FB */
 'use strict';
 
-var React      = require('react/addons');
-var Navigation = require('react-router').Navigation;
+var React         = require('react/addons');
+var _             = require('lodash');
+var Navigation    = require('react-router').Navigation;
 
 var DocumentTitle = require('../components/DocumentTitle');
 var AuthAPI       = require('../utils/AuthAPI');
+var FileInput     = require('../components/FileInput');
 
 var RegisterPage = React.createClass({
 
@@ -22,9 +24,24 @@ var RegisterPage = React.createClass({
       lastName: '',
       avatarUrl: '',
       password: '',
+      confirmPassword: '',
       error: null,
-      isFacebookRegister: false
+      isFacebookRegister: false,
+      submitDisabled: true
     };
+  },
+
+  componentDidUpdate: function(prevProps, prevState) {
+    if ( !_.isEqual(this.state, prevState) && this.isMounted() ) {
+      this.checkForm();
+    }
+  },
+
+  checkForm: function() {
+    var passwordSatisfied = this.state.isFacebookRegister || (this.state.password.length && this.state.password === this.state.confirmPassword);
+    var formIsValid = this.state.username.length && this.state.email.length && this.state.firstName.length && this.state.lastName.length && passwordSatisfied;
+
+    this.setState({ submitDisabled: !formIsValid });
   },
 
   checkFbState: function() {
@@ -61,6 +78,10 @@ var RegisterPage = React.createClass({
     FB.login(this.checkFbState, { scope: 'public_profile,email' });
   },
 
+  updateImage: function(file) {
+    this.setState({ image: file });
+  },
+
   handleSubmit: function(evt) {
     var user = {
       username: this.state.username,
@@ -72,17 +93,36 @@ var RegisterPage = React.createClass({
       password: this.state.password
     };
     var registerFunction = this.state.isFacebookRegister ? AuthAPI.facebookRegister : AuthAPI.register;
+    var passwordsMatch = this.state.isFacebookRegister || (this.state.password.length && this.state.password === this.state.confirmPassword);
 
     evt.stopPropagation();
     evt.preventDefault();
 
-    registerFunction(user).then(function() {
-      console.log('successfully registerd user, transitioning to login page');
-      this.transitionTo('Login');
-    }.bind(this)).catch(function(err) {
-      console.log('error registering:', err);
-      this.setState({ error: err.message });
-    }.bind(this));
+    if ( !passwordsMatch ) {
+      this.setState({ error: 'Those passwords do not match!' });
+    } else {
+      this.setState({ error: null, loading: true });
+
+      registerFunction(user).then(function() {
+        console.log('successfully registerd user, transitioning to home page');
+        this.transitionTo('Home');
+      }.bind(this)).catch(function(err) {
+        console.log('error registering:', err);
+        this.setState({ error: err.message });
+      }.bind(this));
+    }
+  },
+
+  renderImageInput: function() {
+    var element = null;
+
+    if ( !this.state.isFacebookRegister ) {
+      element = (
+        <FileInput id="image-url" accept="image/x-png, image/gif, image/jpeg" processFile={this.updateImage} />
+      );
+    }
+
+    return element;
   },
 
   renderPasswordInput: function() {
@@ -97,32 +137,43 @@ var RegisterPage = React.createClass({
     return element;
   },
 
+  renderConfirmInput: function() {
+    var element = null;
+
+    if ( !this.state.isFacebookRegister ) {
+      element = (
+        <input type="password" id="confirm-password" valueLink={this.linkState('confirmPassword')} placeholder="Confirm" required />
+      );
+    }
+
+    return element;
+  },
+
   render: function() {
     return (
       <section className="content no-hero register">
 
         <DocumentTitle title="Register" />
 
-        <form id="register-form" className="island" onSubmit={this.handleSubmit}>
-          <input type="text" id="username" valueLink={this.linkState('username')} placeholder="Username" required />
-          <br />
-          <input type="text" id="email" valueLink={this.linkState('email')} placeholder="Email address" required />
-          <br />
-          <input type="text" id="firstName" valueLink={this.linkState('firstName')} placeholder="First Name" required />
-          <br />
-          <input type="text" id="lastName" valueLink={this.linkState('lastName')} placeholder="Last Name" required />
-          <br />
-          <input type="text" id="avatarUrl" valueLink={this.linkState('avatarUrl')} placeholder="Avatar URL (optional)" />
-          <br />
-          {this.renderPasswordInput()}
-          <br />
-          <div className="error-container">{this.state.error}</div>
-          <br />
-          <input type="submit" value="Register" />
-        </form>
+        <div className="container">
+          <div className="fb-register-container">
+            <a className="btn fb text-center" onClick={this.fbLogin}>
+              <i className="fa fa-facebook" /> Register with Facebook
+            </a>
+            <strong className="line-thru">or</strong>
+          </div>
 
-        <div className="fb-register-container">
-          <a onClick={this.fbLogin}>Register with Facebook</a>
+          <form id="register-form" onSubmit={this.handleSubmit}>
+            <input type="text" id="username" valueLink={this.linkState('username')} placeholder="Username" required />
+            <input type="text" id="email" valueLink={this.linkState('email')} placeholder="Email address" required />
+            <input type="text" id="firstName" valueLink={this.linkState('firstName')} placeholder="First Name" required />
+            <input type="text" id="lastName" valueLink={this.linkState('lastName')} placeholder="Last Name" required />
+            {this.renderImageInput()}
+            {this.renderPasswordInput()}
+            {this.renderConfirmInput()}
+            <div className="error-container">{this.state.error}</div>
+            <input type="submit" value="Register" className="btn block" disabled={this.state.submitDisabled ? 'true' : ''} />
+          </form>
         </div>
 
       </section>

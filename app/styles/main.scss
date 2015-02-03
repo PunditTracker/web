@@ -7,8 +7,10 @@
 @import 'base';
 
 @import 'elements/button';
+@import 'elements/line-thru';
 @import 'elements/header';
 @import 'elements/modal';
+@import 'elements/login-modal';
 @import 'elements/hero';
 @import 'elements/footer';
 @import 'elements/sidebar';
@@ -27,4 +29,5 @@
 @import 'elements/small-feature-card';
 @import 'elements/march-madness-card';
 
+@import 'pages/register';
 @import 'pages/profile';

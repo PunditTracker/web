@@ -1,0 +1,24 @@
+section.register {
+
+  .btn.fb {
+    display: block;
+
+    i { margin-right: 0.2rem; }
+  }
+
+  input {
+    width: 100%;
+    height: 2.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid $very-light-grey;
+
+    &:not([type="submit"]) {
+      background-color: $white;
+    }
+  }
+
+  a:not(.fb) {
+    font-weight: $bold;
+  }
+
+}

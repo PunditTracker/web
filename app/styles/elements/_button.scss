@@ -2,4 +2,8 @@
 
   @include button($blue, $white, $ultra-light-grey, 1px solid $blue);
 
+  &.fb, &.facebook {
+    @include button($facebook-blue, $white, $ultra-light-grey, 1px solid $facebook-blue);
+  }
+
 }

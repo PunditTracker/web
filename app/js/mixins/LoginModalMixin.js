@@ -6,6 +6,7 @@
 
 var React                 = require('react/addons');
 var Reflux                = require('reflux');
+var _                     = require('lodash');
 
 var UserActions           = require('../actions/UserActions');
 var LayeredComponentMixin = require('./LayeredComponentMixin');
@@ -23,8 +24,21 @@ var LoginModalMixin = {
       loading: false,
       username: '',
       password: '',
-      facebookId: null
+      facebookId: null,
+      submitDisabled: true
     };
+  },
+
+  componentDidUpdate: function(prevProps, prevState) {
+    if ( !_.isEqual(this.state, prevState) && this.isMounted() ) {
+      this.checkForm();
+    }
+  },
+
+  checkForm: function() {
+    var formIsValid = this.state.username.length && this.state.password.length;
+
+    this.setState({ submitDisabled: !formIsValid });
   },
 
   toggleLoginModal: function() {
@@ -114,19 +128,17 @@ var LoginModalMixin = {
       element = (
         <Modal className="login-modal" onRequestClose={this.toggleLoginModal}>
 
-          <form id="login-form" className="island" onSubmit={this.handleSubmit}>
-            <input type="text" id="username" valueLink={this.linkState('username')} placeholder="Username" required />
-            <br />
-            <input type="password" id="password" valueLink={this.linkState('password')} placeholder="Password" required />
-            <br />
-            {this.renderError()}
-            <br />
-            <input type="submit" value="Login" />
-          </form>
-
           <div className="fb-login-container">
-            <a onClick={this.fbLogin}>Login with Facebook</a>
+            <a className="btn fb" onClick={this.fbLogin}><i className="fa fa-facebook" /> Login with Facebook</a>
+            <strong className="line-thru">or</strong>
           </div>
+
+          <form id="login-form" onSubmit={this.handleSubmit}>
+            <input type="text" id="username" valueLink={this.linkState('username')} placeholder="Username" required />
+            <input type="password" id="password" valueLink={this.linkState('password')} placeholder="Password" required />
+            {this.renderError()}
+            <input type="submit" className="btn block" value="Login" disabled={this.state.submitDisabled ? 'true' : ''} />
+          </form>
 
           <div>
             Don't have an account? <a href="/register">Sign up</a>
