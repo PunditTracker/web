@@ -37,6 +37,10 @@ body {
   max-width: 65rem;
   margin: 0 auto;
   margin-bottom: 1.5rem;
+
+  &.slim {
+    max-width: 40rem;
+  }
 }
 
 .full-width-outer {

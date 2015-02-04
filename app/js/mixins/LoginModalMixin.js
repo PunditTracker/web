@@ -154,6 +154,10 @@ var LoginModalMixin = {
           </form>
 
           <div>
+            <a href="/forgot">Forgot your password?</a>
+          </div>
+
+          <div>
             Don't have an account? <a href="/register">Sign up</a>
           </div>
 

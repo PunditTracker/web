@@ -16,6 +16,14 @@ var AuthAPI = {
     return APIUtils.doPost('auth/registerfb', user);
   },
 
+  forgotPassword: function(email) {
+    return APIUtils.doPost('auth/forgot', { email: email });
+  },
+
+  resetPassword: function(userId, resetKey, newPassword) {
+    return APIUtils.doPost('auth/reset/' + userId + '/' + resetKey, { password: newPassword });
+  },
+
   login: function(user) {
     return APIUtils.doPost('auth/login', user);
   },
