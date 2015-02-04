@@ -24,11 +24,9 @@ var PredictionSet = React.createClass({
   },
 
   renderPredictions: function() {
-    var classes = 'pur-u-1-3';
-
     return _.map(this.props.set.predictions, function(prediction, index) {
       return (
-        <PredictionCard className={classes} prediction={prediction} key={index} />
+        <PredictionCard className="pur-u-1-3" prediction={prediction} key={index} />
       );
     });
   },

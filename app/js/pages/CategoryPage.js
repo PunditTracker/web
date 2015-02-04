@@ -5,6 +5,7 @@
 
 var React                = require('react/addons');
 var Reflux               = require('reflux');
+var _                    = require('lodash');
 var Navigation           = React.createFactory(require('react-router').Navigation);
 
 var GlobalActions        = require('../actions/GlobalActions');
@@ -18,6 +19,7 @@ var CategoryPage = React.createClass({
 
   getInitialState: function() {
     return {
+      title: this.props.params.category.trim().charAt(0).toUpperCase() + this.props.params.category.trim().slice(1),
       predictions: [],
       error: null
     };
@@ -49,11 +51,35 @@ var CategoryPage = React.createClass({
     }
   },
 
+  renderFeaturedPredictions: function() {
+    return _.map(this.state.featuredPredictions, function(prediction, index) {
+      return (
+        <PredictionCard className="pur-u-1-3" prediction={prediction} key={index} />
+      );
+    });
+  },
+
   render: function() {
+    var featuredStyles = {
+      'backgroundImage': null
+    };
+
     return (
       <section className="content no-hero category">
 
-        <DocumentTitle title={this.props.params.category.trim().charAt(0).toUpperCase() + this.props.params.category.trim().slice(1)} />
+        <DocumentTitle title={this.state.title} />
+
+        <div className="pure-g card-grid">
+          <div className="pure-u-1 full-width-outer">
+            <div className="prediction-set-card" style={featuredStyles}>
+              <div className="background"><div className="scrim" /></div>
+              <h3 className="question">Featured {this.state.title} Predictions</h3>
+              <div className="pure-g card-grid">
+                {this.renderFeaturedPredictions()}
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="pure-g card-grid">
           <div className="pure-u-1-3">
