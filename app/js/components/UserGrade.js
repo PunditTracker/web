@@ -25,8 +25,12 @@ var UserGrade = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    this.calculateGrade();
+  },
+
   componentDidUpdate: function(prevProps) {
-    if ( !_.isEqual(prevProps.user, this.props.user) ) {
+    if ( !_.isEqual(prevProps.user, this.props.user) && !_.isEmpty(this.props.user) ) {
       this.calculateGrade();
     }
   },
