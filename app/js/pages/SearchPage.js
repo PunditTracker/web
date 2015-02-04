@@ -86,6 +86,7 @@ var SearchPage = React.createClass({
 
         <div className="container">
           <input id="search"
+                 className="block full-width nudge-half--bottom"
                  placeholder="Type to search..."
                  valueLink={this.linkState('query')}
                  onKeyPress={this.handleKeyPress} />

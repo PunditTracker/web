@@ -133,7 +133,7 @@ var LoginModalMixin = {
             <strong className="line-thru">or</strong>
           </div>
 
-          <form id="login-form" onSubmit={this.handleSubmit}>
+          <form id="login-form" className="nudge-half--bottom" onSubmit={this.handleSubmit}>
             <input type="text"
                    id="email"
                    className="nudge-half--bottom"
@@ -153,7 +153,7 @@ var LoginModalMixin = {
                    disabled={this.state.submitDisabled ? 'true' : ''} />
           </form>
 
-          <div>
+          <div className="nudge-half--bottom">
             <a href="/forgot">Forgot your password?</a>
           </div>
 
