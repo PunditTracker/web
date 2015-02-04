@@ -41,7 +41,7 @@ var Hero = React.createClass({
             </div>
             <div className="pure-g card-grid">
               <div className="pure-u-1">
-                <SmallFeatureCard feature={{ text: 'Take charge this playoff season', buttonText: 'View Predictions' }}
+                <SmallFeatureCard feature={{ text: 'Take charge this playoff season', buttonText: 'View Predictions', buttonUrl: '/sports' }}
                                   backgroundImage="../images/playoffs.jpg" />
               </div>
             </div>

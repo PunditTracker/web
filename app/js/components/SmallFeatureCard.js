@@ -25,7 +25,7 @@ var SmallFeatureCard = React.createClass({
         <div className="inner">
           <h3 className="header">{this.props.feature.text}</h3>
           <div className="go">
-            <a href="#" className="button">{this.props.feature.buttonText}</a>
+            <a href={this.props.feature.buttonUrl} className="button">{this.props.feature.buttonText}</a>
           </div>
         </div>
       </div>
