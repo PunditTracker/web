@@ -84,12 +84,14 @@ var SearchPage = React.createClass({
 
         <DocumentTitle title="Search" />
 
-        <input id="search"
-               placeholder="Type to search..."
-               valueLink={this.linkState('query')}
-               onKeyPress={this.handleKeyPress} />
-
-        Search for: {this.props.query.q.replace(/(\+)|(%20)/gi, ' ')}
+        <div className="container">
+          <input id="search"
+                 placeholder="Type to search..."
+                 valueLink={this.linkState('query')}
+                 onKeyPress={this.handleKeyPress} />
+          <br />
+          Search for: {this.props.query.q.replace(/(\+)|(%20)/gi, ' ')}
+        </div>
 
       </section>
     );

@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react/addons');
+var Link  = React.createFactory(require('react-router').Link);
 
 var Footer = React.createClass({
 
@@ -15,11 +16,11 @@ var Footer = React.createClass({
           <div className="pure-u-1-3">
             <ul>
               <li className="double">
-                <a href="">
+                <Link to="Home">
                   <div className="logo">
                     <span>Pundit</span><br /><span>Tracker</span>
                   </div>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -30,38 +31,29 @@ var Footer = React.createClass({
         <div className="pure-g card-grid">
           <div className="pure-u-1-3">
             <ul>
-              <li><a href="">Finance</a></li>
-              <li><a href="">Politics</a></li>
-              <li><a href="">Sports</a></li>
-              <li>
-                <ul>
-                  <li><a href="">NFL</a></li>
-                  <li><a href="">NBA</a></li>
-                </ul>
-              </li>
-              <li><a href="">Media</a></li>
+              <li><Link to="Category" params={{ category: 'finance' }}>Finance</Link></li>
+              <li><Link to="Category" params={{ category: 'politics' }}>Politics</Link></li>
+              <li><Link to="Category" params={{ category: 'sports' }}>Sports</Link></li>
+              <li><Link to="Category" params={{ category: 'tech' }}>Tech</Link></li>
+              <li><Link to="Category" params={{ category: 'media' }}>Media</Link></li>
             </ul>
           </div>
           <div className="pure-u-1-3">
             <ul>
-              <li><a href="">About</a></li>
-              <li><a href="">Jobs</a></li>
-              <li><a href="">Blog</a></li>
-              <li><a href="">Blogs we like</a></li>
-              <li><a href="">Contact</a></li>
-              <li><a href="">Feedback</a></li>
+              <li><Link to="About">About</Link></li>
+              <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
             </ul>
           </div>
           <div className="pure-u-1-3">
             <ul>
-              <li><a href="">Facebook</a></li>
-              <li><a href="">Twitter</a></li>
+              <li><a href="https://www.facebook.com/pundittracker" target="_blank">Facebook</a></li>
+              <li><a href="https://twitter.com/pundittracker" target="_blank">Twitter</a></li>
               <li>
                 <ul>
-                  <li><a href="">@ptraxfinance</a></li>
-                  <li><a href="">@ptraxpolitics</a></li>
-                  <li><a href="">@ptraxsports</a></li>
-                  <li><a href="">@ptraxentertain</a></li>
+                  <li><a href="https://twitter.com/ptraxfinance" target="_blank">@ptraxfinance</a></li>
+                  <li><a href="https://twitter.com/ptraxpolitics" target="_blank">@ptraxpolitics</a></li>
+                  <li><a href="https://twitter.com/ptraxsports" target="_blank">@ptraxsports</a></li>
+                  <li><a href="https://twitter.com/ptraxentertain" target="_blank">@ptraxentertain</a></li>
                 </ul>
               </li>
             </ul>

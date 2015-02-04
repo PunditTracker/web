@@ -149,6 +149,20 @@ var RegisterPage = React.createClass({
     return element;
   },
 
+  renderError: function() {
+    var element = null;
+
+    if ( this.state.error ) {
+      element = (
+        <div className="error-container">
+          {this.state.error}
+        </div>
+      );
+    }
+
+    return element;
+  },
+
   render: function() {
     return (
       <section className="content no-hero register">
@@ -171,7 +185,7 @@ var RegisterPage = React.createClass({
             {this.renderImageInput()}
             {this.renderPasswordInput()}
             {this.renderConfirmInput()}
-            <div className="error-container">{this.state.error}</div>
+            {this.renderError()}
             <input type="submit" value="Register" className="btn block" disabled={this.state.submitDisabled ? 'true' : ''} />
           </form>
         </div>
