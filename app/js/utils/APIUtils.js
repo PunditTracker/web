@@ -74,6 +74,23 @@ var APIUtils = {
     });
 
     return deferred.promise;
+  },
+
+  uploadImage: function(path, image) {
+    var deferred = when.defer();
+
+    request.post(this.root + path)
+    .attach('image', image)
+    .withCredentials()
+    .end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(normalizeResponse(res));
+      } else {
+        deferred.resolve(normalizeResponse(res));
+      }
+    });
+
+    return deferred.promise;
   }
 
 };

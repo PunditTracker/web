@@ -5,10 +5,13 @@
 'use strict';
 
 var React         = require('react/addons');
+var when          = require('when');
 var _             = require('lodash');
 var Navigation    = require('react-router').Navigation;
 
 var DocumentTitle = require('../components/DocumentTitle');
+var UserActions   = require('../actions/UserActions');
+var APIUtils      = require('../utils/APIUtils');
 var AuthAPI       = require('../utils/AuthAPI');
 var FileInput     = require('../components/FileInput');
 
@@ -81,7 +84,9 @@ var RegisterPage = React.createClass({
     this.setState({ image: file });
   },
 
-  handleSubmit: function(evt) {
+  createUser: function() {
+    var deferred = when.defer();
+    var registerFunction = this.state.isFacebookRegister ? AuthAPI.facebookRegister : AuthAPI.register;
     var user = {
       email: this.state.email,
       firstName: this.state.firstName,
@@ -90,7 +95,35 @@ var RegisterPage = React.createClass({
       facebookId: this.state.facebookId,
       password: this.state.password
     };
-    var registerFunction = this.state.isFacebookRegister ? AuthAPI.facebookRegister : AuthAPI.register;
+
+    registerFunction(user).then(function(createdUser) {
+      deferred.resolve(createdUser);
+    }).catch(function(err) {
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  },
+
+  uploadImage: function(user) {
+    var deferred = when.defer();
+
+    if ( this.state.image ) {
+      APIUtils.uploadImage('putprofpic', this.state.image).then(function() {
+        deferred.resolve(user);
+      }).catch(function(err) {
+        console.log('error uploading user image:', err);
+        // Still resolve since user was successfully created
+        deferred.resolve(user);
+      });
+    } else {
+      deferred.resolve(user);
+    }
+
+    return deferred.promise;
+  },
+
+  handleSubmit: function(evt) {
     var passwordsMatch = this.state.isFacebookRegister || (this.state.password.length && this.state.password === this.state.confirmPassword);
 
     evt.stopPropagation();
@@ -101,12 +134,13 @@ var RegisterPage = React.createClass({
     } else {
       this.setState({ error: null, loading: true });
 
-      registerFunction(user).then(function() {
+      this.createUser().then(this.uploadImage).then(function(user) {
         console.log('successfully registerd user, transitioning to home page');
+        UserActions.set(user);
         this.transitionTo('Home');
       }.bind(this)).catch(function(err) {
         console.log('error registering:', err);
-        this.setState({ error: err.message });
+        this.setState({ error: err.message || err });
       }.bind(this));
     }
   },
