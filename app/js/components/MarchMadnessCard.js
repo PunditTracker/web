@@ -23,7 +23,7 @@ var MarchMadnessCard = React.createClass({
   },
 
   componentDidUpdate: function(prevProps, prevState) {
-    if ( this.state.email && this.state.email !== prevState.email && this.isMounted() ) {
+    if ( this.state.email !== prevState.email && this.isMounted() ) {
       this.setState({ isValidEmail: validator.validate(this.state.email) });
     }
   },
