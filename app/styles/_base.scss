@@ -80,28 +80,17 @@ pre {
 
 $table-padding: 0.5rem;
 table {
-  // border: 1px solid $dark-grey;
   margin: 1rem auto 2rem;
   @include box-shadow;
 
   thead {
     background-color: $blue;
     color: $white;
-    // border-bottom: 1px solid $dark-grey;
-  }
-  tfoot {
-    // border-top: 1px solid $dark-grey;
   }
 }
 
 th, td {
   padding: 0 $table-padding;
-  // &:first-child {
-  //     padding-left: 0;
-  // }
-  // &:last-child {
-  //     padding-right: 0;
-  // }
 }
 
 tr {

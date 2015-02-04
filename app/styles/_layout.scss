@@ -1,9 +1,10 @@
-.full-width { width: 100%; }
-.full-height { height: 100%; }
+.full-width { width: 100% !important; }
+.full-height { height: 100% !important; }
 .inherit-height { height: inherit; }
 
-.block { display: block; }
-.inline-block { display: inline-block; }
+.block { display: block !important; }
+.block--center { display: block !important; margin: 0 auto; }
+.inline-block { display: inline-block !important; }
 
 .table { display: table; }
 .tr { display: table-row; }

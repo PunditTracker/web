@@ -6,6 +6,7 @@
 var React         = require('react/addons');
 var _             = require('lodash');
 var cx            = React.addons.classSet;
+var Link          = React.createFactory(require('react-router').Link);
 
 var PredictionAPI = require('../utils/PredictionAPI');
 var DocumentTitle = require('../components/DocumentTitle');
@@ -69,20 +70,14 @@ var PredictPage = React.createClass({
 
   setSubcategory: function(evt) {
     var hasSubcategory = evt.target.value.indexOf('...') === -1;
-    var tagsCopy = this.state.tags;
 
     evt.preventDefault();
 
-    if ( hasSubcategory ) {
-      tagsCopy.push(evt.target.value);
-      this.setState({ tags: tagsCopy });
-    }
+    this.setState({ subcategory: hasSubcategory ? evt.target.value : null });
   },
 
   addTag: function(tag) {
     var tagsCopy = this.state.tags;
-
-    console.log('add tag:', tag);
 
     tagsCopy.push(tag);
 
@@ -102,17 +97,19 @@ var PredictPage = React.createClass({
   handleSubmit: function(evt) {
     var prediction = {
       title: this.state.prediction.trim().charAt(0).toUpperCase() + this.state.prediction.trim().slice(1), // capitalize first letter
-      category: this.state.category
+      category: this.state.category,
+      tags: []
     };
 
     evt.preventDefault();
 
     if ( this.state.subcategory ) {
       prediction.subcat = this.state.subcategory;
+      prediction.tags.push(this.state.subcategory);
     }
 
     if ( this.state.tags && this.state.tags.length ) {
-      prediction.tags = this.state.tags;
+      prediction.tags = prediction.tags.concat(this.state.tags);
     }
 
     if ( this.state.deadline ) {
@@ -139,7 +136,7 @@ var PredictPage = React.createClass({
 
   renderSubcategoryDropdown: function() {
     var element = null;
-    var options = _.map(['NFL', 'NBA', 'MLB', 'NHL'], function(subcategory, index) {
+    var options = _.map(['Select a Subcategory...', 'NFL', 'NBA', 'MLB', 'NHL'], function(subcategory, index) {
       return (
         <option key={index}>{subcategory}</option>
       );
@@ -150,6 +147,18 @@ var PredictPage = React.createClass({
         <select name="category" onChange={this.setSubcategory}>
           {options}
         </select>
+      );
+    }
+
+    return element;
+  },
+
+  renderSubcategoryTag: function() {
+    var element = null;
+
+    if ( this.state.subcategory ) {
+      element = (
+        <li>{this.state.subcategory}</li>
       );
     }
 
@@ -291,6 +300,7 @@ var PredictPage = React.createClass({
                 <div className="tags">
                   <ul className="inner">
                     <li className="category">{this.state.category || 'Select a Category...'}</li>
+                    {this.renderSubcategoryTag()}
                     {this.renderTags()}
                   </ul>
                 </div>
@@ -308,10 +318,11 @@ var PredictPage = React.createClass({
     );
   },
 
-  renderConfirmation: function() {
+  renderSuccessMessage: function() {
     return (
-      <div>
-        Prediction successfully submitted!
+      <div className="container slim">
+        <h4 className="text-center nudge-half--bottom flush--top">Forget your password?</h4>
+        <Link to="Home" className="btn block full-width text-center">Back to Home</Link>
       </div>
     );
   },
@@ -322,7 +333,7 @@ var PredictPage = React.createClass({
 
         <DocumentTitle title="Predict" />
 
-        {this.state.posted ? this.renderConfirmation() : this.renderForm()}
+        {this.state.posted ? this.renderSuccessMessage() : this.renderForm()}
 
       </section>
     );
