@@ -22,7 +22,7 @@ var LoginModalMixin = {
     return {
       showLoginModal: false,
       loading: false,
-      username: '',
+      email: '',
       password: '',
       facebookId: null,
       submitDisabled: true
@@ -36,7 +36,7 @@ var LoginModalMixin = {
   },
 
   checkForm: function() {
-    var formIsValid = this.state.username.length && this.state.password.length;
+    var formIsValid = this.state.email.length && this.state.password.length;
 
     this.setState({ submitDisabled: !formIsValid });
   },
@@ -71,7 +71,7 @@ var LoginModalMixin = {
 
   handleSubmit: function(evt) {
     var user = {
-      username: this.state.username,
+      email: this.state.email,
       password: this.state.password,
       facebookId: this.state.facebookId
     };
@@ -134,7 +134,7 @@ var LoginModalMixin = {
           </div>
 
           <form id="login-form" onSubmit={this.handleSubmit}>
-            <input type="text" id="username" valueLink={this.linkState('username')} placeholder="Username" required />
+            <input type="text" id="email" valueLink={this.linkState('email')} placeholder="Email" required />
             <input type="password" id="password" valueLink={this.linkState('password')} placeholder="Password" required />
             {this.renderError()}
             <input type="submit" className="btn block" value="Login" disabled={this.state.submitDisabled ? 'true' : ''} />

@@ -18,7 +18,6 @@ var RegisterPage = React.createClass({
 
   getInitialState: function() {
     return {
-      username: '',
       email: '',
       firstName: '',
       lastName: '',
@@ -39,7 +38,7 @@ var RegisterPage = React.createClass({
 
   checkForm: function() {
     var passwordSatisfied = this.state.isFacebookRegister || (this.state.password.length && this.state.password === this.state.confirmPassword);
-    var formIsValid = this.state.username.length && this.state.email.length && this.state.firstName.length && this.state.lastName.length && passwordSatisfied;
+    var formIsValid = this.state.email.length && this.state.firstName.length && this.state.lastName.length && passwordSatisfied;
 
     this.setState({ submitDisabled: !formIsValid });
   },
@@ -84,7 +83,6 @@ var RegisterPage = React.createClass({
 
   handleSubmit: function(evt) {
     var user = {
-      username: this.state.username,
       email: this.state.email,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -178,7 +176,6 @@ var RegisterPage = React.createClass({
           </div>
 
           <form id="register-form" onSubmit={this.handleSubmit}>
-            <input type="text" id="username" valueLink={this.linkState('username')} placeholder="Username" required />
             <input type="text" id="email" valueLink={this.linkState('email')} placeholder="Email address" required />
             <input type="text" id="firstName" valueLink={this.linkState('firstName')} placeholder="First Name" required />
             <input type="text" id="lastName" valueLink={this.linkState('lastName')} placeholder="Last Name" required />
