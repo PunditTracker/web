@@ -75,12 +75,8 @@ var PredictPage = React.createClass({
 
     if ( hasSubcategory ) {
       tagsCopy.push(evt.target.value);
+      this.setState({ tags: tagsCopy });
     }
-
-    this.setState({
-      subcategory: hasSubcategory ? evt.target.value : null,
-      tags: tagsCopy
-    });
   },
 
   addTag: function(tag) {
