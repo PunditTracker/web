@@ -10,19 +10,26 @@ var CurrentTrackStore = Reflux.createStore({
   init: function() {
     this.user = null;
 
+    this.listenTo(UserActions.set, this.setUser);
     this.listenTo(UserActions.check, this.checkLoginStatus);
     this.listenTo(UserActions.login, this.loginUser);
     this.listenTo(UserActions.facebookLogin, this.doFacebookLogin);
     this.listenTo(UserActions.logout, this.logoutUser);
   },
 
+  setUser: function(user, cb) {
+    cb = cb || function() {};
+
+    this.user = user;
+    cb(null, this.user);
+    this.trigger(null, this.user);
+  },
+
   checkLoginStatus: function(cb) {
     cb = cb || function() {};
 
     AuthAPI.check().then(function(user) {
-      this.user = user;
-      cb(null, this.user);
-      this.trigger(null, this.user);
+      this.setUser(user, cb);
     }.bind(this)).catch(function(err) {
       cb(err);
       this.trigger(err);
@@ -36,9 +43,7 @@ var CurrentTrackStore = Reflux.createStore({
     console.log('login user');
 
     AuthAPI.login(user).then(function(loggedInUser) {
-      this.user = loggedInUser;
-      cb(null, this.user);
-      this.trigger(null, this.user);
+      this.setUser(loggedInUser, cb);
     }.bind(this)).catch(function(err) {
       cb(err);
       this.trigger(err);
@@ -51,9 +56,7 @@ var CurrentTrackStore = Reflux.createStore({
     console.log('facebook login user');
 
     AuthAPI.facebookLogin(user).then(function(loggedInUser) {
-      this.user = loggedInUser;
-      cb(null, this.user);
-      this.trigger(null, this.user);
+      this.setUser(loggedInUser, cb);
     }.bind(this)).catch(function(err) {
       cb(err);
       this.trigger(err);
@@ -67,9 +70,7 @@ var CurrentTrackStore = Reflux.createStore({
 
     AuthAPI.logout(this.user);
 
-    this.user = null;
-    cb(null, this.user);
-    this.trigger(null, this.user);
+    this.setUser(null, cb);
   }
 
 });
