@@ -116,7 +116,10 @@ var RegisterPage = React.createClass({
 
     if ( !this.state.isFacebookRegister ) {
       element = (
-        <FileInput id="image-url" accept="image/x-png, image/gif, image/jpeg" processFile={this.updateImage} />
+        <FileInput id="image-url"
+                   className="nudge-half--bottom"
+                   accept="image/x-png, image/gif, image/jpeg"
+                   processFile={this.updateImage} />
       );
     }
 
@@ -128,7 +131,12 @@ var RegisterPage = React.createClass({
 
     if ( !this.state.isFacebookRegister ) {
       element = (
-        <input type="password" id="password" valueLink={this.linkState('password')} placeholder="Password" required />
+        <input type="password"
+               id="password"
+               className="nudge-half--bottom"
+               valueLink={this.linkState('password')}
+               placeholder="Password"
+               required />
       );
     }
 
@@ -140,7 +148,12 @@ var RegisterPage = React.createClass({
 
     if ( !this.state.isFacebookRegister ) {
       element = (
-        <input type="password" id="confirm-password" valueLink={this.linkState('confirmPassword')} placeholder="Confirm" required />
+        <input type="password"
+               id="confirm-password"
+               className="nudge-half--bottom"
+               valueLink={this.linkState('confirmPassword')}
+               placeholder="Confirm"
+               required />
       );
     }
 
@@ -152,7 +165,7 @@ var RegisterPage = React.createClass({
 
     if ( this.state.error ) {
       element = (
-        <div className="error-container">
+        <div className="error-container text-center nudge-half--bottom">
           {this.state.error}
         </div>
       );
@@ -167,7 +180,7 @@ var RegisterPage = React.createClass({
 
         <DocumentTitle title="Register" />
 
-        <div className="container">
+        <div className="container slim">
           <div className="fb-register-container">
             <a className="btn fb text-center" onClick={this.fbLogin}>
               <i className="fa fa-facebook" /> Register with Facebook
@@ -176,9 +189,24 @@ var RegisterPage = React.createClass({
           </div>
 
           <form id="register-form" onSubmit={this.handleSubmit}>
-            <input type="text" id="email" valueLink={this.linkState('email')} placeholder="Email address" required />
-            <input type="text" id="firstName" valueLink={this.linkState('firstName')} placeholder="First Name" required />
-            <input type="text" id="lastName" valueLink={this.linkState('lastName')} placeholder="Last Name" required />
+            <input type="text"
+                   className="nudge-half--bottom"
+                   id="email"
+                   valueLink={this.linkState('email')}
+                   placeholder="Email address"
+                   required />
+            <input type="text"
+                   className="nudge-half--bottom"
+                   id="firstName"
+                   valueLink={this.linkState('firstName')}
+                   placeholder="First Name"
+                   required />
+            <input type="text"
+                   className="nudge-half--bottom"
+                   id="lastName"
+                   valueLink={this.linkState('lastName')}
+                   placeholder="Last Name"
+                   required />
             {this.renderImageInput()}
             {this.renderPasswordInput()}
             {this.renderConfirmInput()}

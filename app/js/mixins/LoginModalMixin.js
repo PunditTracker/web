@@ -112,7 +112,7 @@ var LoginModalMixin = {
 
     if ( this.state.error ) {
       element = (
-        <div className="error-container">
+        <div className="error-container text-center nudge-half--bottom">
           {this.state.error}
         </div>
       );
@@ -134,10 +134,23 @@ var LoginModalMixin = {
           </div>
 
           <form id="login-form" onSubmit={this.handleSubmit}>
-            <input type="text" id="email" valueLink={this.linkState('email')} placeholder="Email" required />
-            <input type="password" id="password" valueLink={this.linkState('password')} placeholder="Password" required />
+            <input type="text"
+                   id="email"
+                   className="nudge-half--bottom"
+                   valueLink={this.linkState('email')}
+                   placeholder="Email"
+                   required />
+            <input type="password"
+                   id="password"
+                   className="nudge-half--bottom"
+                   valueLink={this.linkState('password')}
+                   placeholder="Password"
+                   required />
             {this.renderError()}
-            <input type="submit" className="btn block" value="Login" disabled={this.state.submitDisabled ? 'true' : ''} />
+            <input type="submit"
+                   className="btn block"
+                   value="Login"
+                   disabled={this.state.submitDisabled ? 'true' : ''} />
           </form>
 
           <div>

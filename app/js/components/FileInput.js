@@ -9,6 +9,7 @@ var FileInput = React.createClass({
 
   propTypes: {
     processFile: React.PropTypes.func.isRequired,
+    className: React.PropTypes.string,
     id: React.PropTypes.string,
     accept: React.PropTypes.string
   },
@@ -30,7 +31,7 @@ var FileInput = React.createClass({
 
   render: function() {
     return (
-      <input type="file" id={this.props.id} accept={this.props.accept} onChange={this.onFileSelect} />
+      <input type="file" id={this.props.id} className={this.props.className} accept={this.props.accept} onChange={this.onFileSelect} />
     );
   }
 

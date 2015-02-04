@@ -19,8 +19,8 @@ $dark-grey: #111;
 
 // spacing
 $grid-max-width: 1140px;
-$full-space: 40px;
-$half-space: 20px;
+$full-space: 2rem;
+$half-space: $full-space/2;
 
 // sizing
 $content-width: 65rem;
