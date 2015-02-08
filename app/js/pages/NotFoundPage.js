@@ -15,7 +15,9 @@ var NotFoundPage = React.createClass({
 
         <DocumentTitle title="Not Found" />
 
-        Page Not Found
+        <div className="container slim">
+          <h2 className="text-center nudge-half--bottom flush--top">404: Page Not Found</h2>
+        </div>
 
       </section>
     );

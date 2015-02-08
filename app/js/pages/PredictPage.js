@@ -3,19 +3,20 @@
  */
 'use strict';
 
-var React         = require('react/addons');
-var _             = require('lodash');
-var cx            = React.addons.classSet;
-var Link          = React.createFactory(require('react-router').Link);
+var React                   = require('react/addons');
+var _                       = require('lodash');
+var cx                      = React.addons.classSet;
+var Link                    = React.createFactory(require('react-router').Link);
 
-var PredictionAPI = require('../utils/PredictionAPI');
-var DocumentTitle = require('../components/DocumentTitle');
-var User          = require('../components/User');
-var TagInput      = require('../components/TagInput');
+var PredictionAPI           = require('../utils/PredictionAPI');
+var AuthenticatedRouteMixin = require('../mixins/AuthenticatedRouteMixin');
+var DocumentTitle           = require('../components/DocumentTitle');
+var User                    = require('../components/User');
+var TagInput                = require('../components/TagInput');
 
 var PredictPage = React.createClass({
 
-  mixins: [React.addons.LinkedStateMixin],
+  mixins: [AuthenticatedRouteMixin, React.addons.LinkedStateMixin],
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired
