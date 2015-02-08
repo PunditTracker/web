@@ -36,12 +36,35 @@ var PredictionCard = React.createClass({
     };
   },
 
+  mapVoteToInt: function(vote) {
+    var returnInt;
+
+    switch (vote) {
+      case 'No Way':
+        returnInt = 0;
+        break;
+      case 'Unlikely':
+        returnInt = 1;
+        break;
+      case 'Likely':
+        returnInt = 2;
+        break;
+      case 'Definitely':
+        returnInt = 3;
+        break;
+      default:
+        returnInt = 0;
+    }
+
+    return returnInt;
+  },
+
   doVote: function(vote) {
     if ( _.isEmpty(this.props.currentUser) ) {
       this.toggleLoginModal();
     } else if ( vote.toLowerCase() !== this.state.userVote ) {
       this.setState({ userVote: vote });
-      PredictionAPI.doVote(this.props.prediction, vote);
+      PredictionAPI.doVote(this.props.prediction, this.mapVoteToInt(vote));
     }
   },
 

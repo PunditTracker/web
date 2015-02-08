@@ -12,8 +12,8 @@ var PredictionAPI = {
     return APIUtils.doPost('prediction/add', prediction);
   },
 
-  doVote: function(prediction, vote) {
-    return APIUtils.doPost('predictio/vote/' + prediction.id, vote);
+  doVote: function(prediction, voteInt) {
+    return APIUtils.doPost('prediction/vote/' + prediction.id + '/' + voteInt);
   }
 
 };
