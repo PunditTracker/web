@@ -5,7 +5,7 @@ var cdnizer = require('gulp-cdnizer');
 
 gulp.task('cdnizer', function() {
 
-  var cdnBase = 'https://assets.foretellr.com/app/';
+  var cdnBase = 'https://assets.foretellr.com/web/';
 
   gulp.src('./build/css/**/*.css')
   .pipe(cdnizer({

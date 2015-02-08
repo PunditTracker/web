@@ -21,7 +21,7 @@ gulp.task('deploy', ['cdnizer'], function() {
   // Assets
   return gulp.src(config.buildDir + '**/*.{json,js,css,eot,svg,ttf,woff,otf,png,jpg,jpeg}')
   .pipe(rename(function(path) {
-    path.dirname = 'app/' + path.dirname;
+    path.dirname = 'web/' + path.dirname;
   }))
   .pipe(awspublish.gzip())
   .pipe(publisher.publish(headers))
