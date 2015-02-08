@@ -109,7 +109,7 @@ var RegisterPage = React.createClass({
     var deferred = when.defer();
 
     if ( this.state.image ) {
-      APIUtils.uploadImage('putprofpic', this.state.image).then(function() {
+      APIUtils.uploadFile('putprofpic', this.state.image).then(function() {
         deferred.resolve(user);
       }).catch(function(err) {
         console.log('error uploading user image:', err);

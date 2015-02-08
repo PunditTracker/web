@@ -76,11 +76,11 @@ var APIUtils = {
     return deferred.promise;
   },
 
-  uploadImage: function(path, image) {
+  uploadFile: function(path, file) {
     var deferred = when.defer();
 
     request.post(this.root + path)
-    .attach('image', image)
+    .attach('file', file)
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
