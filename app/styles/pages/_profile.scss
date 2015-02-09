@@ -28,16 +28,13 @@ section.profile {
 
     .stats {
       background-color: $ultra-light-grey;
+      border-top: 1px solid $very-light-grey;
 
       h6 {
         margin: 0 0 0.5rem;
       }
       h4 {
         margin: 0;
-      }
-
-      &:not(:last-child) {
-        border-bottom: 1px solid $very-light-grey;
       }
 
       & > div[class^="pure-u-"] {

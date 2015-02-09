@@ -95,6 +95,31 @@ var ProfilePage = React.createClass({
     return element;
   },
 
+  renderSecondRowStats: function() {
+    var element = null;
+
+    if ( false ) {
+      element = (
+        <div className="pure-g stats">
+          <div className="pure-u-1-3">
+            <h6>Hit Rate</h6>
+            <h4>{this.calculateHitRate()}%</h4>
+          </div>
+          <div className="pure-u-1-3">
+            <h6>Yield</h6>
+            <h4>$0.84</h4>
+          </div>
+          <div className="pure-u-1-3">
+            <h6>Coolness</h6>
+            <h4>Max</h4>
+          </div>
+        </div>
+      );
+    }
+
+    return element;
+  },
+
   render: function() {
     return (
       <section className="content no-hero profile">
@@ -125,20 +150,7 @@ var ProfilePage = React.createClass({
                     <h4>{this.state.profile.predictionGraded - this.state.profile.predictionCorrect}</h4>
                   </div>
                 </div>
-                <div className="pure-g stats">
-                  <div className="pure-u-1-3">
-                    <h6>Hit Rate</h6>
-                    <h4>{this.calculateHitRate()}%</h4>
-                  </div>
-                  <div className="pure-u-1-3">
-                    <h6>Yield</h6>
-                    <h4>$0.84</h4>
-                  </div>
-                  <div className="pure-u-1-3">
-                    <h6>Coolness</h6>
-                    <h4>Max</h4>
-                  </div>
-                </div>
+                {this.renderSecondRowStats()}
                 <div className="pure-g stats">
                   <div className="pure-u-1-1 since">
                     <h6>Predicting Since</h6>
