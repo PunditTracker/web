@@ -19,7 +19,7 @@ var HomePageAPI = {
       getUrl += ('/' + category);
     }
 
-    getUrl += '?limit=24'; // Need exactly 24 predictions for current home page orientation
+    getUrl += '?limit=27'; // Need exactly 27 predictions for current home page orientation
 
     return APIUtils.doGet(getUrl);
   },

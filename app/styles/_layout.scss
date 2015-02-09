@@ -1,3 +1,13 @@
+.grid-sizer { width: 33.3333%; }
+.masonry-item {
+  width: 100%;
+
+  &.w-1-3 { width: 33.3333%; }
+  &.w-2-3 { width: 66.6666%; }
+  &.w-1-2 { width: 50%; }
+}
+
+
 .full-width { width: 100% !important; }
 .full-height { height: 100% !important; }
 .inherit-height { height: inherit; }

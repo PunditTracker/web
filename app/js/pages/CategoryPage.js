@@ -11,6 +11,7 @@ var Navigation           = React.createFactory(require('react-router').Navigatio
 var GlobalActions        = require('../actions/GlobalActions');
 var ViewingCategoryStore = require('../stores/ViewingCategoryStore');
 var DocumentTitle        = require('../components/DocumentTitle');
+var MasonryContainer     = require('../components/MasonryContainer');
 var PredictionCard       = require('../components/PredictionCard');
 
 var CategoryPage = React.createClass({
@@ -70,7 +71,7 @@ var CategoryPage = React.createClass({
         <DocumentTitle title={this.state.title} />
 
         <div className="pure-g card-grid">
-          <div className="pure-u-1 full-width-outer">
+          <div className="pure-u-1 full-width-outer flush--bottom">
             <div className="prediction-set-card" style={featuredStyles}>
               <div className="background"><div className="scrim" /></div>
               <h3 className="question">Featured {this.state.title} Predictions</h3>
@@ -81,42 +82,35 @@ var CategoryPage = React.createClass({
           </div>
         </div>
 
-        <div className="pure-g card-grid">
-          <div className="pure-u-1-3">
+        <MasonryContainer className="card-grid">
+          <div className="masonry-item w-1-3">
             <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[0]} />
           </div>
-          <div className="pure-u-1-3">
+          <div className="masonry-item w-1-3">
             <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[1]} />
           </div>
-          <div className="pure-u-1-3">
+          <div className="masonry-item w-1-3">
             <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[2]} />
           </div>
-        </div>
-
-        <div className="pure-g card-grid">
-          <div className="pure-u-1-3">
-            <div className="pure-u-1">
-              <PredictionCard className="tall-3-2" currentUser={this.props.currentUser} prediction={this.state.predictions[3]} />
-            </div>
+          <div className="masonry-item w-1-3">
+            <PredictionCard className="tall-3-2" currentUser={this.props.currentUser} prediction={this.state.predictions[3]} />
           </div>
-          <div className="pure-u-2-3">
-            <div className="pure-g card-grid">
-              <div className="pure-u-1-2">
-                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[4]} />
-              </div>
-              <div className="pure-u-1-2">
-                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[5]} />
-              </div>
-            </div>
-            <div className="pure-g card-grid">
-              <div className="pure-u-1">
-                <PredictionCard className="wide-2" currentUser={this.props.currentUser} prediction={this.state.predictions[6]} />
-              </div>
-            </div>
-            <div className="pure-g card-grid">
-            </div>
+          <div className="masonry-item w-2-3">
+            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[4]} />
           </div>
-        </div>
+          <div className="masonry-item w-2-3">
+            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[5]} />
+          </div>
+          <div className="masonry-item w-1-3">
+            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[6]} />
+          </div>
+          <div className="masonry-item w-1-3">
+            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[7]} />
+          </div>
+          <div className="masonry-item w-1-3">
+            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[8]} />
+          </div>
+        </MasonryContainer>
 
       </section>
     );

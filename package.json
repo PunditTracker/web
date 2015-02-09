@@ -44,7 +44,8 @@
     "gulp-awspublish": "0.0.24",
     "gulp-cdnizer": "^1.1.1",
     "email-validator": "^1.0.1",
-    "xml2js": "^0.4.4"
+    "xml2js": "^0.4.4",
+    "react-masonry-mixin": "git://github.com/jakemmarsh/react-masonry-mixin.git#master"
   },
   "devDependencies": {
     "supervisor": "^0.6.0"

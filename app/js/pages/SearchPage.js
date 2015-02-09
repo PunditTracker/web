@@ -3,13 +3,15 @@
  */
 'use strict';
 
-var React         = require('react/addons');
-var Reflux        = require('reflux');
-var Navigation    = require('react-router').Navigation;
+var React            = require('react/addons');
+var Reflux           = require('reflux');
+var _                = require('lodash');
+var Navigation       = require('react-router').Navigation;
 
-var DocumentTitle = require('../components/DocumentTitle');
-var GlobalActions = require('../actions/GlobalActions');
-var SearchStore   = require('../stores/SearchStore');
+var DocumentTitle    = require('../components/DocumentTitle');
+var MasonryContainer = require('../components/MasonryContainer');
+var GlobalActions    = require('../actions/GlobalActions');
+var SearchStore      = require('../stores/SearchStore');
 
 var SearchPage = React.createClass({
 
@@ -78,6 +80,20 @@ var SearchPage = React.createClass({
     }
   },
 
+  renderResults: function() {
+    var elements = null;
+
+    if ( this.state.results && this.state.results.length ) {
+      elements = _.map(this.state.results, function(result, index) {
+        return (
+          <div key={index} />
+        );
+      });
+    }
+
+    return elements;
+  },
+
   render: function() {
     return (
       <section className="content no-hero search">
@@ -90,8 +106,11 @@ var SearchPage = React.createClass({
                  placeholder="Type to search..."
                  valueLink={this.linkState('query')}
                  onKeyPress={this.handleKeyPress} />
-          <br />
-          Search for: {this.props.query.q.replace(/(\+)|(%20)/gi, ' ')}
+          <h4 className="flush--top nudge-half--bottom">Results for: {this.props.query.q.replace(/(\+)|(%20)/gi, ' ')}</h4>
+          <MasonryContainer className="card-grid">
+            {this.renderResults()}
+          </MasonryContainer>
+
         </div>
 
       </section>
