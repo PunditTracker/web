@@ -37,7 +37,7 @@ var FixedSidebar = React.createClass({
   setStyling: function() {
     var $sidebar = $(this.getDOMNode());
     var $inner = $('.inner');
-    var $wrapper = $('.container');
+    var $wrapper = $sidebar.parent();
     var $header = $('header');
     var navbarAndMargin = parseFloat($('.content').css('padding-top'));
     var bottomOfHeader = $header.offset().top + navbarAndMargin;

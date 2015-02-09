@@ -6,10 +6,12 @@ section.profile {
       background-color: $white;
       margin-bottom: 0;
 
-    img {
-      width: 100%;
-      margin: 0;
+    .profile-image {
       display: block;
+      width: 100%;
+      padding-bottom: 100%; // make image square since padding is relative to container width
+      margin: 0;
+      @include background-cover(center);
     }
 
     .text {

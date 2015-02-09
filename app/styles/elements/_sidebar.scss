@@ -12,6 +12,8 @@
 
 .content-with-sidebar {
   width: 66.666666%;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 
   &.right { float: right; }
   &.left { float: left; }

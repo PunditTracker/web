@@ -32,6 +32,10 @@ var ProfilePage = React.createClass({
   getInitialState: function() {
     return {
       profile: {
+        firstName: '',
+        lastName: '',
+        predictionGraded: 0,
+        predictionCorrect: 0,
         predictions: []
       },
       error: null
@@ -43,7 +47,8 @@ var ProfilePage = React.createClass({
       this.setState({ error: err });
     } else {
       profile = profile || {};
-      profile.predictions = [];
+      profile.predictions = profile.predictions || [];
+      console.log('profile:', profile);
       this.setState({ profile: profile, error: null });
     }
   },
@@ -57,7 +62,17 @@ var ProfilePage = React.createClass({
     }
   },
 
+  calculateHitRate: function() {
+    var percentage = parseFloat(this.state.profile.predictionCorrect)/parseFloat(this.state.profile.predictionGraded || 1);
+
+    return percentage.toFixed(2);
+  },
+
   render: function() {
+    var imageStyles = {
+      'backgroundImage': this.state.profile.avatarURL ? 'url(' + this.state.profile.avatarURL + ')' : null
+    };
+
     return (
       <section className="content no-hero profile">
 
@@ -67,7 +82,7 @@ var ProfilePage = React.createClass({
           <FixedSidebar className="left">
             <div className="inner">
               <div className="user-info">
-                <img src={this.state.profile.avatarUrl} />
+                <div className="profile-image" style={imageStyles} />
                 <div className="text dark">
                   <h1 className="h3">{this.state.profile.firstName + ' ' + this.state.profile.lastName}</h1>
                   <h5>{this.state.profile.affiliation}</h5>
@@ -78,21 +93,21 @@ var ProfilePage = React.createClass({
                 <div className="pure-g stats">
                   <div className="pure-u-1-3">
                     <h6>Predictions</h6>
-                    <h4>{this.state.profile.predictionGraded}</h4>
+                    <h4>{this.state.profile.predictionGraded || 0}</h4>
                   </div>
                   <div className="pure-u-1-3">
                     <h6>Correct</h6>
-                    <h4>{this.state.profile.predictionCorrect}</h4>
+                    <h4>{this.state.profile.predictionCorrect || 0}</h4>
                   </div>
                   <div className="pure-u-1-3">
                     <h6>Wrong</h6>
-                    <h4>{this.state.profile.predictionGraded - this.state.predictionCorrect}</h4>
+                    <h4>{this.state.profile.predictionGraded - this.state.profile.predictionCorrect}</h4>
                   </div>
                 </div>
                 <div className="pure-g stats">
                   <div className="pure-u-1-3">
                     <h6>Hit Rate</h6>
-                    <h4>66.66%</h4>
+                    <h4>{this.calculateHitRate()}%</h4>
                   </div>
                   <div className="pure-u-1-3">
                     <h6>Yield</h6>
