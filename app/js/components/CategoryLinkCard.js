@@ -3,8 +3,10 @@
  */
 'use strict';
 
-var React = require('react/addons');
-var Link  = React.createFactory(require('react-router').Link);
+var React    = require('react/addons');
+var Link     = React.createFactory(require('react-router').Link);
+
+var APIUtils = require('../utils/APIUtils');
 
 var CategoryLinkCard = React.createClass({
 
@@ -24,7 +26,7 @@ var CategoryLinkCard = React.createClass({
         <div className="scrim"></div>
         <h2>The best {this.props.category.toLowerCase()} predictions.</h2>
         <Link to="Category" params={{ category: this.props.category.toLowerCase() }}>
-          <h2>{this.props.category[0].toUpperCase() + this.props.category.slice(1)} Hub <i className="fa fa-long-arrow-right "></i></h2>
+          <h2>{APIUtils.titleCase(this.props.category)} Hub <i className="fa fa-long-arrow-right "></i></h2>
         </Link>
       </div>
     );

@@ -8,6 +8,7 @@ var _               = require('lodash');
 var Link            = React.createFactory(require('react-router').Link);
 var Navigation      = require('react-router').Navigation;
 
+var APIUtils        = require('../utils/APIUtils');
 var LoginModalMixin = require('../mixins/LoginModalMixin');
 var UserActions     = require('../actions/UserActions');
 var ListLink        = require('./ListLink');
@@ -17,12 +18,14 @@ var Header = React.createClass({
   mixins: [React.addons.LinkedStateMixin, Navigation, LoginModalMixin],
 
   propTypes: {
-    currentUser: React.PropTypes.object.isRequired
+    currentUser: React.PropTypes.object.isRequired,
+    categories: React.PropTypes.array.isRequired
   },
 
   getDefaultProps: function() {
     return {
-      currentUser: {}
+      currentUser: {},
+      categories: []
     };
   },
 
@@ -46,6 +49,22 @@ var Header = React.createClass({
     this.setState({ query: '' }, function() {
       this.refs.searchInput.getDOMNode().blur();
     }.bind(this));
+  },
+
+  renderCategoryLinks: function() {
+    var elements = null;
+
+    if ( this.props.categories && this.props.categories.length ) {
+      elements = _.map(this.props.categories, function(category, index) {
+        return (
+          <ListLink to="Category" params={{ category: category.name.toLowerCase() }} key={index}>
+            {APIUtils.titleCase(category.name)}
+          </ListLink>
+        );
+      });
+    }
+
+    return elements;
   },
 
   renderButton: function() {
@@ -93,11 +112,7 @@ var Header = React.createClass({
                 </div>
               </Link>
               <ul className="categories">
-                <ListLink to="Category" params={{ category: 'finance' }}>Finance</ListLink>
-                <ListLink to="Category" params={{ category: 'politics' }}>Politics</ListLink>
-                <ListLink to="Category" params={{ category: 'sports' }}>Sports</ListLink>
-                <ListLink to="Category" params={{ category: 'tech' }}>Tech</ListLink>
-                <ListLink to="Category" params={{ category: 'media' }}>Media</ListLink>
+                {this.renderCategoryLinks()}
                 <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
               </ul>
               {this.renderLink()}

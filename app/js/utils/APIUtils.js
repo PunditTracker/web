@@ -12,6 +12,10 @@ var APIUtils = {
 
   root: 'http://pundittracker-dev.elasticbeanstalk.com/v1/',
 
+  titleCase: function(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  },
+
   doGet: function(path) {
     var deferred = when.defer();
 

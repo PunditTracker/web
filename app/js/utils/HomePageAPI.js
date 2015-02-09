@@ -8,6 +8,10 @@ var APIUtils = require('./APIUtils');
 
 var HomePageAPI = {
 
+  getCategories: function() {
+    return APIUtils.doGet('category');
+  },
+
   getHeroPrediction: function() {
     return APIUtils.doGet('homepage/hero');
   },

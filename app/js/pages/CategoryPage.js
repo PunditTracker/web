@@ -8,6 +8,7 @@ var Reflux               = require('reflux');
 var _                    = require('lodash');
 var Navigation           = React.createFactory(require('react-router').Navigation);
 
+var APIUtils             = require('../utils/APIUtils');
 var GlobalActions        = require('../actions/GlobalActions');
 var ViewingCategoryStore = require('../stores/ViewingCategoryStore');
 var DocumentTitle        = require('../components/DocumentTitle');
@@ -20,7 +21,7 @@ var CategoryPage = React.createClass({
 
   getInitialState: function() {
     return {
-      title: this.props.params.category.trim().charAt(0).toUpperCase() + this.props.params.category.trim().slice(1),
+      title: APIUtils.titleCase(this.props.params.category),
       predictions: [],
       error: null
     };
@@ -38,6 +39,7 @@ var CategoryPage = React.createClass({
     if ( !this.props.params.category ) {
       this.transitionTo('Home');
     } else if ( this.props.params.category !== nextProps.params.category ) {
+      this.setState({ title: APIUtils.titleCase(nextProps.params.category) });
       GlobalActions.loadCategory(nextProps.params.category, this._onPredictionsChange);
       this.listenTo(ViewingCategoryStore, this._onPredictionsChange);
     }

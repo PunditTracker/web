@@ -8,6 +8,7 @@ var _                       = require('lodash');
 var cx                      = React.addons.classSet;
 var Link                    = React.createFactory(require('react-router').Link);
 
+var APIUtils                = require('../utils/APIUtils');
 var PredictionAPI           = require('../utils/PredictionAPI');
 var AuthenticatedRouteMixin = require('../mixins/AuthenticatedRouteMixin');
 var DocumentTitle           = require('../components/DocumentTitle');
@@ -16,10 +17,11 @@ var TagInput                = require('../components/TagInput');
 
 var PredictPage = React.createClass({
 
-  mixins: [AuthenticatedRouteMixin, React.addons.LinkedStateMixin],
+  mixins: [React.addons.LinkedStateMixin],
 
   propTypes: {
-    currentUser: React.PropTypes.object.isRequired
+    currentUser: React.PropTypes.object.isRequired,
+    categories: React.PropTypes.array.isRequired
   },
 
   statics: {
@@ -29,7 +31,8 @@ var PredictPage = React.createClass({
 
   getDefaultProps: function() {
     return {
-      currentUser: {}
+      currentUser: {},
+      categories: []
     };
   },
 
@@ -53,6 +56,12 @@ var PredictPage = React.createClass({
     if ( !_.isEqual(this.state, prevState) ) {
       this.setState({ submitDisabled: !this.state.prediction || !this.state.category });
     }
+  },
+
+  getCategoryId: function(categoryName) {
+    return _.find(this.props.categories, function(category) {
+      return category.name.toUpperCase() === categoryName.toUpperCase();
+    }).id;
   },
 
   setJoiner: function(joiner, evt) {
@@ -98,7 +107,7 @@ var PredictPage = React.createClass({
   handleSubmit: function(evt) {
     var prediction = {
       title: this.state.prediction.trim().charAt(0).toUpperCase() + this.state.prediction.trim().slice(1), // capitalize first letter
-      category: this.state.category,
+      category: this.getCategoryId(this.state.category),
       tags: []
     };
 
@@ -112,7 +121,7 @@ var PredictPage = React.createClass({
       prediction.tags = prediction.tags.concat(this.state.tags);
     }
 
-    if ( this.state.deadline ) {
+    if ( this.state.doesExpire && this.state.deadline ) {
       prediction.deadline = (new Date(this.state.deadline)).toISOString();
     }
 
@@ -132,6 +141,20 @@ var PredictPage = React.createClass({
     }.bind(this)).catch(function(err) {
       this.setState({ error: err });
     }.bind(this));
+  },
+
+  renderCategoryOptions: function() {
+    var elements = null;
+
+    if ( this.props.categories && this.props.categories.length ) {
+      elements = _.map(this.props.categories, function(category, index) {
+        return (
+          <option key={index}>{APIUtils.titleCase(category.name)}</option>
+        );
+      });
+    }
+
+    return elements;
   },
 
   renderSubcategoryDropdown: function() {
@@ -268,11 +291,7 @@ var PredictPage = React.createClass({
             <fieldset>
               <select name="category" onChange={this.setCategory}>
                 <option>Select a Category...</option>
-                <option>Finance</option>
-                <option>Politics</option>
-                <option>Sports</option>
-                <option>Tech</option>
-                <option>Media</option>
+                {this.renderCategoryOptions()}
               </select>
               {this.renderSubcategoryDropdown()}
               </fieldset>
