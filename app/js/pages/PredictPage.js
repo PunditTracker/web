@@ -105,7 +105,6 @@ var PredictPage = React.createClass({
     evt.preventDefault();
 
     if ( this.state.subcategory ) {
-      prediction.subcat = this.state.subcategory;
       prediction.tags.push(this.state.subcategory);
     }
 
