@@ -10,7 +10,7 @@ var normalizeResponse = function(response) {
 
 var APIUtils = {
 
-  root: 'http://pundittracker-f3xcx-env.elasticbeanstalk.com/v1/',
+  root: 'http://pundittracker-dev.elasticbeanstalk.com/v1/',
 
   doGet: function(path) {
     var deferred = when.defer();
