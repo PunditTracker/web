@@ -11,6 +11,7 @@ var Navigation          = require('react-router').Navigation;
 var GlobalActions       = require('../actions/GlobalActions');
 var ViewingProfileStore = require('../stores/ViewingProfileStore');
 var DocumentTitle       = require('../components/DocumentTitle');
+var MasonryContainer    = require('../components/MasonryContainer');
 var FixedSidebar        = require('../components/FixedSidebar');
 var UserGrade           = require('../components/UserGrade');
 var PredictionCard      = require('../components/PredictionCard');
@@ -68,11 +69,33 @@ var ProfilePage = React.createClass({
     return percentage.toFixed(2);
   },
 
-  render: function() {
-    var imageStyles = {
-      'backgroundImage': this.state.profile.avatarURL ? 'url(' + this.state.profile.avatarURL + ')' : null
-    };
+  renderProfileImage: function() {
+    var element;
 
+    if ( this.state.profile.avatarURL ) {
+      element = (
+        <div className="profile-image" style={{ 'backgroundImage': 'url(' + this.state.profile.avatarURL + ')' }} />
+      );
+    }
+
+    return element;
+  },
+
+  renderBio: function() {
+    var element = null;
+
+    if ( this.state.profile.bio && this.state.profile.bio.length ) {
+      element = (
+        <div className="text">
+          <p>{this.state.profile.bio}</p>
+        </div>
+      );
+    }
+
+    return element;
+  },
+
+  render: function() {
     return (
       <section className="content no-hero profile">
 
@@ -82,14 +105,12 @@ var ProfilePage = React.createClass({
           <FixedSidebar className="left">
             <div className="inner">
               <div className="user-info">
-                <div className="profile-image" style={imageStyles} />
+                {this.renderProfileImage()}
                 <div className="text dark">
-                  <h1 className="h3">{this.state.profile.firstName + ' ' + this.state.profile.lastName}</h1>
-                  <h5>{this.state.profile.affiliation}</h5>
+                  <h3>{this.state.profile.firstName + ' ' + this.state.profile.lastName}</h3>
+                  <h5 className="flush">{this.state.profile.affiliation}</h5>
                 </div>
-                <div className="text">
-                  <p>{this.state.profile.bio}</p>
-                </div>
+                {this.renderBio()}
                 <div className="pure-g stats">
                   <div className="pure-u-1-3">
                     <h6>Predictions</h6>
@@ -130,62 +151,58 @@ var ProfilePage = React.createClass({
           </FixedSidebar>
 
           <div className="content-with-sidebar right">
-            <div className="pure-g card-grid">
-              <div className="pure-u-1-2">
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[0]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.profile.predictions[1]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[2]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[3]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[4]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[5]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[6]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[7]} /></div>
-                </div>
+            <MasonryContainer className="card-grid" columnWidth="50%">
+              <div className="masonry-item w-1-2">
+                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[0]} />
               </div>
-              <div className="pure-u-1-2">
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[8]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[9]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[10]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[11]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[12]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.profile.predictions[13]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[14]} /></div>
-                </div>
-                <div className="pure-g card-grid">
-                  <div className="pure-u-1"><PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[15]} /></div>
-                </div>
+              <div className="masonry-item w-1-2">
+                <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.profile.predictions[1]} />
               </div>
+              <div className="masonry-item w-1-2">
+                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[2]} />
+              </div>
+              <div className="masonry-item w-1-2">
+                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[3]} />
+              </div>
+                <div className="masonry-item w-1-2">
+                <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[4]} />
+              </div>
+              <div className="masonry-item w-1-2">
+                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[5]} />
+              </div>
+              <div className="masonry-item w-1-2">
+                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[6]} />
+              </div>
+              <div className="masonry-item w-1-2">
+                <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[7]} />
+              </div>
+              <div className="masonry-item w-1-2">
+                <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[8]} />
+              </div>
+                <div className="masonry-item w-1-2">
+                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[9]} />
+                </div>
+                <div className="masonry-item w-1-2">
+                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[10]} />
+                </div>
+                <div className="masonry-item w-1-2">
+                  <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[11]} />
+                </div>
+                <div className="masonry-item w-1-2">
+                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[12]} />
+                </div>
+                <div className="masonry-item w-1-2">
+                  <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.profile.predictions[13]} />
+                </div>
+                <div className="masonry-item w-1-2">
+                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[14]} />
+                </div>
+                <div className="masonry-item w-1-2">
+                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[15]} />
+                </div>
+              </MasonryContainer>
             </div>
           </div>
-        </div>
 
       </section>
     );

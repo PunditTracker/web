@@ -21,10 +21,6 @@ body {
   width: 100%;
   overflow-x: hidden;
 
-  & > .card-grid {
-    width: 95%;
-  }
-
   &.no-hero {
     padding-top: ($header-height + 2rem);
   }

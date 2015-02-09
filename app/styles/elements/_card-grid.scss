@@ -1,11 +1,14 @@
 .card-grid {
 
   max-width: $content-width;
-  margin: 0 auto;
-  margin-bottom: $card-grid-padding;
+  margin: 0 auto $card-grid-padding;
 
-  & > * {
+  & > *:not(.grid-sizer):not(.gutter-sizer) {
     padding: 0 ($card-grid-padding / 2) $card-grid-padding;
   }
 
+}
+
+.content > .card-grid {
+  width: 95%;
 }

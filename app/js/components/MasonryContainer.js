@@ -15,7 +15,8 @@ var PlaylistList = React.createClass({
   })],
 
   propTypes: {
-    className: React.PropTypes.string
+    className: React.PropTypes.string,
+    columnWidth: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -25,10 +26,14 @@ var PlaylistList = React.createClass({
   },
 
   render: function() {
+    var sizerStyles = {
+      'width': this.props.columnWidth || null
+    };
+
     return (
       <div className={this.props.className} ref="masonryContainer">
 
-        <div className="grid-sizer" />
+        <div className="grid-sizer" style={sizerStyles} />
 
         {this.props.children}
 
