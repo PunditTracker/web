@@ -35,8 +35,37 @@ var PredictionCard = React.createClass({
 
   getInitialState: function() {
     return {
-      userVote: null
+      userVote: this.props.prediction.curUserVote === -1 ? null : this.mapIntToVote(this.props.prediction.curUserVote)
     };
+  },
+
+  componentDidUpdate: function(prevProps) {
+    if ( !_.isEqual(prevProps.prediction, this.props.prediction) ) {
+      this.setState(this.getInitialState());
+    }
+  },
+
+  mapIntToVote: function(voteInt) {
+    var returnVote;
+
+    switch (voteInt) {
+      case 0:
+        returnVote = 'No Way';
+        break;
+      case 1:
+        returnVote = 'Unlikely';
+        break;
+      case 2:
+        returnVote = 'Likely';
+        break;
+      case 3:
+        returnVote = 'Definitely';
+        break;
+      default:
+        returnVote = null;
+    }
+
+    return returnVote;
   },
 
   mapVoteToInt: function(vote) {

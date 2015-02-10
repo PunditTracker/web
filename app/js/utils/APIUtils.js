@@ -1,19 +1,22 @@
 'use strict';
 
-var request           = require('superagent');
-var when              = require('when');
-var humps             = require('humps');
-var camelizeKeys      = humps.camelizeKeys;
-var normalizeResponse = function(response) {
-  return camelizeKeys(response.body);
-};
+var request      = require('superagent');
+var when         = require('when');
+var humps        = require('humps');
+var camelizeKeys = humps.camelizeKeys;
 
 var APIUtils = {
 
   root: 'http://pundittracker-dev.elasticbeanstalk.com/v1/',
 
   titleCase: function(str) {
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return str.replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  },
+
+  normalizeResponse: function(response) {
+    return camelizeKeys(response.body);
   },
 
   doGet: function(path) {
@@ -23,11 +26,11 @@ var APIUtils = {
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(normalizeResponse(res));
+        deferred.reject(this.normalizeResponse(res));
       } else {
-        deferred.resolve(normalizeResponse(res));
+        deferred.resolve(this.normalizeResponse(res));
       }
-    });
+    }.bind(this));
 
     return deferred.promise;
   },
@@ -39,11 +42,11 @@ var APIUtils = {
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(normalizeResponse(res));
+        deferred.reject(this.normalizeResponse(res));
       } else {
-        deferred.resolve(normalizeResponse(res));
+        deferred.resolve(this.normalizeResponse(res));
       }
-    });
+    }.bind(this));
 
     return deferred.promise;
   },
@@ -55,11 +58,11 @@ var APIUtils = {
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(normalizeResponse(res));
+        deferred.reject(this.normalizeResponse(res));
       } else {
-        deferred.resolve(normalizeResponse(res));
+        deferred.resolve(this.normalizeResponse(res));
       }
-    });
+    }.bind(this));
 
     return deferred.promise;
   },
@@ -71,11 +74,11 @@ var APIUtils = {
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(normalizeResponse(res));
+        deferred.reject(this.normalizeResponse(res));
       } else {
-        deferred.resolve(normalizeResponse(res));
+        deferred.resolve(this.normalizeResponse(res));
       }
-    });
+    }.bind(this));
 
     return deferred.promise;
   },
@@ -88,11 +91,11 @@ var APIUtils = {
     .withCredentials()
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(normalizeResponse(res));
+        deferred.reject(this.normalizeResponse(res));
       } else {
-        deferred.resolve(normalizeResponse(res));
+        deferred.resolve(this.normalizeResponse(res));
       }
-    });
+    }.bind(this));
 
     return deferred.promise;
   }
