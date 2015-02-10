@@ -9,8 +9,8 @@ var AuthenticatedRouteMixin = {
 
   mixins: [Navigation],
 
-  componentDidMount: function() {
-    if ( _.isEmpty(CurrentUserStore.user) && this.isMounted() ) {
+  componentDidUpdate: function() {
+    if ( _.isEmpty(CurrentUserStore.user) && CurrentUserStore.hasBeenChecked && this.isMounted() ) {
       this.replaceWith('Home');
     }
   }

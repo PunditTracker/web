@@ -9,6 +9,7 @@ var CurrentTrackStore = Reflux.createStore({
 
   init: function() {
     this.user = null;
+    this.hasBeenChecked = false;
 
     this.listenTo(UserActions.set, this.setUser);
     this.listenTo(UserActions.check, this.checkLoginStatus);
@@ -29,8 +30,10 @@ var CurrentTrackStore = Reflux.createStore({
     cb = cb || function() {};
 
     AuthAPI.check().then(function(user) {
+      this.hasBeenChecked = true;
       this.setUser(user, cb);
     }.bind(this)).catch(function(err) {
+      this.hasBeenChecked = true;
       cb(err);
       this.trigger(err);
       console.log('error checking login status:', err);
