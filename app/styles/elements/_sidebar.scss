@@ -8,6 +8,12 @@
 
   &.left { left: 0; }
   &.right { right: 0; }
+  &.relative {
+    position: relative;
+
+    &.left { float: left; }
+    &.right { float: right; }
+  }
 }
 
 .content-with-sidebar {
