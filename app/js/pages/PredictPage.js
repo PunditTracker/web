@@ -17,7 +17,7 @@ var TagInput                = require('../components/TagInput');
 
 var PredictPage = React.createClass({
 
-  mixins: [React.addons.LinkedStateMixin],
+  mixins: [AuthenticatedRouteMixin, React.addons.LinkedStateMixin],
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired,
@@ -107,7 +107,7 @@ var PredictPage = React.createClass({
   handleSubmit: function(evt) {
     var prediction = {
       title: this.state.prediction.trim().charAt(0).toUpperCase() + this.state.prediction.trim().slice(1), // capitalize first letter
-      category: this.getCategoryId(this.state.category),
+      categoryId: this.getCategoryId(this.state.category),
       tags: []
     };
 
