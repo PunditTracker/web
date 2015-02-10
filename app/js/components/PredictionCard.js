@@ -7,8 +7,11 @@ var React           = require('react/addons');
 var _               = require('lodash');
 var cx              = React.addons.classSet;
 
+var APIUtils        = require('../utils/APIUtils');
 var PredictionAPI   = require('../utils/PredictionAPI');
+var CategoriesStore = require('../stores/CategoriesStore');
 var LoginModalMixin = require('../mixins/LoginModalMixin');
+var ListLink        = require('./ListLink');
 var User            = require('./User');
 
 var PredictionCard = React.createClass({
@@ -59,6 +62,21 @@ var PredictionCard = React.createClass({
     return returnInt;
   },
 
+  getCategoryName: function() {
+    var categoryIdentifier = this.props.prediction.category || this.props.prediction.categoryId;
+    var name;
+
+    if ( categoryIdentifier % 1 === 0 ) { // is an integer, needs to be mapped to name
+      name = _.find(CategoriesStore.categories, function(category) {
+        return category.id === categoryIdentifier;
+      }).name;
+    } else {
+      name = categoryIdentifier;
+    }
+
+    return APIUtils.titleCase(name || '');
+  },
+
   doVote: function(vote) {
     if ( _.isEmpty(this.props.currentUser) ) {
       this.toggleLoginModal();
@@ -74,7 +92,7 @@ var PredictionCard = React.createClass({
     if ( !_.isEmpty(this.props.prediction.tags) ) {
       element = _.map(this.props.prediction.tags, function(tag, index) {
         return (
-          <li key={index}>{tag}</li>
+          <ListLink to="Search" query={{ q: tag }} key={index}>{tag}</ListLink>
         );
       });
     }
@@ -104,7 +122,11 @@ var PredictionCard = React.createClass({
 
         <div className="tags">
           <ul className="inner">
-            <li className="category">{this.props.prediction.subcat ? this.props.prediction.subcat.name : ''}</li>
+            <ListLink to="Category"
+                      params={{ category: this.getCategoryName().toLowerCase() }}
+                      className="category">
+              {this.getCategoryName()}
+            </ListLink>
             {this.renderTags()}
           </ul>
         </div>

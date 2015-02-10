@@ -11,9 +11,13 @@ var ListLink = React.createClass({
 
   mixins: [State],
 
+  propTypes: {
+    className: React.PropTypes.string
+  },
+
   render: function() {
     var isActive = this.isActive(this.props.to, this.props.params, this.props.query);
-    var className = isActive ? 'active' : '';
+    var className = this.props.className + (isActive ? 'active' : '');
     var link = Link(this.props);
 
     return <li className={className}>{link}</li>;
