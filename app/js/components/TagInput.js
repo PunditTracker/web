@@ -18,16 +18,16 @@ var TagInput = React.createClass({
 
   getDefaultProps: function() {
     return {
-      addTag: function() {}
+      addTag: function() {},
+      limit: 3
     };
   },
 
   componentDidMount: function() {
     var $input = $(this.getDOMNode());
-    var isCopy = false;
 
     $input.tokenfield({
-      limit: this.props.limit || 3
+      limit: this.props.limit
     });
 
     // Prevent default tags
@@ -35,12 +35,10 @@ var TagInput = React.createClass({
       _.each(this.getTokens(), function(token) {
         if ( token === evt.attrs.value ) {
           evt.preventDefault();
-          isCopy = true;
+        } else {
+          this.props.addTag(evt.attrs.value);
         }
-      });
-      if ( !isCopy ) {
-        this.props.addTag(evt.attrs.value);
-      }
+      }.bind(this));
     }.bind(this));
   },
 

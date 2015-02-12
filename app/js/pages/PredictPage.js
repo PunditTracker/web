@@ -244,7 +244,7 @@ var PredictPage = React.createClass({
             {this.renderCategoryOptions()}
           </select>
           </fieldset>
-          <fieldset>
+          <fieldset className="nudge-half--bottom">
           <TagInput ref="tagInput" placeholder="Add tags (Optional)" addTag={this.addTag} />
         </fieldset>
         <fieldset>
