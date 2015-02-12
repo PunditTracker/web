@@ -7,6 +7,7 @@ var React                   = require('react/addons');
 var _                       = require('lodash');
 var cx                      = React.addons.classSet;
 var Link                    = React.createFactory(require('react-router').Link);
+var Pikaday                 = require('pikaday');
 
 var APIUtils                = require('../utils/APIUtils');
 var PredictionAPI           = require('../utils/PredictionAPI');
@@ -53,6 +54,18 @@ var PredictPage = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    var component = this;
+
+    this.datepicker = new Pikaday({
+      field: component.refs.datepicker.getDOMNode(),
+      format: 'D MMMM YYYY',
+      onSelect: function() {
+        component.setState({ deadline: this.getMoment().toDate() });
+      }
+    });
+  },
+
   componentDidUpdate: function(prevProps, prevState) {
     if ( !_.isEqual(this.state, prevState) ) {
       this.setState({ submitDisabled: !this.state.prediction || !this.state.category });
@@ -92,8 +105,6 @@ var PredictPage = React.createClass({
   },
 
   setDeadline: function(evt) {
-    evt.preventDefault();
-
     this.setState({ deadline: evt.target.value || null });
   },
 
@@ -252,7 +263,7 @@ var PredictPage = React.createClass({
           <label htmlFor="doesnt-expire">Doesn't expire</label>
           <input type="radio" name="does-expire" id="date-exists-2" checked={this.state.doesExpire} onChange={this.toggleDateInput.bind(null, true)} />
           <label htmlFor="does-expire">Expires</label>
-          <input name="date" type="date" className={dateInputClasses} onChange={this.setDeadline} />
+          <input name="date" ref="datepicker" type="text" className={dateInputClasses} onChange={this.setDeadline} />
         </fieldset>
         <input name="login" defaultValue="yes" hidden />
         {this.renderError()}

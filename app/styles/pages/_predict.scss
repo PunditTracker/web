@@ -27,13 +27,14 @@
     width: 1rem;
   }
 
-  input[type="date"] {
-    width: 12rem;
+  input#datepicker,
+  input.date-input {
+    width: 10rem !important;
 
     @include transition(0.2s);
 
     &.hidden {
-      width: 0;
+      width: 0 !important;
       padding: 0;
     }
   }
