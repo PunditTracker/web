@@ -63,14 +63,12 @@ var RegisterPage = React.createClass({
     var component = this; // Seemingly can't bind FB api calls to 'this'
 
     FB.api('/me', { fields: 'email,first_name,last_name,id' }, function(response) {
-      FB.api('/me/picture?width=180&height=180', function(imageResponse) {
-        component.setState({
-          email: response.email,
-          firstName: response.first_name,
-          lastName: response.last_name,
-          avatarUrl: imageResponse.data.url,
-          facebookId: response.id
-        });
+      component.setState({
+        email: response.email,
+        firstName: response.first_name,
+        lastName: response.last_name,
+        avatarUrl: 'https://graph.facebook.com/' + response.id + '/picture?width=400&height=400',
+        facebookId: response.id
       });
     });
   },
