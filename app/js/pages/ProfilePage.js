@@ -168,9 +168,6 @@ var ProfilePage = React.createClass({
                 <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[0]} />
               </div>
               <div className="masonry-item w-1-2">
-                <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.profile.predictions[1]} />
-              </div>
-              <div className="masonry-item w-1-2">
                 <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[2]} />
               </div>
               <div className="masonry-item w-1-2">
@@ -202,9 +199,6 @@ var ProfilePage = React.createClass({
                 </div>
                 <div className="masonry-item w-1-2">
                   <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[12]} />
-                </div>
-                <div className="masonry-item w-1-2">
-                  <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.profile.predictions[13]} />
                 </div>
                 <div className="masonry-item w-1-2">
                   <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[14]} />
