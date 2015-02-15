@@ -8,7 +8,7 @@ var config       = require('../config');
 
 var APIUtils = {
 
-  root: 'http://pundittracker-dev.elasticbeanstalk.com/v1/',
+  root: '//api.foretellr.com/v1/',
 
   titleCase: function(str) {
     return str.replace(/\w\S*/g, function(txt) {
