@@ -39,20 +39,24 @@ var ProfilePage = React.createClass({
         lastName: '',
         predictionGraded: 0,
         predictionCorrect: 0,
-        predictions: []
+        predictions: null
       },
+      loading: true,
       error: null
     };
   },
 
   _onProfileChange: function(err, profile) {
     if ( err ) {
-      this.setState({ error: err });
+      this.setState({ loading: false, error: err });
     } else {
       profile = profile || {};
       profile.predictions = profile.predictions || [];
-      console.log('profile:', profile);
-      this.setState({ profile: profile, error: null });
+      this.setState({
+        loading: false,
+        profile: profile,
+        error: null
+      });
     }
   },
 
@@ -125,22 +129,33 @@ var ProfilePage = React.createClass({
   renderUserPredictions: function() {
     var randomInt;
     var classes;
+    var element = null;
 
-    return _.map(this.state.profile.predictions, function(prediction, index) {
-      randomInt = APIUtils.randomIntFromInterval(1, 3);
+    console.log('render user predictions. is loading:', this.state.loading);
 
-      if ( randomInt === 3 ) {
-        classes = 'tall-3-2';
-      } else {
-        classes = null;
-      }
+    if ( this.state.profile.predictions && this.state.profile.predictions.length ) {
+      element = _.map(this.state.profile.predictions, function(prediction, index) {
+        randomInt = APIUtils.randomIntFromInterval(1, 3);
 
-      return (
-        <div className="masonry-item w-1-2" key={index}>
-          <PredictionCard currentUser={this.props.currentUser} prediction={prediction} className={classes} />
-        </div>
+        if ( randomInt === 3 ) {
+          classes = 'tall-3-2';
+        } else {
+          classes = null;
+        }
+
+        return (
+          <div className="masonry-item w-1-2" key={index}>
+            <PredictionCard currentUser={this.props.currentUser} prediction={prediction} className={classes} />
+          </div>
+        );
+      }.bind(this));
+    } else if ( !this.state.loading ) {
+      element = (
+        <h3 className="text-center">This user has not made any predictions yet.</h3>
       );
-    }.bind(this));
+    }
+
+    return element;
   },
 
   render: function() {
