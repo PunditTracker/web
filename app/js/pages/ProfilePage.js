@@ -185,7 +185,7 @@ var ProfilePage = React.createClass({
             </div>
           </FixedSidebar>
 
-          <div className="content-with-sidebar right">
+          <div className="content-with-sidebar right" style={{ 'minHeight': '610px' }}>
             <MasonryContainer className="card-grid" columnWidth="50%">
               {this.renderUserPredictions()}
             </MasonryContainer>
