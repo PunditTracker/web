@@ -7,6 +7,9 @@ var React     = require('react/addons');
 var cx        = React.addons.classSet;
 var validator = require('email-validator');
 
+var config    = require('../config');
+var APIUtils  = require('../utils/APIUtils');
+
 var MarchMadnessCard = React.createClass({
 
   mixins: [React.addons.LinkedStateMixin],
@@ -18,7 +21,9 @@ var MarchMadnessCard = React.createClass({
   getInitialState: function() {
     return {
       email: '',
-      isValidEmail: false
+      isValidEmail: false,
+      loading: false,
+      subscribed: false
     };
   },
 
@@ -32,16 +37,36 @@ var MarchMadnessCard = React.createClass({
     evt.preventDefault();
 
     if ( this.state.isValidEmail ) {
-      console.log('handle submit:', this.state.email);
+      this.setState({ loading: true });
+      APIUtils.mailchimpSubscribe(config.mailchimp.marchMadnessListId, this.state.email).then(function() {
+        this.setState({ loading: false, subscribed: true, error: null });
+      }.bind(this)).catch(function(err) {
+        this.setState({ loading: false, error: err.message });
+      }.bind(this));
     }
   },
 
-  render: function() {
-    var classes = 'march-madness-card ' + this.props.className;
+  renderInput: function() {
+    var element = null;
     var inputClasses = cx({
       'email': true,
       'with-text': this.state.isValidEmail
     });
+
+    if ( !this.state.subscribed ) {
+      element = (
+        <h4 className="fade-in-up animated">
+          <input className={inputClasses} type="text" placeholder="Email address" valueLink={this.linkState('email')} />
+          <input type="submit" className="button white-inverse" value="Go" />
+        </h4>
+      );
+    }
+
+    return element;
+  },
+
+  render: function() {
+    var classes = 'march-madness-card ' + this.props.className;
 
     return (
       <div className={classes}>
@@ -52,11 +77,8 @@ var MarchMadnessCard = React.createClass({
           <div className="pure-u-1">
             <h2 className="header">Don't miss out on <br />the Madness.</h2>
             <form className="pick" onSubmit={this.handleSubmit}>
-                <h2 className="h1">Sign up for updates.</h2>
-                <h4 className="fade-in-up animated">
-                    <input className={inputClasses} type="text" placeholder="Email address" valueLink={this.linkState('email')} />
-                    <input type="submit" className="button white-inverse" value="Go" />
-                </h4>
+                <h2 className="h1">{this.state.subscribed ? 'You are signed up!' : 'Sign up for updates.'}</h2>
+                {this.renderInput()}
             </form>
           </div>
         </div>

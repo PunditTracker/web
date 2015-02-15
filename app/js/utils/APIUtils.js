@@ -4,6 +4,7 @@ var request      = require('superagent');
 var when         = require('when');
 var humps        = require('humps');
 var camelizeKeys = humps.camelizeKeys;
+var config       = require('../config');
 
 var APIUtils = {
 
@@ -89,6 +90,31 @@ var APIUtils = {
     request.post(this.root + path)
     .attach('file', file)
     .withCredentials()
+    .end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(this.normalizeResponse(res));
+      } else {
+        deferred.resolve(this.normalizeResponse(res));
+      }
+    }.bind(this));
+
+    return deferred.promise;
+  },
+
+  mailchimpSubscribe: function(listId, userEmail) {
+    var deferred = when.defer();
+    var zone = config.mailchimp.key.split('-')[1];
+    var mailchimpRoot = 'https://' + zone + '.api.mailchimp.com/2.0/';
+    var body = {
+      apikey: config.mailchimp.key,
+      id: listId,
+      email: {
+        email: userEmail
+      },
+      double_optin: false
+    };
+
+    request.post(mailchimpRoot + 'lists/subscribe.json', body)
     .end(function(res) {
       if ( !res.ok ) {
         deferred.reject(this.normalizeResponse(res));
