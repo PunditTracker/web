@@ -20,6 +20,7 @@ var SettingsPage       = require('./pages/SettingsPage');
 //var PredictionPage = require('./pages/PredictionPage');
 var AboutPage          = require('./pages/AboutPage');
 var NotFoundPage       = require('./pages/NotFoundPage');
+var OscarsPage         = require('./pages/OscarsPage');
 
 module.exports = (
   <Route handler={App}>
@@ -43,6 +44,8 @@ module.exports = (
     <Route name='Settings' path='/settings' handler={SettingsPage} />
 
     <Route name='About' path='/about' handler ={AboutPage} />
+
+    <Route name='Oscars' path='/oscars' handler={OscarsPage} />
 
     <Route name='Category' path='/:category' handler={CategoryPage} />
 

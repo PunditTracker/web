@@ -7,6 +7,7 @@ var React            = require('react/addons');
 var Reflux           = require('reflux');
 var _                = require('lodash');
 var RouteHandler     = React.createFactory(require('react-router').RouteHandler);
+var State            = require('react-router').State;
 
 var GlobalActions    = require('./actions/GlobalActions');
 var UserActions      = require('./actions/UserActions');
@@ -15,9 +16,11 @@ var CurrentUserStore = require('./stores/CurrentUserStore');
 var Header           = require('./components/Header');
 var Footer           = require('./components/Footer');
 
+var OscarsHeader     = require('./components/Oscars/Header');
+
 var App = React.createClass({
 
-  mixins: [Reflux.ListenerMixin],
+  mixins: [Reflux.ListenerMixin, State],
 
   getInitialState: function() {
     return {
@@ -53,11 +56,27 @@ var App = React.createClass({
     this.listenTo(CurrentUserStore, this._onUserChange);
   },
 
+  renderHeader: function() {
+    var element = null;
+
+    if ( this.isActive('Oscars') ) {
+      element = (
+        <OscarsHeader currentUser={this.state.currentUser} categories={this.state.categories} />
+      );
+    } else {
+      element = (
+        <Header currentUser={this.state.currentUser} categories={this.state.categories} />
+      );
+    }
+
+    return element;
+  },
+
   render: function() {
     return (
       <div>
 
-        <Header currentUser={this.state.currentUser} categories={this.state.categories} />
+        {this.renderHeader()}
 
         <RouteHandler params={this.props.params}
                       query={this.props.query}
