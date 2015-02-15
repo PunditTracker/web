@@ -6,8 +6,10 @@
 var React               = require('react/addons');
 var Reflux              = require('reflux');
 var moment              = require('moment');
+var _                   = require('lodash');
 var Navigation          = require('react-router').Navigation;
 
+var APIUtils            = require('../utils/APIUtils');
 var GlobalActions       = require('../actions/GlobalActions');
 var ViewingProfileStore = require('../stores/ViewingProfileStore');
 var DocumentTitle       = require('../components/DocumentTitle');
@@ -120,6 +122,27 @@ var ProfilePage = React.createClass({
     return element;
   },
 
+  renderUserPredictions: function() {
+    var randomInt;
+    var classes;
+
+    return _.map(this.state.profile.predictions, function(prediction, index) {
+      randomInt = APIUtils.randomIntFromInterval(1, 3);
+
+      if ( randomInt === 3 ) {
+        classes = 'tall-3-2';
+      } else {
+        classes = null;
+      }
+
+      return (
+        <div className="masonry-item w-1-2" key={index}>
+          <PredictionCard currentUser={this.props.currentUser} prediction={prediction} className={classes} />
+        </div>
+      );
+    }.bind(this));
+  },
+
   render: function() {
     return (
       <section className="content no-hero profile">
@@ -164,51 +187,10 @@ var ProfilePage = React.createClass({
 
           <div className="content-with-sidebar right">
             <MasonryContainer className="card-grid" columnWidth="50%">
-              <div className="masonry-item w-1-2">
-                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[0]} />
-              </div>
-              <div className="masonry-item w-1-2">
-                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[2]} />
-              </div>
-              <div className="masonry-item w-1-2">
-                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[3]} />
-              </div>
-                <div className="masonry-item w-1-2">
-                <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[4]} />
-              </div>
-              <div className="masonry-item w-1-2">
-                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[5]} />
-              </div>
-              <div className="masonry-item w-1-2">
-                <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[6]} />
-              </div>
-              <div className="masonry-item w-1-2">
-                <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[7]} />
-              </div>
-              <div className="masonry-item w-1-2">
-                <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[8]} />
-              </div>
-                <div className="masonry-item w-1-2">
-                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[9]} />
-                </div>
-                <div className="masonry-item w-1-2">
-                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[10]} />
-                </div>
-                <div className="masonry-item w-1-2">
-                  <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.profile.predictions[11]} />
-                </div>
-                <div className="masonry-item w-1-2">
-                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[12]} />
-                </div>
-                <div className="masonry-item w-1-2">
-                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[14]} />
-                </div>
-                <div className="masonry-item w-1-2">
-                  <PredictionCard currentUser={this.props.currentUser} prediction={this.state.profile.predictions[15]} />
-                </div>
-              </MasonryContainer>
-            </div>
+              {this.renderUserPredictions()}
+            </MasonryContainer>
           </div>
+        </div>
 
       </section>
     );

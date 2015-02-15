@@ -16,6 +16,10 @@ var APIUtils = {
     });
   },
 
+  randomIntFromInterval: function(min,max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
+  },
+
   normalizeResponse: function(response) {
     return camelizeKeys(response.body);
   },
