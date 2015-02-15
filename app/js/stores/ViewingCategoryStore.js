@@ -3,7 +3,7 @@
 var Reflux        = require('reflux');
 
 var GlobalActions = require('../actions/GlobalActions');
-var CategoryAPI = require('../utils/CategoryAPI');
+var CategoryAPI   = require('../utils/CategoryAPI');
 
 var ViewingCategoryStore = Reflux.createStore({
 
@@ -13,12 +13,12 @@ var ViewingCategoryStore = Reflux.createStore({
     this.listenTo(GlobalActions.loadCategory, this.loadPredictions);
   },
 
-  loadPredictions: function(category, cb) {
+  loadPredictions: function(categoryId, cb) {
     cb = cb || function() {};
 
-    console.log('get predictions for category:', category);
+    console.log('get predictions for category ID:', categoryId);
 
-    CategoryAPI.getPredictions(category).then(function(predictions) {
+    CategoryAPI.getPredictions(categoryId).then(function(predictions) {
       this.predictions = predictions;
       cb(null, this.predictions);
       this.trigger(null, this.predictions);

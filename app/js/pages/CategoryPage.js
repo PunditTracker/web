@@ -19,6 +19,17 @@ var CategoryPage = React.createClass({
 
   mixins: [Reflux.ListenerMixin, Navigation],
 
+  propTypes: {
+    currentUser: React.PropTypes.object,
+    categories: React.PropTypes.array.isRequired
+  },
+
+  getDefaultProps: function() {
+    return {
+      categories: []
+    };
+  },
+
   getInitialState: function() {
     return {
       title: APIUtils.titleCase(this.props.params.category),
@@ -41,7 +52,6 @@ var CategoryPage = React.createClass({
     } else if ( this.props.params.category !== nextProps.params.category ) {
       this.setState({ title: APIUtils.titleCase(nextProps.params.category) });
       GlobalActions.loadCategory(nextProps.params.category, this._onPredictionsChange);
-      this.listenTo(ViewingCategoryStore, this._onPredictionsChange);
     }
   },
 
@@ -58,6 +68,34 @@ var CategoryPage = React.createClass({
     return _.map(this.state.featuredPredictions, function(prediction, index) {
       return (
         <PredictionCard className="pur-u-1-3" prediction={prediction} key={index} />
+      );
+    });
+  },
+
+  renderPredictions: function() {
+    var randomInt;
+    var containerClasses;
+    var cardClasses;
+
+    return _.map(this.state.predictions, function(prediction, index) {
+      randomInt = APIUtils.randomIntFromInterval(1, 4);
+      containerClasses = 'masonry-item ';
+
+      if ( randomInt ===  1 ) {
+        containerClasses += 'w-1-3';
+        cardClasses = 'tall-3-2';
+      } else if ( randomInt === 2 ) {
+        containerClasses += 'w-2-3';
+        cardClasses = null;
+      } else {
+        containerClasses += 'w-1-3';
+        cardClasses = null;
+      }
+
+      return (
+        <div className={containerClasses} key={index}>
+          <PredictionCard className={cardClasses} prediction={prediction} />
+        </div>
       );
     });
   },
@@ -85,33 +123,7 @@ var CategoryPage = React.createClass({
         </div>
 
         <MasonryContainer className="card-grid">
-          <div className="masonry-item w-1-3">
-            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[0]} />
-          </div>
-          <div className="masonry-item w-1-3">
-            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[1]} />
-          </div>
-          <div className="masonry-item w-1-3">
-            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[2]} />
-          </div>
-          <div className="masonry-item w-1-3">
-            <PredictionCard className="tall-3-2" currentUser={this.props.currentUser} prediction={this.state.predictions[3]} />
-          </div>
-          <div className="masonry-item w-2-3">
-            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[4]} />
-          </div>
-          <div className="masonry-item w-2-3">
-            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[5]} />
-          </div>
-          <div className="masonry-item w-1-3">
-            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[6]} />
-          </div>
-          <div className="masonry-item w-1-3">
-            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[7]} />
-          </div>
-          <div className="masonry-item w-1-3">
-            <PredictionCard currentUser={this.props.currentUser} prediction={this.state.predictions[8]} />
-          </div>
+          {this.renderPredictions()}
         </MasonryContainer>
 
       </section>
