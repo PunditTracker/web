@@ -37,6 +37,12 @@ body {
   &.slim {
     max-width: 40rem;
   }
+
+  a {
+    color: $blue;
+
+    &:hover { text-decoration: underline; }
+  }
 }
 
 .full-width-outer {

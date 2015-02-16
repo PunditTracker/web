@@ -34,15 +34,20 @@ var CategoryPage = React.createClass({
     return {
       title: APIUtils.titleCase(this.props.params.category),
       predictions: [],
-      error: null
+      error: null,
+      loading: true
     };
   },
 
   _onPredictionsChange: function(err, predictions) {
     if ( err ) {
-      this.setState({ error: err });
+      this.setState({ loading: false, error: err });
     } else {
-      this.setState({ predictions: predictions || [], error: null });
+      this.setState({
+        loading: false,
+        predictions: predictions || [],
+        error: null
+      });
     }
   },
 
@@ -50,7 +55,11 @@ var CategoryPage = React.createClass({
     if ( !this.props.params.category ) {
       this.transitionTo('Home');
     } else if ( this.props.params.category !== nextProps.params.category ) {
-      this.setState({ title: APIUtils.titleCase(nextProps.params.category) });
+      this.setState({
+        title: APIUtils.titleCase(nextProps.params.category),
+        predictions: [],
+        loading: true
+      });
       GlobalActions.loadCategory(nextProps.params.category, this._onPredictionsChange);
     }
   },

@@ -62,6 +62,10 @@
           color: $white;
           border-color: $blue;
           z-index: 550;
+          a {
+            color: $white;
+            &:hover { text-decoration: none; }
+          }
         }
       }
     }

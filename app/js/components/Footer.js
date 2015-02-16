@@ -3,10 +3,30 @@
  */
 'use strict';
 
-var React = require('react/addons');
-var Link  = React.createFactory(require('react-router').Link);
+var React     = require('react/addons');
+var _         = require('lodash');
+var Link      = React.createFactory(require('react-router').Link);
+
+var APIUtils  = require('../utils/APIUtils');
+var ListLink  = require('./ListLink');
 
 var Footer = React.createClass({
+
+  renderCategoryLinks: function() {
+    var elements = null;
+
+    if ( this.props.categories && this.props.categories.length ) {
+      elements = _.map(this.props.categories, function(category, index) {
+        return (
+          <ListLink to="Category" params={{ category: category.name.toLowerCase() }} key={index}>
+            {APIUtils.titleCase(category.name)}
+          </ListLink>
+        );
+      });
+    }
+
+    return elements;
+  },
 
   render: function() {
     return (
@@ -31,11 +51,7 @@ var Footer = React.createClass({
         <div className="pure-g card-grid">
           <div className="pure-u-1-3">
             <ul>
-              <li><Link to="Category" params={{ category: 'finance' }}>Finance</Link></li>
-              <li><Link to="Category" params={{ category: 'politics' }}>Politics</Link></li>
-              <li><Link to="Category" params={{ category: 'sports' }}>Sports</Link></li>
-              <li><Link to="Category" params={{ category: 'tech' }}>Tech</Link></li>
-              <li><Link to="Category" params={{ category: 'media' }}>Media</Link></li>
+              {this.renderCategoryLinks()}
             </ul>
           </div>
           <div className="pure-u-1-3">
