@@ -141,7 +141,7 @@ input, textarea {
   }
 }
 
-input:disabled {
+input:disabled, .btn:disabled, .button:disabled {
   background-color: gray;
 }
 

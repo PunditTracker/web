@@ -16,6 +16,7 @@ var DocumentTitle           = require('../components/DocumentTitle');
 var PredictionCard          = require('../components/PredictionCard');
 var User                    = require('../components/User');
 var TagInput                = require('../components/TagInput');
+var Spinner                 = require('../components/Spinner');
 
 var PredictPage = React.createClass({
 
@@ -50,6 +51,7 @@ var PredictPage = React.createClass({
       deadline: null,
       submitDisabled: true,
       createdPrediction: null,
+      loading: false,
       error: null
     };
   },
@@ -134,10 +136,12 @@ var PredictPage = React.createClass({
       prediction.title += '.';
     }
 
+    this.setState({ loading: true });
+
     PredictionAPI.postPrediction(prediction).then(function(createdPrediction) {
-      this.setState({ posted: true, createdPrediction: createdPrediction, error: null });
+      this.setState({ posted: true, loading: false, createdPrediction: createdPrediction, error: null });
     }.bind(this)).catch(function(err) {
-      this.setState({ error: err });
+      this.setState({ loading: false, error: err });
     }.bind(this));
   },
 
@@ -267,7 +271,10 @@ var PredictPage = React.createClass({
         </fieldset>
         <input name="login" defaultValue="yes" hidden />
         {this.renderError()}
-        <input type="submit" className="button" defaultValue="Publish" disabled={this.state.submitDisabled ? 'true' : ''} />
+        <button type="submit" className="btn" disabled={this.state.submitDisabled ? 'true' : ''}>
+          <Spinner loading={this.state.loading} />
+          Publish
+        </button>
       </form>
     );
   },

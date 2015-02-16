@@ -6,4 +6,9 @@
     @include button($facebook-blue, $white, $ultra-light-grey, 1px solid $facebook-blue);
   }
 
+  & > i.fa-spinner {
+    color: $white;
+    margin-right: $half-space;
+  }
+
 }

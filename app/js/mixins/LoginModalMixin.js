@@ -147,10 +147,10 @@ var LoginModalMixin = {
                    placeholder="Password"
                    required />
             {this.renderError()}
-            <input type="submit"
-                   className="btn block"
-                   value="Login"
-                   disabled={this.state.submitDisabled ? 'true' : ''} />
+            <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
+              <Spinner loading={this.state.loading} />
+              Login
+            </button>
           </form>
 
           <div className="nudge-half--bottom">

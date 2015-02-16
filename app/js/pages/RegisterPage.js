@@ -14,6 +14,7 @@ var UserActions   = require('../actions/UserActions');
 var APIUtils      = require('../utils/APIUtils');
 var AuthAPI       = require('../utils/AuthAPI');
 var FileInput     = require('../components/FileInput');
+var Spinner            = require('../components/Spinner');
 
 var RegisterPage = React.createClass({
 
@@ -243,7 +244,10 @@ var RegisterPage = React.createClass({
             {this.renderPasswordInput()}
             {this.renderConfirmInput()}
             {this.renderError()}
-            <input type="submit" value="Register" className="btn block" disabled={this.state.submitDisabled ? 'true' : ''} />
+            <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
+              <Spinner loading={this.state.loading} />
+              Register
+            </button>
           </form>
         </div>
 

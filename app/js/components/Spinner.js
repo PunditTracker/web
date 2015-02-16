@@ -7,10 +7,20 @@ var React = require('react/addons');
 
 var Spinner = React.createClass({
 
+  propTypes: {
+    loading: React.PropTypes.bool.isRequired
+  },
+
   render: function() {
-    return (
-      <div className="spinner" />
-    );
+    var element = null;
+
+    if ( this.props.loading ) {
+      element = (
+        <i className="fa fa-spinner fa-spin" />
+      );
+    }
+
+    return element;
   }
 
 });
