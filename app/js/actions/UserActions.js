@@ -8,6 +8,7 @@ var UserActions = Reflux.createActions([
   'set',
   'login',
   'facebookLogin',
+  'update',
   'logout'
 
 ]);

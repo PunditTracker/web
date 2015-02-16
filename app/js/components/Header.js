@@ -88,11 +88,14 @@ var Header = React.createClass({
 
     if ( _.isEmpty(this.props.currentUser) ) {
       element = (
-        <a className="user-option non-button" onClick={this.toggleLoginModal}>Log in</a>
+        <a className="user-option non-button nudge-half--left" onClick={this.toggleLoginModal}>Log in</a>
       );
     } else {
       element = (
-        <a className="user-option non-button" onClick={UserActions.logout.bind(null, null)}>Log out</a>
+        <div className="user-option non-button">
+          <a className="nudge-half--left" onClick={this.transitionTo.bind(null, 'Settings')}>Settings</a>
+          <a className="nudge-half--left" onClick={UserActions.logout.bind(null, null)}>Log out</a>
+        </div>
       );
     }
 

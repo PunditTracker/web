@@ -1,0 +1,62 @@
+.account-preview-card {
+
+  position: relative;
+  padding: 0;
+
+  background-color: $ultra-light-grey;
+  @include box-shadow;
+
+  .placeholder {
+    color: gray;
+  }
+
+  .profile-image {
+    display: block;
+    width: 100%;
+    padding-bottom: 100%; // make image square since padding is relative to container width
+    margin: 0;
+    @include background-cover(center);
+  }
+
+  .stats {
+    background-color: $white;
+    border-top: 1px solid $very-light-grey;
+
+    h6 {
+      margin: 0 0 0.5rem;
+    }
+    h4 {
+      margin: 0;
+    }
+
+    & > div[class^="pure-u-"] {
+      @include border-box;
+      padding: 0.5rem;
+      text-align: center;
+      &:not(:last-child) {
+        border-right: 1px solid $very-light-grey;
+      }
+    }
+
+    .since {
+      position: relative;
+      padding-right: 5rem !important;
+
+      .grade {
+        width: 4.5rem;
+        padding: 0.5rem;
+        height: 4.5rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        .letter {
+          color: $white;
+          font-size: 1.5rem;
+          font-family: $sans !important;
+          line-height: 3.5rem;
+        }
+      }
+    }
+  }
+
+  }

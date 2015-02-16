@@ -4,6 +4,7 @@ var Reflux      = require('reflux');
 
 var UserActions = require('../actions/UserActions');
 var AuthAPI     = require('../utils/AuthAPI');
+var UserAPI     = require('../utils/UserAPI');
 
 var CurrentTrackStore = Reflux.createStore({
 
@@ -15,6 +16,7 @@ var CurrentTrackStore = Reflux.createStore({
     this.listenTo(UserActions.check, this.checkLoginStatus);
     this.listenTo(UserActions.login, this.loginUser);
     this.listenTo(UserActions.facebookLogin, this.doFacebookLogin);
+    this.listenTo(UserActions.update, this.updateUser);
     this.listenTo(UserActions.logout, this.logoutUser);
   },
 
@@ -63,6 +65,18 @@ var CurrentTrackStore = Reflux.createStore({
     }.bind(this)).catch(function(err) {
       cb(err);
       this.trigger(err);
+    }.bind(this));
+  },
+
+  updateUser: function(updates, cb) {
+    cb = cb || function() {};
+
+    console.log('update user');
+
+    UserAPI.update(updates).then(function(updatedUser) {
+      this.setUser(updatedUser, cb);
+    }.bind(this)).catch(function(err) {
+      cb(err);
     }.bind(this));
   },
 

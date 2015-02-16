@@ -72,6 +72,22 @@ var APIUtils = {
     return deferred.promise;
   },
 
+  doPatch: function(path, body) {
+    var deferred = when.defer();
+
+    request.patch(this.root + path, body)
+    .withCredentials()
+    .end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(this.normalizeResponse(res));
+      } else {
+        deferred.resolve(this.normalizeResponse(res));
+      }
+    }.bind(this));
+
+    return deferred.promise;
+  },
+
   doDelete: function(path) {
     var deferred = when.defer();
 
