@@ -4,22 +4,23 @@
  /* global FB */
 'use strict';
 
-var React              = require('react/addons');
-var when               = require('when');
-var _                  = require('lodash');
-var Navigation         = require('react-router').Navigation;
+var React               = require('react/addons');
+var when                = require('when');
+var _                   = require('lodash');
+var Navigation          = require('react-router').Navigation;
 
-var DocumentTitle      = require('../components/DocumentTitle');
-var UserActions        = require('../actions/UserActions');
-var APIUtils           = require('../utils/APIUtils');
-var AuthAPI            = require('../utils/AuthAPI');
-var FileInput          = require('../components/FileInput');
-var AccountPreviewCard = require('../components/AccountPreviewCard');
-var Spinner            = require('../components/Spinner');
+var LoggedOutRouteMixin = require('../mixins/LoggedOutRouteMixin');
+var DocumentTitle       = require('../components/DocumentTitle');
+var UserActions         = require('../actions/UserActions');
+var APIUtils            = require('../utils/APIUtils');
+var AuthAPI             = require('../utils/AuthAPI');
+var FileInput           = require('../components/FileInput');
+var AccountPreviewCard  = require('../components/AccountPreviewCard');
+var Spinner             = require('../components/Spinner');
 
 var RegisterPage = React.createClass({
 
-  mixins: [React.addons.LinkedStateMixin, Navigation],
+  mixins: [React.addons.LinkedStateMixin, Navigation, LoggedOutRouteMixin],
 
   getInitialState: function() {
     return {
