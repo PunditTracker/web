@@ -11,6 +11,7 @@
     padding: 1rem;
 
     @include background-cover();
+    background-image: url(../images/space_bg.jpg);
 
     & > .title {
       position: absolute;

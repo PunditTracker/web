@@ -157,40 +157,40 @@ var HomePage = React.createClass({
 
           <MasonryContainer className="card-grid">
             <div className="masonry-item w-1-3">
-              <FeaturedUsers />
-            </div>
-            <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[17]} />
+              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.featuredPredictions[17]} />
             </div>
             <div className="masonry-item w-1-3">
               <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[18]} />
             </div>
-            <div className="masonry-item w-2-3">
+            <div className="masonry-item w-1-3">
               <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[19]} />
             </div>
-            <div className="masonry-item w-1-3">
+            <div className="masonry-item w-2-3">
               <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[20]} />
             </div>
             <div className="masonry-item w-1-3">
               <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[21]} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.featuredPredictions[22]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[22]} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[23]} />
+              <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.featuredPredictions[23]} />
             </div>
             <div className="masonry-item w-1-3">
               <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[24]} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.featuredPredictions[25]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[25]} />
+            </div>
+            <div className="masonry-item w-1-3">
+              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.featuredPredictions[26]} />
             </div>
             <div className="masonry-item w-1-3">
               <CategoryLinkCard category="sports" />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[26]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[27]} />
             </div>
           </MasonryContainer>
 
