@@ -22,6 +22,7 @@ var AccountPreviewCard = React.createClass({
         firstName: '',
         lastName: '',
         affiliation: '',
+        score: 0,
         predictionGraded: 0,
         predictionCorrect: 0
       },
@@ -69,7 +70,7 @@ var AccountPreviewCard = React.createClass({
         <div className="pure-g">
           {this.renderUserImage()}
           <div className={nameContainerClasses}>
-            <h2>
+            <h2 className="flush--bottom">
               <span className={firstNameClass}>{this.props.user.firstName || 'First Name'}</span>
               <span> </span>
               <span className={lastNameClass}>{this.props.user.lastName || 'Last Name'}</span>

@@ -36,22 +36,23 @@ var UserGrade = React.createClass({
   },
 
   calculateGrade: function() {
+    var score = this.props.user.score || 0;
     var scoreClass = null;
     var letterGrade = null;
 
-    if ( this.props.user.score <= -7 ) {
+    if ( score <= -7 ) {
       scoreClass = 'red';
       letterGrade = 'F';
-    } else if ( this.props.user.score >= -6 && this.props.user.score <= -3 ) {
+    } else if ( score >= -6 && score <= -3 ) {
       scoreClass = 'yellow-green';
       letterGrade = 'D';
-    } else if ( this.props.user.score >= -2 && this.props.user.score <= 2 ) {
+    } else if ( score >= -2 && score <= 2 ) {
       scoreClass = 'orange';
       letterGrade = 'C';
-    } else if ( this.props.user.score >= 3 && this.props.user.score <= 6 ) {
+    } else if ( score >= 3 && score <= 6 ) {
       scoreClass = 'yellow';
       letterGrade = 'B';
-    } else if ( this.props.user.score >= 7 ) {
+    } else if ( score >= 7 ) {
       scoreClass = 'green';
       letterGrade = 'A';
     }

@@ -18,7 +18,6 @@ var FeaturedUsers            = require('../components/FeaturedUsers');
 var PredictionSet            = require('../components/PredictionSet');
 var FacebookCard             = require('../components/FacebookCard');
 var CategoryLinkCard         = require('../components/CategoryLinkCard');
-var FaceoffCard              = require('../components/FaceoffCard');
 
 var HomePage = React.createClass({
 
