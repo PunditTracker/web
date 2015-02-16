@@ -4,16 +4,17 @@
  /* global FB */
 'use strict';
 
-var React         = require('react/addons');
-var when          = require('when');
-var _             = require('lodash');
-var Navigation    = require('react-router').Navigation;
+var React              = require('react/addons');
+var when               = require('when');
+var _                  = require('lodash');
+var Navigation         = require('react-router').Navigation;
 
-var DocumentTitle = require('../components/DocumentTitle');
-var UserActions   = require('../actions/UserActions');
-var APIUtils      = require('../utils/APIUtils');
-var AuthAPI       = require('../utils/AuthAPI');
-var FileInput     = require('../components/FileInput');
+var DocumentTitle      = require('../components/DocumentTitle');
+var UserActions        = require('../actions/UserActions');
+var APIUtils           = require('../utils/APIUtils');
+var AuthAPI            = require('../utils/AuthAPI');
+var FileInput          = require('../components/FileInput');
+var AccountPreviewCard = require('../components/AccountPreviewCard');
 var Spinner            = require('../components/Spinner');
 
 var RegisterPage = React.createClass({
@@ -30,7 +31,8 @@ var RegisterPage = React.createClass({
       confirmPassword: '',
       error: null,
       isFacebookRegister: false,
-      submitDisabled: true
+      submitDisabled: true,
+      loading: false
     };
   },
 
@@ -139,7 +141,7 @@ var RegisterPage = React.createClass({
         this.transitionTo('Home');
       }.bind(this)).catch(function(err) {
         console.log('error registering:', err);
-        this.setState({ error: err.message || err });
+        this.setState({ loading: false, error: err.message || err });
       }.bind(this));
     }
   },
@@ -193,6 +195,22 @@ var RegisterPage = React.createClass({
     return element;
   },
 
+  renderAccountPreviewCard: function() {
+    var user = {
+      email: this.state.email,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      avatarUrl: this.state.avatarUrl,
+      created: new Date().toISOString(),
+      predictionGraded: 0,
+      predictionCorrect: 0
+    };
+
+    return (
+      <AccountPreviewCard user={user} />
+    );
+  },
+
   renderError: function() {
     var element = null;
 
@@ -209,11 +227,14 @@ var RegisterPage = React.createClass({
 
   render: function() {
     return (
-      <section className="content no-hero register">
+      <section className="content no-hero register full-page-form">
 
         <DocumentTitle title="Register" />
 
         <div className="container slim">
+
+          {this.renderAccountPreviewCard()}
+
           <div className="fb-register-container">
             <a className="btn fb text-center" onClick={this.fbLogin}>
               <i className="fa fa-facebook" /> Register with Facebook
