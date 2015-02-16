@@ -83,7 +83,7 @@ var MarchMadnessCard = React.createClass({
           </div>
         </div>
 
-        <div className="mm-logo"><img src="../images/march-madness.png" /></div>
+        <div className="mm-logo"><img src="../images/march_madness.png" /></div>
 
       </div>
     );
