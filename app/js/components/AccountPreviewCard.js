@@ -21,6 +21,7 @@ var AccountPreviewCard = React.createClass({
       user: {
         firstName: '',
         lastName: '',
+        affiliation: '',
         predictionGraded: 0,
         predictionCorrect: 0
       },
@@ -61,6 +62,7 @@ var AccountPreviewCard = React.createClass({
     });
     var firstNameClass = this.props.user.firstName ? '' : 'placeholder';
     var lastNameClass = this.props.user.lastName ? '' : 'placeholder';
+    var affiliationClass = 'flush ' + (this.props.user.affiliation ? '' : 'placeholder');
 
     return (
       <div className="account-preview-card nudge--bottom">
@@ -72,7 +74,7 @@ var AccountPreviewCard = React.createClass({
               <span> </span>
               <span className={lastNameClass}>{this.props.user.lastName || 'Last Name'}</span>
             </h2>
-            <h4 className="flush">{this.props.user.affiliation}</h4>
+            <h4 className={affiliationClass}>{this.props.user.affiliation || 'Affiliation'}</h4>
           </div>
         </div>
         <div className="pure-g stats">

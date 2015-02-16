@@ -37,6 +37,7 @@ var SettingsPage = React.createClass({
   getInitialState: function() {
     return {
       email: this.props.currentUser.email || '',
+      affiliation: this.props.currentUser.affiliation || '',
       firstName: this.props.currentUser.firstName || '',
       lastName: this.props.currentUser.lastName || '',
       newPassword: '',
@@ -119,6 +120,7 @@ var SettingsPage = React.createClass({
 
   updateUser: function(avatarUrl) {
     var deferred = when.defer();
+    var hasNewAffiliation = this.state.affiliation && this.state.affiliation !== this.props.currentUser.affiliation;
     var hasNewFirstName = this.state.firstName && this.state.firstName !== this.props.currentUser.firstName;
     var hasNewLastName = this.state.lastName && this.state.lastName !== this.props.currentUser.lastName;
     var hasNewPassword = this.state.newPassword && this.state.newPassword.length;
@@ -127,6 +129,10 @@ var SettingsPage = React.createClass({
 
     if ( avatarUrl ) {
       updates.avatarUrl = avatarUrl;
+    }
+
+    if ( hasNewAffiliation ) {
+      updates.affiliation = this.state.affiliation;
     }
 
     if ( hasNewFirstName ) {
@@ -188,6 +194,24 @@ var SettingsPage = React.createClass({
     return element;
   },
 
+  renderAccountPreviewCard: function() {
+    var user = {
+      email: this.state.email,
+      affiliation: this.state.affiliation,
+      firstName: this.state.firstName || this.props.currentUser.firstName,
+      lastName: this.state.lastName || this.props.currentUser.lastName,
+      avatarUrl: this.props.currentUser.avatarUrl || null,
+      created: new Date().toISOString(),
+      predictionGraded: 0,
+      predictionCorrect: 0,
+      score: 0
+    };
+
+    return (
+      <AccountPreviewCard user={user} />
+    );
+  },
+
   render: function() {
     return (
       <section className="content no-hero settings full-page-form">
@@ -195,9 +219,9 @@ var SettingsPage = React.createClass({
         <DocumentTitle title="Account Settings" />
 
         <div className="container slim">
-          <AccountPreviewCard user={this.props.currentUser} />
+          {this.renderAccountPreviewCard()}
           <form id="settings-form" onSubmit={this.handleSubmit}>
-            <input type="text"
+            <input type="email"
                    className="nudge-half--bottom"
                    id="email"
                    valueLink={this.linkState('email')}
@@ -213,16 +237,21 @@ var SettingsPage = React.createClass({
                    id="lastName"
                    valueLink={this.linkState('lastName')}
                    placeholder="Last Name" />
+            <input type="text"
+                   className="nudge-half--bottom"
+                   id="affiliation"
+                   valueLink={this.linkState('affiliation')}
+                   placeholder="Affiliation" />
             <FileInput id="image-url"
                        className="nudge-half--bottom"
                        accept="image/x-png, image/gif, image/jpeg"
                        processFile={this.updateImage} />
-            <input type="text"
+            <input type="password"
                    className="nudge-half--bottom"
                    id="lastName"
                    valueLink={this.linkState('newPassword')}
                    placeholder="New Password" />
-            <input type="text"
+            <input type="password"
                    className="nudge-half--bottom"
                    id="lastName"
                    valueLink={this.linkState('confirmNewPassword')}

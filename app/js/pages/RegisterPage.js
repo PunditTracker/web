@@ -24,6 +24,7 @@ var RegisterPage = React.createClass({
   getInitialState: function() {
     return {
       email: '',
+      affiliation: '',
       firstName: '',
       lastName: '',
       avatarUrl: '',
@@ -92,6 +93,7 @@ var RegisterPage = React.createClass({
       email: this.state.email,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
+      affiliation: this.state.affiliation,
       avatarURL: this.state.avatarUrl,
       facebookId: this.state.facebookId,
       password: this.state.password
@@ -198,6 +200,7 @@ var RegisterPage = React.createClass({
   renderAccountPreviewCard: function() {
     var user = {
       email: this.state.email,
+      affiliation: this.state.affiliation,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       avatarUrl: this.state.avatarUrl,
@@ -261,6 +264,11 @@ var RegisterPage = React.createClass({
                    valueLink={this.linkState('lastName')}
                    placeholder="Last Name"
                    required />
+            <input type="text"
+                   className="nudge-half--bottom"
+                   id="affiliation"
+                   valueLink={this.linkState('affiliation')}
+                   placeholder="Affiliation" />
             {this.renderImageInput()}
             {this.renderPasswordInput()}
             {this.renderConfirmInput()}
