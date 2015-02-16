@@ -78,9 +78,9 @@ var ProfilePage = React.createClass({
   renderProfileImage: function() {
     var element;
 
-    if ( this.state.profile.avatarURL ) {
+    if ( this.state.profile.avatarUrl ) {
       element = (
-        <div className="profile-image" style={{ 'backgroundImage': 'url(' + this.state.profile.avatarURL + ')' }} />
+        <div className="profile-image" style={{ 'backgroundImage': 'url(' + this.state.profile.avatarUrl + ')' }} />
       );
     }
 

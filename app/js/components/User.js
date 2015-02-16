@@ -25,7 +25,7 @@ var User = React.createClass({
   render: function() {
     var factory = React.createFactory(this.props.tag);
     var photoStyles = {
-      'backgroundImage': this.props.user.avatarURL ? 'url(' + this.props.user.avatarURL + ')' : null
+      'backgroundImage': this.props.user.avatarUrl ? 'url(' + this.props.user.avatarUrl + ')' : null
     };
 
     return factory({ className: 'user' },
