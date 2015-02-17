@@ -24,3 +24,5 @@ bower_components
 
 # Build files
 build
+
+.elasticbeanstalk/
