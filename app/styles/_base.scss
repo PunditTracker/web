@@ -38,7 +38,7 @@ body {
     max-width: 40rem;
   }
 
-  a {
+  p > a {
     color: $blue;
 
     &:hover { text-decoration: underline; }
