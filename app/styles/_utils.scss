@@ -39,22 +39,26 @@
   @include custom-text-shadow(2px 2px 3px $black);
 }
 
+@mixin transition-with-delay-and-props($speed, $delay, $props) {
+  -webkit-transition: $speed $delay ease $props;
+     -moz-transition: $speed $delay ease $props;
+       -o-transition: $speed $delay ease $props;
+          transition: $speed $delay ease $props;
+}
+
 @mixin transition-with-delay($speed, $delay) {
-  -webkit-transition: $speed $delay ease all;
-     -moz-transition: $speed $delay ease all;
-       -o-transition: $speed $delay ease all;
-          transition: $speed $delay ease all;
+  @include transition-with-delay-and-props($speed, $delay, all);
 }
 
 @mixin transition($speed) {
   @include transition-with-delay($speed, 0);
 }
 
-@mixin transform-transition($transition-time, $method) {
-  -webkit-transition: -webkit-transform $transition-time $method;
-  -moz-transition:    -moz-transform $transition-time $method;
-  -o-transition:      -o-transform $transition-time $method;
-  transition:         transform $transition-time $method;
+@mixin transform($rule) {
+  transform: $rule;
+  -webkit-transform: $rule;
+  -moz-transform: $rule;
+  -o-transform: $rule;
 }
 
 @mixin background-size($size) {
@@ -221,6 +225,32 @@ $o6: 1;
   &:hover {
     color: $hov;
   }
+}
+
+$fn : cubic-bezier(.98,.44,.25,.78);
+@mixin animateWithBezier {
+  -webkit-animation-timing-function: $fn;
+  -moz-animation-timing-function: $fn;
+  -ms-animation-timing-function: $fn;
+  -o-animation-timing-function: $fn;
+  animation-timing-function: $fn;
+}
+
+@mixin wrap {
+  white-space: wrap;      /* CSS3 */
+  white-space: -moz-wrap; /* Firefox */
+  white-space: -wrap;     /* Opera <7 */
+  white-space: -o-wrap;   /* Opera 7 */
+  word-wrap: break-word;      /* IE */
+}
+
+.textDimensionCalculation {
+  position: absolute;
+  visibility: hidden;
+  height: auto;
+  width: auto;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 %clearfix {

@@ -2,6 +2,7 @@
 
 var request      = require('superagent');
 var when         = require('when');
+var _            = require('lodash');
 var humps        = require('humps');
 var camelizeKeys = humps.camelizeKeys;
 
@@ -17,6 +18,18 @@ var APIUtils = {
 
   randomIntFromInterval: function(min,max) {
     return Math.floor(Math.random()*(max-min+1)+min);
+  },
+
+  getCategoryId: function(categoryName, categories) {
+    var id = null;
+
+    if ( categories && categories.length ) {
+      id = _.find(categories, function(category) {
+        return category.name.toUpperCase() === categoryName.toUpperCase();
+      }).id;
+    }
+
+    return id;
   },
 
   normalizeResponse: function(response) {

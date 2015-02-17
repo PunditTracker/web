@@ -1,0 +1,428 @@
+$oscar-gold: rgba(215, 200, 109, 0.7);
+$oscar-gold-bright: rgba(215, 200, 109, 1);
+
+.go-to-submit {
+  display: none !important;
+  @include transition(0.4s);
+  position: fixed;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  color: $black !important;
+  border: 0 !important;
+  background-color: $oscar-gold-bright !important;
+
+  &.show {
+    display: block !important;
+  }
+}
+
+.completion {
+  position: absolute;
+  left: 2rem;
+  top: 1rem;
+  list-style: none;
+  background-color: $very-light-grey;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  margin: 0;
+  margin-top: -0.5rem;
+  max-width: 16.666666%;
+  z-index: 400;
+  @include transition-with-delay-and-props(0.2s, 0s, background-color);
+  @include transition-with-delay-and-props(0.2s, 0s, box-shadow);
+
+
+  &.fixed {
+    top: ($header-height + 1.5rem);
+    left: 1rem;
+    position: fixed;
+  }
+
+  li {
+    padding: 0.125rem 0.5rem;
+    position: relative;
+    letter-spacing: 0;
+    width: 100%;
+
+    .dot {
+      position: absolute;
+      top: 0.375rem;
+      left: 0.5rem;
+      height: 0.5rem;
+      width: 0.5rem;
+      margin-left: 0.25rem;
+      display: inline;
+      background-color: #888;
+      display: block;
+    }
+    i {
+      @include transition(0.2s);
+      display: none;
+      position: absolute;
+      top: 0.125rem;
+      left: 0.5rem;
+      color: $green;
+    }
+
+    &.done {
+      padding: 0.125rem 0.5rem;
+      .dot {
+        display: none;
+      }
+      i {
+        display: block;
+      }
+    }
+  }
+
+
+  h6 {
+    margin: 0 0 0 1.5rem;
+    min-height: 1rem;
+    color: rgba(0,0,0,0);
+    @include transition(0.2s);
+  }
+  &:hover {
+    background-color: $white;
+    @include box-shadow;
+    h6 {
+      color: $black;
+    }
+    .dot {
+      background-color: $black;
+    }
+  }
+}
+
+.content.oscars {
+  padding-top: ($header-height + 1.5rem);
+
+  & > .card-grid {
+    position: relative;
+  }
+}
+
+.oscars-header {
+  @include box-shadow;
+  padding: 1rem;
+  background-color: $oscar-gold-bright;
+  h2 {
+    margin: 0;
+  }
+  h4 {
+    margin: 0 0 -0.5rem;
+  }
+}
+
+.sidebar.oscars {
+  width: 33.333333%;
+  display: inline-block;
+}
+.oscars-categories {
+  position: relative;
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0.5rem 0;
+  @extend %clearfix;
+
+  .oscars-category {
+    display: block;
+    position: relative;
+    @extend %clearfix;
+
+    &.submitted {
+      .nominees {
+        .nominee {
+          &.selected { background-color: $light-grey; }
+          &:hover { cursor: default; }
+        }
+      }
+    }
+  }
+}
+
+.nominees {
+  list-style: none;
+  margin: 0 0 10rem;
+  padding: 0.5rem 0;
+  @include box-shadow;
+  background-color: $white;
+
+
+  .nominee {
+    padding: 0.5rem 1rem;
+    h4 {
+      margin: 0;
+      @include border-box;
+      vertical-align: middle;
+
+      .boxed {
+        border: 2px solid $black;
+        font-size: 0.75rem;
+        margin-top: -0.5rem;
+        vertical-align: middle;
+        margin-right: 0.5rem;
+        color: rgba(0,0,0,0);
+      }
+    }
+    &:hover {
+      background-color: $ultra-light-grey;
+      cursor: pointer;
+    }
+    &.selected {
+      color: $black;
+      background-color: $oscar-gold;
+      h4 .boxed {
+        color: $black;
+      }
+    }
+  }
+}
+
+#submit {
+
+  height: 20rem;
+  position: relative;
+  z-index: 425;
+  width: 100%;
+  margin-top: -1.5rem;
+  position: relative;
+  min-height: 100vh;
+  .background {
+    background-color: $black;
+    @include border-box;
+    padding-top: $header-height;
+    @extend .background-image;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url('../images/oscars_submit.jpg');
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: block;
+
+    .scrim {
+      @include scrim(0);
+      position: relative;
+      z-index: 450;
+    }
+  }
+  .button {
+    @include button(rgba(0,0,0,0.2), $white, $black, $border: 2px solid $white);
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    z-index: 475;
+    padding: 1rem 2rem;
+    @include transform(translate(-50%, -50%));
+    @include text-shadow;
+    font-size: 2.25rem;
+    font-family: $serif;
+
+    cursor: pointer;
+    &:hover {
+      color: $black;
+      background-color: $white;
+      text-shadow: none;
+    }
+  }
+}
+
+footer.oscars {
+  margin: 0;
+  position: relative;
+  z-index: 425;
+  background-color: $black;
+}
+
+.oscars-details {
+  left: 0.75rem;
+  right: 0.75rem;
+  width: 100%;
+  float: right;
+  display: block;
+  top: 0;
+  @extend %clearfix;
+  @include border-box;
+
+  & > .inner {
+    @include box-shadow;
+    background-color: $white;
+    &.hidden {
+      display: none;
+    }
+  }
+
+  &.fixed {
+    position: fixed;
+    top: $header-height + 1.5rem;
+    float: auto;
+    margin-left: 0.75rem;
+
+    &.bottom {
+      position: absolute !important;
+      top: auto !important;
+      bottom: 0 !important;
+      right: 0 !important;
+      margin-right: 0;
+      padding-left: 0.75rem;
+      width: 33.333333% !important;
+      left: auto !important;
+    }
+  }
+
+  .background {
+    height: 15rem;
+    position: relative;
+    @include background-cover(bottom);
+    .scrim {
+      @include scrim(0);
+    }
+    h3 {
+      position: absolute;
+      bottom: 1rem;
+      z-index: 400;
+      margin-bottom: 0;
+      color: $white;
+      @include text-shadow;
+    }
+  }
+  .text {
+    padding: 1rem;
+    margin: 0;
+  }
+}
+
+.oscars-cover {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .logo {
+    @include animatedWithDelay(2s, 0.5s);
+    @extend .fade-in-up;
+    position: absolute;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../images/oscars_cover.jpg');
+    left: (0.5 * $header-height);
+    right: (0.5 * $header-height);
+    top: (1.5 * $header-height);
+    bottom: (1.5 * $header-height);
+    opacity: 0;
+  }
+
+  .down {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    @include transform(translateX(-50%));
+    color: $oscar-gold;
+    @include animatedWithDelay(1.5s, 1.5s);
+      @extend .fade-in;
+      text-align: center;
+      font-size: 0.8rem;
+    &:hover {
+      color: $oscar-gold-bright;
+    }
+  }
+}
+
+.hero.short {
+  height: 25rem;
+  padding: 0;
+}
+
+.hero.oscars {
+    width: 100%;
+    min-height: 100vh;
+
+    &.shrink {
+      @include animated(2s);
+      @include animateWithBezier;
+      animation-name: shrink;
+      -webkit-animation-name: shrink;
+    }
+}
+
+
+header {
+  &.oscars {
+    z-index: 499;
+    background-color: $black;
+    @include animatedWithDelay(1.5s, 1.5s);
+    @extend .fade-in;
+    color: $oscar-gold;
+    input {
+      background-color: $black;
+      color: $oscar-gold;
+      border-color: $oscar-gold;
+      &:active, &:hover, &:focus {
+        color: $oscar-gold-bright;
+        border-color: $oscar-gold-bright;
+        i {
+          color: $oscar-gold-bright;
+        }
+        &::-webkit-input-placeholder {
+          color :$oscar-gold;
+        }
+        &:-moz-input-placeholder {
+          color :$oscar-gold;
+        }
+        &::-moz-input-placeholder {
+          color :$oscar-gold;
+        }
+        &:-ms-input-placeholder {
+          color :$oscar-gold;
+        }
+      }
+    }
+    .button {
+      background-color: $black;
+      color: $oscar-gold;
+      border-color: $oscar-gold;
+      &:active, &:hover, &:focus {
+        color: $oscar-gold-bright;
+        border-color: $oscar-gold-bright;
+      }
+    }
+    position: absolute;
+    a:hover {
+    color: $oscar-gold-bright;
+    }
+  }
+
+  li.oscars a {
+    color: $oscar-gold;
+
+    &:hover { color: $oscar-gold-bright; }
+  }
+
+  &.hidden-for-oscars {
+    top: -$header-height;
+    @include transition(0.3s);
+    &.show {
+      top: 0;
+    }
+  }
+}
+
+
+
+@-webkit-keyframes shrink {
+    0% {
+        min-height: 100vh;
+    }
+    100% {
+        min-height: 50vh;
+    }
+}
+@keyframes shrink {
+    0% {
+        min-height: 100vh;
+    }
+    100% {
+        min-height: 50vh;
+    }
+}

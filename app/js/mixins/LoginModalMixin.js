@@ -21,7 +21,7 @@ var LoginModalMixin = {
   getInitialState: function() {
     return {
       showLoginModal: false,
-      loading: false,
+      loggingIn: false,
       email: '',
       password: '',
       facebookId: null,
@@ -32,6 +32,9 @@ var LoginModalMixin = {
   componentDidUpdate: function(prevProps, prevState) {
     if ( !_.isEqual(this.state, prevState) && this.isMounted() ) {
       this.checkForm();
+    } else if ( !_.isEmpty(this.props.currentUser) && this.state.showLoginModal ) {
+      // Hide modal if user is updated while open
+      this.setState({ showLoginModal: false });
     }
   },
 
@@ -42,7 +45,9 @@ var LoginModalMixin = {
   },
 
   toggleLoginModal: function() {
-    this.setState({ showLoginModal: !this.state.showLoginModal });
+    this.setState({
+      showLoginModal: !this.state.showLoginModal
+    });
   },
 
   checkFbState: function() {
@@ -82,12 +87,12 @@ var LoginModalMixin = {
       evt.preventDefault();
     }
 
-    this.setState({ loading: true });
+    this.setState({ loggingIn: true });
 
     loginFunction(user, function(err) {
       if ( err ) {
         console.log('error logging in:', err);
-        this.setState({ error: err.message, loading: false });
+        this.setState({ error: err.message, loggingIn: false });
       } else {
         console.log('successfully logged in, closing modal');
         this.toggleLoginModal();
@@ -98,7 +103,7 @@ var LoginModalMixin = {
   renderSpinner: function() {
     var element = null;
 
-    if ( this.state.loading ) {
+    if ( this.state.loggingIn ) {
       element = (
         <Spinner size={10} />
       );
@@ -148,7 +153,7 @@ var LoginModalMixin = {
                    required />
             {this.renderError()}
             <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
-              <Spinner loading={this.state.loading} />
+              <Spinner loading={this.state.loggingIn} />
               Login
             </button>
           </form>

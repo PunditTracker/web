@@ -19,7 +19,8 @@ var Header = React.createClass({
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired,
-    categories: React.PropTypes.array.isRequired
+    categories: React.PropTypes.array.isRequired,
+    className: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -104,7 +105,7 @@ var Header = React.createClass({
 
   render: function() {
     return (
-      <header>
+      <header className={this.props.className}>
 
         <nav>
           <div className="pure-g">
@@ -115,6 +116,7 @@ var Header = React.createClass({
                 </div>
               </Link>
               <ul className="categories">
+                <ListLink to="Oscars" className="oscars">Oscars</ListLink>
                 {this.renderCategoryLinks()}
                 <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
               </ul>

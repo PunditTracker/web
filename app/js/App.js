@@ -16,8 +16,6 @@ var CurrentUserStore = require('./stores/CurrentUserStore');
 var Header           = require('./components/Header');
 var Footer           = require('./components/Footer');
 
-var OscarsHeader     = require('./components/Oscars/Header');
-
 var App = React.createClass({
 
   mixins: [Reflux.ListenerMixin, State],
@@ -56,16 +54,14 @@ var App = React.createClass({
     this.listenTo(CurrentUserStore, this._onUserChange);
   },
 
-  renderHeader: function() {
+  renderOscarsHeader: function() {
     var element = null;
 
     if ( this.isActive('Oscars') ) {
       element = (
-        <OscarsHeader currentUser={this.state.currentUser} categories={this.state.categories} />
-      );
-    } else {
-      element = (
-        <Header currentUser={this.state.currentUser} categories={this.state.categories} />
+        <Header currentUser={this.state.currentUser}
+                categories={this.state.categories}
+                className='oscars' />
       );
     }
 
@@ -73,17 +69,25 @@ var App = React.createClass({
   },
 
   render: function() {
+    var headerClass = this.isActive('Oscars') ? 'hidden-for-oscars' : '';
+    var footerClass = this.isActive('Oscars') ? 'oscars' : '';
+
     return (
       <div>
 
-        {this.renderHeader()}
+        <Header currentUser={this.state.currentUser}
+                categories={this.state.categories}
+                className={headerClass} />
+
+        {this.renderOscarsHeader()}
 
         <RouteHandler params={this.props.params}
                       query={this.props.query}
                       currentUser={this.state.currentUser}
                       categories={this.state.categories} />
 
-        <Footer categories={this.state.categories} />
+        <Footer categories={this.state.categories}
+                className={footerClass} />
 
       </div>
     );

@@ -12,6 +12,11 @@ var ListLink  = require('./ListLink');
 
 var Footer = React.createClass({
 
+  propTypes: {
+    categories: React.PropTypes.array.isRequired,
+    className: React.PropTypes.string
+  },
+
   renderCategoryLinks: function() {
     var elements = null;
 
@@ -30,7 +35,7 @@ var Footer = React.createClass({
 
   render: function() {
     return (
-      <footer>
+      <footer className={this.props.className}>
 
         <div className="pure-g card-grid">
           <div className="pure-u-1-3">

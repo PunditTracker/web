@@ -74,12 +74,6 @@ var PredictPage = React.createClass({
     }
   },
 
-  getCategoryId: function(categoryName) {
-    return _.find(this.props.categories, function(category) {
-      return category.name.toUpperCase() === categoryName.toUpperCase();
-    }).id;
-  },
-
   setJoiner: function(joiner, evt) {
     evt.preventDefault();
 
@@ -113,7 +107,7 @@ var PredictPage = React.createClass({
   handleSubmit: function(evt) {
     var prediction = {
       title: this.state.prediction.trim().charAt(0).toUpperCase() + this.state.prediction.trim().slice(1), // capitalize first letter
-      categoryId: this.getCategoryId(this.state.category),
+      categoryId: APIUtils.getCategoryId(this.state.category, this.props.categories),
       tags: []
     };
 
