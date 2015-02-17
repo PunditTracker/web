@@ -65,16 +65,14 @@ var OscarsPage = React.createClass({
 
   doVote: function(category, nominee) {
     var unsubmittedVotesCopy = this.state.unsubmittedVotes;
-    var showSubmitCopy = this.state.showSubmit;
 
     if ( _.isEqual(unsubmittedVotesCopy[category.toLowerCase()], nominee) ) {
-      unsubmittedVotesCopy[category.toLowerCase()] = null;
+      delete unsubmittedVotesCopy[category.toLowerCase()];
     } else {
       unsubmittedVotesCopy[category.toLowerCase()] = nominee;
-      showSubmitCopy = true;
     }
 
-    this.setState({ unsubmittedVotes: unsubmittedVotesCopy, showSubmit: showSubmitCopy });
+    this.setState({ unsubmittedVotes: unsubmittedVotesCopy });
   },
 
   submitPredictions: function(evt) {
@@ -111,7 +109,6 @@ var OscarsPage = React.createClass({
           loading: false,
           submitted: true,
           error: null,
-          showSubmit: false,
           unsubmittedVotes: {},
           submittedVotes: submittedVotesCopy
         });
@@ -139,7 +136,7 @@ var OscarsPage = React.createClass({
       'button': true,
       'go-to-submit': true,
       'scroll': true,
-      'show': this.state.showSubmit
+      'show': !_.isEmpty(this.state.unsubmittedVotes)
     });
 
     return (
