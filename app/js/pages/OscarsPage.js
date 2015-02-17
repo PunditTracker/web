@@ -111,6 +111,7 @@ var OscarsPage = React.createClass({
           loading: false,
           submitted: true,
           error: null,
+          showSubmit: false,
           unsubmittedVotes: {},
           submittedVotes: submittedVotesCopy
         });
