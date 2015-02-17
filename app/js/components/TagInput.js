@@ -11,34 +11,41 @@ var tokenfield = require('bootstrap-tokenfield')($);
 var TagInput = React.createClass({
 
   propTypes: {
-    addTag: React.PropTypes.func,
     placeholder: React.PropTypes.string,
-    limit: React.PropTypes.number
+    limit: React.PropTypes.number,
+    addTag: React.PropTypes.func,
+    removeTag: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
+      limit: 3,
       addTag: function() {},
-      limit: 3
+      removeTag: function() {}
     };
   },
 
   componentDidMount: function() {
     var $input = $(this.getDOMNode());
+    var isDuplicate = false;
 
     $input.tokenfield({
       limit: this.props.limit
     });
 
-    // Prevent default tags
+    // Prevent duplicate tags
     $input.on('tokenfield:createtoken', function (evt) {
       _.each(this.getTokens(), function(token) {
         if ( token === evt.attrs.value ) {
-          evt.preventDefault();
-        } else {
-          this.props.addTag(evt.attrs.value);
+          isDuplicate = true;
         }
-      }.bind(this));
+      });
+      if ( !isDuplicate ) { this.props.addTag(evt.attrs.value); }
+    }.bind(this));
+
+    // Update parent state accordingly when a token is removed
+    $input.on('tokenfield:removetoken', function(evt) {
+      this.props.removeTag(evt.attrs.value);
     }.bind(this));
   },
 

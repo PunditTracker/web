@@ -89,11 +89,11 @@ var PredictPage = React.createClass({
   },
 
   addTag: function(tag) {
-    var tagsCopy = this.state.tags;
+    this.setState({ tags: _.union(this.state.tags, [tag]) });
+  },
 
-    tagsCopy.push(tag);
-
-    this.setState({ tags: tagsCopy });
+  removeTag: function(tag) {
+    this.setState({ tags: _.without(this.state.tags, tag) });
   },
 
   toggleDateInput: function(shouldShow) {
@@ -114,7 +114,7 @@ var PredictPage = React.createClass({
     evt.preventDefault();
 
     if ( this.state.tags && this.state.tags.length ) {
-      prediction.tags = prediction.tags.concat(this.state.tags);
+      prediction.tags = this.state.tags;
     }
 
     if ( this.state.doesExpire && this.state.deadline ) {
@@ -254,7 +254,7 @@ var PredictPage = React.createClass({
           </select>
           </fieldset>
           <fieldset className="nudge-half--bottom">
-          <TagInput ref="tagInput" placeholder="Add tags (Optional)" addTag={this.addTag} />
+          <TagInput ref="tagInput" placeholder="Add tags (Optional)" addTag={this.addTag} removeTag={this.removeTag} />
         </fieldset>
         <fieldset>
           <input type="radio" ref="doesntExpire" name="doesnt-expire" checked={!this.state.doesExpire} onChange={this.toggleDateInput.bind(null, false)} />
