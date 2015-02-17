@@ -56,7 +56,7 @@ var OscarsPage = React.createClass({
   },
 
   handleScroll: function() {
-    if ( $(window).scrollTop() >= $(this.getDOMNode()).height() / 2 ) {
+    if ( $(window).scrollTop() >= $('.hero').height() / 2 ) {
       $('.hidden-for-oscars').addClass('show');
     } else if ( $(window).scrollTop() <= 0 ){
       $('.hidden-for-oscars').removeClass('show');
