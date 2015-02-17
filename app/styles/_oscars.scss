@@ -125,8 +125,9 @@ $oscar-gold-bright: rgba(215, 200, 109, 1);
   @extend %clearfix;
 
   .oscars-category {
-    display: block;
     position: relative;
+    display: block;
+    margin-bottom: 10rem;
     @extend %clearfix;
 
     &.submitted {
@@ -142,7 +143,7 @@ $oscar-gold-bright: rgba(215, 200, 109, 1);
 
 .nominees {
   list-style: none;
-  margin: 0 0 10rem;
+  margin: 0;
   padding: 0.5rem 0;
   @include box-shadow;
   background-color: $white;

@@ -5,6 +5,7 @@
 
 var React = require('react/addons');
 var _     = require('lodash');
+var $     = require('jquery');
 
 var CompletionWidget = React.createClass({
 
@@ -30,19 +31,27 @@ var CompletionWidget = React.createClass({
     return this.userHasAlreadyVoted(category) || !_.isEmpty(this.props.unsubmittedVotes[category.toLowerCase()]);
   },
 
+  scrollToCategory: function(elementString) {
+    var offset = parseFloat($('.content').css('padding-top'));
+
+    $('html, body').animate({
+      'scrollTop': $(elementString).offset().top - offset
+    }, 500);
+  },
+
   renderCategories: function() {
     var id;
-    var href;
+    var target;
     var classes;
 
     return _.map(this.props.categories, function(oscar, index) {
       id = 'nav-' + index.toString();
-      href = '#cat-' + index.toString();
+      target = '#cat-' + index.toString();
       classes = this.userHasVoted(oscar.category) ? 'done' : null;
 
       return (
         <li id={id} key={index} className={classes}>
-          <a href={href} className="scroll">
+          <a className="scroll" onClick={this.scrollToCategory.bind(null, target)}>
             <span className="dot" />
             <i className="fa fa-check check" />
             <h6 className="text">{oscar.category}</h6>

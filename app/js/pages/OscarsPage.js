@@ -146,7 +146,7 @@ var OscarsPage = React.createClass({
 
         <OscarsHero />
 
-        <div className="content">
+        <div className="content oscars">
           <button className={buttonClasses} onClick={this.submitPredictions}>
             <Spinner loading={this.state.loading} />
             Predict Now
