@@ -14,29 +14,12 @@ header {
     width: 95%;
     padding: 0 0.75rem;
 
-    .logo {
-      @extend .h5;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-top: 0.75rem;
+    .logo-image {
+      position: relative;
       display: inline-block;
-
-      span {
-        text-align: justify;
-        width: 4rem;
-        line-height: 0.75rem;
-        display: block;
-
-        &:first-child {
-          font-size: 1.125rem;
-          line-height: 1.25rem;
-        }
-
-        &:last-child {
-          font-size: 0.95rem;
-          margin-top: -0.75rem;
-        }
-      }
+      height: $header-height*0.75;
+      top: 0.5rem;
+      vertical-align: top;
     }
 
     .categories {

@@ -103,6 +103,20 @@ var Header = React.createClass({
     return element;
   },
 
+  renderLogo: function() {
+    var element = (
+      <img className="logo-image" src="../images/logo_black.png" alt="PunditTracker logo" />
+    );
+
+    if ( this.props.className === 'oscars' ) {
+      element = (
+        <img className="logo-image" src="../images/logo_white.png" alt="PunditTracker logo" />
+      );
+    }
+
+    return element;
+  },
+
   render: function() {
     return (
       <header className={this.props.className}>
@@ -111,9 +125,7 @@ var Header = React.createClass({
           <div className="pure-g">
             <div className="pure-u-1">
               <Link to="Home">
-                <div className="logo">
-                  <span>Pundit</span><br /><span>Tracker</span>
-                </div>
+                {this.renderLogo()}
               </Link>
               <ul className="categories">
                 <ListLink to="Oscars" className="oscars">Oscars</ListLink>
