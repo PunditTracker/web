@@ -7,8 +7,8 @@ var React     = require('react/addons');
 var cx        = React.addons.classSet;
 var validator = require('email-validator');
 
-var config    = require('../config');
 var APIUtils  = require('../utils/APIUtils');
+var Spinner   = require('./Spinner');
 
 var MarchMadnessCard = React.createClass({
 
@@ -38,7 +38,7 @@ var MarchMadnessCard = React.createClass({
 
     if ( this.state.isValidEmail ) {
       this.setState({ loading: true });
-      APIUtils.mailchimpSubscribe(config.mailchimp.marchMadnessListId, this.state.email).then(function() {
+      APIUtils.doPost('marchmadness/add', { email: this.state.email }).then(function() {
         this.setState({ loading: false, subscribed: true, error: null });
       }.bind(this)).catch(function(err) {
         this.setState({ loading: false, error: err.message });
@@ -57,7 +57,10 @@ var MarchMadnessCard = React.createClass({
       element = (
         <h4 className="fade-in-up animated">
           <input className={inputClasses} type="text" placeholder="Email address" valueLink={this.linkState('email')} />
-          <input type="submit" className="button white-inverse" value="Go" />
+          <button type="submit" className="button white-inverse">
+            <Spinner loading={this.state.loading} />
+            Go
+          </button>
         </h4>
       );
     }
