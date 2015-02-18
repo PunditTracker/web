@@ -37,8 +37,8 @@ var ProfilePage = React.createClass({
       profile: {
         firstName: '',
         lastName: '',
-        predictionGraded: 0,
-        predictionCorrect: 0,
+        predictionsGraded: 0,
+        predictionsCorrect: 0,
         predictions: null
       },
       loading: true,
@@ -70,7 +70,7 @@ var ProfilePage = React.createClass({
   },
 
   calculateHitRate: function() {
-    var percentage = parseFloat(this.state.profile.predictionCorrect)/parseFloat(this.state.profile.predictionGraded || 1);
+    var percentage = parseFloat(this.state.profile.predictionsCorrect)/parseFloat(this.state.profile.predictionsGraded || 1);
 
     return percentage.toFixed(2);
   },
@@ -177,15 +177,15 @@ var ProfilePage = React.createClass({
                 <div className="pure-g stats">
                   <div className="pure-u-1-3">
                     <h6>Predictions</h6>
-                    <h4>{this.state.profile.predictionGraded || 0}</h4>
+                    <h4>{this.state.profile.predictionsGraded || 0}</h4>
                   </div>
                   <div className="pure-u-1-3">
                     <h6>Correct</h6>
-                    <h4>{this.state.profile.predictionCorrect || 0}</h4>
+                    <h4>{this.state.profile.predictionsCorrect || 0}</h4>
                   </div>
                   <div className="pure-u-1-3">
                     <h6>Wrong</h6>
-                    <h4>{this.state.profile.predictionGraded - this.state.profile.predictionCorrect}</h4>
+                    <h4>{this.state.profile.predictionsGraded - this.state.profile.predictionsCorrect}</h4>
                   </div>
                 </div>
                 {this.renderSecondRowStats()}

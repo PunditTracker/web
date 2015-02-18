@@ -28,8 +28,8 @@ var SettingsPage = React.createClass({
       currentUser: {
         firstName: '',
         lastName: '',
-        predictionGraded: 0,
-        predictionCorrect: 0
+        predictionsGraded: 0,
+        predictionsCorrect: 0
       }
     };
   },
@@ -202,8 +202,8 @@ var SettingsPage = React.createClass({
       lastName: this.state.lastName || this.props.currentUser.lastName,
       avatarUrl: this.props.currentUser.avatarUrl || null,
       created: new Date().toISOString(),
-      predictionGraded: 0,
-      predictionCorrect: 0,
+      predictionsGraded: 0,
+      predictionsCorrect: 0,
       score: 0
     };
 

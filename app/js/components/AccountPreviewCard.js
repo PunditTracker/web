@@ -23,8 +23,8 @@ var AccountPreviewCard = React.createClass({
         lastName: '',
         affiliation: '',
         score: 0,
-        predictionGraded: 0,
-        predictionCorrect: 0
+        predictionsGraded: 0,
+        predictionsCorrect: 0
       },
       classes: {
         firstName: '',
@@ -81,15 +81,15 @@ var AccountPreviewCard = React.createClass({
         <div className="pure-g stats">
           <div className="pure-u-1-3">
             <h6>Predictions</h6>
-            <h4>{this.props.user.predictionGraded || 0}</h4>
+            <h4>{this.props.user.predictionsGraded || 0}</h4>
           </div>
           <div className="pure-u-1-3">
             <h6>Correct</h6>
-            <h4>{this.props.user.predictionCorrect || 0}</h4>
+            <h4>{this.props.user.predictionsCorrect || 0}</h4>
           </div>
           <div className="pure-u-1-3">
             <h6>Wrong</h6>
-            <h4>{this.props.user.predictionGraded - this.props.user.predictionCorrect}</h4>
+            <h4>{this.props.user.predictionsGraded - this.props.user.predictionsCorrect}</h4>
           </div>
         </div>
         <div className="pure-g stats">

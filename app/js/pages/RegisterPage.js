@@ -206,8 +206,8 @@ var RegisterPage = React.createClass({
       lastName: this.state.lastName,
       avatarUrl: this.state.avatarUrl,
       created: new Date().toISOString(),
-      predictionGraded: 0,
-      predictionCorrect: 0
+      predictionsGraded: 0,
+      predictionsCorrect: 0
     };
 
     return (
