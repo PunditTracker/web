@@ -22,10 +22,4 @@ build/Release
 node_modules
 bower_components
 
-# Build files
-build/css
-build/fonts
-build/images
-build/js
-
 .elasticbeanstalk/
