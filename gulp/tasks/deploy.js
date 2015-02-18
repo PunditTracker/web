@@ -7,7 +7,7 @@ var shell        = require('gulp-shell');
 var config       = require('../config');
 var globalConfig = require('../../config');
 
-gulp.task('deploy', ['cdnizer'], function() {
+gulp.task('deploy', function() {
 
   var publisher = awspublish.create({
     key: globalConfig.aws.key,
