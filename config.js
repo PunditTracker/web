@@ -5,7 +5,8 @@ var config = {};
 /* ====================================================== */
 
 config.aws = {
-  bucket: 'assets.foretellr.com',
+  bucket: 'pundittracker.com',
+  region: 'us-west-2',
   key: 'AKIAJTL7QEGHS6OTMSMQ',
   secret: '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'
 };
