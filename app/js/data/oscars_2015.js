@@ -61,31 +61,31 @@ module.exports = [
         url: "http://wikipedia.com/wiki/Wes_Anderson",
         title: "Wes Anderson",
         imageUrl: '',
-        desc: "The Grand Budapest Hotel"
+        desc: "'The Grand Budapest Hotel'"
       },
       {
         url: "http://wikipedia.com/wiki/Alejandro_Gonz%C3%A1lez_I%C3%B1%C3%A1rritu",
         title: "Alejandro González Iñárritu",
         imageUrl: '',
-        desc: "Birdman or (The Unexpected Virtue of Ignorance)"
+        desc: "'Birdman or (The Unexpected Virtue of Ignorance)'"
       },
       {
         url: "http://wikipedia.com/wiki/Richard_Linklater",
         title: "Richard Linklater",
         imageUrl: '',
-        desc: "Boyhood"
+        desc: "'Boyhood'"
       },
       {
         url: "http://wikipedia.com/wiki/Bennett_Miller",
         title: "Bennett Miller",
         imageUrl: '',
-        desc: "Foxcatcher"
+        desc: "'Foxcatcher'"
       },
       {
         url: "http://wikipedia.com/wiki/Morten_Tyldum",
         title: "Morten Tyldum",
         imageUrl: '',
-        desc: "The Imitation Game"
+        desc: "'The Imitation Game'"
       }
     ]
   },
@@ -96,31 +96,31 @@ module.exports = [
         url: "http://wikipedia.com/wiki/Steve_Carell",
         title: "Steve Carell",
         imageUrl: '',
-        desc: "John Eleuthère du Pont"
+        desc: "John Eleuthère du Pont, 'Foxcatcher'"
       },
       {
         url: "http://wikipedia.com/wiki/Bradley_Cooper",
         title: "Bradley Cooper",
         imageUrl: '',
-        desc: "Chris Kyle"
+        desc: "Chris Kyle, 'American Sniper'"
       },
       {
         url: "http://wikipedia.com/wiki/Benedict_Cumberbatch",
         title: "Benedict Cumberbatch",
         imageUrl: '',
-        desc: "Alan Turing"
+        desc: "Alan Turing, 'The Imitation Game'"
       },
       {
         url: "http://wikipedia.com/wiki/Michael_Keaton",
         title: "Michael Keaton",
         imageUrl: '',
-        desc: "Birdman or (The Unexpected Virtue of Ignorance)"
+        desc: "Birdman, 'Birdman or (The Unexpected Virtue of Ignorance)'"
       },
       {
         url: "http://wikipedia.com/wiki/Eddie_Redmayne",
         title: "Eddie Redmayne",
         imageUrl: '',
-        desc: "Stephen Hawking"
+        desc: "Stephen Hawking, 'The Theory of Everything'"
       }
     ]
   },
@@ -131,31 +131,31 @@ module.exports = [
         url: "http://wikipedia.com/wiki/Marion_Cotillard",
         title: "Marion Cotillard",
         imageUrl: '',
-        desc: "Two Days, One Night"
+        desc: "Sandra Bya, 'Two Days, One Night'"
       },
       {
         url: "http://wikipedia.com/wiki/Felicity_Jones",
         title: "Felicity Jones",
         imageUrl: '',
-        desc: "Jane Wilde Hawking"
+        desc: "Jane Wilde Hawking, 'The Theory of Everything'"
       },
       {
         url: "http://wikipedia.com/wiki/Julianne_Moore",
         title: "Julianne Moore",
         imageUrl: '',
-        desc: "Still Alice"
+        desc: "Alice Howland, 'Still Alice'"
       },
       {
         url: "http://wikipedia.com/wiki/Rosamund_Pike",
         title: "Rosamund Pike",
         imageUrl: '',
-        desc: "Gone Girl"
+        desc: "Amy Elliott-Dunne, 'Gone Girl'"
       },
       {
         url: "http://wikipedia.com/wiki/Reese_Witherspoon",
         title: "Reese Witherspoon",
         imageUrl: '',
-        desc: "Cheryl Strayed"
+        desc: "Cheryl Strayed, 'Wild'"
       }
     ]
   },
@@ -166,31 +166,31 @@ module.exports = [
         url: "http://wikipedia.com/wiki/Robert_Duvall",
         title: "Robert Duvall",
         imageUrl: '',
-        desc: "The Judge"
+        desc: "'The Judge'"
       },
       {
         url: "http://wikipedia.com/wiki/Ethan_Hawke",
         title: "Ethan Hawke",
         imageUrl: '',
-        desc: "Boyhood"
+        desc: "'Boyhood'"
       },
       {
         url: "http://wikipedia.com/wiki/Edward_Norton",
         title: "Edward Norton",
         imageUrl: '',
-        desc: "Birdman or (The Unexpected Virtue of Ignorance)"
+        desc: "'Birdman or (The Unexpected Virtue of Ignorance)'"
       },
       {
         url: "http://wikipedia.com/wiki/Mark_Ruffalo",
         title: "Mark Ruffalo",
         imageUrl: '',
-        desc: "Dave Schultz"
+        desc: "'Foxcatcher'"
       },
       {
         url: "http://wikipedia.com/wiki/J._K._Simmons",
         title: "J. K. Simmons",
         imageUrl: '',
-        desc: "Whiplash"
+        desc: "'Whiplash'"
       }
     ]
   },
@@ -201,31 +201,31 @@ module.exports = [
         url: "http://wikipedia.com/wiki/Patricia_Arquette",
         title: "Patricia Arquette",
         imageUrl: '',
-        desc: "Boyhood"
+        desc: "'Boyhood'"
       },
       {
         url: "http://wikipedia.com/wiki/Laura_Dern",
         title: "Laura Dern",
         imageUrl: '',
-        desc: "Wild"
+        desc: "'Wild'"
       },
       {
         url: "http://wikipedia.com/wiki/Keira_Knightley",
         title: "Keira Knightley",
         imageUrl: '',
-        desc: "Joan Clarke"
+        desc: "'The Imitation Game'"
       },
       {
         url: "http://wikipedia.com/wiki/Emma_Stone",
         title: "Emma Stone",
         imageUrl: '',
-        desc: "Birdman or (The Unexpected Virtue of Ignorance)"
+        desc: "'Birdman or (The Unexpected Virtue of Ignorance)'"
       },
       {
         url: "http://wikipedia.com/wiki/Meryl_Streep",
         title: "Meryl Streep",
         imageUrl: '',
-        desc: "Into the Woods"
+        desc: "'Into the Woods'"
       }
     ]
   },
