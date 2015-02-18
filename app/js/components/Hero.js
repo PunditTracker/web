@@ -6,7 +6,7 @@
 var React            = require('react/addons');
 
 var MarchMadnessCard = require('../components/MarchMadnessCard');
-var SmallFeatureCard = require('../components/SmallFeatureCard');
+var FeatureCard      = require('../components/FeatureCard');
 
 var Hero = React.createClass({
 
@@ -30,19 +30,25 @@ var Hero = React.createClass({
 
         <div className="pure-g card-grid">
           <div className="pure-u-2-3">
-            <MarchMadnessCard className="large-with-small-feature" />
+            <FeatureCard className="left large"
+                         header="Who's winning big at the Oscars?"
+                         buttonText="Make Your Predictons"
+                         buttonUrl="/oscars"
+                         backgroundImage="../images/oscars_trophies.jpg" />
           </div>
           <div className="pure-u-1-3">
             <div className="pure-g card-grid">
               <div className="pure-u-1 hard--bottom">
-                <SmallFeatureCard feature={{ text: 'Draft smarter with Pundit Tracker', buttonText: 'Launch Draft Hub' }}
-                                  backgroundImage="../images/draft.jpg" />
+                <FeatureCard className="right"
+                             header="The Association is heating up"
+                             buttonText="See Hot NBA Predictions"
+                             buttonUrl="/sports"
+                             backgroundImage="../images/draft.jpg" />
               </div>
             </div>
             <div className="pure-g card-grid">
               <div className="pure-u-1">
-                <SmallFeatureCard feature={{ text: 'Take charge this playoff season', buttonText: 'View Predictions', buttonUrl: '/sports' }}
-                                  backgroundImage="../images/playoffs.jpg" />
+                <MarchMadnessCard className="feature-card right" />
               </div>
             </div>
           </div>

@@ -78,9 +78,9 @@ var MarchMadnessCard = React.createClass({
 
         <div className="pure-g card-grid">
           <div className="pure-u-1">
-            <h2 className="header">Don't miss out on <br />the Madness.</h2>
+            <h3 className="header">Don't miss out on <br />the Madness.</h3>
             <form className="pick" onSubmit={this.handleSubmit}>
-                <h2 className="h1">{this.state.subscribed ? 'You are signed up!' : 'Sign up for updates.'}</h2>
+                <h2 className="h1 flush">{this.state.subscribed ? 'You are signed up!' : ''/*'Sign up for updates.'*/}</h2>
                 {this.renderInput()}
             </form>
           </div>

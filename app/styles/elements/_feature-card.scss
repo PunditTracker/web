@@ -1,5 +1,4 @@
-.small-feature-card,
-.march-madness-card {
+.feature-card {
 
   position: relative;
   height: $small-hero-height;
@@ -10,9 +9,10 @@
   .header {
     z-index: 500;
     position: relative;
-    margin: 0;
+    margin: $half-space 0 0;
     color: $white;
     @include text-shadow;
+    @extend h3;
   }
 
   .background {
@@ -30,16 +30,16 @@
 
   .pick, .go {
     z-index: 500;
-    position: absolute;
   }
 
   .pick {
+    position: absolute;
+    width: 80%;
     bottom: 5.5rem;
-    right: 2rem;
     color: $white;
 
     h2 {
-        margin-bottom: 1rem;
+      margin-bottom: 1rem;
     }
 
     h4 {
@@ -74,8 +74,8 @@
   }
 
   .go {
-    right: $extension;
-    bottom: 1rem;
+    position: relative;
+    margin-top: $full-space;
   }
 
   .button {
@@ -86,6 +86,42 @@
       background-color: $white;
       text-shadow: none;
       color: $black;
+    }
+  }
+
+  &.left {
+    margin-left: -10rem;
+    padding-left: 10rem;
+  }
+
+  &.right {
+    margin-right: -10rem;
+    padding-right: 10rem;
+  }
+
+  &.large {
+    height: $hero-height;
+
+    .header {
+      z-index: 500;
+      position: relative;
+      margin: 8rem 0 0;
+      color: $white;
+      @include text-shadow;
+      @extend h1;
+    }
+
+    .go {
+      position: relative;
+      left: 8rem;
+      right: auto;
+      bottom: auto;
+      margin: $half-space 0 0;
+      font-size: 1.5rem;
+    }
+
+    .pick {
+      width: 25rem;
     }
   }
 
