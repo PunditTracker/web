@@ -49,10 +49,28 @@ var OscarsPage = React.createClass({
 
   componentDidMount: function() {
     $(window).scroll(this.handleScroll);
+
+    if ( !_.isEmpty(this.props.currentUser) ) {
+      this.checkForPreviousVotes();
+    }
+  },
+
+  componentDidUpdate: function(prevProps) {
+    if ( !_.isEmpty(this.props.currentUser) && !_.isEqual(prevProps.currentUser, this.props.currentUser) ) {
+      this.checkForPreviousVotes();
+    }
   },
 
   componentWillUnmount: function() {
     $(window).off('scroll', this.handleScroll);
+  },
+
+  checkForPreviousVotes: function() {
+    APIUtils.doGet('event/oscars/2015').then(function(previousVotes) {
+      console.log(previousVotes);
+    }.bind(this)).catch(function(err) {
+      this.setState({ error: err.message });
+    }.bind(this));
   },
 
   handleScroll: function() {

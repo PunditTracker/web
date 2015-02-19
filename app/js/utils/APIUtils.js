@@ -8,7 +8,7 @@ var camelizeKeys = humps.camelizeKeys;
 
 var APIUtils = {
 
-  root: '//api.foretellr.com/v1/',
+  root: '//pundittracker-api-dev.elasticbeanstalk.com/v1/',
 
   titleCase: function(str) {
     return str.replace(/\w\S*/g, function(txt) {
