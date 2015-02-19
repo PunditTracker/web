@@ -3,12 +3,11 @@
  */
 'use strict';
 
-var React    = require('react/addons');
-var _        = require('lodash');
-var humps    = require('humps');
-var cx       = React.addons.classSet;
-
-var APIUtils = require('../../utils/APIUtils');
+var React = require('react/addons');
+var _     = require('lodash');
+var $     = require('jquery');
+var humps = require('humps');
+var cx    = React.addons.classSet;
 
 var CompletionWidget = React.createClass({
 
@@ -80,9 +79,24 @@ var CompletionWidget = React.createClass({
   },
 
   doVote: function(category, nominee) {
+    var $nextCategory = $(this.getDOMNode()).next('.oscars-category');
+    var $header = $('header.oscars');
+    var headerHeight = $header.outerHeight();
+    var scrollTop;
+
     if ( !this.userHasAlreadyVoted() ) {
       this.props.doVote(category, nominee);
     }
+
+    if ( $nextCategory && $nextCategory.offset() ) {
+      scrollTop = $nextCategory.offset().top - headerHeight;
+    } else {
+      scrollTop = $('#submit').offset().top - headerHeight;
+    }
+
+    $('html, body').animate({
+      'scrollTop': scrollTop
+    }, 500);
   },
 
   renderNominees: function() {
