@@ -3,10 +3,12 @@
  */
 'use strict';
 
-var React = require('react/addons');
-var _     = require('lodash');
-var humps = require('humps');
-var cx    = React.addons.classSet;
+var React    = require('react/addons');
+var _        = require('lodash');
+var humps    = require('humps');
+var cx       = React.addons.classSet;
+
+var APIUtils = require('../../utils/APIUtils');
 
 var CompletionWidget = React.createClass({
 
@@ -52,7 +54,26 @@ var CompletionWidget = React.createClass({
     return _.isEqual(votesObject[categoryIndex], nominee) || votesObject[categoryIndex] === nominee.title;
   },
 
+  encode: function(string) {
+    string = string.trim().toLowerCase();
+
+    if ( /birdman/gi.test(string) ) {
+      string = 'birdman';
+    } else {
+      string = string.replace(/( )/g, '_');
+      string = string.replace(/(\:)/g, '');
+      string = string.replace(/(\-)/g, '');
+    }
+
+    return string;
+  },
+
   updateInfo: function(nominee) {
+    var encodedCategory = this.encode(this.props.oscar.category);
+    var encodedTitle = this.encode(nominee.title);
+
+    nominee.imageUrl = '../images/oscars/' + encodedCategory + '/' + encodedTitle + '.jpg';
+
     this.setState({ currentNominee: nominee });
   },
 
@@ -94,7 +115,7 @@ var CompletionWidget = React.createClass({
       'submitted': this.userHasAlreadyVoted()
     });
     var backgroundStyles = {
-      'backgroundImage': 'url(' + this.state.currentNominee.imageUrl + ')'
+      'backgroundImage': 'url(' + (!_.isEmpty(this.state.currentNominee) ? this.state.currentNominee.imageUrl : '') + ')'
     };
 
     return (
