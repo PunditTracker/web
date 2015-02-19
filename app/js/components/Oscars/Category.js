@@ -59,6 +59,8 @@ var CompletionWidget = React.createClass({
 
     if ( /birdman/gi.test(string) ) {
       string = 'birdman';
+    } else if ( /alejandro/gi.test(string) ) {
+      string = 'alejandro';
     } else {
       string = string.replace(/( )/g, '_');
       string = string.replace(/(\:)/g, '');
