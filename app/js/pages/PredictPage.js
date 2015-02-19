@@ -231,7 +231,7 @@ var PredictPage = React.createClass({
           <input type="text"
                  placeholder={this.constructor.placeholderOne}
                  name="prediction"
-                 className="prediction-input"
+                 className="prediction-input full-width"
                  valueLink={this.linkState('prediction')} />
           <ul className="joiners">
             <span className="is-opt">(Optional)</span>
@@ -252,8 +252,8 @@ var PredictPage = React.createClass({
             <option>Select a Category...</option>
             {this.renderCategoryOptions()}
           </select>
-          </fieldset>
-          <fieldset className="nudge-half--bottom">
+        </fieldset>
+        <fieldset className="nudge-half--bottom">
           <TagInput ref="tagInput" placeholder="Add tags (Optional)" addTag={this.addTag} removeTag={this.removeTag} />
         </fieldset>
         <fieldset>

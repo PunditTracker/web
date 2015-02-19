@@ -12,6 +12,7 @@ var TagInput = React.createClass({
 
   propTypes: {
     placeholder: React.PropTypes.string,
+    className: React.PropTypes.string,
     limit: React.PropTypes.number,
     addTag: React.PropTypes.func,
     removeTag: React.PropTypes.func
@@ -19,6 +20,8 @@ var TagInput = React.createClass({
 
   getDefaultProps: function() {
     return {
+      placeholder: '',
+      className: '',
       limit: 3,
       addTag: function() {},
       removeTag: function() {}
@@ -37,6 +40,7 @@ var TagInput = React.createClass({
     $input.on('tokenfield:createtoken', function (evt) {
       _.each(this.getTokens(), function(token) {
         if ( token === evt.attrs.value ) {
+          evt.preventDefault();
           isDuplicate = true;
         }
       });
@@ -57,7 +61,7 @@ var TagInput = React.createClass({
 
   render: function() {
     return (
-      <input type="text" placeholder={this.props.placeholder} />
+      <input type="text" className={this.props.className} placeholder={this.props.placeholder} />
     );
   }
 
