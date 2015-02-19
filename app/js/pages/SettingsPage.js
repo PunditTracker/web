@@ -40,6 +40,7 @@ var SettingsPage = React.createClass({
       affiliation: this.props.currentUser.affiliation || '',
       firstName: this.props.currentUser.firstName || '',
       lastName: this.props.currentUser.lastName || '',
+      oldPassword: '',
       newPassword: '',
       confirmNewPassword: '',
       newImage: null,
@@ -73,9 +74,10 @@ var SettingsPage = React.createClass({
     var hasNewLastName = this.state.lastName && this.state.lastName !== this.props.currentUser.lastName;
     var hasNewImage = !!this.state.newImage;
     var hasNewPassword = this.state.newPassword && this.state.newPassword.length;
+    var hasOldPassword = this.state.oldPassword && this.state.oldPassword.length;
     var newPasswordsMatch = this.state.newPassword === this.state.confirmNewPassword;
 
-    if ( hasNewFirstName || hasNewLastName || hasNewImage || (hasNewPassword && newPasswordsMatch) ) {
+    if ( hasNewFirstName || hasNewLastName || hasNewImage || (hasNewPassword && hasOldPassword && newPasswordsMatch) ) {
       this.setState({ error: null, submitDisabled: false });
     } else {
       this.setState({ submitDisabled: true });
@@ -105,12 +107,20 @@ var SettingsPage = React.createClass({
 
   updatePassword: function(avatarUrl) {
     var deferred = when.defer();
+    var hasOldPassword = this.state.oldPassword && this.state.oldPassword.length;
     var hasNewPassword = this.state.newPassword && this.state.newPassword.length;
     var newPasswordsMatch = this.state.newPassword === this.state.confirmNewPassword;
+    var body = {
+      oldPassword: this.state.oldPassword,
+      newPassword: this.state.newPassword
+    };
 
-    if ( hasNewPassword && newPasswordsMatch ) {
-      // TODO: make actual API call
-      deferred.resolve(avatarUrl);
+    if ( hasNewPassword && hasOldPassword && newPasswordsMatch ) {
+      APIUtils.doPost('user/password', body).then(function() {
+        deferred.resolve(avatarUrl);
+      }).catch(function(err) {
+        deferred.reject(err);
+      });
     } else {
       deferred.resolve(avatarUrl);
     }
@@ -212,6 +222,23 @@ var SettingsPage = React.createClass({
     );
   },
 
+  renderOldPasswordInput: function() {
+    var hasNewPassword = this.state.newPassword && this.state.newPassword.length;
+    var element = null;
+
+    if ( hasNewPassword ) {
+      element = (
+        <input type="password"
+               className="nudge-half--bottom"
+               id="oldPassword"
+               valueLink={this.linkState('oldPassword')}
+               placeholder="Confirm Old Password" />
+      );
+    }
+
+    return element;
+  },
+
   render: function() {
     return (
       <section className="content no-hero settings full-page-form">
@@ -256,6 +283,7 @@ var SettingsPage = React.createClass({
                    id="lastName"
                    valueLink={this.linkState('confirmNewPassword')}
                    placeholder="Confirm New Password" />
+            {this.renderOldPasswordInput()}
             {this.renderError()}
             <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
               <Spinner loading={this.state.loading} />
