@@ -72,9 +72,7 @@ var OscarsPage = React.createClass({
         submittedVotes: _.merge(this.state.submittedVotes, previousVotes),
         loading: false,
         error: null
-      }, function() {
-        console.log(this.state.submittedVotes);
-      }.bind(this));
+      });
     }.bind(this)).catch(function(err) {
       this.setState({ error: err.message, loading: false });
     }.bind(this));

@@ -52,27 +52,27 @@ module.exports = [
       {
         url: "http://wikipedia.com/wiki/Wes_Anderson",
         title: "Wes Anderson",
-        desc: "'The Grand Budapest Hotel'"
+        desc: "<i>The Grand Budapest Hotel</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Alejandro_Gonz%C3%A1lez_I%C3%B1%C3%A1rritu",
         title: "Alejandro González Iñárritu",
-        desc: "'Birdman or (The Unexpected Virtue of Ignorance)'"
+        desc: "<i>Birdman or (The Unexpected Virtue of Ignorance)</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Richard_Linklater",
         title: "Richard Linklater",
-        desc: "'Boyhood'"
+        desc: "<i>Boyhood</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Bennett_Miller",
         title: "Bennett Miller",
-        desc: "'Foxcatcher'"
+        desc: "<i>Foxcatcher</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Morten_Tyldum",
         title: "Morten Tyldum",
-        desc: "'The Imitation Game'"
+        desc: "<i>The Imitation Game</i>"
       }
     ]
   },
@@ -82,27 +82,27 @@ module.exports = [
     {
         url: "http://wikipedia.com/wiki/Steve_Carell",
         title: "Steve Carell",
-        desc: "John Eleuthère du Pont, 'Foxcatcher'"
+        desc: "John Eleuthère du Pont, <i>Foxcatcher</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Bradley_Cooper",
         title: "Bradley Cooper",
-        desc: "Chris Kyle, 'American Sniper'"
+        desc: "Chris Kyle, <i>American Sniper</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Benedict_Cumberbatch",
         title: "Benedict Cumberbatch",
-        desc: "Alan Turing, 'The Imitation Game'"
+        desc: "Alan Turing, <i>The Imitation Game</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Michael_Keaton",
         title: "Michael Keaton",
-        desc: "Birdman, 'Birdman or (The Unexpected Virtue of Ignorance)'"
+        desc: "Birdman, <i>Birdman or (The Unexpected Virtue of Ignorance)</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Eddie_Redmayne",
         title: "Eddie Redmayne",
-        desc: "Stephen Hawking, 'The Theory of Everything'"
+        desc: "Stephen Hawking, <i>The Theory of Everything</i>"
       }
     ]
   },
@@ -112,27 +112,27 @@ module.exports = [
       {
         url: "http://wikipedia.com/wiki/Marion_Cotillard",
         title: "Marion Cotillard",
-        desc: "Sandra Bya, 'Two Days, One Night'"
+        desc: "Sandra Bya, <i>Two Days, One Night</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Felicity_Jones",
         title: "Felicity Jones",
-        desc: "Jane Wilde Hawking, 'The Theory of Everything'"
+        desc: "Jane Wilde Hawking, <i>The Theory of Everything</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Julianne_Moore",
         title: "Julianne Moore",
-        desc: "Alice Howland, 'Still Alice'"
+        desc: "Alice Howland, <i>Still Alice</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Rosamund_Pike",
         title: "Rosamund Pike",
-        desc: "Amy Elliott-Dunne, 'Gone Girl'"
+        desc: "Amy Elliott-Dunne, <i>Gone Girl</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Reese_Witherspoon",
         title: "Reese Witherspoon",
-        desc: "Cheryl Strayed, 'Wild'"
+        desc: "Cheryl Strayed, <i>Wild</i>"
       }
     ]
   },
@@ -142,27 +142,27 @@ module.exports = [
       {
         url: "http://wikipedia.com/wiki/Robert_Duvall",
         title: "Robert Duvall",
-        desc: "'The Judge'"
+        desc: "<i>The Judge</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Ethan_Hawke",
         title: "Ethan Hawke",
-        desc: "'Boyhood'"
+        desc: "<i>Boyhood</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Edward_Norton",
         title: "Edward Norton",
-        desc: "'Birdman or (The Unexpected Virtue of Ignorance)'"
+        desc: "<i>Birdman or (The Unexpected Virtue of Ignorance)</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Mark_Ruffalo",
         title: "Mark Ruffalo",
-        desc: "'Foxcatcher'"
+        desc: "<i>Foxcatcher</i>"
       },
       {
         url: "http://wikipedia.com/wiki/J._K._Simmons",
         title: "J. K. Simmons",
-        desc: "'Whiplash'"
+        desc: "<i>Whiplash</i>"
       }
     ]
   },
@@ -172,27 +172,27 @@ module.exports = [
       {
         url: "http://wikipedia.com/wiki/Patricia_Arquette",
         title: "Patricia Arquette",
-        desc: "'Boyhood'"
+        desc: "<i>Boyhood</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Laura_Dern",
         title: "Laura Dern",
-        desc: "'Wild'"
+        desc: "<i>Wild</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Keira_Knightley",
         title: "Keira Knightley",
-        desc: "'The Imitation Game'"
+        desc: "<i>The Imitation Game</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Emma_Stone",
         title: "Emma Stone",
-        desc: "'Birdman or (The Unexpected Virtue of Ignorance)'"
+        desc: "<i>Birdman or (The Unexpected Virtue of Ignorance)</i>"
       },
       {
         url: "http://wikipedia.com/wiki/Meryl_Streep",
         title: "Meryl Streep",
-        desc: "'Into the Woods'"
+        desc: "<i>Into the Woods</i>"
       }
     ]
   },
@@ -262,27 +262,27 @@ module.exports = [
       {
         url: "http://wikipedia.com/wiki/Big_Hero_6_(film)",
         title: "Big Hero 6",
-        desc: "</a></i> - <a target='_blank' href='/wiki/Don_Hall_(filmmaker)' title='Don Hall (filmmaker)'>Don Hall</a>, <a target='_blank' href='/wiki/Chris_Williams_(director)' title='Chris Williams (director)'>Chris Williams</a> and Roy Conli"
+        desc: "<a target='_blank' href='/wiki/Don_Hall_(filmmaker)' title='Don Hall (filmmaker)'>Don Hall</a>, <a target='_blank' href='/wiki/Chris_Williams_(director)' title='Chris Williams (director)'>Chris Williams</a> and Roy Conli"
       },
       {
         url: "http://wikipedia.com/wiki/The_Boxtrolls",
         title: "The Boxtrolls",
-        desc: "</a></i> - <a target='_blank' href='/wiki/Anthony_Stacchi' title='Anthony Stacchi'>Anthony Stacchi</a>, <a target='_blank' href='/wiki/Graham_Annable' title='Graham Annable'>Graham Annable</a> and <a target='_blank' href='/wiki/Travis_Knight_(animator)' title='Travis Knight (animator)'>Travis Knight</a>"
+        desc: "<a target='_blank' href='/wiki/Anthony_Stacchi' title='Anthony Stacchi'>Anthony Stacchi</a>, <a target='_blank' href='/wiki/Graham_Annable' title='Graham Annable'>Graham Annable</a> and <a target='_blank' href='/wiki/Travis_Knight_(animator)' title='Travis Knight (animator)'>Travis Knight</a>"
       },
       {
         url: "http://wikipedia.com/wiki/How_to_Train_Your_Dragon_2",
         title: "How to Train Your Dragon 2",
-        desc: "</a></i> - <a target='_blank' href='/wiki/Dean_DeBlois' title='Dean DeBlois'>Dean DeBlois</a> and <a target='_blank' href='/wiki/Bonnie_Arnold' title='Bonnie Arnold'>Bonnie Arnold</a>"
+        desc: "<a target='_blank' href='/wiki/Dean_DeBlois' title='Dean DeBlois'>Dean DeBlois</a> and <a target='_blank' href='/wiki/Bonnie_Arnold' title='Bonnie Arnold'>Bonnie Arnold</a>"
       },
       {
         url: "http://wikipedia.com/wiki/Song_of_the_Sea_(2014_film)",
         title: "Song of the Sea",
-        desc: "</a></i> - <a target='_blank' href='/wiki/Tomm_Moore' title='Tomm Moore'>Tomm Moore</a> and Paul Young"
+        desc: "<a target='_blank' href='/wiki/Tomm_Moore' title='Tomm Moore'>Tomm Moore</a> and Paul Young"
       },
       {
         url: "http://wikipedia.com/wiki/The_Tale_of_the_Princess_Kaguya",
         title: "The Tale of the Princess Kaguya",
-        desc: "</a></i> - <a target='_blank' href='/wiki/Isao_Takahata' title='Isao Takahata'>Isao Takahata</a> and Yoshiaki Nishimura"
+        desc: "<a target='_blank' href='/wiki/Isao_Takahata' title='Isao Takahata'>Isao Takahata</a> and Yoshiaki Nishimura"
       }
     ]
   },
