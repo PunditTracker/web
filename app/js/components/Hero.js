@@ -43,7 +43,7 @@ var Hero = React.createClass({
                              header="The Association is heating up"
                              buttonText="See Hot NBA Predictions"
                              buttonUrl="/sports"
-                             backgroundImage="../images/draft.jpg" />
+                             backgroundImage="../images/nba.jpg" />
               </div>
             </div>
             <div className="pure-g card-grid">

@@ -5,6 +5,8 @@
 
 var React = require('react/addons');
 
+var Link  = React.createFactory(require('react-router').Link);
+
 var FeatureCard = React.createClass({
 
   propTypes: {
@@ -29,7 +31,7 @@ var FeatureCard = React.createClass({
         <div className="inner">
           <h3 className="header">{this.props.header}</h3>
           <div className="go">
-            <a href={this.props.buttonUrl} className="button">{this.props.buttonText}</a>
+            <Link to={this.props.buttonUrl} className="button">{this.props.buttonText}</Link>
           </div>
         </div>
       </div>
