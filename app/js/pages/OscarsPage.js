@@ -8,6 +8,7 @@ var $                = require('jquery');
 var _                = require('lodash');
 var when             = require('when');
 var moment           = require('moment');
+var humps            = require('humps');
 var cx               = React.addons.classSet;
 
 var data             = require('../data/oscars_2015');
@@ -67,9 +68,15 @@ var OscarsPage = React.createClass({
 
   checkForPreviousVotes: function() {
     APIUtils.doGet('event/oscars/2015').then(function(previousVotes) {
-      console.log(previousVotes);
+      this.setState({
+        submittedVotes: _.merge(this.state.submittedVotes, previousVotes),
+        loading: false,
+        error: null
+      }, function() {
+        console.log(this.state.submittedVotes);
+      }.bind(this));
     }.bind(this)).catch(function(err) {
-      this.setState({ error: err.message });
+      this.setState({ error: err.message, loading: false });
     }.bind(this));
   },
 
@@ -84,10 +91,10 @@ var OscarsPage = React.createClass({
   doVote: function(category, nominee) {
     var unsubmittedVotesCopy = this.state.unsubmittedVotes;
 
-    if ( _.isEqual(unsubmittedVotesCopy[category.toLowerCase()], nominee) ) {
-      delete unsubmittedVotesCopy[category.toLowerCase()];
+    if ( _.isEqual(unsubmittedVotesCopy[humps.camelize(category)], nominee) ) {
+      delete unsubmittedVotesCopy[humps.camelize(category)];
     } else {
-      unsubmittedVotesCopy[category.toLowerCase()] = nominee;
+      unsubmittedVotesCopy[humps.camelize(category)] = nominee;
     }
 
     this.setState({ unsubmittedVotes: unsubmittedVotesCopy });
@@ -113,12 +120,15 @@ var OscarsPage = React.createClass({
             categoryId: APIUtils.getCategoryId('Entertainment', this.props.categories),
             title: nominee.title + ' will win Best ' + APIUtils.titleCase(category) + '.',
             tags: ['Oscars', 'Best ' + APIUtils.titleCase(category), nominee.title],
-            deadline: moment('Sunday, February 22nd 2015, 11:59:59 pm', 'dddd, MMMM Do YYYY, h:mm:ss a').toISOString()
+            deadline: moment('Sunday, February 22nd 2015, 11:59:59 pm', 'dddd, MMMM Do YYYY, h:mm:ss a').toISOString(),
+            SpecialEventYear: 2015,
+            SpecialEventCategory: APIUtils.titleCase(category),
+            SpecialEventSelection: nominee.title
           };
 
           promises.push(PredictionAPI.postPrediction(prediction));
 
-          submittedVotesCopy[category.toLowerCase()] = nominee;
+          submittedVotesCopy[humps.camelize(category)] = nominee;
         }
       }.bind(this));
 

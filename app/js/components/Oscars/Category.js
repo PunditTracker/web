@@ -5,6 +5,7 @@
 
 var React = require('react/addons');
 var _     = require('lodash');
+var humps = require('humps');
 var cx    = React.addons.classSet;
 
 var CompletionWidget = React.createClass({
@@ -35,11 +36,12 @@ var CompletionWidget = React.createClass({
   },
 
   userHasAlreadyVoted: function() {
-    return !_.isEmpty(this.props.submittedVotes[this.props.oscar.category.toLowerCase()]);
+    return !_.isEmpty(this.props.submittedVotes[humps.camelize(this.props.oscar.category)]);
   },
 
   isSelectedNominee: function(nominee) {
     var votesObject = null;
+    var categoryIndex = humps.camelize(this.props.oscar.category);
 
     if ( this.userHasAlreadyVoted() ) {
       votesObject = this.props.submittedVotes;
@@ -47,7 +49,7 @@ var CompletionWidget = React.createClass({
       votesObject = this.props.unsubmittedVotes;
     }
 
-    return _.isEqual(votesObject[this.props.oscar.category.toLowerCase()], nominee);
+    return _.isEqual(votesObject[categoryIndex], nominee) || votesObject[categoryIndex] === nominee.title;
   },
 
   updateInfo: function(nominee) {

@@ -6,6 +6,7 @@
 var React = require('react/addons');
 var _     = require('lodash');
 var $     = require('jquery');
+var humps = require('humps');
 
 var CompletionWidget = React.createClass({
 
@@ -24,11 +25,11 @@ var CompletionWidget = React.createClass({
   },
 
   userHasAlreadyVoted: function(category) {
-    return !_.isEmpty(this.props.submittedVotes[category.toLowerCase()]);
+    return !_.isEmpty(this.props.submittedVotes[humps.camelize(category)]);
   },
 
   userHasVoted: function(category) {
-    return this.userHasAlreadyVoted(category) || !_.isEmpty(this.props.unsubmittedVotes[category.toLowerCase()]);
+    return this.userHasAlreadyVoted(category) || !_.isEmpty(this.props.unsubmittedVotes[humps.camelize(category)]);
   },
 
   scrollToCategory: function(elementString) {

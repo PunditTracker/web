@@ -1,10 +1,11 @@
 'use strict';
 
-var request      = require('superagent');
-var when         = require('when');
-var _            = require('lodash');
-var humps        = require('humps');
-var camelizeKeys = humps.camelizeKeys;
+var request = require('superagent');
+var when    = require('when');
+var _       = require('lodash');
+var humps   = require('humps');
+
+window.humps = humps;
 
 var APIUtils = {
 
@@ -33,7 +34,7 @@ var APIUtils = {
   },
 
   normalizeResponse: function(response) {
-    return camelizeKeys(response.body);
+    return humps.camelizeKeys(response.body);
   },
 
   doGet: function(path) {
