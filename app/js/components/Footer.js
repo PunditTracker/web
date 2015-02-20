@@ -36,51 +36,32 @@ var Footer = React.createClass({
   render: function() {
     return (
       <footer className={this.props.className}>
-
         <div className="pure-g card-grid">
-          <div className="pure-u-1-3">
-            <ul>
-              <li className="double">
-                <Link to="Home">
-                  <div className="logo">
-                    <span>Pundit</span><br /><span>Tracker</span>
-                  </div>
-                </Link>
-              </li>
-            </ul>
+
+          <div className="pure-u-12-24">
+            <Link to="Home">
+              <img className="logo-image" src="../images/logo_white.png" alt="PunditTracker logo" />
+            </Link>
           </div>
-          <div className="pure-u-1-3"></div>
-          <div className="pure-u-1-3"></div>
-        </div>
 
-        <div className="pure-g card-grid">
-          <div className="pure-u-1-3">
+          <div className="pure-u-6-24">
+            <h3 className="flush--top nudge-quarter--bottom">Categories</h3>
             <ul>
               {this.renderCategoryLinks()}
             </ul>
           </div>
-          <div className="pure-u-1-3">
+
+          <div className="pure-u-6-24">
+            <h3 className="flush--top nudge-quarter--bottom">More PT</h3>
             <ul>
               <li><Link to="About">About</Link></li>
               <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
-            </ul>
-          </div>
-          <div className="pure-u-1-3">
-            <ul>
               <li><a href="https://www.facebook.com/pundittracker" target="_blank">Facebook</a></li>
               <li><a href="https://twitter.com/pundittracker" target="_blank">Twitter</a></li>
-              <li>
-                <ul>
-                  <li><a href="https://twitter.com/ptraxfinance" target="_blank">@ptraxfinance</a></li>
-                  <li><a href="https://twitter.com/ptraxpolitics" target="_blank">@ptraxpolitics</a></li>
-                  <li><a href="https://twitter.com/ptraxsports" target="_blank">@ptraxsports</a></li>
-                  <li><a href="https://twitter.com/ptraxentertain" target="_blank">@ptraxentertain</a></li>
-                </ul>
-              </li>
             </ul>
           </div>
-        </div>
 
+        </div>
       </footer>
     );
   }
