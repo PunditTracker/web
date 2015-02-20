@@ -39,7 +39,7 @@ var ProfilePage = React.createClass({
         lastName: '',
         predictionsGraded: 0,
         predictionsCorrect: 0,
-        predictions: null
+        predictions: []
       },
       loading: true,
       error: null
@@ -177,7 +177,7 @@ var ProfilePage = React.createClass({
                 <div className="pure-g stats">
                   <div className="pure-u-1-3">
                     <h6>Predictions</h6>
-                    <h4>{this.state.profile.predictionsGraded || 0}</h4>
+                    <h4>{this.state.profile.predictions.length || 0}</h4>
                   </div>
                   <div className="pure-u-1-3">
                     <h6>Correct</h6>
