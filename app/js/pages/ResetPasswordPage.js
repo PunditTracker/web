@@ -9,6 +9,7 @@ var Link          = React.createFactory(require('react-router').Link);
 
 var DocumentTitle = require('../components/DocumentTitle');
 var AuthAPI       = require('../utils/AuthAPI');
+var Spinner       = require('../components/Spinner');
 
 var ResetPasswordPage = React.createClass({
 
@@ -88,10 +89,12 @@ var ResetPasswordPage = React.createClass({
                placeholder="Confirm"
                required />
         {this.renderError()}
-        <input type="submit"
-               value="Reset Password"
-               className="btn block full-width"
-               disabled={this.state.submitDisabled || this.state.error ? 'true' : ''} />
+        <button type="submit"
+                className="btn block full-width"
+                disabled={this.state.submitDisabled || this.state.error ? 'true' : ''}>
+          <Spinner loading={this.state.loading} />
+          Reset Password
+        </button>
       </form>
     );
   },

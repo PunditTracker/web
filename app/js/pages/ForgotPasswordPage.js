@@ -10,6 +10,7 @@ var validator     = require('email-validator');
 
 var DocumentTitle = require('../components/DocumentTitle');
 var AuthAPI       = require('../utils/AuthAPI');
+var Spinner       = require('../components/Spinner');
 
 var ForgotPasswordPage = React.createClass({
 
@@ -68,10 +69,12 @@ var ForgotPasswordPage = React.createClass({
                placeholder="Email address"
                required />
         {this.renderError()}
-        <input type="submit"
-               value="Send Reset Email"
-               className="btn block full-width"
-               disabled={this.state.submitDisabled ? 'true' : ''} />
+        <button type="submit"
+                className="btn block full-width"
+                disabled={this.state.submitDisabled ? 'true' : ''}>
+          <Spinner loading={this.state.loading} />
+          Send Reset Email
+        </button>
       </form>
     );
   },
