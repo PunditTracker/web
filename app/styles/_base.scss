@@ -148,7 +148,8 @@ input, textarea {
 }
 
 input:disabled, .btn:disabled, .button:disabled {
-  background-color: gray;
+  background-color: $ultra-light-grey;
+  border-color: $ultra-light-grey;
 }
 
 select {

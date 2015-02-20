@@ -133,7 +133,7 @@ $oscar-gold-bright: rgba(215, 200, 109, 1);
     &.submitted {
       .nominees {
         .nominee {
-          &.selected { background-color: $light-grey; }
+          &.selected { background-color: $ultra-light-grey; }
           &:hover { cursor: default; }
         }
       }

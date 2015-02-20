@@ -131,6 +131,9 @@ var PredictionCard = React.createClass({
 
   render: function() {
     var classes = 'prediction-card ' + this.props.className;
+    var backgroundStyles = {
+      'backgroundImage': 'url(' + this.props.prediction.imageUrl || '' + ')'
+    };
     var noWayClasses = cx({
       'active': this.state.userVote === 'No Way'
     });
@@ -147,7 +150,9 @@ var PredictionCard = React.createClass({
     return (
       <div className={classes}>
 
-        <div className="background"><div className="scrim" /></div>
+        <div className="background" style={backgroundStyles}>
+          <div className="scrim" />
+        </div>
 
         <div className="tags">
           <ul className="inner">
