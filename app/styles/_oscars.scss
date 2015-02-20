@@ -394,12 +394,6 @@ header {
     }
   }
 
-  li.oscars a {
-    color: $oscar-gold;
-
-    &:hover { color: $oscar-gold-bright; }
-  }
-
   &.hidden-for-oscars {
     top: -$header-height;
     @include transition(0.3s);

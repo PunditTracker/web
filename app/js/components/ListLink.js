@@ -20,7 +20,7 @@ var ListLink = React.createClass({
     var className = this.props.className + (isActive ? ' active' : '');
     var link = Link(this.props);
 
-    return <li className={className}>{link}</li>;
+    return <li className={className || ''}>{link}</li>;
   }
 
 });

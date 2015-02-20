@@ -10,7 +10,7 @@ var Navigation      = require('react-router').Navigation;
 
 var APIUtils        = require('../utils/APIUtils');
 var LoginModalMixin = require('../mixins/LoginModalMixin');
-var UserActions     = require('../actions/UserActions');
+var UserDropdown    = require('../components/UserDropdown');
 var ListLink        = require('./ListLink');
 
 var Header = React.createClass({
@@ -93,10 +93,7 @@ var Header = React.createClass({
       );
     } else {
       element = (
-        <div className="user-option non-button">
-          <a className="nudge-half--left" onClick={this.transitionTo.bind(null, 'Settings')}>Settings</a>
-          <a className="nudge-half--left" onClick={UserActions.logout.bind(null, null)}>Log out</a>
-        </div>
+        <UserDropdown currentUser={this.props.currentUser} />
       );
     }
 

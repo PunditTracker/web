@@ -1,0 +1,51 @@
+div.user-dropdown {
+
+  position: relative;
+  float: right;
+  margin: $half-space 0 0 $half-space;
+
+  div.avatar {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    @include background-cover();
+    background-color: $ultra-light-grey;
+  }
+
+  ul.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 10rem;
+    margin: 0;
+    display: none;
+    @include box-shadow;
+
+    & > li {
+      position: relative;
+      padding: $half-space/2 $half-space;
+      cursor: pointer;
+      text-align: left;
+      background-color: $white;
+      color: $dark-grey;
+
+      a {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+      }
+
+      &:hover {
+        background-color: $ultra-light-grey;
+      }
+    }
+
+    &.show {
+      display: block;
+    }
+  }
+
+}
