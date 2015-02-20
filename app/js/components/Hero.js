@@ -32,7 +32,7 @@ var Hero = React.createClass({
           <div className="pure-u-2-3">
             <FeatureCard className="left large"
                          header="Who's winning big at the Oscars?"
-                         buttonText="Make Your Predictons"
+                         buttonText="Make Your Predictions"
                          buttonUrl="/oscars"
                          backgroundImage="../images/oscars_trophies.jpg" />
           </div>

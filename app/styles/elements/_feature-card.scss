@@ -83,7 +83,7 @@
     @include text-shadow;
 
     &:hover, &:focus {
-      background-color: $white;
+      background-color: $white !important;
       text-shadow: none;
       color: $black;
     }

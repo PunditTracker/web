@@ -222,7 +222,7 @@ $oscar-gold-bright: rgba(215, 200, 109, 1);
     cursor: pointer;
     &:hover {
       color: $black;
-      background-color: $white;
+      background-color: $white !important;
       text-shadow: none;
     }
   }
