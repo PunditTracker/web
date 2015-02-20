@@ -30,8 +30,11 @@ var CompletionWidget = React.createClass({
   },
 
   getInitialState: function() {
+    var nominee = this.props.oscar.nominees[0];
+    nominee.imageUrl = this.buildUrl(nominee);
+
     return {
-      currentNominee: this.props.oscar.nominees[0],
+      currentNominee: nominee,
       currentVote: null
     };
   },
@@ -69,12 +72,15 @@ var CompletionWidget = React.createClass({
     return string;
   },
 
-  updateInfo: function(nominee) {
+  buildUrl: function(nominee) {
     var encodedCategory = this.encode(this.props.oscar.category);
     var encodedTitle = this.encode(nominee.title);
 
-    nominee.imageUrl = '../images/oscars/' + encodedCategory + '/' + encodedTitle + '.jpg';
+    return '../images/oscars/' + encodedCategory + '/' + encodedTitle + '.jpg';
+  },
 
+  updateInfo: function(nominee) {
+    nominee.imageUrl = this.buildUrl(nominee);
     this.setState({ currentNominee: nominee });
   },
 
@@ -136,7 +142,7 @@ var CompletionWidget = React.createClass({
       'submitted': this.userHasAlreadyVoted()
     });
     var backgroundStyles = {
-      'backgroundImage': 'url(' + (!_.isEmpty(this.state.currentNominee) ? this.state.currentNominee.imageUrl : '') + ')'
+      'backgroundImage': 'url(' + this.state.currentNominee.imageUrl + ')'
     };
 
     return (

@@ -39,23 +39,23 @@ var UserGrade = React.createClass({
   },
 
   calculateGrade: function() {
-    var score = (this.props.user.predictionsCorrect/this.props.user.predictionsGraded).toFixed(1);
+    var score = Math.round((this.props.user.predictionsCorrect/this.props.user.predictionsGraded)*10)/10; // 1 decimal place
     var scoreClass = null;
     var letterGrade = null;
 
-    if ( score < 0.21 ) {
+    if ( score < 0.11 ) {
       scoreClass = 'red';
       letterGrade = 'F';
-    } else if ( score > 0.2 && score < 0.41 ) {
+    } else if ( score > 0.1 && score < 0.31 ) {
       scoreClass = 'yellow-green';
       letterGrade = 'D';
-    } else if ( score > 0.4 && score < 0.61 ) {
+    } else if ( score > 0.3 && score < 0.51 ) {
       scoreClass = 'orange';
       letterGrade = 'C';
-    } else if ( score > 0.6 && score < 0.71 ) {
+    } else if ( score > 0.5 && score < 0.76 ) {
       scoreClass = 'yellow';
       letterGrade = 'B';
-    } else if ( score > 0.7 ) {
+    } else if ( score > 0.75 ) {
       scoreClass = 'green';
       letterGrade = 'A';
     }
