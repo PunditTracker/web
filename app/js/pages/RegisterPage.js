@@ -15,7 +15,8 @@ var UserActions         = require('../actions/UserActions');
 var APIUtils            = require('../utils/APIUtils');
 var AuthAPI             = require('../utils/AuthAPI');
 var FileInput           = require('../components/FileInput');
-var AccountPreviewCard  = require('../components/AccountPreviewCard');
+var FixedSidebar        = require('../components/FixedSidebar');
+var ProfileCard         = require('../components/ProfileCard');
 var Spinner             = require('../components/Spinner');
 
 var RegisterPage = React.createClass({
@@ -198,7 +199,7 @@ var RegisterPage = React.createClass({
     return element;
   },
 
-  renderAccountPreviewCard: function() {
+  renderProfileCard: function() {
     var user = {
       email: this.state.email,
       affiliation: this.state.affiliation,
@@ -207,11 +208,12 @@ var RegisterPage = React.createClass({
       avatarUrl: this.state.avatarUrl,
       created: new Date().toISOString(),
       predictionsGraded: 0,
-      predictionsCorrect: 0
+      predictionsCorrect: 0,
+      predictions: []
     };
 
     return (
-      <AccountPreviewCard user={user} />
+      <ProfileCard user={user} />
     );
   },
 
@@ -235,50 +237,53 @@ var RegisterPage = React.createClass({
 
         <DocumentTitle title="Register" />
 
-        <div className="container slim">
+        <div className="container card-grid">
+          <div className="content-with-sidebar left" style={{ 'minHeight': '610px' }}>
+            <div className="fb-register-container">
+              <a className="btn fb text-center" onClick={this.fbLogin}>
+                <i className="fa fa-facebook" /> Register with Facebook
+              </a>
+              <strong className="line-thru">or</strong>
+            </div>
 
-          {this.renderAccountPreviewCard()}
-
-          <div className="fb-register-container">
-            <a className="btn fb text-center" onClick={this.fbLogin}>
-              <i className="fa fa-facebook" /> Register with Facebook
-            </a>
-            <strong className="line-thru">or</strong>
+            <form id="register-form" onSubmit={this.handleSubmit}>
+              <input type="text"
+                     className="nudge-half--bottom"
+                     id="email"
+                     valueLink={this.linkState('email')}
+                     placeholder="Email address"
+                     required />
+              <input type="text"
+                     className="nudge-half--bottom"
+                     id="firstName"
+                     valueLink={this.linkState('firstName')}
+                     placeholder="First Name"
+                     required />
+              <input type="text"
+                     className="nudge-half--bottom"
+                     id="lastName"
+                     valueLink={this.linkState('lastName')}
+                     placeholder="Last Name"
+                     required />
+              <input type="text"
+                     className="nudge-half--bottom"
+                     id="affiliation"
+                     valueLink={this.linkState('affiliation')}
+                     placeholder="Affiliation" />
+              {this.renderImageInput()}
+              {this.renderPasswordInput()}
+              {this.renderConfirmInput()}
+              {this.renderError()}
+              <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
+                <Spinner loading={this.state.loading} />
+                Register
+              </button>
+            </form>
           </div>
 
-          <form id="register-form" onSubmit={this.handleSubmit}>
-            <input type="text"
-                   className="nudge-half--bottom"
-                   id="email"
-                   valueLink={this.linkState('email')}
-                   placeholder="Email address"
-                   required />
-            <input type="text"
-                   className="nudge-half--bottom"
-                   id="firstName"
-                   valueLink={this.linkState('firstName')}
-                   placeholder="First Name"
-                   required />
-            <input type="text"
-                   className="nudge-half--bottom"
-                   id="lastName"
-                   valueLink={this.linkState('lastName')}
-                   placeholder="Last Name"
-                   required />
-            <input type="text"
-                   className="nudge-half--bottom"
-                   id="affiliation"
-                   valueLink={this.linkState('affiliation')}
-                   placeholder="Affiliation" />
-            {this.renderImageInput()}
-            {this.renderPasswordInput()}
-            {this.renderConfirmInput()}
-            {this.renderError()}
-            <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
-              <Spinner loading={this.state.loading} />
-              Register
-            </button>
-          </form>
+          <FixedSidebar className="right">
+            {this.renderProfileCard()}
+          </FixedSidebar>
         </div>
 
       </section>

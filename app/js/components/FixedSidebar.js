@@ -69,7 +69,9 @@ var FixedSidebar = React.createClass({
 
     return (
       <div className={classes} style={styles}>
-        {this.props.children}
+        <div className="inner">
+          {this.props.children}
+        </div>
       </div>
     );
   }

@@ -13,7 +13,8 @@ var AuthenticatedRouteMixin = require('../mixins/AuthenticatedRouteMixin');
 var DocumentTitle           = require('../components/DocumentTitle');
 var FileInput               = require('../components/FileInput');
 var Spinner                 = require('../components/Spinner');
-var AccountPreviewCard      = require('../components/AccountPreviewCard');
+var FixedSidebar            = require('../components/FixedSidebar');
+var ProfileCard             = require('../components/ProfileCard');
 
 var SettingsPage = React.createClass({
 
@@ -204,7 +205,7 @@ var SettingsPage = React.createClass({
     return element;
   },
 
-  renderAccountPreviewCard: function() {
+  renderProfileCard: function() {
     var user = {
       email: this.state.email,
       affiliation: this.state.affiliation,
@@ -214,11 +215,12 @@ var SettingsPage = React.createClass({
       created: new Date().toISOString(),
       predictionsGraded: 0,
       predictionsCorrect: 0,
+      predictions: [],
       score: 0
     };
 
     return (
-      <AccountPreviewCard user={user} />
+      <ProfileCard user={user} />
     );
   },
 
@@ -245,51 +247,56 @@ var SettingsPage = React.createClass({
 
         <DocumentTitle title="Account Settings" />
 
-        <div className="container slim">
-          {this.renderAccountPreviewCard()}
-          <form id="settings-form" onSubmit={this.handleSubmit}>
-            <input type="email"
-                   className="nudge-half--bottom"
-                   id="email"
-                   valueLink={this.linkState('email')}
-                   placeholder="Email address"
-                   disabled />
-            <input type="text"
-                   className="nudge-half--bottom"
-                   id="firstName"
-                   valueLink={this.linkState('firstName')}
-                   placeholder="First Name" />
-            <input type="text"
-                   className="nudge-half--bottom"
-                   id="lastName"
-                   valueLink={this.linkState('lastName')}
-                   placeholder="Last Name" />
-            <input type="text"
-                   className="nudge-half--bottom"
-                   id="affiliation"
-                   valueLink={this.linkState('affiliation')}
-                   placeholder="Affiliation" />
-            <FileInput id="image-url"
-                       className="nudge-half--bottom"
-                       accept="image/x-png, image/gif, image/jpeg"
-                       processFile={this.updateImage} />
-            <input type="password"
-                   className="nudge-half--bottom"
-                   id="lastName"
-                   valueLink={this.linkState('newPassword')}
-                   placeholder="New Password" />
-            <input type="password"
-                   className="nudge-half--bottom"
-                   id="lastName"
-                   valueLink={this.linkState('confirmNewPassword')}
-                   placeholder="Confirm New Password" />
-            {this.renderOldPasswordInput()}
-            {this.renderError()}
-            <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
-              <Spinner loading={this.state.loading} />
-              Update Account
-            </button>
-          </form>
+        <div className="container card-grid">
+          <div className="content-with-sidebar left" style={{ 'minHeight': '610px' }}>
+            <form id="settings-form" onSubmit={this.handleSubmit}>
+              <input type="email"
+                     className="nudge-half--bottom"
+                     id="email"
+                     valueLink={this.linkState('email')}
+                     placeholder="Email address"
+                     disabled />
+              <input type="text"
+                     className="nudge-half--bottom"
+                     id="firstName"
+                     valueLink={this.linkState('firstName')}
+                     placeholder="First Name" />
+              <input type="text"
+                     className="nudge-half--bottom"
+                     id="lastName"
+                     valueLink={this.linkState('lastName')}
+                     placeholder="Last Name" />
+              <input type="text"
+                     className="nudge-half--bottom"
+                     id="affiliation"
+                     valueLink={this.linkState('affiliation')}
+                     placeholder="Affiliation" />
+              <FileInput id="image-url"
+                         className="nudge-half--bottom"
+                         accept="image/x-png, image/gif, image/jpeg"
+                         processFile={this.updateImage} />
+              <input type="password"
+                     className="nudge-half--bottom"
+                     id="lastName"
+                     valueLink={this.linkState('newPassword')}
+                     placeholder="New Password" />
+              <input type="password"
+                     className="nudge-half--bottom"
+                     id="lastName"
+                     valueLink={this.linkState('confirmNewPassword')}
+                     placeholder="Confirm New Password" />
+              {this.renderOldPasswordInput()}
+              {this.renderError()}
+              <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
+                <Spinner loading={this.state.loading} />
+                Update Account
+              </button>
+            </form>
+          </div>
+
+          <FixedSidebar className="right">
+            {this.renderProfileCard()}
+          </FixedSidebar>
         </div>
 
       </section>

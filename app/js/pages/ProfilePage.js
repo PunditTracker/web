@@ -15,7 +15,7 @@ var ViewingProfileStore = require('../stores/ViewingProfileStore');
 var DocumentTitle       = require('../components/DocumentTitle');
 var MasonryContainer    = require('../components/MasonryContainer');
 var FixedSidebar        = require('../components/FixedSidebar');
-var UserGrade           = require('../components/UserGrade');
+var ProfileCard         = require('../components/ProfileCard');
 var PredictionCard      = require('../components/PredictionCard');
 
 var ProfilePage = React.createClass({
@@ -87,45 +87,6 @@ var ProfilePage = React.createClass({
     return element;
   },
 
-  renderBio: function() {
-    var element = null;
-
-    if ( this.state.profile.bio && this.state.profile.bio.length ) {
-      element = (
-        <div className="text">
-          <p>{this.state.profile.bio}</p>
-        </div>
-      );
-    }
-
-    return element;
-  },
-
-  renderSecondRowStats: function() {
-    var element = null;
-
-    if ( false ) {
-      element = (
-        <div className="pure-g stats">
-          <div className="pure-u-1-3">
-            <h6>Hit Rate</h6>
-            <h4>{this.calculateHitRate()}%</h4>
-          </div>
-          <div className="pure-u-1-3">
-            <h6>Yield</h6>
-            <h4>$0.84</h4>
-          </div>
-          <div className="pure-u-1-3">
-            <h6>Coolness</h6>
-            <h4>Max</h4>
-          </div>
-        </div>
-      );
-    }
-
-    return element;
-  },
-
   renderUserPredictions: function() {
     var randomInt;
     var classes;
@@ -166,38 +127,7 @@ var ProfilePage = React.createClass({
 
         <div className="container card-grid">
           <FixedSidebar className="left">
-            <div className="inner">
-              <div className="user-info">
-                {this.renderProfileImage()}
-                <div className="text dark">
-                  <h3>{this.state.profile.firstName + ' ' + this.state.profile.lastName}</h3>
-                  <h5 className="flush">{this.state.profile.affiliation}</h5>
-                </div>
-                {this.renderBio()}
-                <div className="pure-g stats">
-                  <div className="pure-u-1-3">
-                    <h6>Predictions</h6>
-                    <h4>{this.state.profile.predictions.length || 0}</h4>
-                  </div>
-                  <div className="pure-u-1-3">
-                    <h6>Correct</h6>
-                    <h4>{this.state.profile.predictionsCorrect || 0}</h4>
-                  </div>
-                  <div className="pure-u-1-3">
-                    <h6>Wrong</h6>
-                    <h4>{this.state.profile.predictionsGraded - this.state.profile.predictionsCorrect}</h4>
-                  </div>
-                </div>
-                {this.renderSecondRowStats()}
-                <div className="pure-g stats">
-                  <div className="pure-u-1-1 since">
-                    <h6>Predicting Since</h6>
-                    <h4>{moment(this.state.profile.created).format('MMMM YYYY')}</h4>
-                    <UserGrade user={this.state.profile} />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ProfileCard user={this.state.profile} usePlaceholders={false} />
           </FixedSidebar>
 
           <div className="content-with-sidebar right" style={{ 'minHeight': '610px' }}>
