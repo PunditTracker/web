@@ -5,7 +5,6 @@
 
 var React               = require('react/addons');
 var Reflux              = require('reflux');
-var moment              = require('moment');
 var _                   = require('lodash');
 var Navigation          = require('react-router').Navigation;
 
@@ -91,8 +90,6 @@ var ProfilePage = React.createClass({
     var randomInt;
     var classes;
     var element = null;
-
-    console.log('render user predictions. is loading:', this.state.loading);
 
     if ( this.state.profile.predictions && this.state.profile.predictions.length ) {
       element = _.map(this.state.profile.predictions, function(prediction, index) {

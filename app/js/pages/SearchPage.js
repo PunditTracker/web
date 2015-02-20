@@ -8,8 +8,10 @@ var Reflux           = require('reflux');
 var _                = require('lodash');
 var Navigation       = require('react-router').Navigation;
 
+var APIUtils         = require('../utils/APIUtils');
 var DocumentTitle    = require('../components/DocumentTitle');
 var MasonryContainer = require('../components/MasonryContainer');
+var PredictionCard   = require('../components/PredictionCard');
 var GlobalActions    = require('../actions/GlobalActions');
 var SearchStore      = require('../stores/SearchStore');
 
@@ -81,17 +83,40 @@ var SearchPage = React.createClass({
   },
 
   renderResults: function() {
-    var elements = null;
+    var element = null;
+    var randomInt;
+    var containerClasses;
+    var cardClasses;
 
     if ( this.state.results && this.state.results.length ) {
-      elements = _.map(this.state.results, function(result, index) {
+      element = _.map(this.state.results, function(prediction, index) {
+        randomInt = APIUtils.randomIntFromInterval(1, 4);
+        containerClasses = 'masonry-item ';
+
+        if ( randomInt ===  1 ) {
+          containerClasses += 'w-1-3';
+          cardClasses = 'tall-3-2';
+        } else if ( randomInt === 2 ) {
+          containerClasses += 'w-2-3';
+          cardClasses = null;
+        } else {
+          containerClasses += 'w-1-3';
+          cardClasses = null;
+        }
+
         return (
-          <div key={index} />
+          <div className={containerClasses} key={index}>
+            <PredictionCard className={cardClasses} prediction={prediction} />
+          </div>
         );
-      });
+      }.bind(this));
+    } else {
+      element = (
+        <h3 className="text-center">No matching predictions found.</h3>
+      );
     }
 
-    return elements;
+    return element;
   },
 
   render: function() {
