@@ -9,7 +9,7 @@ window.humps = humps;
 
 var APIUtils = {
 
-  root: '//pundittracker-api-dev.elasticbeanstalk.com/v1/',
+  root: '//api.dev.pundittracker.com/v1/',
 
   titleCase: function(str) {
     return str.replace(/\w\S*/g, function(txt) {

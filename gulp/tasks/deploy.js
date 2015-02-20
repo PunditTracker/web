@@ -5,7 +5,7 @@ var awspublish   = require('gulp-awspublish');
 var config       = require('../config');
 var globalConfig = require('../../config');
 
-gulp.task('deploy', function() {
+gulp.task('deploy', ['switchAPI'], function() {
 
   var publisher = awspublish.create(globalConfig.aws);
   var oneWeekInSeconds = 60*60*24*7;
@@ -18,4 +18,5 @@ gulp.task('deploy', function() {
   .pipe(awspublish.gzip())
   .pipe(publisher.publish(headers))
   .pipe(awspublish.reporter());
+
 });
