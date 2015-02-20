@@ -43,19 +43,19 @@ var UserGrade = React.createClass({
     var scoreClass = null;
     var letterGrade = null;
 
-    if ( score < 0.11 ) {
+    if ( score < 0.16 ) {
       scoreClass = 'red';
       letterGrade = 'F';
-    } else if ( score > 0.1 && score < 0.31 ) {
+    } else if ( score > 0.15 && score < 0.31 ) {
       scoreClass = 'yellow-green';
       letterGrade = 'D';
-    } else if ( score > 0.3 && score < 0.51 ) {
+    } else if ( score > 0.3 && score < 0.46 ) {
       scoreClass = 'orange';
       letterGrade = 'C';
-    } else if ( score > 0.5 && score < 0.76 ) {
+    } else if ( score > 0.45 && score < 0.6 ) {
       scoreClass = 'yellow';
       letterGrade = 'B';
-    } else if ( score > 0.75 ) {
+    } else if ( score > 0.59 ) {
       scoreClass = 'green';
       letterGrade = 'A';
     }

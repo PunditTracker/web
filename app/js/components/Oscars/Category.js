@@ -87,9 +87,8 @@ var CompletionWidget = React.createClass({
   doVote: function(category, nominee) {
     if ( !this.userHasAlreadyVoted() ) {
       this.props.doVote(category, nominee);
+      this.scrollToNextCategory();
     }
-
-    this.scrollToNextCategory();
   },
 
   scrollToNextCategory: function() {
