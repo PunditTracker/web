@@ -132,7 +132,7 @@ var PredictionCard = React.createClass({
   render: function() {
     var classes = 'prediction-card ' + this.props.className;
     var backgroundStyles = {
-      'backgroundImage': 'url(' + this.props.prediction.imageUrl || '' + ')'
+      'backgroundImage': 'url(' + (this.props.prediction.imageUrl || '') + ')'
     };
     var noWayClasses = cx({
       'active': this.state.userVote === 'No Way'
