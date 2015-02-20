@@ -1,6 +1,6 @@
 .button, .btn {
 
-  @include button($blue, $white, $ultra-light-grey, 1px solid $blue);
+  @include button($purple, $white, $ultra-light-grey, 1px solid $purple);
 
   &.fb, &.facebook {
     @include button($facebook-blue, $white, $ultra-light-grey, 1px solid $facebook-blue);

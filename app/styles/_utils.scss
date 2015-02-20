@@ -224,6 +224,7 @@ $o6: 1;
 
   &:hover {
     color: $hov;
+    background-color: lighten($bg, 5);
   }
 }
 
