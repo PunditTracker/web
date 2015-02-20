@@ -58,9 +58,9 @@
         position: relative;
         z-index: 500;
         &.category {
-          background-color: $blue;
+          background-color: $purple;
           color: $white;
-          border-color: $blue;
+          border-color: $purple;
           z-index: 550;
           a {
             color: $white;
@@ -124,7 +124,7 @@
           background-color: $ultra-light-grey;
         }
         &.active {
-          background-color: $blue;
+          background-color: $purple;
           color: $white;
         }
         &:not(:last-child) {

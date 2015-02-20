@@ -39,7 +39,7 @@ body {
   }
 
   p > a {
-    color: $blue;
+    color: $purple;
 
     &:hover { text-decoration: underline; }
   }
@@ -58,6 +58,7 @@ body {
   width: 100%;
 }
 
+.purple { background-color: $purple; }
 .blue { background-color: $blue; }
 .red { background-color: $red; }
 .yellow { background-color: $yellow; }
@@ -90,7 +91,7 @@ table {
   @include box-shadow;
 
   thead {
-    background-color: $blue;
+    background-color: $purple;
     color: $white;
   }
 }
