@@ -14,7 +14,6 @@ var cx               = React.addons.classSet;
 var data             = require('../data/oscars_2015');
 var APIUtils         = require('../utils/APIUtils');
 var PredictionAPI    = require('../utils/PredictionAPI');
-var LoginModalMixin  = require('../mixins/LoginModalMixin');
 var DocumentTitle    = require('../components/DocumentTitle');
 var OscarsHero       = require('../components/Oscars/Hero');
 var CompletionWidget = require('../components/Oscars/CompletionWidget');
@@ -22,9 +21,6 @@ var Category         = require('../components/Oscars/Category');
 var Spinner          = require('../components/Spinner');
 
 var OscarsPage = React.createClass({
-
-  // NOTE: LinkedStateMixin is only included for the LoginModal
-  mixins: [React.addons.LinkedStateMixin, LoginModalMixin],
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired,
@@ -107,41 +103,37 @@ var OscarsPage = React.createClass({
       evt.preventDefault();
     }
 
-    if ( _.isEmpty(this.props.currentUser) ) {
-      this.toggleLoginModal();
-    } else {
-      this.setState({ loading: true });
+    this.setState({ loading: true });
 
-      _.forOwn(this.state.unsubmittedVotes, function(nominee, category) {
-        if ( !_.isEmpty(nominee) ) {
-          prediction = {
-            categoryId: APIUtils.getCategoryId('Entertainment', this.props.categories),
-            title: nominee.title + ' will win Best ' + APIUtils.titleCase(category) + '.',
-            tags: ['Oscars', 'Best ' + APIUtils.titleCase(category), nominee.title],
-            deadline: moment('Sunday, February 22nd 2015, 11:59:59 pm', 'dddd, MMMM Do YYYY, h:mm:ss a').toISOString(),
-            SpecialEventYear: 2015,
-            SpecialEventCategory: APIUtils.titleCase(category),
-            SpecialEventSelection: nominee.title
-          };
+    _.forOwn(this.state.unsubmittedVotes, function(nominee, category) {
+      if ( !_.isEmpty(nominee) ) {
+        prediction = {
+          categoryId: APIUtils.getCategoryId('Entertainment', this.props.categories),
+          title: nominee.title + ' will win Best ' + APIUtils.titleCase(category) + '.',
+          tags: ['Oscars', 'Best ' + APIUtils.titleCase(category), nominee.title],
+          deadline: moment('Sunday, February 22nd 2015, 11:59:59 pm', 'dddd, MMMM Do YYYY, h:mm:ss a').toISOString(),
+          SpecialEventYear: 2015,
+          SpecialEventCategory: APIUtils.titleCase(category),
+          SpecialEventSelection: nominee.title
+        };
 
-          promises.push(PredictionAPI.postPrediction(prediction));
+        promises.push(PredictionAPI.postPrediction(prediction));
 
-          submittedVotesCopy[humps.camelize(category)] = nominee;
-        }
-      }.bind(this));
+        submittedVotesCopy[humps.camelize(category)] = nominee;
+      }
+    }.bind(this));
 
-      when.all(promises).then(function() {
-        this.setState({
-          loading: false,
-          submitted: true,
-          error: null,
-          unsubmittedVotes: {},
-          submittedVotes: submittedVotesCopy
-        });
-      }.bind(this)).catch(function(err) {
-        this.setState({ loading: false, error: err.message });
-      }.bind(this));
-    }
+    when.all(promises).then(function() {
+      this.setState({
+        loading: false,
+        submitted: true,
+        error: null,
+        unsubmittedVotes: {},
+        submittedVotes: submittedVotesCopy
+      });
+    }.bind(this)).catch(function(err) {
+      this.setState({ loading: false, error: err.message });
+    }.bind(this));
   },
 
   renderCategories: function() {

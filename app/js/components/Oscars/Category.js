@@ -3,13 +3,18 @@
  */
 'use strict';
 
-var React = require('react/addons');
-var _     = require('lodash');
-var $     = require('jquery');
-var humps = require('humps');
-var cx    = React.addons.classSet;
+var React           = require('react/addons');
+var _               = require('lodash');
+var $               = require('jquery');
+var humps           = require('humps');
+var cx              = React.addons.classSet;
+
+var LoginModalMixin = require('../../mixins/LoginModalMixin');
 
 var CompletionWidget = React.createClass({
+
+  // NOTE: LinkedStateMixin is only included for the LoginModal
+  mixins: [React.addons.LinkedStateMixin, LoginModalMixin],
 
   propTypes: {
     oscar: React.PropTypes.object.isRequired,
@@ -86,8 +91,12 @@ var CompletionWidget = React.createClass({
 
   doVote: function(category, nominee) {
     if ( !this.userHasAlreadyVoted() ) {
-      this.props.doVote(category, nominee);
-      this.scrollToNextCategory();
+      if ( _.isEmpty(this.props.currentUser) ) {
+        this.toggleLoginModal();
+      } else {
+        this.props.doVote(category, nominee);
+        this.scrollToNextCategory();
+      }
     }
   },
 
