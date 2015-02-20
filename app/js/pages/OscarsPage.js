@@ -109,7 +109,7 @@ var OscarsPage = React.createClass({
       if ( !_.isEmpty(nominee) ) {
         prediction = {
           categoryId: APIUtils.getCategoryId('Entertainment', this.props.categories),
-          title: nominee.title + ' will win Best ' + APIUtils.titleCase(category) + '.',
+          title: 'Oscars 2015: ' + nominee.title + ' will win Best ' + APIUtils.titleCase(category) + '.',
           tags: ['Oscars', 'Best ' + APIUtils.titleCase(category), nominee.title],
           deadline: moment('Sunday, February 22nd 2015, 11:59:59 pm', 'dddd, MMMM Do YYYY, h:mm:ss a').toISOString(),
           SpecialEventYear: 2015,
