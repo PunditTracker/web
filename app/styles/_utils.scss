@@ -222,7 +222,7 @@ $o6: 1;
   color: $fg;
   cursor: pointer;
 
-  &:hover {
+  &:not(:disabled):hover {
     color: $hov;
     background-color: lighten($bg, 5);
   }
