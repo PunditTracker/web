@@ -79,17 +79,22 @@ var CompletionWidget = React.createClass({
   },
 
   doVote: function(category, nominee) {
-    var $nextCategory = $(this.getDOMNode()).next('.oscars-category');
-    var $header = $('header.oscars');
-    var headerHeight = $header.outerHeight();
-    var scrollTop;
-
     if ( !this.userHasAlreadyVoted() ) {
       this.props.doVote(category, nominee);
     }
 
+    this.scrollToNextCategory();
+  },
+
+  scrollToNextCategory: function() {
+    var $nextCategory = $(this.getDOMNode()).next('.oscars-category');
+    var $header = $('header.oscars');
+    var headerHeight = $header.outerHeight();
+    var currentBottomMargin = parseFloat($(this.getDOMNode()).css('margin-bottom'));
+    var scrollTop;
+
     if ( $nextCategory && $nextCategory.offset() ) {
-      scrollTop = $nextCategory.offset().top - headerHeight;
+      scrollTop = $nextCategory.offset().top - headerHeight - currentBottomMargin/2;
     } else {
       scrollTop = $('#submit').offset().top - headerHeight;
     }
