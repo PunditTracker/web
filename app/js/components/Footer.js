@@ -45,7 +45,7 @@ var Footer = React.createClass({
           </div>
 
           <div className="pure-u-6-24">
-            <h3 className="flush--top nudge-quarter--bottom">Categories</h3>
+            <h4 className="flush--top nudge-quarter--bottom">Categories</h4>
             <ul>
               <ListLink to="Oscars">Osars</ListLink>
               {this.renderCategoryLinks()}
@@ -53,7 +53,7 @@ var Footer = React.createClass({
           </div>
 
           <div className="pure-u-6-24">
-            <h3 className="flush--top nudge-quarter--bottom">More PT</h3>
+            <h4 className="flush--top nudge-quarter--bottom">More PT</h4>
             <ul>
               <li><Link to="About">About</Link></li>
               <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
