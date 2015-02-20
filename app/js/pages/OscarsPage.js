@@ -139,7 +139,8 @@ var OscarsPage = React.createClass({
   renderCategories: function() {
     return _.map(data, function(oscar, index) {
       return (
-        <Category oscar={oscar}
+        <Category currentUser={this.props.currentUser}
+                  oscar={oscar}
                   index={index}
                   key={index}
                   unsubmittedVotes={this.state.unsubmittedVotes}

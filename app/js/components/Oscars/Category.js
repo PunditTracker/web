@@ -17,6 +17,7 @@ var CompletionWidget = React.createClass({
   mixins: [React.addons.LinkedStateMixin, LoginModalMixin],
 
   propTypes: {
+    currentUser: React.Prop.object.isRequired,
     oscar: React.PropTypes.object.isRequired,
     index: React.PropTypes.number.isRequired,
     unsubmittedVotes: React.PropTypes.object.isRequired,
@@ -26,6 +27,7 @@ var CompletionWidget = React.createClass({
 
   getDefaultProps: function() {
     return {
+      currentUser: {},
       oscar: {},
       index: 0,
       unsubmittedVotes: {},
