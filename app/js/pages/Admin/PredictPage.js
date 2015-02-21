@@ -315,7 +315,7 @@ var PredictPage = React.createClass({
           {this.renderFinalJoiner()}
           {this.renderFinalClause()}
         </h4>
-        <User user={this.props.currentUser} />
+        <User user={{}} />
       </div>
     );
   },

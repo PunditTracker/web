@@ -13,7 +13,7 @@ var HomePageAPI = {
   },
 
   getHeroFeatures: function() {
-    return APIUtils.doGet('homepage/hero');
+    return APIUtils.doGet('hero');
   },
 
   getFeaturedPredictions: function(category) {
@@ -60,7 +60,7 @@ var HomePageAPI = {
   },
 
   getPredictionSet: function() {
-    return APIUtils.doGet('homepage/predictionSet');
+    return APIUtils.doGet('predictionSet');
   }
 
 };
