@@ -43,7 +43,7 @@ var HomePage = React.createClass({
 
   _onFeaturedPredictionsChange: function(err, predictions) {
     if ( err ) {
-      this.setState({ error: err });
+      this.setState({ error: err.message });
     } else {
       this.setState({ featuredPredictions: predictions || [], error: null });
     }
@@ -51,7 +51,7 @@ var HomePage = React.createClass({
 
   _onPredictionSetChange: function(err, predictionSets) {
     if ( err ) {
-      this.setState({ error: err });
+      this.setState({ error: err.message });
     } else {
       this.setState({ predictionSets: predictionSets || [], error: null });
     }

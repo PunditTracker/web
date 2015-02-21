@@ -12,7 +12,7 @@ var HomePageAPI = {
     return APIUtils.doGet('category');
   },
 
-  getHeroPrediction: function() {
+  getHeroFeatures: function() {
     return APIUtils.doGet('homepage/hero');
   },
 
@@ -23,7 +23,7 @@ var HomePageAPI = {
       getUrl += ('/' + category);
     }
 
-    getUrl += '?limit=27'; // Need exactly 27 predictions for current home page orientation
+    getUrl += '?limit=17'; // Need exactly 17 predictions for current home page orientation
 
     return APIUtils.doGet(getUrl);
   },

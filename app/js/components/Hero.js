@@ -3,12 +3,18 @@
  */
 'use strict';
 
-var React            = require('react/addons');
+var React             = require('react/addons');
+var Reflux            = require('reflux');
+var _                 = require('lodash');
 
-var MarchMadnessCard = require('../components/MarchMadnessCard');
-var FeatureCard      = require('../components/FeatureCard');
+var HomePageActions   = require('../actions/HomePageActions');
+var HeroFeaturesStore = require('../stores/HeroFeaturesStore');
+var FeatureCard       = require('../components/FeatureCard');
+var MarchMadnessCard  = require('../components/MarchMadnessCard');
 
 var Hero = React.createClass({
+
+  mixins: [Reflux.ListenerMixin],
 
   propTypes: {
     featuredPrediction: React.PropTypes.object.isRequired,
@@ -22,6 +28,31 @@ var Hero = React.createClass({
     };
   },
 
+  getInitialState: function() {
+    return {
+      features: []
+    };
+  },
+
+  _onFeaturesChange: function(err, features) {
+    if ( err ) {
+      this.setState({ error: err.message });
+    } else {
+      this.setState({ features: features || [], error: null });
+    }
+  },
+
+  componentDidMount: function() {
+    HomePageActions.loadHeroFeatures(this._onFeaturesChange);
+    this.listenTo(HeroFeaturesStore, this._onFeaturesChange);
+  },
+
+  getFeatureAtLocation: function(locationNum) {
+    return _.find(this.state.features, function(feature) {
+      return feature.locationNum === locationNum;
+    });
+  },
+
   render: function() {
     var classes = 'hero ' + this.props.className;
 
@@ -30,20 +61,12 @@ var Hero = React.createClass({
 
         <div className="pure-g card-grid">
           <div className="pure-u-2-3">
-            <FeatureCard className="left large"
-                         header="Who's winning big at the Oscars?"
-                         buttonText="Make Your Predictions"
-                         buttonUrl="/oscars"
-                         backgroundImage="../images/oscars_trophies.jpg" />
+            <FeatureCard className="left large" feature={this.getFeatureAtLocation(1)} />
           </div>
           <div className="pure-u-1-3">
             <div className="pure-g card-grid">
               <div className="pure-u-1 hard--bottom">
-                <FeatureCard className="right"
-                             header="The Association is heating up"
-                             buttonText="See Hot NBA Predictions"
-                             buttonUrl="/search?q=nba"
-                             backgroundImage="../images/nba.jpg" />
+                <FeatureCard className="right" feature={this.getFeatureAtLocation(2)} />
               </div>
             </div>
             <div className="pure-g card-grid">
@@ -61,12 +84,3 @@ var Hero = React.createClass({
 });
 
 module.exports = React.createFactory(Hero);
-
-// <div className="background" style={backgroundStyles} />
-
-// <div className="pure-g full">
-//   <div className="pure-u-1-2" />
-//   <div className="pure-u-1-2 right full">
-//     <PredictionCard className="featured" prediction={this.props.featuredPrediction} />
-//   </div>
-// </div>

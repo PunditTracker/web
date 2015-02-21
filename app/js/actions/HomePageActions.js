@@ -4,7 +4,7 @@ var Reflux = require('reflux');
 
 var HomePageActions = Reflux.createActions([
 
-  'loadHeroPrediction',
+  'loadHeroFeatures',
   'loadFeaturedPredictions',
   'loadFeaturedUsers',
   'loadRecentBlogPosts',
