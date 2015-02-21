@@ -30,7 +30,7 @@ var APIUtils = {
       }).id;
     }
 
-    return id;
+    return parseInt(id);
   },
 
   normalizeResponse: function(response) {
