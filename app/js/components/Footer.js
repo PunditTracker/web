@@ -47,7 +47,7 @@ var Footer = React.createClass({
           <div className="pure-u-6-24">
             <h4 className="flush--top nudge-quarter--bottom">Categories</h4>
             <ul>
-              <ListLink to="Oscars">Osars</ListLink>
+              <ListLink to="Oscars">Oscars</ListLink>
               {this.renderCategoryLinks()}
             </ul>
           </div>

@@ -42,7 +42,7 @@ var Hero = React.createClass({
                 <FeatureCard className="right"
                              header="The Association is heating up"
                              buttonText="See Hot NBA Predictions"
-                             buttonUrl="/sports"
+                             buttonUrl="/search?q=nba"
                              backgroundImage="../images/nba.jpg" />
               </div>
             </div>
