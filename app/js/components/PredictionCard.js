@@ -45,6 +45,10 @@ var PredictionCard = React.createClass({
     }
   },
 
+  hasDeadlinePassed: function() {
+    return new Date(this.props.prediction.deadline) < new Date();
+  },
+
   mapIntToVote: function(voteInt) {
     var returnVote;
 
@@ -107,11 +111,13 @@ var PredictionCard = React.createClass({
   },
 
   doVote: function(vote) {
-    if ( _.isEmpty(this.props.currentUser) ) {
-      this.toggleLoginModal();
-    } else if ( vote.toLowerCase() !== this.state.userVote ) {
-      this.setState({ userVote: vote });
-      PredictionAPI.doVote(this.props.prediction, this.mapVoteToInt(vote));
+    if ( !this.hasDeadlinePassed() ) {
+      if ( _.isEmpty(this.props.currentUser) ) {
+        this.toggleLoginModal();
+      } else if ( vote.toLowerCase() !== this.state.userVote ) {
+        this.setState({ userVote: vote });
+        PredictionAPI.doVote(this.props.prediction, this.mapVoteToInt(vote));
+      }
     }
   },
 
@@ -130,22 +136,19 @@ var PredictionCard = React.createClass({
   },
 
   render: function() {
-    var classes = 'prediction-card ' + this.props.className;
-    var backgroundStyles = {
-      'backgroundImage': 'url(' + (this.props.prediction.imageUrl || '') + ')'
+    var backgroundStyles = { 'backgroundImage': 'url(' + (this.props.prediction.imageUrl || '') + ')' };
+    var noWayClasses = cx({ 'active': this.state.userVote === 'No Way' });
+    var unlikelyClasses = cx({ 'active': this.state.userVote === 'Unlikely' });
+    var likelyClasses = cx({ 'active': this.state.userVote === 'Likely' });
+    var definitelyClasses = cx({ 'active': this.state.userVote === 'Definitely' });
+    var classObject = {
+      'prediction-card': true,
+      'deadline-passed': this.hasDeadlinePassed()
     };
-    var noWayClasses = cx({
-      'active': this.state.userVote === 'No Way'
-    });
-    var unlikelyClasses = cx({
-      'active': this.state.userVote === 'Unlikely'
-    });
-    var likelyClasses = cx({
-      'active': this.state.userVote === 'Likely'
-    });
-    var definitelyClasses = cx({
-      'active': this.state.userVote === 'Definitely'
-    });
+    var classes;
+
+    classObject[this.props.className] = true;
+    classes = cx(classObject);
 
     return (
       <div className={classes}>
