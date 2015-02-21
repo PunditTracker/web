@@ -40,7 +40,7 @@ var ProfilePage = React.createClass({
         predictionsCorrect: 0,
         predictions: []
       },
-      loading: true,
+      loading: false,
       error: null
     };
   },
@@ -63,6 +63,7 @@ var ProfilePage = React.createClass({
     if ( !this.props.params.identifier ) {
       this.transitionTo('Home');
     } else {
+      this.setState({ loading: true });
       GlobalActions.loadProfile(this.props.params.identifier, this._onProfileChange);
       this.listenTo(ViewingProfileStore, this._onProfileChange);
     }

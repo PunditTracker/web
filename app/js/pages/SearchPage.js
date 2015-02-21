@@ -8,12 +8,13 @@ var Reflux           = require('reflux');
 var _                = require('lodash');
 var Navigation       = require('react-router').Navigation;
 
+var GlobalActions    = require('../actions/GlobalActions');
+var SearchStore      = require('../stores/SearchStore');
 var APIUtils         = require('../utils/APIUtils');
 var DocumentTitle    = require('../components/DocumentTitle');
 var MasonryContainer = require('../components/MasonryContainer');
 var PredictionCard   = require('../components/PredictionCard');
-var GlobalActions    = require('../actions/GlobalActions');
-var SearchStore      = require('../stores/SearchStore');
+var Spinner          = require('../components/Spinner');
 
 var SearchPage = React.createClass({
 
@@ -22,7 +23,7 @@ var SearchPage = React.createClass({
   getInitialState: function() {
     return {
       query: this.props.query.q ? this.props.query.q.replace(/(\+)|(%20)/gi, ' ') : '',
-      isSearching: false,
+      loading: false,
       error: null
     };
   },
@@ -52,7 +53,7 @@ var SearchPage = React.createClass({
 
   doSearch: function() {
     this.setState({
-      isSearching: true,
+      loading: true,
       results: []
     }, function() {
       GlobalActions.search(this.state.query, this.doneSearching);
@@ -63,11 +64,11 @@ var SearchPage = React.createClass({
     if ( err ) {
       this.setState({
         error: err.message,
-        isSearching: false
+        loading: false
       });
     } else {
       this.setState({
-        isSearching: false,
+        loading: false,
         results: data,
         error: null
       });
@@ -80,6 +81,26 @@ var SearchPage = React.createClass({
     if ( keyCode === '13' || keyCode === 13 ) {
       this.reloadPage();
     }
+  },
+
+  renderTitle: function() {
+    var element = null;
+
+    if ( this.state.results && this.state.results.length ) {
+      element = (
+        <h4 className="flush--top nudge-half--bottom soft-half--left">
+          Results for: {this.props.query.q.replace(/(\+)|(%20)/gi, ' ')}
+        </h4>
+      );
+    } else if ( !this.state.loading ) {
+      element = (
+        <h4 className="flush--top nudge-half--bottom soft-half--left">
+          No matching predictions found.
+        </h4>
+      );
+    }
+
+    return element;
   },
 
   renderResults: function() {
@@ -110,10 +131,6 @@ var SearchPage = React.createClass({
           </div>
         );
       }.bind(this));
-    } else {
-      element = (
-        <h3 className="text-center">No matching predictions found.</h3>
-      );
     }
 
     return element;
@@ -126,12 +143,22 @@ var SearchPage = React.createClass({
         <DocumentTitle title="Search" />
 
         <div className="container">
-          <input id="search"
-                 className="block full-width nudge-half--bottom"
-                 placeholder="Type to search..."
-                 valueLink={this.linkState('query')}
-                 onKeyPress={this.handleKeyPress} />
-          <h4 className="flush--top nudge-half--bottom">Results for: {this.props.query.q.replace(/(\+)|(%20)/gi, ' ')}</h4>
+          <div className="pure-g card-grid flush--bottom">
+            <div className="pure-u-20-24 hard--bottom">
+              <input id="search"
+                     className="block full-width nudge-half--bottom"
+                     placeholder="Type to search..."
+                     valueLink={this.linkState('query')}
+                     onKeyPress={this.handleKeyPress} />
+            </div>
+            <div className="pure-u-4-24 hard--bottom">
+              <a className="button block text-center" onClick={this.reloadPage}>
+                <Spinner loading={this.state.loading} />
+                Search
+              </a>
+            </div>
+          </div>
+          {this.renderTitle()}
           <MasonryContainer className="card-grid">
             {this.renderResults()}
           </MasonryContainer>
