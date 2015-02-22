@@ -393,6 +393,7 @@ header {
       &:active, &:hover, &:focus {
         color: $oscar-gold-bright;
         border-color: $oscar-gold-bright;
+        background-color: $black;
       }
     }
     position: absolute;

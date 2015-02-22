@@ -8,6 +8,7 @@ var $                = require('jquery');
 var _                = require('lodash');
 var when             = require('when');
 var moment           = require('moment');
+var Navigation       = require('react-router').Navigation;
 var cx               = React.addons.classSet;
 
 var data             = require('../data/oscars_2015');
@@ -20,6 +21,8 @@ var Category         = require('../components/Oscars/Category');
 var Spinner          = require('../components/Spinner');
 
 var OscarsPage = React.createClass({
+
+  mixins: [Navigation],
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired,
@@ -129,10 +132,14 @@ var OscarsPage = React.createClass({
         error: null,
         unsubmittedVotes: {},
         submittedVotes: submittedVotesCopy
-      });
+      }, this.redirectToResults);
     }.bind(this)).catch(function(err) {
       this.setState({ loading: false, error: err.message });
     }.bind(this));
+  },
+
+  redirectToResults: function() {
+    this.transitionTo('Search', {}, { q: 'oscars' });
   },
 
   renderCategories: function() {
