@@ -6,9 +6,9 @@
 var React           = require('react/addons');
 var _               = require('lodash');
 var $               = require('jquery');
-var humps           = require('humps');
 var cx              = React.addons.classSet;
 
+var APIUtils        = require('../../utils/APIUtils');
 var LoginModalMixin = require('../../mixins/LoginModalMixin');
 
 var CompletionWidget = React.createClass({
@@ -47,12 +47,12 @@ var CompletionWidget = React.createClass({
   },
 
   userHasAlreadyVoted: function() {
-    return !_.isEmpty(this.props.submittedVotes[humps.camelize(this.props.oscar.category)]);
+    return !_.isEmpty(this.props.submittedVotes[APIUtils.titleCase(this.props.oscar.category)]);
   },
 
   isSelectedNominee: function(nominee) {
     var votesObject = null;
-    var categoryIndex = humps.camelize(this.props.oscar.category);
+    var categoryIndex = APIUtils.titleCase(this.props.oscar.category);
 
     if ( this.userHasAlreadyVoted() ) {
       votesObject = this.props.submittedVotes;
