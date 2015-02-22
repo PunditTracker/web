@@ -62,7 +62,7 @@ var OscarsPage = React.createClass({
   },
 
   checkForPreviousVotes: function() {
-    APIUtils.doGet('event/oscars/2015').then(function(previousVotes) {
+    APIUtils.doUnnormalizedGet('event/oscars/2015').then(function(previousVotes) {
       this.setState({
         submittedVotes: _.merge(this.state.submittedVotes, previousVotes),
         loading: false,
@@ -118,7 +118,7 @@ var OscarsPage = React.createClass({
 
         promises.push(PredictionAPI.postPrediction(prediction));
 
-        submittedVotesCopy[humps.camelize(category)] = nominee;
+        submittedVotesCopy[APIUtils.titleCase(category)] = nominee;
       }
     }.bind(this));
 

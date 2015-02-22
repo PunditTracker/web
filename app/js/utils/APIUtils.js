@@ -5,8 +5,6 @@ var when    = require('when');
 var _       = require('lodash');
 var humps   = require('humps');
 
-window.humps = humps;
-
 var APIUtils = {
 
   root: '//api.dev.pundittracker.com/v1/',
@@ -55,6 +53,22 @@ var APIUtils = {
         deferred.reject(this.normalizeResponse(res));
       } else {
         deferred.resolve(this.normalizeResponse(res));
+      }
+    }.bind(this));
+
+    return deferred.promise;
+  },
+
+  doUnnormalizedGet: function(path) {
+    var deferred = when.defer();
+
+    request.get(this.root + path)
+    .withCredentials()
+    .end(function(res) {
+      if ( !res.ok ) {
+        deferred.reject(res.body);
+      } else {
+        deferred.resolve(res.body);
       }
     }.bind(this));
 

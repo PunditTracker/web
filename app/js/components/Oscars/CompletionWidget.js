@@ -3,10 +3,11 @@
  */
 'use strict';
 
-var React = require('react/addons');
-var _     = require('lodash');
-var $     = require('jquery');
-var humps = require('humps');
+var React    = require('react/addons');
+var _        = require('lodash');
+var $        = require('jquery');
+
+var APIUtils = require('../../utils/APIUtils');
 
 var CompletionWidget = React.createClass({
 
@@ -25,11 +26,11 @@ var CompletionWidget = React.createClass({
   },
 
   userHasAlreadyVoted: function(category) {
-    return !_.isEmpty(this.props.submittedVotes[humps.camelize(category)]);
+    return !_.isEmpty(this.props.submittedVotes[APIUtils.titleCase(category)]);
   },
 
   userHasVoted: function(category) {
-    return this.userHasAlreadyVoted(category) || !_.isEmpty(this.props.unsubmittedVotes[humps.camelize(category)]);
+    return this.userHasAlreadyVoted(category) || !_.isEmpty(this.props.unsubmittedVotes[APIUtils.titleCase(category)]);
   },
 
   scrollToCategory: function(elementString) {
