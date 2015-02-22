@@ -97,12 +97,14 @@ var PredictionCard = React.createClass({
 
   getCategoryName: function() {
     var categoryIdentifier = this.props.prediction.category || this.props.prediction.categoryId;
+    var match;
     var name;
 
     if ( categoryIdentifier % 1 === 0 ) { // is an integer, needs to be mapped to name
-      name = _.find(CategoriesStore.categories, function(category) {
+      match = _.find(CategoriesStore.categories, function(category) {
         return category.id === categoryIdentifier;
-      }).name;
+      });
+      name = match ? match.name : null;
     } else {
       name = categoryIdentifier;
     }
