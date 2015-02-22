@@ -2,6 +2,7 @@ $oscar-gold: rgba(215, 200, 109, 0.7);
 $oscar-gold-bright: rgba(215, 200, 109, 1);
 
 .go-to-submit {
+  z-index: 999;
   display: none !important;
   @include transition(0.4s);
   position: fixed;
@@ -215,6 +216,8 @@ $oscar-gold-bright: rgba(215, 200, 109, 1);
     z-index: 475;
     padding: 1rem 2rem;
     @include transform(translate(-50%, -50%));
+    @include transition(0.3s);
+    opacity: 1;
     @include text-shadow;
     font-size: 2.25rem;
     font-family: $serif;
@@ -224,6 +227,10 @@ $oscar-gold-bright: rgba(215, 200, 109, 1);
       color: $black;
       background-color: $white !important;
       text-shadow: none;
+    }
+
+    &.hide {
+      opacity: 0;
     }
   }
 }

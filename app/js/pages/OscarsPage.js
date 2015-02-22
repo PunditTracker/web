@@ -156,6 +156,10 @@ var OscarsPage = React.createClass({
       'scroll': true,
       'show': !_.isEmpty(this.state.unsubmittedVotes)
     });
+    var finalSubmitButtonClasses = cx({
+      'button': true,
+      'hide': _.isEmpty(this.state.unsubmittedVotes)
+    });
 
     return (
       <section className="oscars">
@@ -188,7 +192,7 @@ var OscarsPage = React.createClass({
         <div id="submit">
           <div className="background">
             <div className="scrim">
-              <button className="button" onClick={this.submitPredictions}>
+              <button className={finalSubmitButtonClasses} onClick={this.submitPredictions}>
                 <Spinner loading={this.state.loading} />
                 Submit Predictions
               </button>
