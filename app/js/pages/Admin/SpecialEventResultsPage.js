@@ -60,7 +60,7 @@ var SpecialEventsResultsPage = React.createClass({
         result = {
           year: 2015,
           category: category,
-          selection: nominee.title
+          selection: nominee
         };
 
         promises.push(APIUtils.doPost('admin/special_event/result/set', result));
