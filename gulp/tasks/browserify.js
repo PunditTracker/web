@@ -18,7 +18,7 @@ function buildScript(file, watch) {
 
   var bundler = browserify({
     entries: [config.sourceDir + 'js/' + file],
-    debug: true,
+    debug: !global.isProd,
     cache: {},
     packageCache: {},
     fullPaths: true
@@ -54,6 +54,6 @@ function buildScript(file, watch) {
 gulp.task('browserify', function() {
 
   // Only run watchify if NOT production
-  return buildScript('index.js', !global.isProd);
+  return buildScript('index.js', global.doWatch);
 
 });

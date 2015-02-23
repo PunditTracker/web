@@ -5,7 +5,7 @@ var awspublish   = require('gulp-awspublish');
 var config       = require('../config');
 var globalConfig = require('../../config');
 
-gulp.task('deploy', ['switchAPI', 'cdnizer'], function() {
+gulp.task('deploy', ['prod', 'switchAPI', 'cdnizer'], function() {
 
   var publisher = awspublish.create(globalConfig.aws);
   var oneWeekInSeconds = 60*60*24*7;

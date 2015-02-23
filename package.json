@@ -16,9 +16,7 @@
     "morgan": "^1.5.0",
     "body-parser": "^1.9.2",
     "method-override": "^2.3.0",
-    "compression": "^1.2.0"
-  },
-  "devDependencies": {
+    "compression": "^1.2.0",
     "browserify": "^5.10.0",
     "gulp": "^3.8.8",
     "gulp-rename": "^1.2.0",
@@ -54,6 +52,7 @@
     "gulp-shell": "^0.3.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "gulp dev"
   }
 }

@@ -1,11 +1,19 @@
 'use strict';
 
-var gulp  = require('gulp');
-var shell = require('gulp-shell');
+var gulp        = require('gulp');
+var runSequence = require('run-sequence');
+var shell       = require('gulp-shell');
 
 gulp.task('server', function() {
 
-  return gulp.src('')
-  .pipe(shell('npm start'));
+  var startServer = function() {
+    return gulp.src('')
+    .pipe(shell('npm start'));
+  };
+
+  global.doWatch = true;
+
+  return runSequence('dev', 'watch', startServer);
+
 
 });

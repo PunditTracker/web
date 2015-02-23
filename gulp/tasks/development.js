@@ -7,9 +7,9 @@ gulp.task('dev', ['clean'], function(cb) {
 
   cb = cb || function() {};
 
-  global.isProd = false;
+  global.doWatch = false;
+  global.isProd  = false;
 
-  // Run all tasks once, then start to watch
-  runSequence('sass', 'imagemin', 'browserify', 'copyFonts', 'copyIndex', 'copyIcons', 'watch', 'server', cb);
+  return runSequence(['sass', 'imagemin', 'browserify', 'copyFonts', 'copyIndex', 'copyIcons'], cb);
 
 });
