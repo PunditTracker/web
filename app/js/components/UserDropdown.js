@@ -43,6 +43,21 @@ var UserDropdown = React.createClass({
     }
   },
 
+  renderAdminLink: function() {
+    var element = null;
+
+    if ( this.props.currentUser.isAdmin ) {
+      element = (
+        <li>
+          Admin
+          <Link to="AdminIndex" />
+        </li>
+      );
+    }
+
+    return element;
+  },
+
   renderDropdown: function() {
     var classes = cx({
       'dropdown': true,
@@ -51,6 +66,7 @@ var UserDropdown = React.createClass({
 
     return (
       <ul className={classes}>
+        {this.renderAdminLink()}
         <li>
           My Profile
           <Link to="Profile" params={{ identifier: this.props.currentUser.id }} />

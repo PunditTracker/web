@@ -19,7 +19,9 @@ var ProfilePage        = require('./pages/ProfilePage');
 var SettingsPage       = require('./pages/SettingsPage');
 //var PredictionPage = require('./pages/PredictionPage');
 var AboutPage          = require('./pages/AboutPage');
+var AdminIndexPage     = require('./pages/Admin/IndexPage');
 var AdminPredictPage   = require('./pages/Admin/PredictPage');
+var AdminResultsPage   = require('./pages/Admin/ResultsPage');
 var NotFoundPage       = require('./pages/NotFoundPage');
 var OscarsPage         = require('./pages/OscarsPage');
 
@@ -46,7 +48,11 @@ module.exports = (
 
     <Route name='About' path='/about' handler ={AboutPage} />
 
+    <Route name='AdminIndex' path='/admin' handler={AdminIndexPage} />
+
     <Route name='AdminPredict' path='/admin/predict' handler={AdminPredictPage} />
+
+    <Route name='AdminResults' path='/admin/results' handler={AdminResultsPage} />
 
     <Route name='Oscars' path='/oscars' handler={OscarsPage} />
 

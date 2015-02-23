@@ -24,6 +24,9 @@
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 
+.float-left { float: left; }
+.float-right { float: right; }
+
 .nudge { margin: $full-space !important; }
 .nudge-half { margin: $half-space !important; }
 .nudge--top { margin-top: $full-space !important; }
