@@ -11,7 +11,8 @@ gulp.task('server', function() {
     .pipe(shell('npm start'));
   };
 
-  global.doWatch = true;
+  global.doWatch  = true;
+  global.isServer = true;
 
   return runSequence('dev', 'watch', startServer);
 
