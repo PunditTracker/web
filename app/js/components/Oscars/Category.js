@@ -21,8 +21,7 @@ var CompletionWidget = React.createClass({
     oscar: React.PropTypes.object.isRequired,
     index: React.PropTypes.number.isRequired,
     unsubmittedVotes: React.PropTypes.object.isRequired,
-    submittedVotes: React.PropTypes.object.isRequired,
-    doVote: React.PropTypes.func.isRequired
+    submittedVotes: React.PropTypes.object.isRequired
   },
 
   getDefaultProps: function() {
@@ -31,8 +30,7 @@ var CompletionWidget = React.createClass({
       oscar: {},
       index: 0,
       unsubmittedVotes: {},
-      submittedVotes: {},
-      doVote: function() {}
+      submittedVotes: {}
     };
   },
 
@@ -135,8 +133,7 @@ var CompletionWidget = React.createClass({
         <li className={classes}
             id={id}
             key={index}
-            onMouseOver={this.updateInfo.bind(null, nominee)}
-            onClick={this.doVote.bind(null, this.props.oscar.category, nominee)}>
+            onMouseOver={this.updateInfo.bind(null, nominee)}>
           <h4><i className="fa fa-check boxed" />{nominee.title}</h4>
         </li>
       );

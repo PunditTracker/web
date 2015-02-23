@@ -166,10 +166,6 @@ $oscar-gold-bright: rgba(215, 200, 109, 1);
         color: rgba(0,0,0,0);
       }
     }
-    &:hover {
-      background-color: $ultra-light-grey;
-      cursor: pointer;
-    }
     &.selected {
       color: $black;
       background-color: $oscar-gold;

@@ -9,7 +9,6 @@ var _                = require('lodash');
 var when             = require('when');
 var moment           = require('moment');
 var Navigation       = require('react-router').Navigation;
-var cx               = React.addons.classSet;
 
 var data             = require('../data/oscars_2015');
 var APIUtils         = require('../utils/APIUtils');
@@ -18,7 +17,6 @@ var DocumentTitle    = require('../components/DocumentTitle');
 var OscarsHero       = require('../components/Oscars/Hero');
 var CompletionWidget = require('../components/Oscars/CompletionWidget');
 var Category         = require('../components/Oscars/Category');
-var Spinner          = require('../components/Spinner');
 
 var OscarsPage = React.createClass({
 
@@ -47,11 +45,13 @@ var OscarsPage = React.createClass({
   },
 
   componentDidMount: function() {
-    $(window).scroll(this.handleScroll);
+    // $(window).scroll(this.handleScroll);
 
-    if ( !_.isEmpty(this.props.currentUser) ) {
-      this.checkForPreviousVotes();
-    }
+    // if ( !_.isEmpty(this.props.currentUser) ) {
+    //   this.checkForPreviousVotes();
+    // }
+
+    this.transitionTo('Search', {}, { q: 'Oscars 2015' });
   },
 
   componentDidUpdate: function(prevProps) {
@@ -157,17 +157,6 @@ var OscarsPage = React.createClass({
   },
 
   render: function() {
-    var buttonClasses = cx({
-      'button': true,
-      'go-to-submit': true,
-      'scroll': true,
-      'show': !_.isEmpty(this.state.unsubmittedVotes)
-    });
-    var finalSubmitButtonClasses = cx({
-      'button': true,
-      'hide': _.isEmpty(this.state.unsubmittedVotes)
-    });
-
     return (
       <section className="oscars">
 
@@ -176,11 +165,6 @@ var OscarsPage = React.createClass({
         <OscarsHero />
 
         <div className="content oscars">
-          <button className={buttonClasses} onClick={this.submitPredictions}>
-            <Spinner loading={this.state.loading} />
-            Predict Now
-          </button>
-
           <CompletionWidget categories={data}
                             unsubmittedVotes={this.state.unsubmittedVotes}
                             submittedVotes={this.state.submittedVotes} />
@@ -198,12 +182,7 @@ var OscarsPage = React.createClass({
 
         <div id="submit">
           <div className="background">
-            <div className="scrim">
-              <button className={finalSubmitButtonClasses} onClick={this.submitPredictions}>
-                <Spinner loading={this.state.loading} />
-                Submit Predictions
-              </button>
-            </div>
+            <div className="scrim" />
           </div>
         </div>
 
