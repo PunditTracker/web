@@ -152,7 +152,7 @@ var SearchPage = React.createClass({
                      onKeyPress={this.handleKeyPress} />
             </div>
             <div className="pure-u-4-24 hard--bottom">
-              <a className="button block text-center" onClick={this.reloadPage}>
+              <a className="button block full-width text-center" onClick={this.reloadPage}>
                 <Spinner loading={this.state.loading} />
                 Search
               </a>
