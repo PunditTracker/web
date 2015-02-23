@@ -26,6 +26,7 @@ var SpecialEventsResultsPage = React.createClass({
     return {
       results: {},
       loading: false,
+      submitted: false,
       error: null
     };
   },
@@ -51,6 +52,7 @@ var SpecialEventsResultsPage = React.createClass({
     var result;
 
     evt.preventDefault();
+
     this.setState({ loading: true, error: null });
 
     _.forOwn(this.state.results, function(nominee, category) {
@@ -58,7 +60,7 @@ var SpecialEventsResultsPage = React.createClass({
         result = {
           year: 2015,
           category: category,
-          selection: nominee.title
+          selection: nominee
         };
 
         promises.push(APIUtils.doPost('admin/special_event/result/set', result));
@@ -68,6 +70,7 @@ var SpecialEventsResultsPage = React.createClass({
     when.all(promises).then(function() {
       this.setState({
         loading: false,
+        submitted: true,
         error: null
       });
     }.bind(this)).catch(function(err) {
@@ -113,6 +116,41 @@ var SpecialEventsResultsPage = React.createClass({
     return elements;
   },
 
+  renderError: function() {
+    var element = null;
+
+    if ( this.state.error ) {
+      element = (
+        <div className="error-container text-center nudge-half--bottom">
+          {this.state.error}
+        </div>
+      );
+    }
+
+    return element;
+  },
+
+  renderForm: function() {
+    return (
+      <form id="results-form" onSubmit={this.submitResults}>
+        {this.renderCategoryRows()}
+        {this.renderError()}
+        <button type="submit"
+                className="btn float-right"
+                disabled={_.isEmpty(this.state.results) || this.state.loading ? 'true' : ''}>
+          <Spinner loading={this.state.loading} />
+          Submit Results
+        </button>
+      </form>
+    );
+  },
+
+  renderSuccessMessage: function() {
+    return (
+      <h2>Results successfully submitted!</h2>
+    );
+  },
+
   render: function() {
     return (
       <section className="content no-hero results predict">
@@ -121,13 +159,7 @@ var SpecialEventsResultsPage = React.createClass({
 
         <div className="container">
           <h3 className="flush--top">Event Results: Oscars 2015</h3>
-          <form id="results-form" onSubmit={this.submitResults}>
-            {this.renderCategoryRows()}
-            <button type="submit" className="btn float-right" disabled={_.isEmpty(this.state.results) ? 'true' : ''}>
-              <Spinner loading={this.state.loading} />
-              Submit Results
-            </button>
-          </form>
+          {this.state.submitted ? this.renderSuccessMessage() : this.renderForm()}
         </div>
 
       </section>

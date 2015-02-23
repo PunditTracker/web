@@ -152,7 +152,9 @@ var LoginModalMixin = {
                    placeholder="Password"
                    required />
             {this.renderError()}
-            <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
+            <button type="submit"
+                   className="btn block full-width"
+                   disabled={this.state.loggingIn || this.state.submitDisabled ? 'true' : ''}>
               <Spinner loading={this.state.loggingIn} />
               Login
             </button>

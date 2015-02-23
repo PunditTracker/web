@@ -276,7 +276,9 @@ var RegisterPage = React.createClass({
               {this.renderPasswordInput()}
               {this.renderConfirmInput()}
               {this.renderError()}
-              <button type="submit" className="btn block full-width" disabled={this.state.submitDisabled ? 'true' : ''}>
+              <button type="submit"
+                      className="btn block full-width"
+                      disabled={this.state.loading || this.state.submitDisabled ? 'true' : ''}>
                 <Spinner loading={this.state.loading} />
                 Register
               </button>
