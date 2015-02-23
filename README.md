@@ -10,6 +10,5 @@ Frontend web application for PunditTracker.
 - Run `npm install` from root project directory
 - Run `sudo npm install -g gulp` if you have never installed Gulp
 - Run `sudo npm install -g supervisor` if you have never installed Supervisor
-- Run `gulp prod` from root project directory to generate the `/build` directory (the compiled application)
-- Run `npm start` from the root project directory to begin serving the application to `localhost:3000`
+- Run `gulp server` from root project directory to generate the `/build` directory (the compiled application) and start serving the application locally
 - Navigate to `localhost:3000` to view/use the application
