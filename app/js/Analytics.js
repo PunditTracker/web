@@ -5,8 +5,13 @@ var ga = require('./ga');
 var Analytics = {
 
   send: function(state) {
-    console.log('send:', state.path);
-    ga('send', 'pageview', { 'page': state.path });
+    var subdomain = window.location.host.split('.')[0];
+    var hostname = window.location.hostname;
+
+    // Don't log development visits
+    if ( subdomain !== 'dev' && hostname !== 'localhost' ) {
+      ga('send', 'pageview', { 'page': state.path });
+    }
   }
 
 };
