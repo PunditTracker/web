@@ -119,18 +119,6 @@ var CategoryPage = React.createClass({
 
         <DocumentTitle title={this.state.title} />
 
-        <div className="pure-g card-grid">
-          <div className="pure-u-1 full-width-outer flush--bottom">
-            <div className="prediction-set-card" style={featuredStyles}>
-              <div className="background"><div className="scrim" /></div>
-              <h3 className="question">Featured {this.state.title} Predictions</h3>
-              <div className="pure-g card-grid">
-                {this.renderFeaturedPredictions()}
-              </div>
-            </div>
-          </div>
-        </div>
-
         <MasonryContainer className="card-grid">
           {this.renderPredictions()}
         </MasonryContainer>
@@ -142,3 +130,15 @@ var CategoryPage = React.createClass({
 });
 
 module.exports = React.createFactory(CategoryPage);
+
+// <div className="pure-g card-grid">
+//   <div className="pure-u-1 full-width-outer flush--bottom">
+//     <div className="prediction-set-card" style={featuredStyles}>
+//       <div className="background"><div className="scrim" /></div>
+//       <h3 className="question">Featured {this.state.title} Predictions</h3>
+//       <div className="pure-g card-grid">
+//         {this.renderFeaturedPredictions()}
+//       </div>
+//     </div>
+//   </div>
+// </div>

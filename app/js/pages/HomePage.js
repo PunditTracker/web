@@ -112,12 +112,6 @@ var HomePage = React.createClass({
             </div>
           </MasonryContainer>
 
-          <div className="pure-g card-grid flush--ends">
-            <div className="pure-u-1 full-width-outer flush--bottom">
-              <PredictionSet set={this.state.predictionSets[0]} />
-            </div>
-          </div>
-
           <MasonryContainer className="card-grid flush--bottom">
             <div className="masonry-item w-1-3">
               <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.featuredPredictions[10]} />
@@ -157,3 +151,9 @@ var HomePage = React.createClass({
 });
 
 module.exports = React.createFactory(HomePage);
+
+// <div className="pure-g card-grid flush--ends">
+//   <div className="pure-u-1 full-width-outer flush--bottom">
+//     <PredictionSet set={this.state.predictionSets[0]} />
+//   </div>
+// </div>
