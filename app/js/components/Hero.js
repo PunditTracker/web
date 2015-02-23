@@ -61,7 +61,7 @@ var Hero = React.createClass({
 
         <div className="pure-g card-grid">
           <div className="pure-u-2-3">
-            <FeatureCard className="left large" feature={this.getFeatureAtLocation(1)} />
+            <MarchMadnessCard className="left large feature-card" />
           </div>
           <div className="pure-u-1-3">
             <div className="pure-g card-grid">
@@ -71,7 +71,7 @@ var Hero = React.createClass({
             </div>
             <div className="pure-g card-grid">
               <div className="pure-u-1">
-                <MarchMadnessCard className="feature-card right" />
+                <FeatureCard className="right" feature={this.getFeatureAtLocation(3)} />
               </div>
             </div>
           </div>

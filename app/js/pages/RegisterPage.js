@@ -75,7 +75,7 @@ var RegisterPage = React.createClass({
         lastName: response.last_name,
         avatarUrl: 'https://graph.facebook.com/' + response.id + '/picture?width=400&height=400',
         facebookId: response.id
-      });
+      }, component.handleSubmit);
     });
   },
 
@@ -131,8 +131,10 @@ var RegisterPage = React.createClass({
   handleSubmit: function(evt) {
     var passwordsMatch = this.state.isFacebookRegister || (this.state.password.length && this.state.password === this.state.confirmPassword);
 
-    evt.stopPropagation();
-    evt.preventDefault();
+    if ( evt ) {
+      evt.stopPropagation();
+      evt.preventDefault();
+    }
 
     if ( !passwordsMatch ) {
       this.setState({ error: 'Those passwords do not match!' });
