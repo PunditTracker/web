@@ -125,7 +125,7 @@ var Header = React.createClass({
                 {this.renderLogo()}
               </Link>
               <ul className="categories">
-                <ListLink to="Oscars" className="oscars">Oscars</ListLink>
+                <ListLink to="Search" query={{ q: 'Oscars 2015' }} className="oscars">Oscars</ListLink>
                 {this.renderCategoryLinks()}
                 <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
               </ul>
