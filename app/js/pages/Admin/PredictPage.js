@@ -278,7 +278,7 @@ var PredictPage = React.createClass({
         </fieldset>
         <input name="login" defaultValue="yes" hidden />
         {this.renderError()}
-        <button type="submit" className="btn" disabled={this.state.submitDisabled ? 'true' : ''}>
+        <button type="submit" className="btn" disabled={this.state.loading || this.state.submitDisabled ? 'true' : ''}>
           <Spinner loading={this.state.loading} />
           Publish
         </button>
