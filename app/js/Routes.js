@@ -21,7 +21,7 @@ var SettingsPage       = require('./pages/SettingsPage');
 var AboutPage          = require('./pages/AboutPage');
 var AdminIndexPage     = require('./pages/Admin/IndexPage');
 var AdminPredictPage   = require('./pages/Admin/PredictPage');
-var AdminResultsPage   = require('./pages/Admin/ResultsPage');
+var AdminResultsPage   = require('./pages/Admin/SpecialEventResultsPage');
 var NotFoundPage       = require('./pages/NotFoundPage');
 var OscarsPage         = require('./pages/OscarsPage');
 

@@ -14,7 +14,7 @@ var AdminRouteMixin = require('../../mixins/AdminRouteMixin');
 var DocumentTitle   = require('../../components/DocumentTitle');
 var Spinner         = require('../../components/Spinner');
 
-var ResultsPage = React.createClass({
+var SpecialEventsResultsPage = React.createClass({
 
   mixins: [AdminRouteMixin],
 
@@ -132,4 +132,4 @@ var ResultsPage = React.createClass({
 
 });
 
-module.exports = React.createFactory(ResultsPage);
+module.exports = React.createFactory(SpecialEventsResultsPage);
