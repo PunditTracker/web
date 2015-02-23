@@ -123,6 +123,23 @@ var PredictionCard = React.createClass({
     }
   },
 
+  renderTitle: function() {
+    var element = null;
+
+    // Any larger cards should use <h3 />
+    if ( this.props.className && this.props.className.length ) {
+      element = (
+        <h3 className="text">{this.props.prediction.title}</h3>
+      );
+    } else {
+      element = (
+        <h4 className="text">{this.props.prediction.title}</h4>
+      );
+    }
+
+    return element;
+  },
+
   renderTags: function() {
     var element = null;
 
@@ -170,7 +187,7 @@ var PredictionCard = React.createClass({
           </ul>
         </div>
 
-        <h4 className="text">{this.props.prediction.title}</h4>
+        {this.renderTitle()}
 
         <div className="voting">
           <div className="prompt">
