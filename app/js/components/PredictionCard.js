@@ -154,6 +154,27 @@ var PredictionCard = React.createClass({
     return element;
   },
 
+  renderStateIcon: function() {
+    var containerClasses = cx({
+      'state-icon-container': true,
+      'ungraded': this.props.prediction.state === 0 || this.props.prediction.state === 1,
+      'correct': this.props.prediction.state === 2,
+      'incorrect': this.props.prediction.state === 3
+    });
+    var iconClasses = cx({
+      'fa': true,
+      'fa-ellipsis-h': this.props.prediction.state === 0 || this.props.prediction.state === 1,
+      'fa-check': this.props.prediction.state === 2,
+      'fa-remove': this.props.prediction.state === 3
+    });
+
+    return (
+      <div className={containerClasses}>
+        <i className={iconClasses} />
+      </div>
+    );
+  },
+
   render: function() {
     var backgroundStyles = { 'backgroundImage': 'url(' + (this.props.prediction.imageUrl || '') + ')' };
     var noWayClasses = cx({ 'active': this.state.userVote === 'No Way' });
@@ -171,6 +192,8 @@ var PredictionCard = React.createClass({
 
     return (
       <div className={classes}>
+
+        {this.renderStateIcon()}
 
         <div className="background" style={backgroundStyles}>
           <div className="scrim" />

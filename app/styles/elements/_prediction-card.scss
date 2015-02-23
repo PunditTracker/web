@@ -9,6 +9,33 @@
   @include background-cover();
   @include box-shadow;
 
+  .state-icon-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    margin-left: -15px;
+    margin-top: -15px;
+    line-height: 30px;
+    text-align: center;
+
+    @include border-radius(100%);
+    color: $white;
+
+    &.ungraded {
+      background-color: $grey;
+    }
+
+    &.incorrect {
+      background-color: $red;
+    }
+
+    &.correct {
+      background-color: $green;
+    }
+  }
+
   .text {
     margin: 0;
   }
