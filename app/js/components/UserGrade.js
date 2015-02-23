@@ -39,7 +39,10 @@ var UserGrade = React.createClass({
   },
 
   calculateGrade: function() {
-    var score = Math.round((this.props.user.predictionsCorrect/this.props.user.predictionsGraded)*10)/10; // 1 decimal place
+    var predictionsGraded = this.props.user.predictionsGraded || 1;
+    // Default to a 'C' score if user hasn't had any predictions graded yet
+    var predictionsCorrect = this.props.user.predictionsGraded ? this.props.user.predictionsCorrect : 0.35;
+    var score = Math.round((predictionsCorrect/predictionsGraded)*10)/10; // 1 decimal place
     var scoreClass = null;
     var letterGrade = null;
 
