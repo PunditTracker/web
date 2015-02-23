@@ -10,9 +10,10 @@
   @include box-shadow;
 
   .state-icon-container {
+    z-index: 600;
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: $user-height + $prediction-padding;
+    right: $prediction-padding;
     width: 30px;
     height: 30px;
     margin-left: -15px;
@@ -20,6 +21,7 @@
     line-height: 30px;
     text-align: center;
 
+    @include transition(0.2s);
     @include border-radius(100%);
     color: $white;
 
@@ -108,20 +110,6 @@
     width: 100%;
     @include transition(0.2s);
 
-    .prompt {
-      text-transform: uppercase;
-      position: absolute;
-      display: none;
-      top: -1rem;
-      font-size: 0.8rem;
-      line-height: $user-height;
-      height: $user-height;
-      vertical-align: middle;
-      text-align: center;
-      width: 100%;
-      color: $dark-grey;
-    }
-
     .options {
       z-index: 3000;
       position: absolute;
@@ -167,6 +155,9 @@
   }
 
   &:hover, &.hover {
+    .voting + .state-icon-container {
+      @include translate-y(-$voting-height);
+    }
     .voting .options {
       top: 0;
     }

@@ -155,32 +155,73 @@ var PredictionCard = React.createClass({
   },
 
   renderStateIcon: function() {
-    var containerClasses = cx({
-      'state-icon-container': true,
-      'ungraded': this.props.prediction.state === 0 || this.props.prediction.state === 1,
-      'correct': this.props.prediction.state === 2,
-      'incorrect': this.props.prediction.state === 3
-    });
-    var iconClasses = cx({
-      'fa': true,
-      'fa-ellipsis-h': this.props.prediction.state === 0 || this.props.prediction.state === 1,
-      'fa-check': this.props.prediction.state === 2,
-      'fa-remove': this.props.prediction.state === 3
-    });
+    var containerClasses = 'state-icon-container';
+    var iconClasses = 'fa';
+    var title;
+
+    switch ( this.props.prediction.state ) {
+      case ( 0 ):
+        title = 'Awaiting Grading';
+        containerClasses += ' ungraded';
+        iconClasses += ' fa-ellipsis-h';
+        break;
+      case ( 1 ):
+        title = 'Awaiting Grading';
+        containerClasses += ' ungraded';
+        iconClasses += ' fa-ellipsis-h';
+        break;
+      case ( 2 ):
+        title = 'Correct';
+        containerClasses += ' correct';
+        iconClasses += ' fa-check';
+        break;
+      case ( 3 ):
+        title = 'Incorrect';
+        containerClasses += ' incorrect';
+        iconClasses += ' fa-remove';
+        break;
+    }
 
     return (
-      <div className={containerClasses}>
+      <div className={containerClasses} title={title}>
         <i className={iconClasses} />
       </div>
     );
   },
 
-  render: function() {
-    var backgroundStyles = { 'backgroundImage': 'url(' + (this.props.prediction.imageUrl || '') + ')' };
+  renderVotingOptions: function() {
+    var element = null;
     var noWayClasses = cx({ 'active': this.state.userVote === 'No Way' });
     var unlikelyClasses = cx({ 'active': this.state.userVote === 'Unlikely' });
     var likelyClasses = cx({ 'active': this.state.userVote === 'Likely' });
     var definitelyClasses = cx({ 'active': this.state.userVote === 'Definitely' });
+
+    if ( this.props.prediction.state === 0 ) {
+      element = (
+        <div className="voting">
+          <ul className="options">
+            <li className={noWayClasses}>
+              <span className="option" onClick={this.doVote.bind(null, 'No Way')}>No Way</span>
+            </li>
+            <li className={unlikelyClasses}>
+              <span className="option" onClick={this.doVote.bind(null, 'Unlikely')}>Unlikely</span>
+            </li>
+            <li className={likelyClasses}>
+              <span className="option" onClick={this.doVote.bind(null, 'Likely')}>Likely</span>
+            </li>
+            <li className={definitelyClasses}>
+              <span className="option" onClick={this.doVote.bind(null, 'Definitely')}>Definitely</span>
+            </li>
+          </ul>
+        </div>
+      );
+    }
+
+    return element;
+  },
+
+  render: function() {
+    var backgroundStyles = { 'backgroundImage': 'url(' + (this.props.prediction.imageUrl || '') + ')' };
     var classObject = {
       'prediction-card': true,
       'deadline-passed': this.hasDeadlinePassed()
@@ -192,8 +233,6 @@ var PredictionCard = React.createClass({
 
     return (
       <div className={classes}>
-
-        {this.renderStateIcon()}
 
         <div className="background" style={backgroundStyles}>
           <div className="scrim" />
@@ -212,25 +251,9 @@ var PredictionCard = React.createClass({
 
         {this.renderTitle()}
 
-        <div className="voting">
-          <div className="prompt">
-            <p><i className="fa fa-bar-chart"></i></p>
-          </div>
-          <ul className="options">
-            <li className={noWayClasses}>
-              <span className="option" onClick={this.doVote.bind(null, 'No Way')}>No Way</span>
-            </li>
-            <li className={unlikelyClasses}>
-              <span className="option" onClick={this.doVote.bind(null, 'Unlikely')}>Unlikely</span>
-            </li>
-            <li className={likelyClasses}>
-              <span className="option" onClick={this.doVote.bind(null, 'Likely')}>Likely</span>
-            </li>
-            <li className={definitelyClasses}>
-              <span className="option" onClick={this.doVote.bind(null, 'Definitely')}>Definitely</span>
-            </li>
-          </ul>
-        </div>
+        {this.renderVotingOptions()}
+
+        {this.renderStateIcon()}
 
         <User user={this.props.prediction.creator} />
 
