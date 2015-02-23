@@ -52,6 +52,7 @@ var SpecialEventsResultsPage = React.createClass({
     var result;
 
     evt.preventDefault();
+
     this.setState({ loading: true, error: null });
 
     _.forOwn(this.state.results, function(nominee, category) {
@@ -134,7 +135,9 @@ var SpecialEventsResultsPage = React.createClass({
       <form id="results-form" onSubmit={this.submitResults}>
         {this.renderCategoryRows()}
         {this.renderError()}
-        <button type="submit" className="btn float-right" disabled={_.isEmpty(this.state.results) ? 'true' : ''}>
+        <button type="submit"
+                className="btn float-right"
+                disabled={_.isEmpty(this.state.results) || this.state.loading ? 'true' : ''}>
           <Spinner loading={this.state.loading} />
           Submit Results
         </button>
