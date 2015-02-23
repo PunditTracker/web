@@ -70,23 +70,28 @@ var MarchMadnessCard = React.createClass({
 
   render: function() {
     var classes = 'march-madness-card ' + this.props.className;
+    var backgroundStyles = {
+      'backgroundImage': 'url(//assets.pundittracker.com/hero_pic/basket.png)'
+    };
 
     return (
       <div className={classes}>
 
-        <div className="background"><div className="scrim" /></div>
+        <div className="background" style={backgroundStyles}>
+          <div className="scrim" />
+        </div>
 
         <div className="pure-g card-grid">
           <div className="pure-u-1">
             <h3 className="header">Don't miss out on <br />the Madness.</h3>
             <form className="pick" onSubmit={this.handleSubmit}>
-                <h2 className="h1 flush">{this.state.subscribed ? 'You are signed up!' : ''/*'Sign up for updates.'*/}</h2>
+                <h2 className="h1 flush">{this.state.subscribed ? 'You are signed up!' : 'Sign up for updates.'}</h2>
                 {this.renderInput()}
             </form>
           </div>
         </div>
 
-        <div className="mm-logo"><img src="../images/march_madness.png" /></div>
+        <div className="mm-logo"><img src="//assets.pundittracker.com/hero_pic/march_madness_logo.png" /></div>
 
       </div>
     );
