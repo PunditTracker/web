@@ -26,6 +26,33 @@ var FeatureCard = React.createClass({
     };
   },
 
+  renderTitle: function() {
+    var element = null;
+
+    if ( this.props.feature.title && this.props.feature.title.length ) {
+      element = (
+        <h3 className="header">{this.props.feature.title}</h3>
+      );
+    }
+
+    return element;
+  },
+
+  renderButton: function() {
+    var hasButtonUrl = this.props.feature.buttonUrl && this.props.feature.buttonUrl.length;
+    var hasButtonText = this.props.feature.buttonText && this.props.feature.buttonText.length;
+    var buttonText = hasButtonText ? this.props.feature.buttonText : 'Go';
+    var element = null;
+
+    if ( hasButtonUrl ) {
+      element = (
+        <Link to={this.props.feature.buttonUrl} className="button">{buttonText}</Link>
+      );
+    }
+
+    return element;
+  },
+
   render: function() {
     var backgroundStyles = {
       'backgroundImage': this.props.feature.imageUrl ? 'url(' + this.props.feature.imageUrl + ')' : null
@@ -38,9 +65,9 @@ var FeatureCard = React.createClass({
             <div className="scrim" />
         </div>
         <div className="inner">
-          <h3 className="header">{this.props.feature.title}</h3>
+          {this.renderTitle()}
           <div className="go">
-            <Link to={this.props.feature.buttonUrl || '/'} className="button">{this.props.feature.buttonText}</Link>
+            {this.renderButton()}
           </div>
         </div>
       </div>
