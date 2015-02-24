@@ -16,16 +16,8 @@ var HomePageAPI = {
     return APIUtils.doGet('hero');
   },
 
-  getFeaturedPredictions: function(category) {
-    var getUrl = 'prediction/featured';
-
-    if ( category ) {
-      getUrl += ('/' + category);
-    }
-
-    getUrl += '?limit=17'; // Need exactly 17 predictions for current home page orientation
-
-    return APIUtils.doGet(getUrl);
+  getPredictions: function(category) {
+    return APIUtils.doGet('prediction/homepage');
   },
 
   getFeaturedUsers: function(category) {

@@ -7,7 +7,7 @@ var React                    = require('react/addons');
 var Reflux                   = require('reflux');
 
 var HomePageActions          = require('../actions/HomePageActions');
-var FeaturedPredictionsStore = require('../stores/FeaturedPredictionsStore');
+var HomePagePredictionsStore = require('../stores/HomePagePredictionsStore');
 var PredictionSetsStore      = require('../stores/PredictionSetsStore');
 var DocumentTitle            = require('../components/DocumentTitle');
 var MasonryContainer         = require('../components/MasonryContainer');
@@ -35,17 +35,17 @@ var HomePage = React.createClass({
 
   getInitialState: function() {
     return {
-      featuredPredictions: [],
+      predictions: [],
       predictionSets: [],
       error: null
     };
   },
 
-  _onFeaturedPredictionsChange: function(err, predictions) {
+  _onHomePagePredictionsChange: function(err, predictions) {
     if ( err ) {
       this.setState({ error: err.message });
     } else {
-      this.setState({ featuredPredictions: predictions || [], error: null });
+      this.setState({ predictions: predictions || [], error: null });
     }
   },
 
@@ -58,10 +58,20 @@ var HomePage = React.createClass({
   },
 
   componentDidMount: function() {
-    HomePageActions.loadFeaturedPredictions(this._onFeaturedPredictionsChange);
+    HomePageActions.loadPredictions(this._onHomePagePredictionsChange);
     HomePageActions.loadPredictionSets(this._onPredictionSetChange);
-    this.listenTo(FeaturedPredictionsStore, this._onFeaturedPredictionsChange);
+    this.listenTo(HomePagePredictionsStore, this._onHomePagePredictionsChange);
     this.listenTo(PredictionSetsStore, this._onPredictionSetChange);
+  },
+
+  getPredictionAtIndex: function(index) {
+    var prediction = {};
+
+    if ( this.state.predictions && this.state.predictions[index] ) {
+      prediction = this.state.predictions[index].prediction;
+    }
+
+    return prediction;
   },
 
   render: function() {
@@ -75,70 +85,70 @@ var HomePage = React.createClass({
         <div className="content">
           <MasonryContainer className="card-grid flush--bottom">
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[0]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(0)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[1]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(1)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[2]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(2)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.featuredPredictions[3]} />
+              <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.getPredictionAtIndex(3)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[4]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(4)} />
             </div>
             <div className="masonry-item w-1-3">
               <RecentBlogPosts />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[5]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(5)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[6]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(6)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[7]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(7)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[8]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(8)} />
             </div>
             <div className="masonry-item w-1-3">
               <FeaturedUsers />
             </div>
             <div className="masonry-item w-2-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[9]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(9)} />
             </div>
           </MasonryContainer>
 
           <MasonryContainer className="card-grid flush--bottom">
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.featuredPredictions[10]} />
+              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.getPredictionAtIndex(1)} />
             </div>
             <div className="masonry-item w-1-3">
               <CategoryLinkCard category="finance" />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[11]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(1)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[12]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(1)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.state.featuredPredictions[13]} />
+              <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.getPredictionAtIndex(1)} />
             </div>
             <div className="masonry-item w-1-3">
               <FacebookCard />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[14]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(1)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.state.featuredPredictions[15]} />
+              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.getPredictionAtIndex(1)} />
             </div>
             <div className="masonry-item w-2-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.state.featuredPredictions[16]} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(1)} />
             </div>
           </MasonryContainer>
 
