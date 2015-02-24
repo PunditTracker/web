@@ -100,7 +100,10 @@ var ProfilePage = React.createClass({
 
         return (
           <div className="masonry-item w-1-2" key={index}>
-            <PredictionCard currentUser={this.props.currentUser} prediction={prediction} className={classes} />
+            <PredictionCard currentUser={this.props.currentUser}
+                            prediction={prediction}
+                            className={classes}
+                            renderGrade={false} />
           </div>
         );
       }.bind(this));

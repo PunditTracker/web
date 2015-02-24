@@ -67,12 +67,8 @@
     .affiliation {
       margin: 0.25rem 0 0;
     }
-  }
 
-  &:hover {
-    .grade {
-      top: 0;
-    }
+    &.no-grade { right: 0; }
   }
 
 }

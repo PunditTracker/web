@@ -22,14 +22,16 @@ var PredictionCard = React.createClass({
   propTypes: {
     currentUser: React.PropTypes.object.isRequired,
     prediction: React.PropTypes.object.isRequired,
-    className: React.PropTypes.string
+    className: React.PropTypes.string,
+    renderGrade: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
       currentUser: {},
       prediction: {},
-      className: ''
+      className: '',
+      renderGrade: true
     };
   },
 
@@ -255,7 +257,7 @@ var PredictionCard = React.createClass({
 
         {this.renderStateIcon()}
 
-        <User user={this.props.prediction.creator} />
+        <User user={this.props.prediction.creator} renderGrade={this.props.renderGrade} />
 
       </div>
     );
