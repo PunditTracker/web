@@ -7,7 +7,7 @@ var React       = require('react/addons');
 var Navigation  = require('react-router').Navigation;
 var Link        = React.createFactory(require('react-router').Link);
 var $           = require('jquery');
-var cx          = React.addons.classSet;
+var cx          = require('classnames');
 
 var UserActions = require('../actions/UserActions');
 

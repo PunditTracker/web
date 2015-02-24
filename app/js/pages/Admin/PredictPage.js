@@ -5,7 +5,7 @@
 
 var React           = require('react/addons');
 var _               = require('lodash');
-var cx              = React.addons.classSet;
+var cx              = require('classnames');
 var Link            = React.createFactory(require('react-router').Link);
 var Pikaday         = require('pikaday');
 

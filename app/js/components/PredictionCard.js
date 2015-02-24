@@ -5,7 +5,7 @@
 
 var React           = require('react/addons');
 var _               = require('lodash');
-var cx              = React.addons.classSet;
+var cx              = require('classnames');
 
 var APIUtils        = require('../utils/APIUtils');
 var PredictionAPI   = require('../utils/PredictionAPI');
