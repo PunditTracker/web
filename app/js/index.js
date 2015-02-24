@@ -6,8 +6,10 @@ var Router    = require('react-router');
 
 var routes    = require('./Routes');
 var Analytics = require('./Analytics');
+var subdomain = window.location.host.split('.')[0];
+var hostname  = window.location.hostname;
 
-if ( process.env.NODE_ENV !== 'production' ) {
+if ( subdomain === 'dev' || hostname === 'localhost' ) {
   window.React = React; // Enable React devtools
 }
 
