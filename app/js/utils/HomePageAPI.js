@@ -16,8 +16,8 @@ var HomePageAPI = {
     return APIUtils.doGet('hero');
   },
 
-  getPredictions: function(category) {
-    return APIUtils.doGet('prediction/homepage');
+  getPredictions: function() {
+    return APIUtils.doGet('prediction/page/0');
   },
 
   getFeaturedUsers: function(category) {

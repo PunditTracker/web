@@ -52,25 +52,36 @@ var CategoryPage = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
+    var hasNewCategory = this.props.params.category !== nextProps.params.category;
+    var hasNewCategories = nextProps.categories && nextProps.categories.length !== this.props.categories.length;
+    var categoryId;
+
     if ( !this.props.params.category ) {
       this.transitionTo('Home');
-    } else if ( this.props.params.category !== nextProps.params.category ) {
+    } else if ( hasNewCategory || hasNewCategories ) {
+      categoryId = APIUtils.getCategoryId(nextProps.params.category, nextProps.categories);
+
       this.setState({
         title: APIUtils.titleCase(nextProps.params.category),
         predictions: [],
         loading: true
       });
-      GlobalActions.loadCategory(nextProps.params.category, this._onPredictionsChange);
+
+      GlobalActions.loadCategory(categoryId, this._onPredictionsChange);
     }
   },
 
   componentDidMount: function() {
+    var categoryId;
+
     if ( !this.props.params.category ) {
       this.transitionTo('Home');
-    } else {
-      GlobalActions.loadCategory(this.props.params.category, this._onPredictionsChange);
-      this.listenTo(ViewingCategoryStore, this._onPredictionsChange);
+    } else if ( this.props.params.category && this.props.categories.length ) {
+      categoryId = APIUtils.getCategoryId(this.props.params.category, this.props.categories);
+      GlobalActions.loadCategory(categoryId, this._onPredictionsChange);
     }
+
+    this.listenTo(ViewingCategoryStore, this._onPredictionsChange);
   },
 
   renderFeaturedPredictions: function() {
