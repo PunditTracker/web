@@ -97,7 +97,7 @@ var CategoryPage = React.createClass({
     var containerClasses;
     var cardClasses;
 
-    return _.map(this.state.predictions, function(prediction, index) {
+    return _.map(this.state.predictions, function(item, index) {
       randomInt = APIUtils.randomIntFromInterval(1, 4);
       containerClasses = 'masonry-item ';
 
@@ -114,7 +114,7 @@ var CategoryPage = React.createClass({
 
       return (
         <div className={containerClasses} key={index}>
-          <PredictionCard className={cardClasses} prediction={prediction} />
+          <PredictionCard className={cardClasses} prediction={item.prediction} />
         </div>
       );
     });
