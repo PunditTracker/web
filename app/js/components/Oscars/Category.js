@@ -6,7 +6,7 @@
 var React           = require('react/addons');
 var _               = require('lodash');
 var $               = require('jquery');
-var cx              = React.addons.classSet;
+var cx              = require('classnames');
 
 var APIUtils        = require('../../utils/APIUtils');
 var LoginModalMixin = require('../../mixins/LoginModalMixin');
