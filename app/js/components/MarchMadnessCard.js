@@ -4,7 +4,7 @@
 'use strict';
 
 var React     = require('react/addons');
-var cx        = React.addons.classSet;
+var cx        = require('classnames');
 var validator = require('email-validator');
 
 var APIUtils  = require('../utils/APIUtils');
