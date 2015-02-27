@@ -100,20 +100,6 @@ var Header = React.createClass({
     return element;
   },
 
-  renderLogo: function() {
-    var element = (
-      <img className="logo-image" src="../images/logo_black.png" alt="PunditTracker logo" />
-    );
-
-    if ( this.props.className === 'oscars' ) {
-      element = (
-        <img className="logo-image" src="../images/logo_white.png" alt="PunditTracker logo" />
-      );
-    }
-
-    return element;
-  },
-
   render: function() {
     return (
       <header className={this.props.className}>
@@ -122,10 +108,9 @@ var Header = React.createClass({
           <div className="pure-g">
             <div className="pure-u-1">
               <Link to="Home">
-                {this.renderLogo()}
+                <img className="logo-image" src="../images/logo_black.png" alt="PunditTracker logo" />
               </Link>
               <ul className="categories">
-                <ListLink to="Search" query={{ q: 'Oscars 2015' }} className="oscars">Oscars</ListLink>
                 {this.renderCategoryLinks()}
                 <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
               </ul>

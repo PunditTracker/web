@@ -23,7 +23,6 @@ var AdminIndexPage     = require('./pages/Admin/IndexPage');
 var AdminPredictPage   = require('./pages/Admin/PredictPage');
 var AdminResultsPage   = require('./pages/Admin/SpecialEventResultsPage');
 var NotFoundPage       = require('./pages/NotFoundPage');
-var OscarsPage         = require('./pages/OscarsPage');
 
 module.exports = (
   <Route handler={App}>
@@ -53,8 +52,6 @@ module.exports = (
     <Route name='AdminPredict' path='/admin/predict' handler={AdminPredictPage} />
 
     <Route name='AdminResults' path='/admin/results' handler={AdminResultsPage} />
-
-    <Route name='Oscars' path='/oscars' handler={OscarsPage} />
 
     <Route name='Category' path='/:category' handler={CategoryPage} />
 
