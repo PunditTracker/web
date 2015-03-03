@@ -22,6 +22,6 @@ gulp.task('deploy', function() {
     .pipe(awspublish.reporter());
   };
 
-  runSequence('prod', 'switchAPI', 'cdnizer', uploadToS3);
+  return runSequence('prod', 'switchAPI', 'cdnizer', uploadToS3);
 
 });
