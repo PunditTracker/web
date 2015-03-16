@@ -54,40 +54,19 @@ var App = React.createClass({
     this.listenTo(CurrentUserStore, this._onUserChange);
   },
 
-  renderOscarsHeader: function() {
-    var element = null;
-
-    if ( this.isActive('Oscars') ) {
-      element = (
-        <Header currentUser={this.state.currentUser}
-                categories={this.state.categories}
-                className='oscars' />
-      );
-    }
-
-    return element;
-  },
-
   render: function() {
-    var headerClass = this.isActive('Oscars') ? 'hidden-for-oscars' : '';
-    var footerClass = this.isActive('Oscars') ? 'oscars' : '';
-
     return (
       <div>
 
         <Header currentUser={this.state.currentUser}
-                categories={this.state.categories}
-                className={headerClass} />
-
-        {this.renderOscarsHeader()}
+                categories={this.state.categories} />
 
         <RouteHandler params={this.props.params}
                       query={this.props.query}
                       currentUser={this.state.currentUser}
                       categories={this.state.categories} />
 
-        <Footer categories={this.state.categories}
-                className={footerClass} />
+        <Footer categories={this.state.categories} />
 
       </div>
     );
