@@ -6,7 +6,7 @@ var runSequence  = require('run-sequence');
 var config       = require('../config');
 var globalConfig = require('../../config');
 
-gulp.task('deploy', function() {
+gulp.task('deploy', ['prod'], function() {
 
   var uploadToS3 = function() {
     var publisher = awspublish.create(globalConfig.aws);
@@ -22,6 +22,6 @@ gulp.task('deploy', function() {
     .pipe(awspublish.reporter());
   };
 
-  runSequence('prod', 'switchAPI', 'cdnizer', uploadToS3);
+  return runSequence('switchAPI', 'cdnizer', uploadToS3);
 
 });

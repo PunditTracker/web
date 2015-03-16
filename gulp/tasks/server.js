@@ -8,7 +8,7 @@ gulp.task('server', function() {
 
   var startServer = function() {
     return gulp.src('')
-    .pipe(shell('npm start'));
+      .pipe(shell('npm start'));
   };
 
   global.doWatch  = true;
