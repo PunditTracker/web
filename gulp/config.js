@@ -3,7 +3,7 @@
 module.exports = {
 
   'scripts': {
-    'src': './app/js/**/*.js',
+    'src': './js/**/*.js',
     'dest': './build/js/'
   },
 

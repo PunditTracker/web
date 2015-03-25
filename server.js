@@ -5,7 +5,21 @@ var morgan         = require('morgan');
 var compression    = require('compression');
 var methodOverride = require('method-override');
 var bodyParser     = require('body-parser');
+var nodeJSX        = require('node-jsx');
+var React          = require('react');
+var Router         = require('react-router');
+var DocumentTitle  = require('react-document-title');
+var ReactAsync     = require('react-async');
 var app            = express();
+var Routes;
+var Html;
+
+/* ====================================================== */
+
+// Require JSX files as node modules
+nodeJSX.install({ extension: '.jsx' });
+Routes = require('./js/Routes.jsx');
+Html = require('./js/Html.jsx');
 
 /* ====================================================== */
 
@@ -40,9 +54,23 @@ app.use('*/images', express.static(__dirname + '/build/images'));
 app.use('*/css', express.static(__dirname + '/build/css'));
 app.use('*/fonts', express.static(__dirname + '/build/fonts'));
 
-// Serve index.html for all main routes to leave routing up to react-router
-app.all('/*', function(req, res) {
-    res.sendFile('index.html', { root: 'build' });
+// Serve React app for all main routes
+app.get('/*' ,function(req,res) {
+  Router.run(Routes, req.path, function(Handler, state) {
+    var title = DocumentTitle.rewind();
+    var HandlerComponent = React.createElement(Handler, { params: state.params, query: state.query });
+    var HtmlComponent;
+
+    ReactAsync.renderToStringAsync(HandlerComponent, function(err, markup/*, data*/) {
+      if ( err ) {
+        console.trace('error rendering to string:', err);
+        res.status(500).json({ status: 500, message: err });
+      } else {
+        HtmlComponent = React.createElement(Html, { title: title, markup: markup });
+        res.send('<!DOCTYPE html>\n' + React.renderToString(HtmlComponent));
+      }
+    });
+  });
 });
 
 /* ====================================================== */
