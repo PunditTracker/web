@@ -17,7 +17,7 @@ var RecentBlogPostsStore = Reflux.createStore({
     console.log('get blog posts');
 
     HomePageAPI.getRecentBlogPosts().then(function(posts) {
-      console.log('got posts:', posts);
+      console.log('successfully got posts');
       this.posts = posts;
       cb(null, this.posts);
       this.trigger(null, this.posts);

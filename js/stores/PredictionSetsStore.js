@@ -13,13 +13,13 @@ var PredictionSetsStore = Reflux.createStore({
     this.listenTo(HomePageActions.loadPredictionSets, this.loadSets);
   },
 
-  loadSets: function(category, cb) {
+  loadSets: function(cb) {
     cb = cb || function() {};
 
     console.log('get prediction sets');
 
-    HomePageAPI.getPredictionSet(category).then(function(predictionSets) {
-      console.log('got prediction sets:', predictionSets);
+    HomePageAPI.getPredictionSet().then(function(predictionSets) {
+      console.log('successfully got prediction sets');
       this.sets = predictionSets;
       cb(null, this.sets);
       this.trigger(null, this.sets);
