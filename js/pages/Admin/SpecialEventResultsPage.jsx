@@ -1,6 +1,7 @@
 'use strict';
 
 var React           = require('react/addons');
+var ReactAsync      = require('react-async');
 var _               = require('lodash');
 var $               = require('jquery');
 var when            = require('when');
@@ -13,19 +14,19 @@ var Spinner         = require('../../components/Spinner.jsx');
 
 var SpecialEventsResultsPage = React.createClass({
 
-  mixins: [AdminRouteMixin],
+  mixins: [ReactAsync.Mixin, AdminRouteMixin],
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired
   },
 
-  getInitialState: function() {
-    return {
+  getInitialStateAsync: function(cb) {
+    cb(null, {
       results: {},
       loading: false,
       submitted: false,
       error: null
-    };
+    });
   },
 
   updateCategoryResult: function(evt) {

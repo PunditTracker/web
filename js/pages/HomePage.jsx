@@ -2,6 +2,7 @@
 
 var React                    = require('react/addons');
 var ReactAsync               = require('react-async');
+var Preloaded                = ReactAsync.Preloaded;
 var Reflux                   = require('reflux');
 var DocumentTitle            = require('react-document-title');
 
@@ -79,7 +80,9 @@ var HomePage = React.createClass({
       <DocumentTitle title="Home">
       <section className="page home">
 
-        <Hero />
+        <Preloaded>
+          <Hero />
+        </Preloaded>
 
         <div className="content">
           <MasonryContainer className="card-grid flush--bottom">
@@ -99,7 +102,9 @@ var HomePage = React.createClass({
               <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(4)} />
             </div>
             <div className="masonry-item w-1-3">
-              <RecentBlogPosts />
+              <Preloaded>
+                <RecentBlogPosts />
+              </Preloaded>
             </div>
             <div className="masonry-item w-1-3">
               <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(5)} />
@@ -114,7 +119,9 @@ var HomePage = React.createClass({
               <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(8)} />
             </div>
             <div className="masonry-item w-1-3">
-              <FeaturedUsers />
+              <Preloaded>
+                <FeaturedUsers />
+              </Preloaded>
             </div>
             <div className="masonry-item w-2-3">
               <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(9)} />

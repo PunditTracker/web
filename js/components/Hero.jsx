@@ -1,6 +1,7 @@
 'use strict';
 
 var React             = require('react/addons');
+var ReactAsync        = require('react-async');
 var Reflux            = require('reflux');
 var _                 = require('lodash');
 
@@ -11,7 +12,7 @@ var MarchMadnessCard  = require('../components/MarchMadnessCard.jsx');
 
 var Hero = React.createClass({
 
-  mixins: [Reflux.ListenerMixin],
+  mixins: [ReactAsync.Mixin, Reflux.ListenerMixin],
 
   propTypes: {
     featuredPrediction: React.PropTypes.object.isRequired,
@@ -25,10 +26,12 @@ var Hero = React.createClass({
     };
   },
 
-  getInitialState: function() {
-    return {
-      features: []
-    };
+  getInitialStateAsync: function(cb) {
+    HomePageActions.loadHeroFeatures(function(err, features) {
+      cb(null, {
+        features: features || []
+      });
+    });
   },
 
   _onFeaturesChange: function(err, features) {
@@ -40,7 +43,6 @@ var Hero = React.createClass({
   },
 
   componentDidMount: function() {
-    HomePageActions.loadHeroFeatures(this._onFeaturesChange);
     this.listenTo(HeroFeaturesStore, this._onFeaturesChange);
   },
 

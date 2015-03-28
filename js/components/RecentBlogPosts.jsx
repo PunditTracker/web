@@ -1,6 +1,7 @@
 'use strict';
 
 var React                = require('react/addons');
+var ReactAsync           = require('react-async');
 var Reflux               = require('reflux');
 var _                    = require('lodash');
 var moment               = require('moment');
@@ -10,12 +11,15 @@ var RecentBlogPostsStore = require('../stores/RecentBlogPostsStore');
 
 var RecentBlogPosts = React.createClass({
 
-  mixins: [Reflux.ListenerMixin],
+  mixins: [ReactAsync.Mixin, Reflux.ListenerMixin],
 
-  getInitialState: function() {
-    return {
-      recentBlogPosts: []
-    };
+  getInitialStateAsync: function(cb) {
+    HomePageActions.loadRecentBlogPosts(function(err, posts) {
+      cb(null, {
+        recentBlogPosts: posts ? posts.slice(0,3) : [],
+        error: null
+      });
+    });
   },
 
   _onBlogPostsChange: function(err, posts) {
@@ -23,12 +27,14 @@ var RecentBlogPosts = React.createClass({
       this.setState({ error: err });
     } else {
       console.log('posts change:', posts);
-      this.setState({ recentBlogPosts: posts ? posts.slice(0, 3) : [], error: null });
+      this.setState({
+        recentBlogPosts: posts ? posts.slice(0, 3) : [],
+        error: null
+      });
     }
   },
 
   componentDidMount: function() {
-    HomePageActions.loadRecentBlogPosts(this._onBlogPostsChange);
     this.listenTo(RecentBlogPostsStore, this._onBlogPostsChange);
   },
 

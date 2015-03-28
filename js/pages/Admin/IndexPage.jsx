@@ -1,6 +1,7 @@
 'use strict';
 
 var React           = require('react/addons');
+var ReactAsync      = require('react-async');
 var DocumentTitle   = require('react-document-title');
 
 var AdminRouteMixin = require('../../mixins/AdminRouteMixin');
@@ -8,18 +9,18 @@ var ListLink        = require('../../components/ListLink.jsx');
 
 var IndexPage = React.createClass({
 
-  mixins: [AdminRouteMixin],
+  mixins: [ReactAsync.Mixin, AdminRouteMixin],
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired
   },
 
-  getInitialState: function() {
-    return {
+  getInitialStateAsync: function(cb) {
+    cb(null, {
       results: {},
       loading: false,
       error: null
-    };
+    });
   },
 
   render: function() {

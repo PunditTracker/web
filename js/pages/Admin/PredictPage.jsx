@@ -1,6 +1,7 @@
 'use strict';
 
 var React           = require('react/addons');
+var ReactAsync      = require('react-async');
 var _               = require('lodash');
 var cx              = require('classnames');
 var Link            = require('react-router').Link;
@@ -15,7 +16,7 @@ var Spinner         = require('../../components/Spinner.jsx');
 
 var PredictPage = React.createClass({
 
-  mixins: [AdminRouteMixin, React.addons.LinkedStateMixin],
+  mixins: [ReactAsync.Mixin, AdminRouteMixin, React.addons.LinkedStateMixin],
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired,
@@ -34,8 +35,8 @@ var PredictPage = React.createClass({
     };
   },
 
-  getInitialState: function() {
-    return {
+  getInitialStateAsync: function(cb) {
+    cb(null, {
       posted: false,
       creatorId: null,
       prediction: null,
@@ -49,7 +50,7 @@ var PredictPage = React.createClass({
       createdPrediction: null,
       loading: false,
       error: null
-    };
+    });
   },
 
   componentDidMount: function() {
