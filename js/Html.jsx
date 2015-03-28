@@ -27,26 +27,26 @@ var Html = React.createClass({
           version : 'v2.2'
         });
       };
-    }
 
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    }
   },
 
   render: function() {
     var title = this.props.title ? this.props.title + ' \u2014 PunditTracker' : 'PunditTracker';
 
     return (
-      <html class="no-js" lang="">
+      <html className="no-js" lang="">
 
         <head>
-          <meta charset="utf-8" />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta charSet="utf-8" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="description" content="" />
           <meta name="viewport" content="width=device-width" />
 
