@@ -38,9 +38,15 @@ var FeatureCard = React.createClass({
     var hasButtonUrl = this.props.feature.buttonUrl && this.props.feature.buttonUrl.length;
     var hasButtonText = this.props.feature.buttonText && this.props.feature.buttonText.length;
     var buttonText = hasButtonText ? this.props.feature.buttonText : 'Go';
+    var httpRegex = new RegExp('http', 'gi');
+    var wwwRegex = new RegExp('www\.', 'gi');
     var element = null;
 
-    if ( hasButtonUrl ) {
+    if ( hasButtonUrl && (httpRegex.test(this.props.feature.buttonUrl) || wwwRegex.test(this.props.feature.buttonUrl)) ) {
+      element = (
+        <a href={this.props.feature.buttonUrl} target="_blank" className="button">{buttonText}</a>
+      );
+    } else if ( hasButtonUrl ) {
       element = (
         <Link to={this.props.feature.buttonUrl} className="button">{buttonText}</Link>
       );
