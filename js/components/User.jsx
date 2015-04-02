@@ -35,7 +35,7 @@ var User = React.createClass({
   },
 
   render: function() {
-    var factory = this.props.tag;
+    var factory = React.createFactory(this.props.tag);
     var photoStyles = {
       'backgroundImage': this.props.user.avatarUrl ? 'url(' + this.props.user.avatarUrl + ')' : null
     };
@@ -43,8 +43,6 @@ var User = React.createClass({
       'text-wrapper': true,
       'no-grade': !this.props.renderGrade
     });
-
-    console.log('render grade:', this.props.renderGrade);
 
     return factory({ className: 'user' },
       <div>

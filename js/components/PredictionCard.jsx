@@ -101,7 +101,7 @@ var PredictionCard = React.createClass({
 
     if ( categoryIdentifier % 1 === 0 ) { // is an integer, needs to be mapped to name
       match = _.find(CategoriesStore.categories, function(category) {
-        return category.id === categoryIdentifier;
+        return !_.isEmpty(category) && !_.isEmpty(category.id) && category.id === categoryIdentifier;
       });
       name = match ? match.name : null;
     } else {

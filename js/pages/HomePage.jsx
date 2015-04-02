@@ -102,9 +102,7 @@ var HomePage = React.createClass({
               <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(4)} />
             </div>
             <div className="masonry-item w-1-3">
-              <Preloaded>
-                <RecentBlogPosts />
-              </Preloaded>
+              <RecentBlogPosts />
             </div>
             <div className="masonry-item w-1-3">
               <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(5)} />
@@ -119,9 +117,7 @@ var HomePage = React.createClass({
               <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(8)} />
             </div>
             <div className="masonry-item w-1-3">
-              <Preloaded>
-                <FeaturedUsers />
-              </Preloaded>
+              <FeaturedUsers />
             </div>
             <div className="masonry-item w-2-3">
               <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(9)} />

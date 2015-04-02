@@ -35,6 +35,7 @@ var RecentBlogPosts = React.createClass({
   },
 
   componentDidMount: function() {
+    HomePageActions.loadRecentBlogPosts(this._onBlogPostsChange);
     this.listenTo(RecentBlogPostsStore, this._onBlogPostsChange);
   },
 

@@ -22,6 +22,7 @@ var LoginModalMixin = {
       email: '',
       password: '',
       facebookId: null,
+      isFacebookLogin: false,
       submitDisabled: true
     };
   },
