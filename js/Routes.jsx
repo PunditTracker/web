@@ -24,7 +24,7 @@ var AdminResultsPage   = require('./pages/Admin/SpecialEventResultsPage.jsx');
 var NotFoundPage       = require('./pages/NotFoundPage.jsx');
 
 module.exports = (
-  <Route handler={App}>
+  <Route path='/' handler={App}>
 
     <DefaultRoute handler={HomePage} />
 

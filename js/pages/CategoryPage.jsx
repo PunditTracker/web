@@ -38,7 +38,7 @@ var CategoryPage = React.createClass({
         error: null,
         loading: true
       });
-    });
+    }.bind(this));
   },
 
   _onPredictionsChange: function(err, predictions) {
