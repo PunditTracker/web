@@ -34,13 +34,13 @@ var HomePage = React.createClass({
 
   getInitialStateAsync: function(cb) {
     HomePageActions.loadPredictions(function(err, predictions) {
-      HomePageActions.loadPredictionSets(function(err, predictionSets) {
+      //HomePageActions.loadPredictionSets(function(err, predictionSets) {
         cb(null, {
           predictions: predictions || [],
-          predictionSets: predictionSets || [],
+          predictionSets: [],
           error: null
         });
-      });
+      //});
     });
   },
 
