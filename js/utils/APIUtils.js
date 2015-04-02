@@ -5,6 +5,31 @@ var when    = require('when');
 var _       = require('lodash');
 var humps   = require('humps');
 
+/* ====================================================== */
+
+function normalizeResponse(response) {
+  response = !_.isEmpty(response.body) ? response.body : response;
+  response = (typeof response === 'string') ? JSON.parse(response) : response;
+
+  return humps.camelizeKeys(response);
+}
+
+/* ====================================================== */
+
+function createRequest(verb, path, body) {
+  var req;
+
+  if ( typeof window !== 'undefined' ) {
+    req = request[verb](path, body).withCredentials();
+  } else {
+    req = request[verb](path, body);
+  }
+
+  return req;
+}
+
+/* ====================================================== */
+
 var APIUtils = {
 
   root: 'http://api.dev.pundittracker.com/v1/',
@@ -39,31 +64,15 @@ var APIUtils = {
     return parseInt(id);
   },
 
-  normalizeResponse: function(response) {
-    return humps.camelizeKeys(response.body);
-  },
-
-  createRequest: function(verb, path, body) {
-    var req;
-
-    if ( typeof window !== 'undefined' ) {
-      req = request[verb](path, body).withCredentials();
-    } else {
-      req = request[verb](path, body);
-    }
-
-    return req;
-  },
-
   doGet: function(path) {
     var deferred = when.defer();
 
-    this.createRequest('get', this.root + path)
+    createRequest('get', this.root + path)
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(this.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res.text));
       } else {
-        deferred.resolve(this.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res.text));
       }
     }.bind(this));
 
@@ -73,7 +82,7 @@ var APIUtils = {
   doUnnormalizedGet: function(path) {
     var deferred = when.defer();
 
-    this.createRequest('get', this.root + path)
+    createRequest('get', this.root + path)
     .end(function(res) {
       if ( !res.ok ) {
         deferred.reject(res.body);
@@ -88,12 +97,12 @@ var APIUtils = {
   doPost: function(path, body) {
     var deferred = when.defer();
 
-    this.createRequest('post', this.root + path, body)
+    createRequest('post', this.root + path, body)
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(this.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res));
       } else {
-        deferred.resolve(this.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res));
       }
     }.bind(this));
 
@@ -103,12 +112,12 @@ var APIUtils = {
   doPut: function(path, body) {
     var deferred = when.defer();
 
-    this.createRequest('put', this.root + path, body)
+    createRequest('put', this.root + path, body)
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(this.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res));
       } else {
-        deferred.resolve(this.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res));
       }
     }.bind(this));
 
@@ -118,12 +127,12 @@ var APIUtils = {
   doPatch: function(path, body) {
     var deferred = when.defer();
 
-    this.createRequest('patch', this.root + path, body)
+    createRequest('patch', this.root + path, body)
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(this.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res));
       } else {
-        deferred.resolve(this.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res));
       }
     }.bind(this));
 
@@ -133,12 +142,12 @@ var APIUtils = {
   doDelete: function(path) {
     var deferred = when.defer();
 
-    this.createRequest('del', this.root + path)
+    createRequest('del', this.root + path)
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(this.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res));
       } else {
-        deferred.resolve(this.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res));
       }
     }.bind(this));
 
@@ -148,13 +157,13 @@ var APIUtils = {
   uploadFile: function(path, file) {
     var deferred = when.defer();
 
-    this.createRequest('post', this.root + path)
+    createRequest('post', this.root + path)
     .attach('file', file)
     .end(function(res) {
       if ( !res.ok ) {
-        deferred.reject(this.normalizeResponse(res));
+        deferred.reject(normalizeResponse(res));
       } else {
-        deferred.resolve(this.normalizeResponse(res));
+        deferred.resolve(normalizeResponse(res));
       }
     }.bind(this));
 
