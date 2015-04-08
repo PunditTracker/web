@@ -5,7 +5,6 @@ var gulpif       = require('gulp-if');
 var gutil        = require('gulp-util');
 var source       = require('vinyl-source-stream');
 var streamify    = require('gulp-streamify');
-var rename       = require('gulp-rename');
 var watchify     = require('watchify');
 var browserify   = require('browserify');
 var babelify     = require('babelify');
@@ -41,10 +40,7 @@ function buildScript(file, watch) {
     .pipe(gulpif(global.isProd, streamify(uglify({
       compress: { drop_console: true }
     }))))
-    .pipe(streamify(rename({
-      basename: 'main'
-    })))
-    .pipe(gulp.dest(config.scripts.dest));
+    .pipe(gulp.dest(config.buildDir));
   }
 
   return rebundle();
@@ -54,6 +50,6 @@ function buildScript(file, watch) {
 gulp.task('browserify', function() {
 
   // Only run watchify if NOT production
-  return buildScript('./js/index.js', global.doWatch);
+  return buildScript('./js/main.js', global.doWatch);
 
 });

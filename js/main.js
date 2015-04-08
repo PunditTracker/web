@@ -14,7 +14,9 @@ if ( subdomain === 'dev' || hostname === 'localhost' || process.env.NODE_ENV !==
 
 Router.HistoryLocation.replace(Router.HashLocation.getCurrentPath());
 
-Router.run(routes, Router.HistoryLocation, function(Handler, state) {
-  React.render(<Handler params={state.params} query={state.query} />, document.getElementById('app'));
-  Analytics.send(state);
+document.addEventListener('DOMContentLoaded', function() {
+  Router.run(routes, Router.HistoryLocation, function(Handler, state) {
+    React.render(<Handler params={state.params} query={state.query} />, document.body);
+    Analytics.send(state);
+  });
 });

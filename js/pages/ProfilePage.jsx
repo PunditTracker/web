@@ -32,7 +32,7 @@ var ProfilePage = React.createClass({
   getInitialStateAsync: function(cb) {
     GlobalActions.loadProfile(this.props.params.identifier, function(err, profile) {
       cb(null, {
-        profile: profile,
+        profile: profile || {},
         loading: false,
         error: null
       });
