@@ -1,7 +1,6 @@
 'use strict';
 
 var React              = require('react/addons');
-var ReactAsync         = require('react-async');
 var Reflux             = require('reflux');
 var _                  = require('lodash');
 
@@ -11,19 +10,13 @@ var User               = require('./User.jsx');
 
 var FeaturedUsers = React.createClass({
 
-  mixins: [ReactAsync.Mixin, Reflux.ListenerMixin],
+  mixins: [Reflux.ListenerMixin],
 
-  propTypes: {
-    category: React.PropTypes.string
-  },
-
-  getInitialStateAsync: function(cb) {
-    HomePageActions.loadFeaturedUsers(function(err, users) {
-      cb(null, {
-        error: null,
-        users: users || []
-      });
-    });
+  getInitialState: function() {
+    return {
+      error: null,
+      users: []
+    };
   },
 
   _onFeaturedUsersChange: function(err, users) {
@@ -38,6 +31,16 @@ var FeaturedUsers = React.createClass({
   componentDidMount: function() {
     HomePageActions.loadFeaturedUsers(this._onFeaturedUsersChange);
     this.listenTo(FeaturedUsersStore, this._onFeaturedUsersChange);
+  },
+
+  componentWillUpdate: function(nextProps, nextState) {
+    var hasNewProps = !_.isEqual(nextProps, this.props);
+    var hasNewState = !_.isEqual(nextState, this.state);
+    var hasUsers = !_.isEmpty(this.state.users);
+
+    if ( (hasNewProps || hasNewState) && !hasUsers ) {
+      HomePageActions.loadFeaturedUsers(this._onFeaturedUsersChange);
+    }
   },
 
   renderUsers: function() {
