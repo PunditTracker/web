@@ -11,6 +11,8 @@ var React          = require('react');
 var Router         = require('react-router');
 var DocumentTitle  = require('react-document-title');
 var ReactAsync     = require('react-async');
+var _              = require('lodash');
+var url            = require('url');
 var app            = express();
 var Routes;
 var Html;
@@ -61,7 +63,8 @@ app.use(/\/.*\.(png|ico|xml|json)\/?/gi, express.static(__dirname + '/build/'));
 app.get('/*' ,function(req,res) {
   Router.run(Routes, req.path, function(Handler, state) {
     var title = DocumentTitle.rewind();
-    var HandlerComponent = React.createElement(Handler, { params: state.params, query: state.query });
+    var query = _.isEmpty(state.query) ? url.parse(req.url, true).query : state.query;
+    var HandlerComponent = React.createElement(Handler, { params: state.params, query: query });
     var HtmlComponent;
 
     ReactAsync.renderToStringAsync(HandlerComponent, function(err, markup/*, data*/) {
