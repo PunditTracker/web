@@ -256,7 +256,7 @@ var PredictPage = React.createClass({
         </fieldset>
         <fieldset>
           <input type="radio" ref="doesntExpire" name="doesnt-expire" checked={!this.state.doesExpire} onChange={this.toggleDateInput.bind(null, false)} />
-          <label htmlFor="doesnt-expire">Doesn't expire</label>
+          <label htmlFor="doesnt-expire">{'Doesn\'t'} expire</label>
           <input type="radio" name="does-expire" id="date-exists-2" checked={this.state.doesExpire} onChange={this.toggleDateInput.bind(null, true)} />
           <label htmlFor="does-expire">Expires</label>
           <input name="date" ref="datepicker" type="text" className={dateInputClasses} onChange={this.setDeadline} />

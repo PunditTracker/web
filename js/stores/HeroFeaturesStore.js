@@ -19,7 +19,6 @@ var HeroFeaturesStore = Reflux.createStore({
     console.log('get hero features');
 
     HomePageAPI.getHeroFeatures().then(function(features) {
-      console.log('got hero features:', features);
       this.features = features;
       cb(null, this.features);
       this.trigger(null, this.features);

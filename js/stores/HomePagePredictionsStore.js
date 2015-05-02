@@ -19,7 +19,6 @@ var HomePagePredictionsStore = Reflux.createStore({
     console.log('get home page predictions');
 
     HomePageAPI.getPredictions().then(function(predictions) {
-      console.log('got home page predictions:', predictions);
       this.predictions = predictions;
       cb(null, this.predictions);
       this.trigger(null, this.predictions);

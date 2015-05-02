@@ -19,7 +19,6 @@ var CategoriesStore = Reflux.createStore({
     console.log('get categories');
 
     HomePageAPI.getCategories().then(function(categories) {
-      console.log('successfully got categories');
       this.categories = categories;
       cb(null, this.categories);
       this.trigger(null, this.categories);
