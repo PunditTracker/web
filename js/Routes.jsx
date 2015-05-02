@@ -35,6 +35,8 @@ module.exports = (
 
     <Route name='Search' path='/search' handler={SearchPage} />
 
+    <Route name='Category' path='/category/:category' handler={CategoryPage} />
+
     <Route name='Predict' path='/predict' handler={PredictPage} />
 
     <Route name='Profile' path='/user/:identifier' handler={ProfilePage} />
