@@ -5,6 +5,7 @@ var _             = require('lodash');
 var Link          = require('react-router').Link;
 var DocumentTitle = require('react-document-title');
 
+var APIUtils      = require('../utils/APIUtils');
 var AuthAPI       = require('../utils/AuthAPI');
 var Spinner       = require('../components/Spinner.jsx');
 
@@ -108,7 +109,7 @@ var ResetPasswordPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="Reset Password">
+      <DocumentTitle title={APIUtils.buildPageTitle('Reset Password')}>
       <section className="content no-hero reset">
 
 

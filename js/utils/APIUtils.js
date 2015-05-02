@@ -48,6 +48,10 @@ var APIUtils = {
     return newString;
   },
 
+  buildPageTitle: function(title) {
+    return title ? title + ' \u2014 PunditTracker' : 'PunditTracker';
+  },
+
   randomIntFromInterval: function(min,max) {
     return Math.floor(Math.random()*(max-min+1)+min);
   },

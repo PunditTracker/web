@@ -313,7 +313,7 @@ var PredictPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="Predict">
+      <DocumentTitle title={APIUtils.buildPageTitle('Predict')}>
       <section className="content no-hero predict">
 
         <div className="container card-grid">

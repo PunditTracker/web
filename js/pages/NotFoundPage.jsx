@@ -3,11 +3,13 @@
 var React         = require('react/addons');
 var DocumentTitle = require('react-document-title');
 
+var APIUtils      = require('../utils/APIUtils');
+
 var NotFoundPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="Not Found">
+      <DocumentTitle title={APIUtils.buildPageTitle('Not Found')}>
       <section className="content no-hero not-found">
 
         <div className="container slim">

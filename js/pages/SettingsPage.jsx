@@ -241,7 +241,7 @@ var SettingsPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="Account Settings">
+      <DocumentTitle title={APIUtils.buildPageTitle('Account Settings')}>
       <section className="content no-hero settings full-page-form">
 
         <div className="container card-grid">

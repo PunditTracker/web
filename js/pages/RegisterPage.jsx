@@ -233,7 +233,7 @@ var RegisterPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="Register">
+      <DocumentTitle title={APIUtils.buildPageTitle('Register')}>
       <section className="content no-hero register full-page-form">
 
         <div className="container card-grid">

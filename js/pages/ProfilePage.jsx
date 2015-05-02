@@ -110,7 +110,7 @@ var ProfilePage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title={this.state.profile.firstName + ' ' + this.state.profile.lastName}>
+      <DocumentTitle title={APIUtils.buildPageTitle(this.state.profile.firstName + ' ' + this.state.profile.lastName)}>
       <section className="content no-hero profile">
 
         <div className="container card-grid">

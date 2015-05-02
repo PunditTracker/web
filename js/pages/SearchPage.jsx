@@ -136,7 +136,7 @@ var SearchPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="Search">
+      <DocumentTitle title={APIUtils.buildPageTitle('Search')}>
       <section className="content no-hero search">
 
         <div className="container">

@@ -6,6 +6,7 @@ var Preloaded                = ReactAsync.Preloaded;
 var Reflux                   = require('reflux');
 var DocumentTitle            = require('react-document-title');
 
+var APIUtils                 = require('../utils/APIUtils');
 var HomePageActions          = require('../actions/HomePageActions');
 var HomePagePredictionsStore = require('../stores/HomePagePredictionsStore');
 var PredictionSetsStore      = require('../stores/PredictionSetsStore');
@@ -77,7 +78,7 @@ var HomePage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="Home">
+      <DocumentTitle title={APIUtils.buildPageTitle('Home')}>
       <section className="page home">
 
         <Preloaded>

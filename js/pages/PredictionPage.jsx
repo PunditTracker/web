@@ -6,6 +6,7 @@ var Reflux                 = require('reflux');
 var Navigation             = require('react-router').Navigation;
 var DocumentTitle          = require('react-document-title');
 
+var APIUtils               = require('../utils/APIUtils');
 var GlobalActions          = require('../actions/GlobalActions');
 var ViewingPredictionStore = require('../stores/ViewingPredictionStore');
 
@@ -44,7 +45,7 @@ var PredictionPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title={this.state.prediction.title}>
+      <DocumentTitle title={APIUtils.buildPageTitle(this.state.prediction.title)}>
       <section className="content no-hero prediction">
 
         prediction page

@@ -3,11 +3,13 @@
 var React         = require('react/addons');
 var DocumentTitle = require('react-document-title');
 
+var APIUtils      = require('../utils/APIUtils');
+
 var AboutPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="About">
+      <DocumentTitle title={APIUtils.buildPageTitle('About')}>
       <section className="content no-hero about">
 
         <div className="container slim">

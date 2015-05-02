@@ -7,6 +7,7 @@ var Link          = require('react-router').Link;
 var validator     = require('email-validator');
 var DocumentTitle = require('react-document-title');
 
+var APIUtils      = require('../utils/APIUtils');
 var AuthAPI       = require('../utils/AuthAPI');
 var Spinner       = require('../components/Spinner.jsx');
 
@@ -88,7 +89,7 @@ var ForgotPasswordPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="Forgot Password">
+      <DocumentTitle title={APIUtils.buildPageTitle('Forgot Password')}>
       <section className="content no-hero forgot">
 
         <div className="container slim">

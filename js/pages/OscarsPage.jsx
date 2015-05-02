@@ -156,7 +156,7 @@ var OscarsPage = React.createClass({
 
   render: function() {
     return (
-      <DocumentTitle title="The Oscars" />
+      <DocumentTitle title={APIUtils.buildPageTitle('The Oscars')}>
       <section className="oscars">
 
         <OscarsHero />

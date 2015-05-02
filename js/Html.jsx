@@ -2,7 +2,9 @@
 
 'use strict';
 
-var React = require('react/addons');
+var React    = require('react/addons');
+
+var APIUtils = require('./utils/APIUtils');
 
 var Html = React.createClass({
 
@@ -39,8 +41,6 @@ var Html = React.createClass({
   },
 
   render: function() {
-    var title = this.props.title ? this.props.title + ' \u2014 PunditTracker' : 'PunditTracker';
-
     return (
       <html className="no-js" lang="">
 
@@ -50,7 +50,7 @@ var Html = React.createClass({
           <meta name="description" content="" />
           <meta name="viewport" content="width=device-width" />
 
-          <title>{title}</title>
+          <title>{APIUtils.buildPageTitle(this.props.title)}</title>
 
           <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png" />

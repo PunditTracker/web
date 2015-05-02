@@ -123,7 +123,7 @@ var CategoryPage = React.createClass({
     };
 
     return (
-      <DocumentTitle title={this.state.title}>
+      <DocumentTitle title={APIUtils.buildPageTitle(this.state.title)}>
       <section className="content no-hero category">
 
         <MasonryContainer className="card-grid">
