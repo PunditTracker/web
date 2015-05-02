@@ -47,7 +47,7 @@ var UserDropdown = React.createClass({
       element = (
         <li>
           Admin
-          <Link to="AdminIndex" />
+          <a href="//admin.pundittracker.com" target="_blank" />
         </li>
       );
     }
