@@ -6,7 +6,7 @@ var config  = require('../config');
 
 gulp.task('cdnizer', function() {
 
-  var cdnBase = '//s3-us-west-2.amazonaws.com/pundittracker.com/';
+  var cdnBase = '//assets.pundittracker.com/';
 
   gulp.src(config.buildDir + 'css/**/*.css')
   .pipe(cdnizer({

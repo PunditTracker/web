@@ -5,10 +5,17 @@ Frontend web application for PunditTracker.
 
 ### To get up and running:
 
-- Download this repo with `git clone https://github.com/PunditTracker/web.git`
-- Install node.js and NPM globally if you have not before. [Instructions here](http://blog.nodeknockout.com/post/65463770933/how-to-install-node-js-and-npm)
-- Run `npm install` from root project directory
-- Run `sudo npm install -g gulp` if you have never installed Gulp
-- Run `sudo npm install -g supervisor` if you have never installed Supervisor
-- Run `gulp server` from root project directory to generate the `/build` directory (the compiled application) and start serving the application locally
-- Navigate to `localhost:3000` to view/use the application
+1. Download this repo with `git clone https://github.com/PunditTracker/web.git`
+2. Install node.js and NPM globally if you have not before. [Instructions here](http://blog.nodeknockout.com/post/65463770933/how-to-install-node-js-and-npm)
+3. Run `npm install` from root project directory
+4. Run `gulp dev` from root project directory to generate the `/build` directory (the compiled application) and start serving the application locally
+5. Navigate to `localhost:3000` to view/use the application
+
+### Deploying:
+
+1. Same as above
+2. Same as above
+3. Same as above
+4. Install [ebs-deploy](https://github.com/briandilley/ebs-deploy) with `pip install ebs-deploy` (assuming you have [pip]() installedhttps://github.com/pypa/pip)
+5. **Development:** To deploy to the development staging environment, simply run `gulp deploy`
+6. **Production:** To deploy to the production environment, run `gulp deploy --prod` or `gulp deploy --production`

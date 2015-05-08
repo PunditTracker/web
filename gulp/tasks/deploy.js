@@ -1,27 +1,38 @@
 'use strict';
 
 var gulp         = require('gulp');
-var awspublish   = require('gulp-awspublish');
 var runSequence  = require('run-sequence');
+var argv         = require('yargs').argv;
+var shell        = require('gulp-shell');
 var config       = require('../config');
-var globalConfig = require('../../config');
 
 gulp.task('deploy', ['prod'], function() {
 
-  var uploadToS3 = function() {
-    var publisher = awspublish.create(globalConfig.aws);
-    var oneWeekInSeconds = 60*60*24*7;
-    var headers = {
-      'Cache-Control': 'max-age=' + oneWeekInSeconds + ', no-transform, public'
-    };
+  var isProd = argv.production || argv.prod;
+  var s3Task;
+  var tasks;
 
-    // Upload assets to S3
-    return gulp.src(config.buildDir + '**/*')
-    .pipe(awspublish.gzip())
-    .pipe(publisher.publish(headers))
-    .pipe(awspublish.reporter());
+  var ebsDeploy = function() {
+    var shellCommand = 'ebs-deploy deploy --environment ';
+
+    if ( isProd ) {
+      shellCommand += 'pundittracker-web-prod';
+    } else {
+      shellCommand += 'pundittracker-web-dev';
+    }
+
+    return gulp.src('')
+    .pipe(shell(shellCommand));
   };
 
-  return runSequence('switchAPI', 'cdnizer', uploadToS3);
+  if ( isProd ) {
+    tasks = ['switchAPI', 'cdnizer'];
+    s3Task = 'uploadToS3 --prod'
+  } else {
+    tasks = 'emptyTask';
+    s3Task = 'uploadToS3';
+  }
+
+  return runSequence(tasks, s3Task, ebsDeploy);
 
 });
