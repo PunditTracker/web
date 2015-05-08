@@ -16,6 +16,6 @@ Frontend web application for PunditTracker.
 1. Same as above
 2. Same as above
 3. Same as above
-4. Install [ebs-deploy](https://github.com/briandilley/ebs-deploy) with `pip install ebs-deploy` (assuming you have [pip]() installedhttps://github.com/pypa/pip)
+4. Install [ebs-deploy](https://github.com/briandilley/ebs-deploy) with `pip install ebs-deploy` (assuming you have [pip](https://github.com/pypa/pip) installed)
 5. **Development:** To deploy to the development staging environment, simply run `gulp deploy`
 6. **Production:** To deploy to the production environment, run `gulp deploy --prod` or `gulp deploy --production`
