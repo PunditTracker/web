@@ -14,10 +14,23 @@ var ListLink = React.createClass({
 
   render: function() {
     var isActive = this.isActive(this.props.to, this.props.params, this.props.query);
-    var className = this.props.className + (isActive ? ' active' : '');
-    var link = Link(this.props);
+    var className = '';
 
-    return <li className={className || ''}>{link}</li>;
+    if ( this.props.className ) {
+      className = this.props.className;
+    }
+
+    if ( isActive ) {
+      className += this.props.className ? ' active' : 'active';
+    }
+
+    return (
+      <li className={className || ''}>
+        <Link to={this.props.to} params={this.props.params} query={this.props.query}>
+          {this.props.children}
+        </Link>
+      </li>
+    );
   }
 
 });

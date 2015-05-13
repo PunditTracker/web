@@ -23,15 +23,11 @@ var User = React.createClass({
   },
 
   renderGrade: function() {
-    var element = null;
-
     if ( this.props.renderGrade ) {
-      element = (
+      return (
         <UserGrade user={this.props.user} />
       );
     }
-
-    return element;
   },
 
   render: function() {

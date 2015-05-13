@@ -49,8 +49,8 @@ var Header = React.createClass({
     }.bind(this));
   },
 
-  renderCategoryLinks: function() {
-    var elements = null;
+  renderMenuLinks: function() {
+    var elements = [];
 
     if ( this.props.categories && this.props.categories.length ) {
       elements = _.map(this.props.categories, function(category, index) {
@@ -62,11 +62,17 @@ var Header = React.createClass({
       });
     }
 
+    elements.push((
+      <li key={Math.floor(Math.random()+50)}>
+        <a href="http://blog.pundittracker.com/" target="_blank">Blog</a>
+      </li>
+    ));
+
     return elements;
   },
 
   renderButton: function() {
-    var element = null;
+    var element;
 
     if ( _.isEmpty(this.props.currentUser) ) {
       element = (
@@ -82,7 +88,7 @@ var Header = React.createClass({
   },
 
   renderLink: function() {
-    var element = null;
+    var element;
 
     if ( _.isEmpty(this.props.currentUser) ) {
       element = (
@@ -108,8 +114,7 @@ var Header = React.createClass({
                 <img className="logo-image" src="../images/logo_black.png" alt="PunditTracker logo" />
               </Link>
               <ul className="categories">
-                {this.renderCategoryLinks()}
-                <li><a href="http://blog.pundittracker.com/" target="_blank">Blog</a></li>
+                {this.renderMenuLinks()}
               </ul>
               {this.renderLink()}
               {this.renderButton()}

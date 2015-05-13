@@ -14,11 +14,15 @@ var Footer = React.createClass({
     className: React.PropTypes.string
   },
 
-  renderCategoryLinks: function() {
-    var elements = null;
+  getDefaultProps: function() {
+    return {
+      categories: []
+    };
+  },
 
+  renderCategoryLinks: function() {
     if ( this.props.categories && this.props.categories.length ) {
-      elements = _.map(this.props.categories, function(category, index) {
+       return _.map(this.props.categories, function(category, index) {
         return (
           <ListLink to="Category" params={{ category: category.name.toLowerCase() }} key={index}>
             {APIUtils.titleCase(category.name)}
@@ -26,8 +30,6 @@ var Footer = React.createClass({
         );
       });
     }
-
-    return elements;
   },
 
   render: function() {

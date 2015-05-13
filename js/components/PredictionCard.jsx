@@ -123,7 +123,7 @@ var PredictionCard = React.createClass({
   },
 
   renderTitle: function() {
-    var element = null;
+    var element;
 
     // Any larger cards should use <h3 />
     if ( this.props.className && this.props.className.length ) {
@@ -140,34 +140,29 @@ var PredictionCard = React.createClass({
   },
 
   renderTags: function() {
-    var element = null;
+    var elements = [];
+    var categoryName = this.getCategoryName();
 
     if ( !_.isEmpty(this.props.prediction.tags) ) {
-      element = _.map(this.props.prediction.tags, function(tag, index) {
+      elements = _.map(this.props.prediction.tags, function(tag, index) {
         return (
           <ListLink to="Search" query={{ q: tag }} key={index}>{tag}</ListLink>
         );
       });
     }
 
-    return element;
-  },
-
-  renderCategory: function() {
-    var element = null;
-    var categoryName = this.getCategoryName();
-
     if ( !_.isEmpty(categoryName) ) {
-      element = (
+      elements.push((
         <ListLink to="Category"
                   params={{ category: categoryName.toLowerCase() }}
-                  className="category">
+                  className="category"
+                  key={Math.floor(Math.random()+50)}>
           {categoryName}
         </ListLink>
-      );
+      ));
     }
 
-    return element;
+    return elements;
   },
 
   renderStateIcon: function() {
@@ -206,7 +201,7 @@ var PredictionCard = React.createClass({
   },
 
   renderVotingOptions: function() {
-    var element = null;
+    var element;
     var noWayClasses = cx({ 'active': this.state.userVote === 'No Way' });
     var unlikelyClasses = cx({ 'active': this.state.userVote === 'Unlikely' });
     var likelyClasses = cx({ 'active': this.state.userVote === 'Likely' });
@@ -256,7 +251,6 @@ var PredictionCard = React.createClass({
 
         <div className="tags">
           <ul className="inner">
-            {this.renderCategory()}
             {this.renderTags()}
           </ul>
         </div>
