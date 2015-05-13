@@ -4,6 +4,7 @@ var React            = require('react/addons');
 var ReactAsync       = require('react-async');
 var Preloaded        = ReactAsync.Preloaded;
 var Reflux           = require('reflux');
+var _                = require('lodash');
 var RouteHandler     = require('react-router').RouteHandler;
 var State            = require('react-router').State;
 
@@ -45,9 +46,29 @@ var App = React.createClass({
     }
   },
 
+  // Must ensure categories store has categories due to serverside rendering
+  // not populating stores initially
+  _checkCategoriesStore: function() {
+    var hasCategories = !_.isEmpty(this.state.categories);
+    var storeHasCategories = !_.isEmpty(CategoriesStore.categories);
+    var categoriesNotEqual = !_.isEqual(this.state.categories, CategoriesStore.categories);
+
+    if ( hasCategories && (!storeHasCategories || categoriesNotEqual) ) {
+      GlobalActions.setCategories(this.state.categories);
+    } else if ( !hasCategories ) {
+      GlobalActions.loadCategories();
+    }
+  },
+
   componentDidMount: function() {
     this.listenTo(CategoriesStore, this._onCategoriesChange);
     this.listenTo(CurrentUserStore, this._onUserChange);
+
+    this._checkCategoriesStore();
+  },
+
+  componentDidUpdate: function() {
+    this._checkCategoriesStore();
   },
 
   render: function() {

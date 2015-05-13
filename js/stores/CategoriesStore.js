@@ -10,7 +10,17 @@ var CategoriesStore = Reflux.createStore({
   init: function() {
     this.categories = null;
 
+    this.listenTo(GlobalActions.setCategories, this.setCategories);
     this.listenTo(GlobalActions.loadCategories, this.loadCategories);
+  },
+
+  setCategories: function(categories, cb) {
+    cb = cb || function() {};
+
+    this.categories = categories;
+    console.log('set categories:', categories);
+    cb(null, this.categories);
+    this.trigger(null, this.categories);
   },
 
   loadCategories: function(cb) {
@@ -19,9 +29,7 @@ var CategoriesStore = Reflux.createStore({
     console.log('get categories');
 
     HomePageAPI.getCategories().then(function(categories) {
-      this.categories = categories;
-      cb(null, this.categories);
-      this.trigger(null, this.categories);
+      this.setCategories(categories, cb);
     }.bind(this)).catch(function(err) {
       cb(err);
       this.trigger(err);

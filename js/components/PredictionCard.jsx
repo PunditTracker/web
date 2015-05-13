@@ -99,9 +99,9 @@ var PredictionCard = React.createClass({
     var match;
     var name;
 
-    if ( categoryIdentifier % 1 === 0 ) { // is an integer, needs to be mapped to name
+    if ( categoryIdentifier % 1 === 0 ) { // is an integer, needs to be mapped to name'
       match = _.find(CategoriesStore.categories, function(category) {
-        return !_.isEmpty(category) && !_.isEmpty(category.id) && category.id === categoryIdentifier;
+        return !_.isEmpty(category) && category.id === categoryIdentifier;
       });
       name = match ? match.name : null;
     } else {
@@ -148,6 +148,23 @@ var PredictionCard = React.createClass({
           <ListLink to="Search" query={{ q: tag }} key={index}>{tag}</ListLink>
         );
       });
+    }
+
+    return element;
+  },
+
+  renderCategory: function() {
+    var element = null;
+    var categoryName = this.getCategoryName();
+
+    if ( !_.isEmpty(categoryName) ) {
+      element = (
+        <ListLink to="Category"
+                  params={{ category: categoryName.toLowerCase() }}
+                  className="category">
+          {categoryName}
+        </ListLink>
+      );
     }
 
     return element;
@@ -239,11 +256,7 @@ var PredictionCard = React.createClass({
 
         <div className="tags">
           <ul className="inner">
-            <ListLink to="Category"
-                      params={{ category: this.getCategoryName().toLowerCase() }}
-                      className="category">
-              {this.getCategoryName()}
-            </ListLink>
+            {this.renderCategory()}
             {this.renderTags()}
           </ul>
         </div>
