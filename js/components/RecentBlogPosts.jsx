@@ -20,14 +20,16 @@ var RecentBlogPosts = React.createClass({
   },
 
   _onBlogPostsChange: function(err, posts) {
-    if ( err ) {
-      this.setState({ error: err });
-    } else {
-      console.log('posts change:', posts);
-      this.setState({
-        recentBlogPosts: posts ? posts.slice(0, 3) : [],
-        error: null
-      });
+    if ( this.isMounted() ) {
+      if ( err ) {
+        this.setState({ error: err });
+      } else {
+        console.log('posts change:', posts);
+        this.setState({
+          recentBlogPosts: posts ? posts.slice(0, 3) : [],
+          error: null
+        });
+      }
     }
   },
 
