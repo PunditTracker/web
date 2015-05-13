@@ -19,27 +19,41 @@ var SearchPage = React.createClass({
   mixins: [ReactAsync.Mixin, React.addons.LinkedStateMixin, Navigation, Reflux.ListenerMixin],
 
   getInitialStateAsync: function(cb) {
-    cb(null, {
-      query: this.props.query.q ? this.props.query.q.replace(/(\+)|(%20)/gi, ' ') : '',
-      loading: false,
-      error: null
-    });
-  },
-
-  componentDidUpdate: function(prevProps) {
-    var haveNewQuery = this.props.query.q && this.props.query.q.length && prevProps.query.q !== this.props.query.q;
-
-    if ( haveNewQuery ) {
-      this.setState({
-        query: this.props.query.q
-      }, function() {
-        this.doSearch();
+    var query;
+    console.log('get initial state search page', this.props.query);
+    if ( this.props.query.q && this.props.query.q.length ) {
+      query = this.props.query.q.replace(/(\+)|(%20)/gi, ' ');
+      console.log('should do search');
+      GlobalActions.search(query, function(err, results) {
+        cb(null, {
+          query: query,
+          loading: false,
+          error: null,
+          results: results || []
+        });
+      }.bind(this));
+    } else {
+      cb(null, {
+        query: '',
+        results: [],
+        loading: false,
+        error: null
       });
     }
   },
 
+  componentDidUpdate: function(prevProps) {
+    var hasNewQuery = this.props.query.q && this.props.query.q.length && prevProps.query.q !== this.props.query.q;
+
+    if ( hasNewQuery ) {
+      this.setState({
+        query: this.props.query.q
+      }, this.doSearch);
+    }
+  },
+
   componentDidMount: function() {
-    if ( this.state.query.length ) {
+    if ( this.state.query && this.state.query.length ) {
       this.doSearch();
     }
     this.listenTo(SearchStore, this.doneSearching);
@@ -149,7 +163,7 @@ var SearchPage = React.createClass({
                      onKeyPress={this.handleKeyPress} />
             </div>
             <div className="pure-u-4-24 hard--bottom">
-              <button className="button block text-center"
+              <button className="button block full-width text-center"
                       onClick={this.reloadPage}
                       disabled={this.state.loading ? 'true' : ''}>
                 <Spinner loading={this.state.loading} />
