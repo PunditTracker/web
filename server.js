@@ -71,6 +71,11 @@ app.get('/*' ,function(req,res) {
         console.trace('error rendering to string:', err);
         res.status(500).json({ status: 500, message: err });
       } else {
+        // Currently, the 'Not Found' route title flashes before loading actual route and title
+        // TODO: real logic to prevent this
+        if ( title && title.indexOf('Not Found') !== -1 ) {
+          title = 'PunditTracker';
+        }
         HtmlComponent = React.createElement(Html, { title: title, markup: markup });
         res.send('<!DOCTYPE html>\n' + React.renderToString(HtmlComponent));
       }
