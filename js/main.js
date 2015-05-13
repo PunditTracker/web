@@ -13,8 +13,8 @@ if ( subdomain === 'dev' || hostname === 'localhost' || process.env.NODE_ENV !==
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  Router.run(routes, Router.HistoryLocation, function(Handler, state) {
-    React.render(<Handler params={state.params} query={state.query} />, document.body);
+  Router.run(routes, Router.HistoryLocation, function(Root, state) {
+    React.render(<Root params={state.params} query={state.query} />, document.body);
     Analytics.send(state);
   });
 });

@@ -6,8 +6,7 @@ var compression    = require('compression');
 var methodOverride = require('method-override');
 var bodyParser     = require('body-parser');
 var favicon        = require('serve-favicon');
-var nodeJSX        = require('node-jsx');
-var React          = require('react');
+var React          = require('react/addons');
 var Router         = require('react-router');
 var DocumentTitle  = require('react-document-title');
 var ReactAsync     = require('react-async');
@@ -20,7 +19,7 @@ var Html;
 /* ====================================================== */
 
 // Require JSX files as node modules
-nodeJSX.install({ extension: '.jsx' });
+require('babel/register');
 Routes = require('./js/Routes.jsx');
 Html = require('./js/Html.jsx');
 
