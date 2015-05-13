@@ -1,11 +1,18 @@
 'use strict';
 
 var React         = require('react/addons');
+var ReactAsync    = require('react-async');
 var DocumentTitle = require('react-document-title');
 
 var APIUtils      = require('../utils/APIUtils');
 
 var NotFoundPage = React.createClass({
+
+  mixins: [ReactAsync.Mixin],
+
+  getInitialStateAsync: function(cb) {
+    cb(null, {});
+  },
 
   render: function() {
     return (
