@@ -55,9 +55,9 @@
   .text-wrapper {
     position: absolute;
     padding: $user-vertical-padding;
+    width: calc(100% - #{$user-height*2});
     top: 0;
-    left: ($user-height - 2 * $user-vertical-padding +  2 * $prediction-padding);
-    right: $user-height;
+    left: $user-height;
     height: $user-height;
     color: $dark-grey;
     .name {

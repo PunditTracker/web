@@ -39,19 +39,19 @@
   @include custom-text-shadow(2px 2px 3px $black);
 }
 
-@mixin transition-with-delay-and-props($speed, $delay, $props) {
-  -webkit-transition: $speed $delay ease $props;
-     -moz-transition: $speed $delay ease $props;
-       -o-transition: $speed $delay ease $props;
-          transition: $speed $delay ease $props;
+@mixin transition-with-delay-and-props($speed, $props, $delay) {
+  -webkit-transition: $speed $props ease $delay;
+     -moz-transition: $speed $props ease $delay;
+       -o-transition: $speed $props ease $delay;
+          transition: $speed $props ease $delay;
 }
 
 @mixin transition-with-delay($speed, $delay) {
-  @include transition-with-delay-and-props($speed, $delay, all);
+  @include transition-with-delay-and-props($speed, all, $delay);
 }
 
 @mixin transition($speed) {
-  @include transition-with-delay($speed, 0);
+  @include transition-with-delay($speed, 0s);
 }
 
 @mixin transform($rule) {
