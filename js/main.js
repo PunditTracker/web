@@ -12,8 +12,6 @@ if ( subdomain === 'dev' || hostname === 'localhost' || process.env.NODE_ENV !==
   window.React = React; // Enable React devtools
 }
 
-Router.HistoryLocation.replace(Router.HashLocation.getCurrentPath());
-
 document.addEventListener('DOMContentLoaded', function() {
   Router.run(routes, Router.HistoryLocation, function(Handler, state) {
     React.render(<Handler params={state.params} query={state.query} />, document.body);
