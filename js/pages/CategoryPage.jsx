@@ -12,6 +12,7 @@ var GlobalActions        = require('../actions/GlobalActions');
 var ViewingCategoryStore = require('../stores/ViewingCategoryStore');
 var MasonryContainer     = require('../components/MasonryContainer.jsx');
 var PredictionCard       = require('../components/PredictionCard.jsx');
+var Spinner              = require('../components/Spinner.jsx');
 
 var CategoryPage = React.createClass({
 
@@ -90,31 +91,44 @@ var CategoryPage = React.createClass({
   },
 
   renderPredictions: function() {
+    var element = null;
     var randomInt;
     var containerClasses;
     var cardClasses;
 
-    return _.map(this.state.predictions, function(item, index) {
-      randomInt = APIUtils.randomIntFromInterval(1, 4);
-      containerClasses = 'masonry-item ';
-
-      if ( randomInt ===  1 ) {
-        containerClasses += 'w-1-3';
-        cardClasses = 'tall-3-2';
-      } else if ( randomInt === 2 ) {
-        containerClasses += 'w-2-3';
-        cardClasses = null;
-      } else {
-        containerClasses += 'w-1-3';
-        cardClasses = null;
-      }
-
-      return (
-        <div className={containerClasses} key={index}>
-          <PredictionCard className={cardClasses} prediction={item.prediction} />
+    if ( this.state.loading ) {
+      element = (
+        <div className="text-center">
+          <Spinner loading={this.state.loading} size={75} />
         </div>
       );
-    });
+    } else if ( this.state.predictions && this.state.predictions.length ) {
+      element =  _.map(this.state.predictions, function(item, index) {
+        randomInt = APIUtils.randomIntFromInterval(1, 4);
+        containerClasses = 'masonry-item ';
+
+        console.log('prediction:', item.prediction.id, 'key:', index);
+
+        if ( randomInt ===  1 ) {
+          containerClasses += 'w-1-3';
+          cardClasses = 'tall-3-2';
+        } else if ( randomInt === 2 ) {
+          containerClasses += 'w-2-3';
+          cardClasses = null;
+        } else {
+          containerClasses += 'w-1-3';
+          cardClasses = null;
+        }
+
+        return (
+          <div className={containerClasses} key={index}>
+            <PredictionCard className={cardClasses} prediction={item.prediction} />
+          </div>
+        );
+      });
+    }
+
+    return element;
   },
 
   render: function() {
