@@ -127,31 +127,31 @@ var HomePage = React.createClass({
 
           <MasonryContainer className="card-grid flush--bottom">
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.getPredictionAtIndex(1)} />
+              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.getPredictionAtIndex(10)} />
             </div>
             <div className="masonry-item w-1-3">
               <CategoryLinkCard category="finance" />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(1)} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(11)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(1)} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(12)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.getPredictionAtIndex(1)} />
+              <PredictionCard currentUser={this.props.currentUser} className="tall-2" prediction={this.getPredictionAtIndex(13)} />
             </div>
             <div className="masonry-item w-1-3">
               <FacebookCard />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(1)} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(14)} />
             </div>
             <div className="masonry-item w-1-3">
-              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.getPredictionAtIndex(1)} />
+              <PredictionCard currentUser={this.props.currentUser} className="tall-3-2" prediction={this.getPredictionAtIndex(15)} />
             </div>
             <div className="masonry-item w-2-3">
-              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(1)} />
+              <PredictionCard currentUser={this.props.currentUser} prediction={this.getPredictionAtIndex(16)} />
             </div>
           </MasonryContainer>
 
