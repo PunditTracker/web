@@ -11,6 +11,7 @@ var ViewingProfileStore = Reflux.createStore({
     this.profile = null;
 
     this.listenTo(GlobalActions.loadProfile, this.loadUser);
+    this.listenTo(GlobalActions.loadUserPredictions, this.loadUserPredictions);
   },
 
   loadUser: function(identifier, cb) {
@@ -23,14 +24,22 @@ var ViewingProfileStore = Reflux.createStore({
       this.profile.predictions = [];
       cb(null, this.profile);
       this.trigger(null, this.profile);
+    }.bind(this)).catch(function(err) {
+      cb(err);
+      this.trigger(err);
+    }.bind(this));
+  },
 
-      UserAPI.getPredictions(this.profile.id).then(function(predictions) {
-        this.profile.predictions = predictions;
-        this.trigger(null, this.profile);
-      }.bind(this)).catch(function(err) {
-        cb(err);
-        this.trigger(err);
-      }.bind(this));
+  loadUserPredictions: function(identifier, cb) {
+    cb = cb || function() {};
+
+    console.log('get user predictions for:', identifier);
+
+    UserAPI.getPredictions(this.profile.id).then(function(predictions) {
+      this.profile = this.profile || {};
+      this.profile.predictions = predictions || [];
+      cb(null, this.profile);
+      this.trigger(null, this.profile);
     }.bind(this)).catch(function(err) {
       cb(err);
       this.trigger(err);

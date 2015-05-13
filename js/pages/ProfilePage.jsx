@@ -30,13 +30,16 @@ var ProfilePage = React.createClass({
   },
 
   getInitialStateAsync: function(cb) {
+    console.log('get initial state profile page');
     GlobalActions.loadProfile(this.props.params.identifier, function(err, profile) {
-      cb(null, {
-        profile: profile || {},
-        loading: false,
-        error: null
+      GlobalActions.loadUserPredictions(this.props.params.identifier, function(err, profile) {
+        cb(null, {
+          profile: profile || { predictions: [] },
+          loading: false,
+          error: null
+        });
       });
-    });
+    }.bind(this));
   },
 
   _onProfileChange: function(err, profile) {
