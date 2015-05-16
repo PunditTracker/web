@@ -20,6 +20,9 @@ var ProfilePage = React.createClass({
 
   mixins: [ReactAsync.Mixin, Reflux.ListenerMixin, Navigation],
 
+  shouldUseCachedElements: false,
+  cachedElements: null,
+
   propTypes: {
     currentUser: React.PropTypes.object
   },
@@ -73,9 +76,13 @@ var ProfilePage = React.createClass({
     if ( !this.props.params.identifier ) {
       this.transitionTo('Home');
     } else {
-      GlobalActions.loadUserPredictions(this.state.profile, this._onProfileChangeWithPredictions);
       this.listenTo(ViewingProfileStore, this._onProfileChange);
+      GlobalActions.loadUserPredictions(this.state.profile, this._onProfileChangeWithPredictions);
     }
+  },
+
+  componentDidUpdate: function(prevProps, prevState) {
+    this.shouldUseCachedElements = _.isEqual(this.state.predictions, prevState.predictions);
   },
 
   calculateHitRate: function() {
@@ -107,6 +114,9 @@ var ProfilePage = React.createClass({
           <Spinner loading={this.state.loading} size={75} />
         </div>
       );
+    } else if ( this.shouldUseCachedElements && this.cachedElements ) {
+      // Use cached version of result elements to prevent masonry flashing on any update
+      element = this.cachedElements;
     } else if ( this.state.profile.predictions && this.state.profile.predictions.length ) {
       element = _.map(this.state.profile.predictions, function(prediction, index) {
         randomInt = APIUtils.randomIntFromInterval(1, 3);
@@ -126,6 +136,8 @@ var ProfilePage = React.createClass({
           </div>
         );
       }.bind(this));
+
+      this.cachedElements = element;
     } else {
       element = (
         <h3 className="text-center">This user has not made any predictions yet.</h3>

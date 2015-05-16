@@ -18,6 +18,9 @@ var CategoryPage = React.createClass({
 
   mixins: [ReactAsync.Mixin, Reflux.ListenerMixin, Navigation],
 
+  shouldUseCachedElements: false,
+  cachedElements: null,
+
   propTypes: {
     currentUser: React.PropTypes.object,
     categories: React.PropTypes.array.isRequired
@@ -82,6 +85,10 @@ var CategoryPage = React.createClass({
     }
   },
 
+  componentDidUpdate: function(prevProps, prevState) {
+    this.shouldUseCachedElements = _.isEqual(this.state.predictions, prevState.predictions);
+  },
+
   renderSpinner: function() {
     if ( this.state.loading ) {
       return (
@@ -106,7 +113,10 @@ var CategoryPage = React.createClass({
     var containerClasses;
     var cardClasses;
 
-    if ( !this.state.loading && this.state.predictions && this.state.predictions.length ) {
+    if ( !this.state.loading && this.shouldUseCachedElements && this.cachedElements ) {
+      // Use cached version of result elements to prevent masonry flashing on any update
+      element = this.cachedElements;
+    } else if ( !this.state.loading && this.state.predictions && this.state.predictions.length ) {
       element =  _.map(this.state.predictions, function(item, index) {
         randomInt = APIUtils.randomIntFromInterval(1, 4);
         containerClasses = 'masonry-item ';
@@ -131,6 +141,8 @@ var CategoryPage = React.createClass({
         );
       });
     }
+
+    this.cachedElements = element;
 
     return element;
   },
