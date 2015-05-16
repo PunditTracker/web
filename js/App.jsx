@@ -5,7 +5,7 @@ var ReactAsync       = require('react-async');
 var Preloaded        = ReactAsync.Preloaded;
 var Reflux           = require('reflux');
 var _                = require('lodash');
-var RouteHandler     = require('react-router').RouteHandler;
+var RouteHandlerMixin = require('../node_modules/react-router/modules/mixins/RouteHandler');
 var State            = require('react-router').State;
 
 var GlobalActions    = require('./actions/GlobalActions');
@@ -17,7 +17,7 @@ var Footer           = require('./components/Footer.jsx');
 
 var App = React.createClass({
 
-  mixins: [ReactAsync.Mixin, Reflux.ListenerMixin, State],
+  mixins: [RouteHandlerMixin, ReactAsync.Mixin, Reflux.ListenerMixin, State],
 
   getInitialStateAsync: function(cb) {
     UserActions.check(function(err, user) {
@@ -72,16 +72,20 @@ var App = React.createClass({
   },
 
   render: function() {
+    var RouteHandler = this.getRouteHandler({
+      params: this.props.params,
+      query: this.props.query,
+      currentUser: this.state.currentUser,
+      categories: this.state.categories
+    });
+
     return (
       <div>
         <Header currentUser={this.state.currentUser}
                 categories={this.state.categories} />
 
         <Preloaded>
-          <RouteHandler params={this.props.params}
-                        query={this.props.query}
-                        currentUser={this.state.currentUser}
-                        categories={this.state.categories} />
+          {RouteHandler}
         </Preloaded>
 
         <Footer categories={this.state.categories} />

@@ -14,6 +14,7 @@ var MasonryContainer    = require('../components/MasonryContainer.jsx');
 var FixedSidebar        = require('../components/FixedSidebar.jsx');
 var ProfileCard         = require('../components/ProfileCard.jsx');
 var PredictionCard      = require('../components/PredictionCard.jsx');
+var Spinner             = require('../components/Spinner.jsx');
 
 var ProfilePage = React.createClass({
 
@@ -32,23 +33,25 @@ var ProfilePage = React.createClass({
   getInitialStateAsync: function(cb) {
     console.log('get initial state profile page');
     GlobalActions.loadProfile(this.props.params.identifier, function(err, profile) {
-      GlobalActions.loadUserPredictions(this.props.params.identifier, function(err, profile) {
-        cb(null, {
-          profile: profile || { predictions: [] },
-          loading: false,
-          error: null
-        });
+      cb(null, {
+        profile: profile || { predictions: [] },
+        loading: true,
+        error: null
       });
     }.bind(this));
   },
 
   _onProfileChange: function(err, profile) {
     if ( err ) {
-      this.setState({ error: err.message });
+      this.setState({ loading: false, error: err.message });
     } else {
       profile = profile || {};
       profile.predictions = profile.predictions || [];
-      this.setState({ profile: profile, error: null });
+      this.setState({
+        loading: false,
+        profile: profile,
+        error: null
+      });
     }
   },
 
@@ -57,6 +60,7 @@ var ProfilePage = React.createClass({
       this.transitionTo('Home');
     } else {
       this.listenTo(ViewingProfileStore, this._onProfileChange);
+      GlobalActions.loadUserPredictions(this.state.profile);
     }
   },
 
@@ -83,7 +87,13 @@ var ProfilePage = React.createClass({
     var classes;
     var element = null;
 
-    if ( this.state.profile.predictions && this.state.profile.predictions.length ) {
+    if ( this.state.loading ) {
+      element = (
+        <div className="text-center island">
+          <Spinner loading={this.state.loading} size={75} />
+        </div>
+      );
+    } else if ( this.state.profile.predictions && this.state.profile.predictions.length ) {
       element = _.map(this.state.profile.predictions, function(prediction, index) {
         randomInt = APIUtils.randomIntFromInterval(1, 3);
 
@@ -102,7 +112,7 @@ var ProfilePage = React.createClass({
           </div>
         );
       }.bind(this));
-    } else if ( !this.state.loading ) {
+    } else {
       element = (
         <h3 className="text-center">This user has not made any predictions yet.</h3>
       );

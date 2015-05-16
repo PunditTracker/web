@@ -18,6 +18,9 @@ var SearchPage = React.createClass({
 
   mixins: [ReactAsync.Mixin, React.addons.LinkedStateMixin, Navigation, Reflux.ListenerMixin],
 
+  shouldRenderNewResults: false,
+  existingResults: null,
+
   getInitialStateAsync: function(cb) {
     var query;
     console.log('get initial state search page', this.props.query);
@@ -42,8 +45,10 @@ var SearchPage = React.createClass({
     }
   },
 
-  componentDidUpdate: function(prevProps) {
-    var hasNewQuery = this.props.query.q && this.props.query.q.length && prevProps.query.q !== this.props.query.q;
+  componentDidUpdate: function(prevProps, prevState) {
+    var hasNewQuery = !_.isEqual(this.props.query.q, prevProps.query.q);
+
+    this.shouldRenderNewResults = !_.isEqual(this.state.results, prevState.results); // Cache use flag
 
     if ( hasNewQuery ) {
       this.setState({
@@ -121,7 +126,10 @@ var SearchPage = React.createClass({
     var containerClasses;
     var cardClasses;
 
-    if ( this.state.results && this.state.results.length ) {
+    if ( !this.shouldRenderNewResults ) {
+      // Use cached version of result elements to prevent masonry flashing on any update
+      element = this.existingResults;
+    } else if ( this.state.results && this.state.results.length ) {
       element = _.map(this.state.results, function(prediction, index) {
         randomInt = APIUtils.randomIntFromInterval(1, 4);
         containerClasses = 'masonry-item ';
@@ -144,6 +152,8 @@ var SearchPage = React.createClass({
         );
       }.bind(this));
     }
+
+    this.existingResults = element;
 
     return element;
   },

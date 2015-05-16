@@ -37,7 +37,7 @@ var CategoryPage = React.createClass({
         title: APIUtils.titleCase(this.props.params.category),
         predictions: predictions || [],
         error: null,
-        loading: true
+        loading: false
       });
     }.bind(this));
   },
@@ -82,6 +82,16 @@ var CategoryPage = React.createClass({
     }
   },
 
+  renderSpinner: function() {
+    if ( this.state.loading ) {
+      return (
+        <div className="text-center island">
+          <Spinner loading={this.state.loading} size={75} />
+        </div>
+      );
+    }
+  },
+
   renderFeaturedPredictions: function() {
     return _.map(this.state.featuredPredictions, function(prediction, index) {
       return (
@@ -96,13 +106,7 @@ var CategoryPage = React.createClass({
     var containerClasses;
     var cardClasses;
 
-    if ( this.state.loading ) {
-      element = (
-        <div className="text-center">
-          <Spinner loading={this.state.loading} size={75} />
-        </div>
-      );
-    } else if ( this.state.predictions && this.state.predictions.length ) {
+    if ( !this.state.loading && this.state.predictions && this.state.predictions.length ) {
       element =  _.map(this.state.predictions, function(item, index) {
         randomInt = APIUtils.randomIntFromInterval(1, 4);
         containerClasses = 'masonry-item ';
@@ -139,6 +143,8 @@ var CategoryPage = React.createClass({
     return (
       <DocumentTitle title={APIUtils.buildPageTitle(this.state.title)}>
       <section className="content no-hero category">
+
+        {this.renderSpinner()}
 
         <MasonryContainer className="card-grid">
           {this.renderPredictions()}
