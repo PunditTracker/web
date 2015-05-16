@@ -39,7 +39,6 @@ var ViewingProfileStore = Reflux.createStore({
       this.profile = this.profile || user || {};
       this.profile.predictions = predictions || [];
       cb(null, this.profile);
-      this.trigger(null, this.profile);
     }.bind(this)).catch(function(err) {
       cb(err);
       this.trigger(err);

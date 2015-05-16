@@ -48,6 +48,20 @@ var ProfilePage = React.createClass({
       profile = profile || {};
       profile.predictions = profile.predictions || [];
       this.setState({
+        profile: profile,
+        error: null
+      });
+    }
+  },
+
+  // Only difference from _onProfileChange (above) is that this sets loading: false
+  _onProfileChangeWithPredictions: function(err, profile) {
+    if ( err ) {
+      this.setState({ loading: false, error: err.message });
+    } else {
+      profile = profile || {};
+      profile.predictions = profile.predictions || [];
+      this.setState({
         loading: false,
         profile: profile,
         error: null
@@ -59,8 +73,8 @@ var ProfilePage = React.createClass({
     if ( !this.props.params.identifier ) {
       this.transitionTo('Home');
     } else {
+      GlobalActions.loadUserPredictions(this.state.profile, this._onProfileChangeWithPredictions);
       this.listenTo(ViewingProfileStore, this._onProfileChange);
-      GlobalActions.loadUserPredictions(this.state.profile);
     }
   },
 
