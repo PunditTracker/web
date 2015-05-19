@@ -61,7 +61,7 @@ app.use(/\/.*\.(png|ico|xml|json)\/?/gi, express.static(__dirname + '/build/'));
 // Serve React app for all main routes
 app.get('/*' ,function(req,res) {
   Router.run(Routes, req.path, function(Handler, state) {
-    var title = DocumentTitle.rewind();
+    var title = DocumentTitle.peek();
     var query = _.isEmpty(state.query) ? url.parse(req.url, true).query : state.query;
     var HandlerComponent = React.createElement(Handler, { params: state.params, query: query });
     var HtmlComponent;
@@ -80,6 +80,8 @@ app.get('/*' ,function(req,res) {
         res.send('<!DOCTYPE html>\n' + React.renderToString(HtmlComponent));
       }
     });
+
+    DocumentTitle.rewind(); // to prevent memory leak
   });
 });
 
