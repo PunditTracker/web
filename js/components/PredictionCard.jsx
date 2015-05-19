@@ -143,14 +143,6 @@ var PredictionCard = React.createClass({
     var elements = [];
     var categoryName = this.getCategoryName();
 
-    if ( !_.isEmpty(this.props.prediction.tags) ) {
-      elements = _.map(this.props.prediction.tags, function(tag, index) {
-        return (
-          <ListLink to="Search" query={{ q: tag }} key={index}>{tag}</ListLink>
-        );
-      });
-    }
-
     if ( !_.isEmpty(categoryName) ) {
       elements.push((
         <ListLink to="Category"
@@ -160,6 +152,14 @@ var PredictionCard = React.createClass({
           {categoryName}
         </ListLink>
       ));
+    }
+
+    if ( !_.isEmpty(this.props.prediction.tags) ) {
+      _.each(this.props.prediction.tags, function(tag, index) {
+        elements.push((
+          <ListLink to="Search" query={{ q: tag }} key={index}>{tag}</ListLink>
+        ));
+      });
     }
 
     return elements;
