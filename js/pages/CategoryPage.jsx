@@ -148,9 +148,9 @@ var CategoryPage = React.createClass({
   },
 
   render: function() {
-    var featuredStyles = {
-      'backgroundImage': null
-    };
+    // var featuredStyles = {
+    //   'backgroundImage': null
+    // };
 
     return (
       <DocumentTitle title={APIUtils.buildPageTitle(this.state.title)}>
