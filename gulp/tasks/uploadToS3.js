@@ -3,6 +3,7 @@
 var gulp       = require('gulp');
 var awspublish = require('gulp-awspublish');
 var dotenv     = require('dotenv');
+var config     = require('../config');
 
 dotenv.load();
 
@@ -20,7 +21,7 @@ gulp.task('uploadToS3', function(cb) {
   };
 
   // Upload assets to S3
-  return gulp.src(config.buildDir + '**/*')
+  return gulp.src(config.buildDir + '{css,fonts,images,js}/*')
   .pipe(awspublish.gzip())
   .pipe(publisher.publish(headers))
   .pipe(awspublish.reporter());
