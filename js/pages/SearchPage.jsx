@@ -1,7 +1,6 @@
 'use strict';
 
 var React            = require('react/addons');
-var ReactAsync       = require('react-async');
 var Reflux           = require('reflux');
 var _                = require('lodash');
 var Navigation       = require('react-router').Navigation;
@@ -16,33 +15,18 @@ var Spinner          = require('../components/Spinner.jsx');
 
 var SearchPage = React.createClass({
 
-  mixins: [ReactAsync.Mixin, React.addons.LinkedStateMixin, Navigation, Reflux.ListenerMixin],
+  mixins: [React.addons.LinkedStateMixin, Navigation, Reflux.ListenerMixin],
 
   shouldUseCachedElements: false,
   cachedElements: null,
 
-  getInitialStateAsync: function(cb) {
-    var query;
-    console.log('get initial state search page', this.props.query);
-    if ( this.props.query.q && this.props.query.q.length ) {
-      query = this.props.query.q.replace(/(\+)|(%20)/gi, ' ');
-      console.log('should do search');
-      GlobalActions.search(query, function(err, results) {
-        cb(null, {
-          query: query,
-          loading: false,
-          error: null,
-          results: results || []
-        });
-      }.bind(this));
-    } else {
-      cb(null, {
-        query: '',
-        results: [],
-        loading: false,
-        error: null
-      });
-    }
+  getInitialState: function() {
+    return {
+      query: this.props.query.q ? this.props.query.q.replace(/(\+)|(%20)/gi, ' ') : '',
+      loading: false,
+      error: null,
+      results: []
+    };
   },
 
   componentDidUpdate: function(prevProps, prevState) {
@@ -120,16 +104,26 @@ var SearchPage = React.createClass({
     return element;
   },
 
+  renderSpinner: function() {
+    if ( this.state.loading ) {
+      return (
+        <div className="text-center island">
+          <Spinner loading={this.state.loading} size={75} />
+        </div>
+      );
+    }
+  },
+
   renderResults: function() {
     var element = null;
     var randomInt;
     var containerClasses;
     var cardClasses;
 
-    if ( this.shouldUseCachedElements && this.cachedElements ) {
+    if ( !this.state.loading && this.shouldUseCachedElements && this.cachedElements ) {
       // Use cached version of result elements to prevent masonry flashing on any update
       element = this.cachedElements;
-    } else if ( this.state.results && this.state.results.length ) {
+    } else if ( !this.state.loading && this.state.results && this.state.results.length ) {
       element = _.map(this.state.results, function(prediction, index) {
         randomInt = APIUtils.randomIntFromInterval(1, 4);
         containerClasses = 'masonry-item ';
@@ -176,12 +170,12 @@ var SearchPage = React.createClass({
               <button className="button block full-width text-center"
                       onClick={this.reloadPage}
                       disabled={this.state.loading ? 'true' : ''}>
-                <Spinner loading={this.state.loading} />
                 Search
               </button>
             </div>
           </div>
           {this.renderTitle()}
+          {this.renderSpinner()}
           <MasonryContainer className="card-grid">
             {this.renderResults()}
           </MasonryContainer>
