@@ -8,7 +8,6 @@ dotenv.load();
 
 gulp.task('uploadToS3', function(cb) {
 
-  var isProd = argv.production || argv.prod;
   var publisher = awspublish.create({
     bucket: process.env.S3_BUCKET,
     region: process.env.S3_REGION,
@@ -21,14 +20,9 @@ gulp.task('uploadToS3', function(cb) {
   };
 
   // Upload assets to S3
-  if ( isProd ) {
-    return gulp.src(config.buildDir + '**/*')
-    .pipe(awspublish.gzip())
-    .pipe(publisher.publish(headers))
-    .pipe(awspublish.reporter());
-  } else {
-    cb();
-    return;
-  }
+  return gulp.src(config.buildDir + '**/*')
+  .pipe(awspublish.gzip())
+  .pipe(publisher.publish(headers))
+  .pipe(awspublish.reporter());
 
 });

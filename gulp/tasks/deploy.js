@@ -9,8 +9,8 @@ var config       = require('../config');
 gulp.task('deploy', ['prod'], function() {
 
   var isProd = argv.production || argv.prod;
-  var s3Task;
   var tasks;
+  var s3Task;
 
   var ebsDeploy = function() {
     var shellCommand = 'ebs-deploy deploy --environment ';
@@ -25,13 +25,8 @@ gulp.task('deploy', ['prod'], function() {
     .pipe(shell(shellCommand));
   };
 
-  if ( isProd ) {
-    tasks = ['switchAPI', 'cdnizer'];
-    s3Task = 'uploadToS3 --prod'
-  } else {
-    tasks = 'emptyTask';
-    s3Task = 'uploadToS3';
-  }
+  tasks = isProd ? ['switchAPI', 'cdnizer'] : 'emptyTask';
+  s3Task = isProd ? 'uploadToS3' : 'emptyTask';
 
   return runSequence(tasks, s3Task, ebsDeploy);
 

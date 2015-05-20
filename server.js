@@ -62,7 +62,7 @@ app.use('*/js', express.static(__dirname + '/build/js'));
 app.use('*/images', express.static(__dirname + '/build/images'));
 app.use('*/css', express.static(__dirname + '/build/css'));
 app.use('*/fonts', express.static(__dirname + '/build/fonts'));
-app.use(/\/.*\.(png|ico|xml|json)\/?/gi, express.static(__dirname + '/build/'));
+app.use(/\/.+?\.(png|ico|xml|json)\/?/gi, express.static(__dirname + '/build/'));
 
 // Serve React app for all main routes
 app.get('/*' ,function(req,res) {
@@ -82,7 +82,7 @@ app.get('/*' ,function(req,res) {
         if ( title && title.indexOf('Not Found') !== -1 ) {
           title = 'PunditTracker';
         }
-        HtmlComponent = React.createElement(Html, { title: title, markup: markup });
+        HtmlComponent = React.createElement(Html, { env: process.env.NODE_ENV, title: title, markup: markup });
         res.send('<!DOCTYPE html>\n' + React.renderToString(HtmlComponent));
       }
     });
