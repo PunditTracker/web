@@ -43,6 +43,7 @@
   "devDependencies": {
     "babelify": "^5.0.4",
     "browserify": "^5.10.0",
+    "dotenv": "^1.1.0",
     "gulp": "^3.8.8",
     "gulp-awspublish": "0.0.24",
     "gulp-cdnizer": "^1.1.2",

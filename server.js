@@ -12,9 +12,15 @@ var DocumentTitle  = require('react-document-title');
 var ReactAsync     = require('react-async');
 var _              = require('lodash');
 var url            = require('url');
+var dotenv         = require('dotenv');
 var app            = express();
 var Routes;
 var Html;
+
+/* ====================================================== */
+
+// Ensure .env variables are available at process.env.*
+dotenv.load();
 
 /* ====================================================== */
 
