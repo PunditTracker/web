@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp    = require('gulp');
-var cdnizer = require("gulp-cdnizer");
+var cdnizer = require('gulp-cdnizer');
 var config  = require('../config');
 
 gulp.task('cdnizer', function() {
@@ -9,7 +9,7 @@ gulp.task('cdnizer', function() {
   var cdnBase = '//assets.pundittracker.com/';
 
   // CDNize CSS file(s)
-  gulp.src(config.buildDir + 'css/**/*.css')
+  return gulp.src(config.buildDir + 'css/**/*.css')
   .pipe(cdnizer({
       defaultCDNBase: cdnBase,
       relativeRoot: 'css',
@@ -18,15 +18,15 @@ gulp.task('cdnizer', function() {
   .pipe(gulp.dest(config.styles.dest));
 
   // CDNize minifed Javascript
-  return gulp.src(config.buildDir + 'js/main.js')
-  .pipe(cdnizer({
-    defaultCDNBase: cdnBase,
-    relativeRoot: 'js',
-    files: ['**/*.{js,gif,png,jpg,jpeg,css}'],
-    matchers: [
-      /([""'])(\.\.\/images\/.*(png|gif|jpg|jpeg))[""']/gi,
-    ]
-  }))
-  .pipe(gulp.dest(config.scripts.dest));
+  // return gulp.src(config.buildDir + 'js/main.js')
+  // .pipe(cdnizer({
+  //   defaultCDNBase: cdnBase,
+  //   relativeRoot: 'js',
+  //   files: ['**/*.{js,gif,png,jpg,jpeg,css}'],
+  //   matchers: [
+  //     /(url\(|:"|:')((?:\.{2}\/)+.+\/.+(?:png|gif|jpg|jpeg))(["'\)])/gi,
+  //   ]
+  // }))
+  // .pipe(gulp.dest(config.scripts.dest));
 
 });

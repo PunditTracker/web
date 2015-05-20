@@ -34,6 +34,8 @@ var APIUtils = {
 
   root: 'http://api.dev.pundittracker.com/v1/',
 
+  env: process.env && process.env.NODE_ENV ? process.env.NODE_ENV.toLowerCase() : 'dev',
+
   titleCase: function(str) {
     var newString = str;
 
@@ -50,6 +52,10 @@ var APIUtils = {
 
   buildPageTitle: function(title) {
     return title ? title + ' \u2014 PunditTracker' : 'PunditTracker';
+  },
+
+  buildAssetUrl: function(url) {
+    return this.env === 'production' ? '//assets.pundittracker.com/' + url : url;
   },
 
   randomIntFromInterval: function(min,max) {

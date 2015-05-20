@@ -41,11 +41,6 @@ var Html = React.createClass({
   },
 
   render: function() {
-    var isProd = this.props.env.toLowerCase() === 'production';
-    var stylesheetPath = isProd ? '//assets.pundittracker.com/css/main.css' : 'css/main.css';
-    var jsPath = isProd ? '//assets.pundittracker.com/js/main.js' : 'js/main.js';
-
-    console.log('env:', this.props.env);
     return (
       <html className="no-js" lang="">
 
@@ -72,8 +67,8 @@ var Html = React.createClass({
           <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
           <meta name="theme-color" content="#ffffff" />
 
-          <link rel="stylesheet" href={stylesheetPath} />
-          <script src={jsPath} />
+          <link rel="stylesheet" href={APIUtils.buildAssetUrl('css/main.css')} />
+          <script src={APIUtils.buildAssetUrl('js/main.js')} />
         </head>
 
         <body dangerouslySetInnerHTML={{ __html: this.props.markup }} />
