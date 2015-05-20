@@ -68,7 +68,7 @@ var MarchMadnessCard = React.createClass({
   render: function() {
     var classes = 'march-madness-card ' + this.props.className;
     var backgroundStyles = {
-      'backgroundImage': 'url(//assets.pundittracker.com/hero_pic/basket.png)'
+      'backgroundImage': 'url(../images/hero_pic/basket.png)'
     };
 
     return (
@@ -88,7 +88,7 @@ var MarchMadnessCard = React.createClass({
           </div>
         </div>
 
-        <div className="mm-logo"><img src="//assets.pundittracker.com/hero_pic/march_madness_logo.png" /></div>
+        <div className="mm-logo"><img src="../images/hero_pic/march_madness_logo.png" /></div>
 
       </div>
     );

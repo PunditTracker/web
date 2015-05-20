@@ -24,7 +24,7 @@ gulp.task('cdnizer', function() {
     relativeRoot: 'js',
     files: ['**/*.{js,gif,png,jpg,jpeg,css}'],
     matchers: [
-      /(src:[""'])(\.\.\/images\/.*(png|gif|jpg|jpeg))[""']/gi
+      /([""'])(\.\.\/images\/.*(png|gif|jpg|jpeg))[""']/gi,
     ]
   }))
   .pipe(gulp.dest(config.scripts.dest));
