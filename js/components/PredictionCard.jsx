@@ -208,7 +208,7 @@ var PredictionCard = React.createClass({
     var likelyClasses = cx({ 'active': this.state.userVote === 'Likely' });
     var definitelyClasses = cx({ 'active': this.state.userVote === 'Definitely' });
 
-    if ( this.props.prediction.state === 0 ) {
+    if ( !this.hasDeadlinePassed() && this.props.prediction.state === 0 ) {
       element = (
         <div className="voting">
           <ul className="options">
