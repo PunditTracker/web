@@ -228,6 +228,14 @@ $o6: 1;
   }
 }
 
+@mixin flex($num) {
+  -webkit-box-flex: $num;
+  -moz-box-flex: $num;
+  -webkit-flex: $num;
+  -ms-flex: $num;
+  flex: $num;
+}
+
 $fn : cubic-bezier(.98,.44,.25,.78);
 @mixin animateWithBezier {
   -webkit-animation-timing-function: $fn;

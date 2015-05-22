@@ -80,7 +80,7 @@ var App = React.createClass({
     });
 
     return (
-      <div>
+      <div className="app-container">
         <Header currentUser={this.state.currentUser}
                 categories={this.state.categories} />
 
