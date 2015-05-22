@@ -140,6 +140,12 @@ var CategoryPage = React.createClass({
           </div>
         );
       });
+    } else if ( !this.state.loading && (!this.state.predictions || !this.state.predictions.length) ) {
+      element = (
+        <div className="text-center island">
+          <h3>There are no recent predictions in the {APIUtils.titleCase(this.props.params.category)} category.</h3>
+        </div>
+      );
     }
 
     this.cachedElements = element;
