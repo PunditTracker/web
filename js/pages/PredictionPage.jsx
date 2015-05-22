@@ -48,7 +48,9 @@ var PredictionPage = React.createClass({
       <DocumentTitle title={APIUtils.buildPageTitle(this.state.prediction.title)}>
       <section className="content no-hero prediction">
 
-        prediction page
+        <div className="container">
+          prediction page
+        </div>
 
       </section>
       </DocumentTitle>

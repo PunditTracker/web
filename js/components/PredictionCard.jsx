@@ -3,6 +3,7 @@
 var React           = require('react/addons');
 var _               = require('lodash');
 var cx              = require('classnames');
+var Link            = require('react-router').Link;
 
 var APIUtils        = require('../utils/APIUtils');
 var PredictionAPI   = require('../utils/PredictionAPI');
@@ -13,7 +14,7 @@ var User            = require('./User.jsx');
 
 var PredictionCard = React.createClass({
 
-  // React.addons.LinkedStateMixin is for LoginModalMixin
+  // NOTE: React.addons.LinkedStateMixin is for LoginModalMixin
   mixins: [React.addons.LinkedStateMixin, LoginModalMixin],
 
   propTypes: {
@@ -255,7 +256,9 @@ var PredictionCard = React.createClass({
           </ul>
         </div>
 
-        {this.renderTitle()}
+        <Link to="Prediction" params={{ identifier: this.props.prediction.id || 1 }}>
+          {this.renderTitle()}
+        </Link>
 
         {this.renderVotingOptions()}
 
