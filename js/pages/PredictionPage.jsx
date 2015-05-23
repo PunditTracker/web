@@ -1,19 +1,20 @@
 'use strict';
 
-var React                  = require('react/addons');
-var ReactAsync             = require('react-async');
-var Reflux                 = require('reflux');
-var _                      = require('lodash');
-var Navigation             = require('react-router').Navigation;
-var DocumentTitle          = require('react-document-title');
+var React                       = require('react/addons');
+var ReactAsync                  = require('react-async');
+var Reflux                      = require('reflux');
+var _                           = require('lodash');
+var Navigation                  = require('react-router').Navigation;
+var DocumentTitle               = require('react-document-title');
 
-var APIUtils               = require('../utils/APIUtils');
-var GlobalActions          = require('../actions/GlobalActions');
-var ViewingPredictionStore = require('../stores/ViewingPredictionStore');
-var UserPredictionsStore   = require('../stores/UserPredictionsStore');
-var MasonryContainer       = require('../components/MasonryContainer.jsx');
-var Spinner                = require('../components/Spinner.jsx');
-var PredictionCard         = require('../components/PredictionCard.jsx');
+var APIUtils                    = require('../utils/APIUtils');
+var GlobalActions               = require('../actions/GlobalActions');
+var ViewingPredictionStore      = require('../stores/ViewingPredictionStore');
+var UserPredictionsStore        = require('../stores/UserPredictionsStore');
+var MasonryContainer            = require('../components/MasonryContainer.jsx');
+var Spinner                     = require('../components/Spinner.jsx');
+var PredictionDataVisualization = require('../components/PredictionDataVisualization.jsx');
+var PredictionCard              = require('../components/PredictionCard.jsx');
 
 var PredictionPage = React.createClass({
 
@@ -71,6 +72,16 @@ var PredictionPage = React.createClass({
     this.shouldUseCachedElements = _.isEqual(this.state.userPredictions, prevState.userPredictions);
   },
 
+  renderVisualization: function() {
+    if ( !_.isEmpty(this.state.prediction) ) {
+      return (
+        <div className="nudge-half--bottom">
+          <PredictionDataVisualization prediction={this.state.prediction} />
+        </div>
+      );
+    }
+  },
+
   renderMorePredictionsHeader: function() {
     var firstName = this.state.prediction && this.state.prediction.creator ? this.state.prediction.creator.firstName : '';
     var lastName = this.state.prediction && this.state.prediction.creator ? this.state.prediction.creator.lastName : '';
@@ -121,6 +132,7 @@ var PredictionPage = React.createClass({
       <section className="content no-hero prediction">
 
         <div className="container">
+          {this.renderVisualization()}
           {this.renderMorePredictionsHeader()}
           {this.renderUserPredictions()}
         </div>
