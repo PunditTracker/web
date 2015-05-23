@@ -1,20 +1,21 @@
 'use strict';
 
-var React               = require('react/addons');
-var ReactAsync          = require('react-async');
-var Reflux              = require('reflux');
-var _                   = require('lodash');
-var Navigation          = require('react-router').Navigation;
-var DocumentTitle       = require('react-document-title');
+var React                = require('react/addons');
+var ReactAsync           = require('react-async');
+var Reflux               = require('reflux');
+var _                    = require('lodash');
+var Navigation           = require('react-router').Navigation;
+var DocumentTitle        = require('react-document-title');
 
-var APIUtils            = require('../utils/APIUtils');
-var GlobalActions       = require('../actions/GlobalActions');
-var ViewingProfileStore = require('../stores/ViewingProfileStore');
-var MasonryContainer    = require('../components/MasonryContainer.jsx');
-var FixedSidebar        = require('../components/FixedSidebar.jsx');
-var ProfileCard         = require('../components/ProfileCard.jsx');
-var PredictionCard      = require('../components/PredictionCard.jsx');
-var Spinner             = require('../components/Spinner.jsx');
+var APIUtils             = require('../utils/APIUtils');
+var GlobalActions        = require('../actions/GlobalActions');
+var ViewingProfileStore  = require('../stores/ViewingProfileStore');
+var UserPredictionsStore = require('../stores/UserPredictionsStore');
+var MasonryContainer     = require('../components/MasonryContainer.jsx');
+var FixedSidebar         = require('../components/FixedSidebar.jsx');
+var ProfileCard          = require('../components/ProfileCard.jsx');
+var PredictionCard       = require('../components/PredictionCard.jsx');
+var Spinner              = require('../components/Spinner.jsx');
 
 var ProfilePage = React.createClass({
 
@@ -37,7 +38,8 @@ var ProfilePage = React.createClass({
     console.log('get initial state profile page');
     GlobalActions.loadProfile(this.props.params.identifier, function(err, profile) {
       cb(null, {
-        profile: profile || { predictions: [] },
+        profile: profile || {},
+        predictions: [],
         loading: true,
         error: null
       });
@@ -48,25 +50,20 @@ var ProfilePage = React.createClass({
     if ( err ) {
       this.setState({ loading: false, error: err.message });
     } else {
-      profile = profile || {};
-      profile.predictions = profile.predictions || [];
       this.setState({
-        profile: profile,
+        profile: profile || {},
         error: null
       });
     }
   },
 
-  // Only difference from _onProfileChange (above) is that this sets loading: false
-  _onProfileChangeWithPredictions: function(err, profile) {
+  _onUserPredictionsChange: function(err, predictions) {
     if ( err ) {
       this.setState({ loading: false, error: err.message });
     } else {
-      profile = profile || {};
-      profile.predictions = profile.predictions || [];
       this.setState({
         loading: false,
-        profile: profile,
+        predictions: predictions,
         error: null
       });
     }
@@ -77,7 +74,8 @@ var ProfilePage = React.createClass({
       this.transitionTo('Home');
     } else {
       this.listenTo(ViewingProfileStore, this._onProfileChange);
-      GlobalActions.loadUserPredictions(this.state.profile, this._onProfileChangeWithPredictions);
+      this.listenTo(UserPredictionsStore, this._onUserPredictionsChange);
+      GlobalActions.loadUserPredictions(this.state.profile);
     }
   },
 
@@ -117,8 +115,8 @@ var ProfilePage = React.createClass({
     } else if ( this.shouldUseCachedElements && this.cachedElements ) {
       // Use cached version of result elements to prevent masonry flashing on any update
       element = this.cachedElements;
-    } else if ( this.state.profile.predictions && this.state.profile.predictions.length ) {
-      element = _.map(this.state.profile.predictions, function(prediction, index) {
+    } else if ( this.state.predictions && this.state.predictions.length ) {
+      element = _.map(this.state.predictions, function(prediction, index) {
         randomInt = APIUtils.randomIntFromInterval(1, 3);
 
         if ( randomInt === 3 ) {
