@@ -82,7 +82,7 @@ app.get('/*' ,function(req,res) {
         if ( title && title.indexOf('Not Found') !== -1 ) {
           title = 'PunditTracker';
         }
-        HtmlComponent = React.createElement(Html, { env: process.env.NODE_ENV, title: title, markup: markup });
+        HtmlComponent = React.createElement(Html, { title: title, markup: markup });
         res.send('<!DOCTYPE html>\n' + React.renderToString(HtmlComponent));
       }
     });
