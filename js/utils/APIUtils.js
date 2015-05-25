@@ -32,9 +32,9 @@ function createRequest(verb, path, body) {
 
 var APIUtils = {
 
-  root: 'http://api.dev.pundittracker.com/v1/',
+  env: process.env.NODE_ENV.toLowerCase(),
 
-  env: process.env && process.env.NODE_ENV ? process.env.NODE_ENV.toLowerCase() : 'dev',
+  root: process.env.NODE_ENV.toLowerCase() === 'production' ? 'http://api.pundittracker.com/v1/'  : 'http://api.dev.pundittracker.com/v1/',
 
   titleCase: function(str) {
     var newString = str;

@@ -9,7 +9,7 @@ var config       = require('../config');
 gulp.task('deploy', ['prod'], function() {
 
   var isProd = argv.production || argv.prod;
-  var tasks;
+  var cdnizerTask;
   var s3Task;
 
   var ebsDeploy = function() {
@@ -17,17 +17,19 @@ gulp.task('deploy', ['prod'], function() {
 
     if ( isProd ) {
       shellCommand += 'pundittracker-web-prod';
+      global.NODE_ENV = 'production';
     } else {
       shellCommand += 'pundittracker-web-dev';
+      global.NODE_ENV = 'dev';
     }
 
     return gulp.src('')
     .pipe(shell(shellCommand));
   };
 
-  tasks = isProd ? ['switchAPI', 'cdnizer'] : 'emptyTask';
+  cdnizerTask = isProd ? 'cdnizer' : 'emptyTask';
   s3Task = isProd ? 'uploadToS3' : 'emptyTask';
 
-  return runSequence(tasks, s3Task, ebsDeploy);
+  return runSequence(cdnizerTask, s3Task, ebsDeploy);
 
 });
