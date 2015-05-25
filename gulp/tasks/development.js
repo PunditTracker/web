@@ -12,6 +12,7 @@ gulp.task('dev', ['clean'], function() {
   };
 
   global.isProd  = false;
+  global.NODE_ENV = global.NODE_ENV || 'dev';
 
   return runSequence(['sass', 'imagemin', 'browserify', 'copyFonts', 'copyIcons'], 'watch', startServer);
 

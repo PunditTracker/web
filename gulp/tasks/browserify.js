@@ -9,6 +9,7 @@ var watchify     = require('watchify');
 var browserify   = require('browserify');
 var babelify     = require('babelify');
 var uglify       = require('gulp-uglify');
+var envify       = require('envify/custom');
 var handleErrors = require('../util/handle-errors');
 var config       = require('../config');
 
@@ -31,7 +32,13 @@ function buildScript(file, watch) {
     });
   }
 
+  // Parse JSX, transform ES5/ES6 features
   bundler.transform(babelify);
+
+  // Replace environment variables in compiled JS to achieve isomorphism
+  bundler.transform(envify({
+    NODE_ENV: global.NODE_ENV
+  }));
 
   function rebundle() {
     var stream = bundler.bundle();
