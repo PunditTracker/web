@@ -274,6 +274,19 @@
     }
   }
 
+  // actually the same as &:hover, &.hover
+  &.single {
+    .voting + .state-icon-container {
+      @include translate-y(-$voting-height);
+    }
+    .voting .options {
+      top: 0;
+    }
+    .tags .inner {
+      margin-top: 0;
+    }
+  }
+
   &.no-box {
     height: $tall-2-height;
     padding-bottom: 1rem;

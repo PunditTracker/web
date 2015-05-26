@@ -72,11 +72,31 @@ var PredictionPage = React.createClass({
     this.shouldUseCachedElements = _.isEqual(this.state.userPredictions, prevState.userPredictions);
   },
 
+  renderPrediction: function() {
+    if ( !_.isEmpty(this.state.prediction) ) {
+      return (
+        <div className="pure-g card-grid flush--bottom">
+          <div className="pure-u-1-6" />
+          <div className="pure-u-2-3">
+            <div className="pure-g card-grid">
+              <div className="pure-u-1">
+                <PredictionCard prediction={this.state.prediction} className="single" />
+              </div>
+            </div>
+          </div>
+          <div className="pure-u-1-6" />
+        </div>
+      );
+    }
+  },
+
   renderVisualization: function() {
     if ( !_.isEmpty(this.state.prediction) ) {
       return (
-        <div className="nudge-half--bottom">
-          <PredictionDataVisualization prediction={this.state.prediction} />
+        <div className="container">
+          <div className="visualization-container islet nudge-half--bottom">
+            <PredictionDataVisualization prediction={this.state.prediction} />
+          </div>
         </div>
       );
     }
@@ -112,7 +132,9 @@ var PredictionPage = React.createClass({
             _.map(this.state.userPredictions, function(prediction, index) {
               return (
                 <div className="masonry-item w-1-3" key={index}>
-                  <PredictionCard currentUser={this.props.currentUser} prediction={prediction} />
+                  <PredictionCard currentUser={this.props.currentUser}
+                                  prediction={prediction}
+                                  renderGrade={false} />
                 </div>
               );
             }.bind(this))
@@ -131,8 +153,11 @@ var PredictionPage = React.createClass({
       <DocumentTitle title={APIUtils.buildPageTitle(this.state.prediction.title)}>
       <section className="content no-hero prediction">
 
+        {this.renderPrediction()}
+
+        {this.renderVisualization()}
+
         <div className="container">
-          {this.renderVisualization()}
           {this.renderMorePredictionsHeader()}
           {this.renderUserPredictions()}
         </div>

@@ -1,5 +1,13 @@
 section.prediction {
 
+  .visualization-container {
+    margin: 0 (-$extension);
+    overflow: hidden;
+    @include content-box;
 
+    color: $white;
+    background-color: $very-dark-grey;
+    @include box-shadow;
+  }
 
 }
