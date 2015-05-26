@@ -42,7 +42,9 @@ var PredictionPage = React.createClass({
     if ( err ) {
       this.setState({ error: err });
     } else {
-      this.setState({ prediction: prediction, error: null });
+      this.setState({ prediction: prediction, error: null }, function() {
+        GlobalActions.loadUserPredictions(this.state.prediction.creator);
+      }.bind(this));
     }
   },
 
@@ -65,6 +67,20 @@ var PredictionPage = React.createClass({
       this.listenTo(ViewingPredictionStore, this._onPredictionChange);
       this.listenTo(UserPredictionsStore, this._onUserPredictionsChange);
       GlobalActions.loadUserPredictions(this.state.prediction.creator);
+    }
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    var hasNewPrediction = this.props.params.identifier !== nextProps.params.identifier;
+
+    if ( !nextProps.params.identifier ) {
+      this.transitionTo('Home');
+    } else if ( hasNewPrediction ) {
+      this.setState({
+        loading: true
+      }, function() {
+        GlobalActions.loadPrediction(nextProps.params.identifier);
+      });
     }
   },
 
