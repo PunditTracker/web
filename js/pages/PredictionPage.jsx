@@ -107,7 +107,7 @@ var PredictionPage = React.createClass({
   },
 
   renderVisualization: function() {
-    if ( !_.isEmpty(this.state.prediction) ) {
+    if ( !_.isEmpty(this.state.prediction) && !_.isEmpty(this.state.prediction.voteHistory) ) {
       return (
         <div className="container">
           <div className="visualization-container islet nudge-half--bottom">

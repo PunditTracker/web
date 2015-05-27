@@ -278,7 +278,7 @@
     }
   }
 
-  // actually the same as &:hover, &.hover
+  // similar to &:hover, &.hover
   &.single {
     .voting + .state-icon-container {
       @include translate-y(-$voting-height);
@@ -288,6 +288,9 @@
     }
     .tags .inner {
       margin-top: 0;
+    }
+    .text:hover, text:active, text:focus {
+      text-decoration: underline;
     }
   }
 
