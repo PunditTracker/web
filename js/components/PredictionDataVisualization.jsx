@@ -43,7 +43,7 @@ var PredictionDataVisualization = React.createClass({
     //   debugger;
     // }
 
-    return _.filter(this.props.prediction.voteHistory, function(vote) {
+    return _.filter(this.props.prediction.voteHistory, vote => {
       debugVote = vote;
       isValue = vote.voteValue === value;
       isBetween = moment(vote.created).isBetween(startDay, endOfRange);
@@ -80,12 +80,12 @@ var PredictionDataVisualization = React.createClass({
     if ( this.shouldUseCache && this.cachedData ) {
       data = this.cachedData;
     } else if ( !_.isEmpty(this.props.prediction) ) {
-      data = _.map(APIUtils.voteValues, function(value, index) {
+      data = _.map(APIUtils.voteValues, (value, index) => {
         return {
           name: value,
           values: this._getSeries(index)
         };
-      }.bind(this));
+      });
     }
 
     this.cachedData = data;

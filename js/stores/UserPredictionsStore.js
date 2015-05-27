@@ -13,21 +13,19 @@ var UserPredictionsStore = Reflux.createStore({
     this.listenTo(GlobalActions.loadUserPredictions, this.loadUserPredictions);
   },
 
-  loadUserPredictions: function(user, cb) {
+  loadUserPredictions: function(user, limit = 20, cb = function() {}) {
     var id = typeof user === 'object' ? user.id : user;
-
-    cb = cb || function() {};
 
     console.log('get user predictions for:', id);
 
-    UserAPI.getPredictions(id).then(function(predictions) {
+    UserAPI.getPredictions(id, limit).then(predictions => {
       this.predictions = predictions;
       cb(null, this.predictions);
       this.trigger(null, this.predictions);
-    }.bind(this)).catch(function(err) {
+    }).catch(err => {
       cb(err);
       this.trigger(err);
-    }.bind(this));
+    });
   }
 
 });

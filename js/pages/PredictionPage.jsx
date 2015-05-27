@@ -28,7 +28,7 @@ var PredictionPage = React.createClass({
   },
 
   getInitialStateAsync: function(cb) {
-    GlobalActions.loadPrediction(this.props.params.identifier, function(err, prediction) {
+    GlobalActions.loadPrediction(this.props.params.identifier, (err, prediction) => {
       cb(null, {
         loading: true,
         prediction: prediction,
@@ -42,9 +42,9 @@ var PredictionPage = React.createClass({
     if ( err ) {
       this.setState({ error: err });
     } else {
-      this.setState({ prediction: prediction, error: null }, function() {
-        GlobalActions.loadUserPredictions(this.state.prediction.creator);
-      }.bind(this));
+      this.setState({ prediction: prediction, error: null }, () => {
+        GlobalActions.loadUserPredictions(this.state.prediction.creator, 12);
+      });
     }
   },
 
@@ -66,7 +66,7 @@ var PredictionPage = React.createClass({
     } else {
       this.listenTo(ViewingPredictionStore, this._onPredictionChange);
       this.listenTo(UserPredictionsStore, this._onUserPredictionsChange);
-      GlobalActions.loadUserPredictions(this.state.prediction.creator);
+      GlobalActions.loadUserPredictions(this.state.prediction.creator, 12);
     }
   },
 
@@ -78,7 +78,7 @@ var PredictionPage = React.createClass({
     } else if ( hasNewPrediction ) {
       this.setState({
         loading: true
-      }, function() {
+      }, () => {
         GlobalActions.loadPrediction(nextProps.params.identifier);
       });
     }

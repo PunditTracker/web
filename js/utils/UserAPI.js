@@ -8,8 +8,7 @@ var UserAPI = {
     return APIUtils.doGet('user/' + identifier);
   },
 
-  getPredictions: function(id) {
-    var limit = 20; // TODO: should this be hardcoded?
+  getPredictions: function(id, limit = 20) {
     return APIUtils.doGet('prediction/user/' + id + '?limit=' + limit);
   },
 

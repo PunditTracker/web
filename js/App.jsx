@@ -1,19 +1,19 @@
 'use strict';
 
-var React            = require('react/addons');
-var ReactAsync       = require('react-async');
-var Preloaded        = ReactAsync.Preloaded;
-var Reflux           = require('reflux');
-var _                = require('lodash');
-var RouteHandlerMixin = require('../node_modules/react-router/modules/mixins/RouteHandler');
-var State            = require('react-router').State;
+import React             from 'react/addons';
+import ReactAsync        from 'react-async';
+import Reflux            from 'reflux';
+import _                 from 'lodash';
+import RouteHandlerMixin from '../node_modules/react-router/modules/mixins/RouteHandler';
+import {State}           from 'react-router';
+const {Preloaded}        = ReactAsync;
 
-var GlobalActions    = require('./actions/GlobalActions');
-var UserActions      = require('./actions/UserActions');
-var CategoriesStore  = require('./stores/CategoriesStore');
-var CurrentUserStore = require('./stores/CurrentUserStore');
-var Header           = require('./components/Header.jsx');
-var Footer           = require('./components/Footer.jsx');
+import GlobalActions     from './actions/GlobalActions';
+import UserActions       from './actions/UserActions';
+import CategoriesStore   from './stores/CategoriesStore';
+import CurrentUserStore  from './stores/CurrentUserStore';
+import Header            from './components/Header.jsx';
+import Footer            from './components/Footer.jsx';
 
 var App = React.createClass({
 
@@ -98,4 +98,4 @@ var App = React.createClass({
 
 });
 
-module.exports = App;
+export default App;

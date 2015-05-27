@@ -13,19 +13,17 @@ var ViewingPredictionStore = Reflux.createStore({
     this.listenTo(GlobalActions.loadPrediction, this.loadPrediction);
   },
 
-  loadPrediction: function(identifier, cb) {
-    cb = cb || function() {};
-
+  loadPrediction: function(identifier, cb = function() {}) {
     console.log('get prediction:', identifier);
 
-    PredictionAPI.get(identifier).then(function(prediction) {
+    PredictionAPI.get(identifier).then(prediction => {
       this.prediction = prediction;
       cb(null, this.prediction);
       this.trigger(null, this.prediction);
-    }.bind(this)).catch(function(err) {
+    }).catch(err => {
       cb(err);
       this.trigger(err);
-    }.bind(this));
+    });
   }
 
 });

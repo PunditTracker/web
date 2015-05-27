@@ -36,14 +36,14 @@ var ProfilePage = React.createClass({
 
   getInitialStateAsync: function(cb) {
     console.log('get initial state profile page');
-    GlobalActions.loadProfile(this.props.params.identifier, function(err, profile) {
+    GlobalActions.loadProfile(this.props.params.identifier, (err, profile) => {
       cb(null, {
         profile: profile || {},
         predictions: [],
         loading: true,
         error: null
       });
-    }.bind(this));
+    });
   },
 
   _onProfileChange: function(err, profile) {
@@ -53,6 +53,8 @@ var ProfilePage = React.createClass({
       this.setState({
         profile: profile || {},
         error: null
+      }, () => {
+        GlobalActions.loadUserPredictions(this.state.profile);
       });
     }
   },

@@ -1,19 +1,19 @@
 'use strict';
 
-var React     = require('react/addons');
-var Router    = require('react-router');
+import React     from 'react/addons';
+import Router    from 'react-router';
 
-var routes    = require('./Routes.jsx');
-var Analytics = require('./Analytics');
-var subdomain = window.location.host.split('.')[0];
-var hostname  = window.location.hostname;
+import Routes    from './Routes.jsx';
+import Analytics from './Analytics';
+const subdomain  = window.location.host.split('.')[0];
+const hostname   = window.location.hostname;
 
 if ( subdomain === 'dev' || hostname === 'localhost' || process.env.NODE_ENV !== 'production' ) {
   window.React = React; // Enable React devtools
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  Router.run(routes, Router.HistoryLocation, function(Root, state) {
+document.addEventListener('DOMContentLoaded', () => {
+  Router.run(Routes, Router.HistoryLocation, (Root, state) => {
     React.render(<Root params={state.params} query={state.query} />, document.body);
     Analytics.send(state);
   });

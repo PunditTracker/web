@@ -1,10 +1,8 @@
 /*global FB:false */
-
 'use strict';
 
-var React    = require('react/addons');
-
-var APIUtils = require('./utils/APIUtils');
+import React    from 'react/addons';
+import APIUtils from './utils/APIUtils';
 
 var Html = React.createClass({
 
@@ -79,4 +77,4 @@ var Html = React.createClass({
 
 });
 
-module.exports = Html;
+export default Html;

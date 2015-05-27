@@ -1,26 +1,29 @@
 'use strict';
 
-var React              = require('react/addons');
-var Router             = require('react-router');
-var Route              = Router.Route;
-var DefaultRoute       = Router.DefaultRoute;
-var NotFoundRoute      = Router.NotFoundRoute;
+import React              from 'react/addons';
+import Router             from 'react-router';
 
-var App                = require('./App.jsx');
-var HomePage           = require('./pages/HomePage.jsx');
-var RegisterPage       = require('./pages/RegisterPage.jsx');
-var ForgotPasswordPage = require('./pages/ForgotPasswordPage.jsx');
-var ResetPasswordPage  = require('./pages/ResetPasswordPage.jsx');
-var SearchPage         = require('./pages/SearchPage.jsx');
-var PredictPage        = require('./pages/PredictPage.jsx');
-var CategoryPage       = require('./pages/CategoryPage.jsx');
-var ProfilePage        = require('./pages/ProfilePage.jsx');
-var SettingsPage       = require('./pages/SettingsPage.jsx');
-var PredictionPage     = require('./pages/PredictionPage.jsx');
-var AboutPage          = require('./pages/AboutPage.jsx');
-var NotFoundPage       = require('./pages/NotFoundPage.jsx');
+const {
+  Route,
+  DefaultRoute,
+  NotFoundRoute
+} = Router;
 
-module.exports = (
+import App                from './App.jsx';
+import HomePage           from './pages/HomePage.jsx';
+import RegisterPage       from './pages/RegisterPage.jsx';
+import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
+import ResetPasswordPage  from './pages/ResetPasswordPage.jsx';
+import SearchPage         from './pages/SearchPage.jsx';
+import PredictPage        from './pages/PredictPage.jsx';
+import CategoryPage       from './pages/CategoryPage.jsx';
+import ProfilePage        from './pages/ProfilePage.jsx';
+import SettingsPage       from './pages/SettingsPage.jsx';
+import PredictionPage     from './pages/PredictionPage.jsx';
+import AboutPage          from './pages/AboutPage.jsx';
+import NotFoundPage       from './pages/NotFoundPage.jsx';
+
+export default (
   <Route path="/" handler={App}>
 
     <DefaultRoute handler={HomePage} />

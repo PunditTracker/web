@@ -13,20 +13,18 @@ var ViewingProfileStore = Reflux.createStore({
     this.listenTo(GlobalActions.loadProfile, this.loadUser);
   },
 
-  loadUser: function(identifier, cb) {
-    cb = cb || function() {};
-
+  loadUser: function(identifier, cb = function() {}) {
     console.log('get user:', identifier);
 
-    UserAPI.get(identifier).then(function(profile) {
+    UserAPI.get(identifier).then(profile => {
       this.profile = profile;
       this.profile.predictions = [];
       cb(null, this.profile);
       this.trigger(null, this.profile);
-    }.bind(this)).catch(function(err) {
+    }).catch(err => {
       cb(err);
       this.trigger(err);
-    }.bind(this));
+    });
   }
 
 });
