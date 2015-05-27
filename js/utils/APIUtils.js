@@ -36,6 +36,8 @@ var APIUtils = {
 
   root: process.env.NODE_ENV.toLowerCase() === 'production' ? 'http://api.pundittracker.com/v1/'  : 'http://api.dev.pundittracker.com/v1/',
 
+  voteValues: ['No Way', 'Unlikely', 'Likely', 'Definitely'],
+
   titleCase: function(str) {
     var newString = str;
 
@@ -72,6 +74,22 @@ var APIUtils = {
     }
 
     return parseInt(id);
+  },
+
+  mapIntToVote: function(voteInt) {
+    var returnVote = null;
+
+    if ( voteInt < this.voteValues.length ) {
+      returnVote = this.voteValues[voteInt];
+    }
+
+    return returnVote;
+  },
+
+  mapVoteToInt: function(vote) {
+    var index = this.voteValues.indexOf(vote);
+
+    return index !== -1 ? index : 0;
   },
 
   doGet: function(path) {

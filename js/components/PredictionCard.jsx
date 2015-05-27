@@ -35,7 +35,7 @@ var PredictionCard = React.createClass({
 
   getInitialState: function() {
     return {
-      userVote: this.props.prediction.curUserVote === -1 ? null : this.mapIntToVote(this.props.prediction.curUserVote)
+      userVote: this.props.prediction.curUserVote === -1 ? null : APIUtils.mapIntToVote(this.props.prediction.curUserVote)
     };
   },
 
@@ -47,52 +47,6 @@ var PredictionCard = React.createClass({
 
   hasDeadlinePassed: function() {
     return new Date(this.props.prediction.deadline) < new Date();
-  },
-
-  mapIntToVote: function(voteInt) {
-    var returnVote;
-
-    switch (voteInt) {
-      case 0:
-        returnVote = 'No Way';
-        break;
-      case 1:
-        returnVote = 'Unlikely';
-        break;
-      case 2:
-        returnVote = 'Likely';
-        break;
-      case 3:
-        returnVote = 'Definitely';
-        break;
-      default:
-        returnVote = null;
-    }
-
-    return returnVote;
-  },
-
-  mapVoteToInt: function(vote) {
-    var returnInt;
-
-    switch (vote) {
-      case 'No Way':
-        returnInt = 0;
-        break;
-      case 'Unlikely':
-        returnInt = 1;
-        break;
-      case 'Likely':
-        returnInt = 2;
-        break;
-      case 'Definitely':
-        returnInt = 3;
-        break;
-      default:
-        returnInt = 0;
-    }
-
-    return returnInt;
   },
 
   getCategoryName: function() {
@@ -118,7 +72,7 @@ var PredictionCard = React.createClass({
         this.toggleLoginModal();
       } else if ( vote.toLowerCase() !== this.state.userVote ) {
         this.setState({ userVote: vote });
-        PredictionAPI.doVote(this.props.prediction, this.mapVoteToInt(vote));
+        PredictionAPI.doVote(this.props.prediction, APIUtils.mapVoteToInt(vote));
       }
     }
   },
