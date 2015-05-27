@@ -1,20 +1,20 @@
 'use strict';
 
-var React                       = require('react/addons');
-var ReactAsync                  = require('react-async');
-var Reflux                      = require('reflux');
-var _                           = require('lodash');
-var Navigation                  = require('react-router').Navigation;
-var DocumentTitle               = require('react-document-title');
+import React                       from 'react/addons';
+import ReactAsync                  from 'react-async';
+import Reflux                      from 'reflux';
+import _                           from 'lodash';
+import {Navigation}                from 'react-router';
+import DocumentTitle               from 'react-document-title';
 
-var APIUtils                    = require('../utils/APIUtils');
-var GlobalActions               = require('../actions/GlobalActions');
-var ViewingPredictionStore      = require('../stores/ViewingPredictionStore');
-var UserPredictionsStore        = require('../stores/UserPredictionsStore');
-var MasonryContainer            = require('../components/MasonryContainer.jsx');
-var Spinner                     = require('../components/Spinner.jsx');
-var PredictionDataVisualization = require('../components/PredictionDataVisualization.jsx');
-var PredictionCard              = require('../components/PredictionCard.jsx');
+import APIUtils                    from '../utils/APIUtils';
+import GlobalActions               from '../actions/GlobalActions';
+import ViewingPredictionStore      from '../stores/ViewingPredictionStore';
+import UserPredictionsStore        from '../stores/UserPredictionsStore';
+import MasonryContainer            from '../components/MasonryContainer.jsx';
+import Spinner                     from '../components/Spinner.jsx';
+import PredictionDataVisualization from '../components/PredictionDataVisualization.jsx';
+import PredictionCard              from '../components/PredictionCard.jsx';
 
 var PredictionPage = React.createClass({
 
@@ -92,15 +92,15 @@ var PredictionPage = React.createClass({
     if ( !_.isEmpty(this.state.prediction) ) {
       return (
         <div className="pure-g card-grid flush--bottom">
-          <div className="pure-u-1-6" />
-          <div className="pure-u-2-3">
+          <div className="pure-u-1-6 hard--bottom" />
+          <div className="pure-u-2-3 hard--bottom">
             <div className="pure-g card-grid">
               <div className="pure-u-1">
                 <PredictionCard prediction={this.state.prediction} className="single" />
               </div>
             </div>
           </div>
-          <div className="pure-u-1-6" />
+          <div className="pure-u-1-6 hard--bottom" />
         </div>
       );
     }
@@ -124,7 +124,7 @@ var PredictionPage = React.createClass({
 
     if ( this.state.loading || (this.state.userPredictions && this.state.userPredictions.length) ) {
       return (
-        <h4>More from {firstName} {lastName}</h4>
+        <h4 className="flush--top">More from {firstName} {lastName}</h4>
       );
     }
   },
@@ -185,4 +185,4 @@ var PredictionPage = React.createClass({
 
 });
 
-module.exports = PredictionPage;
+export default PredictionPage;

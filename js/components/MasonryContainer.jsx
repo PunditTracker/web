@@ -1,9 +1,9 @@
 'use strict';
 
-var React        = require('react/addons');
-var MasonryMixin = require('react-masonry-mixin');
+import React        from 'react/addons';
+import MasonryMixin from 'react-masonry-mixin';
 
-var PlaylistList = React.createClass({
+var MasonryContainer = React.createClass({
 
   mixins: [MasonryMixin('masonryContainer', {
     transitionDuration: 0,
@@ -40,4 +40,4 @@ var PlaylistList = React.createClass({
 
 });
 
-module.exports = PlaylistList;
+export default MasonryContainer;

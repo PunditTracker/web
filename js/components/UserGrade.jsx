@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react/addons');
-var _     = require('lodash');
+import React from 'react/addons';
+import _     from 'lodash';
 
 var UserGrade = React.createClass({
 
@@ -78,4 +78,4 @@ var UserGrade = React.createClass({
 
 });
 
-module.exports = UserGrade;
+export default UserGrade;

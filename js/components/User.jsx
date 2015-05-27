@@ -1,10 +1,10 @@
 'use strict';
 
-var React     = require('react/addons');
-var cx        = require('classnames');
-var Link      = require('react-router').Link;
+import React     from 'react/addons';
+import cx        from 'classnames';
+import {Link}    from 'react-router';
 
-var UserGrade = require('./UserGrade.jsx');
+import UserGrade from './UserGrade.jsx';
 
 var User = React.createClass({
 
@@ -60,4 +60,4 @@ var User = React.createClass({
 
 });
 
-module.exports = User;
+export default User;

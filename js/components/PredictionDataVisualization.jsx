@@ -1,12 +1,12 @@
 'use strict';
 
-var React     = require('react/addons');
-var rd3       = require('react-d3');
-var AreaChart = rd3.AreaChart;
-var _         = require('lodash');
-var moment    = require('moment');
+import React      from 'react/addons';
+import rd3        from 'react-d3';
+import _          from 'lodash';
+import moment     from 'moment';
+const {AreaChart} = rd3;
 
-var APIUtils  = require('../utils/APIUtils');
+import APIUtils   from '../utils/APIUtils';
 
 var PredictionDataVisualization = React.createClass({
 
@@ -20,9 +20,7 @@ var PredictionDataVisualization = React.createClass({
 
   getDefaultProps: function() {
     return {
-      prediction: {
-        voteHistory: []
-    }
+      prediction: { voteHistory: [] }
     };
   },
 
@@ -107,4 +105,4 @@ var PredictionDataVisualization = React.createClass({
 
 });
 
-module.exports = PredictionDataVisualization;
+export default PredictionDataVisualization;

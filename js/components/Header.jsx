@@ -1,14 +1,13 @@
 'use strict';
 
-var React           = require('react/addons');
-var _               = require('lodash');
-var Link            = require('react-router').Link;
-var Navigation      = require('react-router').Navigation;
+import React              from 'react/addons';
+import _                  from 'lodash';
+import {Link, Navigation} from 'react-router';
 
-var APIUtils        = require('../utils/APIUtils');
-var LoginModalMixin = require('../mixins/LoginModalMixin.jsx');
-var UserDropdown    = require('../components/UserDropdown.jsx');
-var ListLink        = require('./ListLink.jsx');
+import APIUtils           from '../utils/APIUtils';
+import LoginModalMixin    from '../mixins/LoginModalMixin.jsx';
+import UserDropdown       from '../components/UserDropdown.jsx';
+import ListLink           from './ListLink.jsx';
 
 var Header = React.createClass({
 
@@ -44,16 +43,16 @@ var Header = React.createClass({
   doSearch: function() {
     this.transitionTo('Search', {}, { q: this.state.query });
 
-    this.setState({ query: '' }, function() {
+    this.setState({ query: '' }, () => {
       this.refs.searchInput.getDOMNode().blur();
-    }.bind(this));
+    });
   },
 
   renderMenuLinks: function() {
     var elements = [];
 
     if ( this.props.categories && this.props.categories.length ) {
-      elements = _.map(this.props.categories, function(category, index) {
+      elements = _.map(this.props.categories, (category, index) => {
         return (
           <ListLink to="Category" params={{ category: category.name.toLowerCase() }} key={index}>
             {APIUtils.titleCase(category.name)}
@@ -138,4 +137,4 @@ var Header = React.createClass({
 
 });
 
-module.exports = Header;
+export default Header;

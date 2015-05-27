@@ -1,16 +1,16 @@
 'use strict';
 
-var React           = require('react/addons');
-var _               = require('lodash');
-var cx              = require('classnames');
-var Link            = require('react-router').Link;
+import React           from 'react/addons';
+import _               from 'lodash';
+import cx              from 'classnames';
+import {Link}          from 'react-router';
 
-var APIUtils        = require('../utils/APIUtils');
-var PredictionAPI   = require('../utils/PredictionAPI');
-var CategoriesStore = require('../stores/CategoriesStore');
-var LoginModalMixin = require('../mixins/LoginModalMixin.jsx');
-var ListLink        = require('./ListLink.jsx');
-var User            = require('./User.jsx');
+import APIUtils        from '../utils/APIUtils';
+import PredictionAPI   from '../utils/PredictionAPI';
+import CategoriesStore from '../stores/CategoriesStore';
+import LoginModalMixin from '../mixins/LoginModalMixin.jsx';
+import ListLink        from './ListLink.jsx';
+import User            from './User.jsx';
 
 var PredictionCard = React.createClass({
 
@@ -46,6 +46,7 @@ var PredictionCard = React.createClass({
   },
 
   hasDeadlinePassed: function() {
+    // TODO: use moment.js for this?
     return new Date(this.props.prediction.deadline) < new Date();
   },
 
@@ -55,7 +56,7 @@ var PredictionCard = React.createClass({
     var name;
 
     if ( categoryIdentifier % 1 === 0 ) { // is an integer, needs to be mapped to name'
-      match = _.find(CategoriesStore.categories, function(category) {
+      match = _.find(CategoriesStore.categories, category => {
         return !_.isEmpty(category) && category.id === categoryIdentifier;
       });
       name = match ? match.name : null;
@@ -72,7 +73,9 @@ var PredictionCard = React.createClass({
         this.toggleLoginModal();
       } else if ( vote.toLowerCase() !== this.state.userVote ) {
         this.setState({ userVote: vote });
-        PredictionAPI.doVote(this.props.prediction, APIUtils.mapVoteToInt(vote));
+        PredictionAPI.doVote(this.props.prediction, () => {
+          APIUtils.mapVoteToInt(vote);
+        });
       }
     }
   },
@@ -110,7 +113,7 @@ var PredictionCard = React.createClass({
     }
 
     if ( !_.isEmpty(this.props.prediction.tags) ) {
-      _.each(this.props.prediction.tags, function(tag, index) {
+      _.each(this.props.prediction.tags, (tag, index) => {
         elements.push((
           <ListLink to="Search" query={{ q: tag }} key={index}>{tag}</ListLink>
         ));
@@ -226,4 +229,4 @@ var PredictionCard = React.createClass({
 
 });
 
-module.exports = PredictionCard;
+export default PredictionCard;

@@ -1,11 +1,11 @@
 'use strict';
 
-var React     = require('react/addons');
-var _         = require('lodash');
-var Link      = require('react-router').Link;
+import React     from 'react/addons';
+import _         from 'lodash';
+import {Link}    from 'react-router';
 
-var APIUtils  = require('../utils/APIUtils');
-var ListLink  = require('./ListLink.jsx');
+import APIUtils  from '../utils/APIUtils';
+import ListLink  from './ListLink.jsx';
 
 var Footer = React.createClass({
 
@@ -67,4 +67,4 @@ var Footer = React.createClass({
 
 });
 
-module.exports = Footer;
+export default Footer;
