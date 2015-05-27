@@ -8,6 +8,8 @@ section.prediction {
     color: $white;
     background-color: $very-dark-grey;
     @include box-shadow;
+
+    svg { float: left; }
   }
 
 }
