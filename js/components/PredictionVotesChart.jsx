@@ -1,18 +1,18 @@
 'use strict';
 
-import React      from 'react/addons';
-import rd3        from 'react-d3';
-import _          from 'lodash';
-import moment     from 'moment';
-const {AreaChart} = rd3;
+import React       from 'react/addons';
+import _           from 'lodash';
+import moment      from 'moment';
+import {LineChart} from 'react-d3';
 
 import APIUtils   from '../utils/APIUtils';
 
-var PredictionDataVisualization = React.createClass({
+var PredictionVotesChart = React.createClass({
 
   shouldUseCache: true,
   cachedData: null,
   numDaysInterval: 30,
+  xDomain: [],
 
   propTypes: {
     prediction: React.PropTypes.object.isRequired
@@ -29,11 +29,8 @@ var PredictionDataVisualization = React.createClass({
   },
 
   _getVotesForDayRangeAndValue: function(lowerFence, value) {
-    var startDay = moment(lowerFence).startOf('day');
-    var endOfRange = moment(lowerFence).endOf('day');
-    var debugVote;
-    var isValue;
-    var isBetween;
+    let startDay = moment(lowerFence).startOf('day');
+    let endOfRange = moment(lowerFence).endOf('day');
 
     endOfRange.day(endOfRange.day() + this.numDaysInterval);
 
@@ -42,28 +39,25 @@ var PredictionDataVisualization = React.createClass({
     // }
 
     return _.filter(this.props.prediction.voteHistory, vote => {
-      debugVote = vote;
-      isValue = vote.voteValue === value;
-      isBetween = moment(vote.created).isBetween(startDay, endOfRange);
       return vote.voteValue === value && moment(vote.created).isBetween(startDay, endOfRange);
     });
   },
 
   _getSeries: function(voteValue) {
-    var startDay = moment(this.props.prediction.created);
-    var today = moment().startOf('day');
-    var values = [];
-    var d = startDay;
+    let startDay = moment(this.props.prediction.created);
+    let today = moment().startOf('day');
+    let values = [];
+    let d = startDay;
 
     // Iterate over days from prediction creation to today
     while ( d.isBefore(today) ) {
-      var votes = this._getVotesForDayRangeAndValue(d.toDate(), voteValue);
-      var dCopy = new Date(d.toDate());
+      let votes = this._getVotesForDayRangeAndValue(d.toDate(), voteValue);
+      let numVotes = votes ? votes.length : 0;
 
-      // Create a point for each day where x = day, y = # of votes on that day with value == voteValue
+      // Create a point for each date range, y = # of votes on that day with value == voteValue
       values.push({
-        x: dCopy,
-        y: votes ? votes.length : 0
+        x: new Date(d.toDate()),
+        y: numVotes
       });
 
       d.day(d.day() + this.numDaysInterval);
@@ -73,7 +67,7 @@ var PredictionDataVisualization = React.createClass({
   },
 
   buildDataForD3: function() {
-    var data = null;
+    let data = null;
 
     if ( this.shouldUseCache && this.cachedData ) {
       data = this.cachedData;
@@ -91,13 +85,24 @@ var PredictionDataVisualization = React.createClass({
     return data;
   },
 
+  renderTooltip: function(closestY, cumulativeY) {
+    return closestY + ' votes';
+  },
+
   render: function() {
+    let startDate = new Date(this.props.prediction.created);
+    let endDate = new Date();
+    let data = this.buildDataForD3();
+
+    console.log('data:', data);
+
     return (
-      <AreaChart data={this.buildDataForD3()}
-                 xAxisTickInterval={{ unit: 'day', interval: this.numDaysInterval }}
-                 yAxisTickCount={5}
-                 yAxisTickInterval={{ interval: 1 }}
+      <LineChart data={data}
                  legend={true}
+                 yAxisLabel="Number of Votes"
+                 axesColor="#e5e5e5"
+                 legendTextStroke="#e5e5e5"
+                 tooltipHtml={this.renderTooltip}
                  width={1300}
                  height={400} />
     );
@@ -105,4 +110,4 @@ var PredictionDataVisualization = React.createClass({
 
 });
 
-export default PredictionDataVisualization;
+export default PredictionVotesChart;

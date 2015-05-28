@@ -1,20 +1,20 @@
 'use strict';
 
-import React                       from 'react/addons';
-import ReactAsync                  from 'react-async';
-import Reflux                      from 'reflux';
-import _                           from 'lodash';
-import {Navigation}                from 'react-router';
-import DocumentTitle               from 'react-document-title';
+import React                  from 'react/addons';
+import ReactAsync             from 'react-async';
+import Reflux                 from 'reflux';
+import _                      from 'lodash';
+import {Navigation}           from 'react-router';
+import DocumentTitle          from 'react-document-title';
 
-import APIUtils                    from '../utils/APIUtils';
-import GlobalActions               from '../actions/GlobalActions';
-import ViewingPredictionStore      from '../stores/ViewingPredictionStore';
-import UserPredictionsStore        from '../stores/UserPredictionsStore';
-import MasonryContainer            from '../components/MasonryContainer.jsx';
-import Spinner                     from '../components/Spinner.jsx';
-import PredictionDataVisualization from '../components/PredictionDataVisualization.jsx';
-import PredictionCard              from '../components/PredictionCard.jsx';
+import APIUtils               from '../utils/APIUtils';
+import GlobalActions          from '../actions/GlobalActions';
+import ViewingPredictionStore from '../stores/ViewingPredictionStore';
+import UserPredictionsStore   from '../stores/UserPredictionsStore';
+import MasonryContainer       from '../components/MasonryContainer.jsx';
+import Spinner                from '../components/Spinner.jsx';
+import PredictionVotesChart   from '../components/PredictionVotesChart.jsx';
+import PredictionCard         from '../components/PredictionCard.jsx';
 
 var PredictionPage = React.createClass({
 
@@ -71,7 +71,7 @@ var PredictionPage = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    var hasNewPrediction = this.props.params.identifier !== nextProps.params.identifier;
+    let hasNewPrediction = this.props.params.identifier !== nextProps.params.identifier;
 
     if ( !nextProps.params.identifier ) {
       this.transitionTo('Home');
@@ -111,7 +111,8 @@ var PredictionPage = React.createClass({
       return (
         <div className="container">
           <div className="visualization-container islet nudge-half--bottom">
-            <PredictionDataVisualization prediction={this.state.prediction} />
+            <h3 className="text-center">What have other users been saying?</h3>
+            <PredictionVotesChart prediction={this.state.prediction} />
           </div>
         </div>
       );
@@ -119,8 +120,8 @@ var PredictionPage = React.createClass({
   },
 
   renderMorePredictionsHeader: function() {
-    var firstName = this.state.prediction && this.state.prediction.creator ? this.state.prediction.creator.firstName : '';
-    var lastName = this.state.prediction && this.state.prediction.creator ? this.state.prediction.creator.lastName : '';
+    let firstName = this.state.prediction && this.state.prediction.creator ? this.state.prediction.creator.firstName : '';
+    let lastName = this.state.prediction && this.state.prediction.creator ? this.state.prediction.creator.lastName : '';
 
     if ( this.state.loading || (this.state.userPredictions && this.state.userPredictions.length) ) {
       return (
@@ -130,7 +131,7 @@ var PredictionPage = React.createClass({
   },
 
   renderUserPredictions: function() {
-    var element = null;
+    let element = null;
 
     if ( this.state.loading ) {
       return (
