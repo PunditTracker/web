@@ -88,12 +88,12 @@ var CompletionWidget = React.createClass({
 
   doVote: function(category, nominee) {
     if ( !this.userHasAlreadyVoted() ) {
-      if ( _.isEmpty(this.props.currentUser) ) {
-        this.toggleLoginModal();
-      } else {
+      // if ( _.isEmpty(this.props.currentUser) ) {
+      //   this.toggleLoginModal();
+      // } else {
         this.props.doVote(category, nominee);
         this.scrollToNextCategory();
-      }
+      // }
     }
   },
 
@@ -130,7 +130,8 @@ var CompletionWidget = React.createClass({
         <li className={classes}
             id={id}
             key={index}
-            onMouseOver={this.updateInfo.bind(null, nominee)}>
+            onMouseOver={this.updateInfo.bind(null, nominee)}
+            onClick={this.doVote.bind(null, this.props.oscar.category, nominee)}>
           <h4><i className="fa fa-check boxed" />{nominee.title}</h4>
         </li>
       );

@@ -1,20 +1,22 @@
 'use strict';
 
-var React            = require('react/addons');
-var ReactAsync       = require('react-async');
-var $                = require('jquery');
-var _                = require('lodash');
-var when             = require('when');
-var moment           = require('moment');
-var Navigation       = require('react-router').Navigation;
-var DocumentTitle    = require('react-document-title');
+import React            from 'react/addons';
+import ReactAsync       from 'react-async';
+import $                from 'jquery';
+import _                from 'lodash';
+import when             from 'when';
+import moment           from 'moment';
+import {Navigation}     from 'react-router';
+import DocumentTitle    from 'react-document-title';
+import cx               from 'classnames';
 
-var data             = require('../data/oscars_2015');
-var APIUtils         = require('../utils/APIUtils');
-var PredictionAPI    = require('../utils/PredictionAPI');
-var OscarsHero       = require('../components/Oscars/Hero.jsx');
-var CompletionWidget = require('../components/Oscars/CompletionWidget.jsx');
-var Category         = require('../components/Oscars/Category.jsx');
+import data             from '../data/oscars_2015';
+import APIUtils         from '../utils/APIUtils';
+import PredictionAPI    from '../utils/PredictionAPI';
+import OscarsHero       from '../components/Oscars/Hero.jsx';
+import CompletionWidget from '../components/Oscars/CompletionWidget.jsx';
+import Category         from '../components/Oscars/Category.jsx';
+import Spinner          from '../components/Spinner.jsx';
 
 var OscarsPage = React.createClass({
 
@@ -43,13 +45,13 @@ var OscarsPage = React.createClass({
   },
 
   componentDidMount: function() {
-    // $(window).scroll(this.handleScroll);
+    $(window).scroll(this.handleScroll);
 
-    // if ( !_.isEmpty(this.props.currentUser) ) {
-    //   this.checkForPreviousVotes();
-    // }
+    if ( !_.isEmpty(this.props.currentUser) ) {
+      this.checkForPreviousVotes();
+    }
 
-    this.transitionTo('Search', {}, { q: 'Oscars 2015' });
+    // this.transitionTo('Search', {}, { q: 'Oscars 2015' });
   },
 
   componentDidUpdate: function(prevProps) {
@@ -63,15 +65,15 @@ var OscarsPage = React.createClass({
   },
 
   checkForPreviousVotes: function() {
-    APIUtils.doUnnormalizedGet('event/oscars/2015').then(function(previousVotes) {
-      this.setState({
-        submittedVotes: _.merge(this.state.submittedVotes, previousVotes),
-        loading: false,
-        error: null
-      });
-    }.bind(this)).catch(function(err) {
-      this.setState({ error: err.message, loading: false });
-    }.bind(this));
+    // APIUtils.doUnnormalizedGet('event/oscars/2015').then(previousVotes => {
+    //   this.setState({
+    //     submittedVotes: _.merge(this.state.submittedVotes, previousVotes),
+    //     loading: false,
+    //     error: null
+    //   });
+    // }).catch(err => {
+    //   this.setState({ error: err.message, loading: false });
+    // });
   },
 
   handleScroll: function() {
@@ -105,35 +107,43 @@ var OscarsPage = React.createClass({
 
     this.setState({ loading: true });
 
-    _.forOwn(this.state.unsubmittedVotes, function(nominee, category) {
-      if ( !_.isEmpty(nominee) ) {
-        prediction = {
-          categoryId: APIUtils.getCategoryId('Entertainment', this.props.categories),
-          title: 'Oscars 2015: ' + nominee.title + ' will win Best ' + APIUtils.titleCase(category) + '.',
-          tags: ['Oscars', 'Best ' + APIUtils.titleCase(category), nominee.title],
-          deadline: moment('Sunday, February 22nd 2015, 11:59:59 pm', 'dddd, MMMM Do YYYY, h:mm:ss a').toISOString(),
-          SpecialEventYear: 2015,
-          SpecialEventCategory: APIUtils.titleCase(category),
-          SpecialEventSelection: nominee.title
-        };
-
-        promises.push(PredictionAPI.postPrediction(prediction));
-
-        submittedVotesCopy[APIUtils.titleCase(category)] = nominee;
-      }
-    }.bind(this));
-
-    when.all(promises).then(function() {
+    // Simulate submission
+    setTimeout(() => {
       this.setState({
         loading: false,
-        submitted: true,
-        error: null,
-        unsubmittedVotes: {},
-        submittedVotes: submittedVotesCopy
-      }, this.redirectToResults);
-    }.bind(this)).catch(function(err) {
-      this.setState({ loading: false, error: err.message });
-    }.bind(this));
+        submitted: true
+      });
+    }, 1000);
+
+    // _.forOwn(this.state.unsubmittedVotes, (nominee, category) => {
+    //   if ( !_.isEmpty(nominee) ) {
+    //     prediction = {
+    //       categoryId: APIUtils.getCategoryId('Entertainment', this.props.categories),
+    //       title: 'Oscars 2015: ' + nominee.title + ' will win Best ' + APIUtils.titleCase(category) + '.',
+    //       tags: ['Oscars', 'Best ' + APIUtils.titleCase(category), nominee.title],
+    //       deadline: moment('Sunday, February 22nd 2015, 11:59:59 pm', 'dddd, MMMM Do YYYY, h:mm:ss a').toISOString(),
+    //       SpecialEventYear: 2015,
+    //       SpecialEventCategory: APIUtils.titleCase(category),
+    //       SpecialEventSelection: nominee.title
+    //     };
+
+    //     promises.push(PredictionAPI.postPrediction(prediction));
+
+    //     submittedVotesCopy[APIUtils.titleCase(category)] = nominee;
+    //   }
+    // }.bind(this));
+
+    // when.all(promises).then(() => {
+    //   this.setState({
+    //     loading: false,
+    //     submitted: true,
+    //     error: null,
+    //     unsubmittedVotes: {},
+    //     submittedVotes: submittedVotesCopy
+    //   }, this.redirectToResults);
+    // }).catch(err => {
+    //   this.setState({ loading: false, error: err.message });
+    // });
   },
 
   redirectToResults: function() {
@@ -154,6 +164,56 @@ var OscarsPage = React.createClass({
     }.bind(this));
   },
 
+  renderSideSubmitButton: function() {
+    var buttonClasses = cx({
+      'button': true,
+      'go-to-submit': true,
+      'scroll': true,
+      'show': !_.isEmpty(this.state.unsubmittedVotes)
+    });
+    var element;
+
+    if ( !this.state.submitted ) {
+      element = (
+        <button className={buttonClasses} onClick={this.submitPredictions}>
+          <Spinner loading={this.state.loading} />
+          Predict Now
+        </button>
+      );
+    } else {
+      element = (
+        <button className={buttonClasses} disabled="true">
+          Submitted!
+        </button>
+      );
+    }
+
+    return element;
+  },
+
+  renderFinalSubmitButton: function() {
+    var finalSubmitButtonClasses = cx({
+      'button': true,
+      'hide': _.isEmpty(this.state.unsubmittedVotes)
+    });
+    var element;
+
+    if ( !this.state.submitted ) {
+      element =  (
+        <button className={finalSubmitButtonClasses} onClick={this.submitPredictions}>
+          <Spinner loading={this.state.loading} />
+          Submit Predictions
+        </button>
+      );
+    } else {
+      element = (
+        <h2 className="text-center soft--top">Predictions submitted!</h2>
+      );
+    }
+
+    return element;
+  },
+
   render: function() {
     return (
       <DocumentTitle title={APIUtils.buildPageTitle('The Oscars')}>
@@ -162,6 +222,8 @@ var OscarsPage = React.createClass({
         <OscarsHero />
 
         <div className="content oscars">
+          {this.renderSideSubmitButton()}
+
           <CompletionWidget categories={data}
                             unsubmittedVotes={this.state.unsubmittedVotes}
                             submittedVotes={this.state.submittedVotes} />
@@ -179,7 +241,9 @@ var OscarsPage = React.createClass({
 
         <div id="submit">
           <div className="background">
-            <div className="scrim" />
+            <div className="scrim">
+              {this.renderFinalSubmitButton()}
+            </div>
           </div>
         </div>
 
@@ -190,4 +254,4 @@ var OscarsPage = React.createClass({
 
 });
 
-module.exports = OscarsPage;
+export default OscarsPage;

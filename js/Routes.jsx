@@ -22,6 +22,7 @@ import SettingsPage       from './pages/SettingsPage.jsx';
 import PredictionPage     from './pages/PredictionPage.jsx';
 import AboutPage          from './pages/AboutPage.jsx';
 import NotFoundPage       from './pages/NotFoundPage.jsx';
+import OscarsPage         from './pages/OscarsPage.jsx';
 
 export default (
   <Route path="/" handler={App}>
@@ -48,7 +49,9 @@ export default (
 
     <Route name="Settings" path="/settings" handler={SettingsPage} />
 
-    <Route name="About" path="/about" handler ={AboutPage} />
+    <Route name="About" path="/about" handler={AboutPage} />
+
+    <Route name="Oscars" path="/oscars" handler={OscarsPage} />
 
     <NotFoundRoute handler={NotFoundPage} />
 
